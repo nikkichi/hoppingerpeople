@@ -1,0 +1,212 @@
+{
+    "namespace": "SimpleModelsAndRelations",
+    "context_name": "SimpleModelsAndRelationsContext",
+    "api_version": "v1",
+    "database_provider": "sqlite",
+    "custom_view_imports": "",
+    "custom_restriction_imports": "",
+    "models": [
+        {
+            "name": "HomePage",
+            "allow_maximisation": true,
+            "type": "homepage",
+            "attributes": [],
+            "permissions": {
+                "view": ["*"],
+                "edit": ["*"],
+                "delete": [],
+                "create": []
+            }
+        },
+        {
+            "name": "Group1",
+            "dbname": "G1",
+            "allow_maximisation": true,
+            "suppress_clickable_header": true,
+            "attributes": [
+                { "type": "title", "name": "Name", "dbname":"Name", "hidden_label":true },
+                { "type": "string", "name": "String" },
+                { "type": "rich_text", "name": "RichText" },
+                { "type": "int", "name": "Int" },
+                { "type": "double", "name": "Double" },
+                { "type": "date_time", "name": "DateTime" },
+                { "type": "date", "name": "Date" },
+                { "type": "time", "name": "Time" },
+                { "type": "url", "name": "Url" },
+                { "type": "email", "name": "Email" },
+                { "type": "tel", "name": "Tel" },
+                { "type": "image", "name": "Pic" },
+                { "type": "file", "name": "File" },
+                { "type": "union", "cases":["A", "B", "C"], "name": "Letter" },
+                { "type": "bool", "name": "IsRad" }
+            ],
+            "permissions": {
+                "view": ["*"],
+                "edit": ["*"],
+                "delete": ["*"],
+                "create": ["*"]
+            },
+            "seeds": [
+              { "Id": 1, "Name": "\"Group1 1\"", "IsRad":true, "Letter":"\"A\"",
+                "String":"\"String\"", "Int":0, "Double":0.0, "RichText":"null",
+                "DateTime":"DateTime.Now", "Date":"DateTime.Now", "Time":"DateTime.Now", "Url":"\"www.google.com\"",
+                "Tel":"\"0123456789\"", "Email":"\"a@b.c\"", "Pic":"null", "File":"null" },
+              { "Id": 2, "Name": "\"Group1 2\"", "IsRad":false, "Letter":"\"B\"",
+                "String":"\"String\"", "Int":0, "Double":0.0, "RichText":"null",
+                "DateTime":"DateTime.Now", "Date":"DateTime.Now", "Time":"DateTime.Now", "Url":"\"www.google.com\"",
+                "Tel":"\"0123456789\"", "Email":"\"a@b.c\"", "Pic":"null", "File":"null" },
+              { "Id": 3, "Name": "\"Group1 3\"", "IsRad":true, "Letter":"\"C\"",
+                "String":"\"String\"", "Int":0, "Double":0.0, "RichText":"null",
+                "DateTime":"DateTime.Now", "Date":"DateTime.Now", "Time":"DateTime.Now", "Url":"\"www.google.com\"",
+                "Tel":"\"0123456789\"", "Email":"\"a@b.c\"", "Pic":"null", "File":"null" },
+              { "Id": 4, "Name": "\"Group1 4\"", "IsRad":false, "Letter":"\"A\"",
+                "String":"\"String\"", "Int":0, "Double":0.0, "RichText":"null",
+                "DateTime":"DateTime.Now", "Date":"DateTime.Now", "Time":"DateTime.Now", "Url":"\"www.google.com\"",
+                "Tel":"\"0123456789\"", "Email":"\"a@b.c\"", "Pic":"null", "File":"null" }
+            ]
+        },
+        {
+            "name": "Item1",
+            "allow_maximisation": true,
+            "attributes": [
+                { "type": "string", "name": "Name" },
+                { "type": "rich_text", "name": "Description", "hidden_when_minimised":true }
+            ],
+            "permissions": {
+                "view": ["*"],
+                "edit": ["*"],
+                "delete": ["*"],
+                "create": ["*"]
+            },
+            "seeds": [
+              { "Id": 1, "Name": "\"Item1 1\"", "Description":"\"\"" },
+              { "Id": 2, "Name": "\"Item1 2\"", "Description":"\"\"" },
+              { "Id": 3, "Name": "\"Item1 3\"", "Description":"\"\"" },
+              { "Id": 4, "Name": "\"Item1 4\"", "Description":"\"\"" }
+            ]
+        },
+
+        {
+            "name": "Group2",
+            "allow_maximisation": true,
+            "attributes": [
+                { "type": "string", "name": "Name" }
+            ],
+            "permissions": {
+                "view": ["*"],
+                "edit": ["*"],
+                "delete": ["*"],
+                "create": ["*"]
+            },
+            "seeds": [
+              { "Id": 1, "Name": "\"Group2 1\"" },
+              { "Id": 2, "Name": "\"Group2 2\"" },
+              { "Id": 3, "Name": "\"Group2 3\"" },
+              { "Id": 4, "Name": "\"Group2 4\"" }
+            ]
+        },
+        {
+            "name": "Item2A",
+            "allow_maximisation": true,
+            "attributes": [
+                { "type": "string", "name": "Name" },
+                { "type": "string", "name": "Description", "hidden_when_minimised": true }
+            ],
+            "permissions": {
+                "view": ["*"],
+                "edit": ["*"],
+                "delete": ["*"],
+                "create": ["*"]
+            },
+            "seeds": [
+              { "Id": 1, "Name": "\"Item2A 1\"", "Description": "An item of type 2" },
+              { "Id": 2, "Name": "\"Item2A 2\"", "Description": "An item of type 2" },
+              { "Id": 3, "Name": "\"Item2A 3\"", "Description": "An item of type 2" },
+              { "Id": 4, "Name": "\"Item2A 4\"", "Description": "An item of type 2" }
+            ]
+        },
+        {
+            "name": "Item2B",
+            "allow_maximisation": true,
+            "attributes": [
+                { "type": "string", "name": "Name" },
+                { "type": "rich_text", "name": "Content" }
+            ],
+            "permissions": {
+                "view": ["*"],
+                "edit": ["*"],
+                "delete": ["*"],
+                "create": ["*"]
+            },
+            "seeds": [
+              { "Id": 1, "Name": "\"Item2B 1\"", "Content": "\"Content 1\"" },
+              { "Id": 2, "Name": "\"Item2B 2\"", "Content": "\"Content 2\"" },
+              { "Id": 3, "Name": "\"Item2B 3\"", "Content": "\"Content 3\"" },
+              { "Id": 4, "Name": "\"Item2B 4\"", "Content": "\"Content 4\"" }
+            ]
+        }
+
+    ],
+    "relations": [{
+            "source": "HomePage",
+            "target": "Group1",
+            "sort": "1-N",
+            "seeds": [
+              { "HomePageId": 1, "Group1Id": 1 },
+              { "HomePageId": 1, "Group1Id": 2 },
+              { "HomePageId": 1, "Group1Id": 3 }
+            ]
+        },
+        {
+            "source": "HomePage",
+            "target": "Group2",
+            "sort": "1-N",
+            "seeds": [
+              { "HomePageId": 1, "Group2Id": 1 },
+              { "HomePageId": 1, "Group2Id": 2 },
+              { "HomePageId": 1, "Group2Id": 3 }
+            ]
+        },
+        {
+            "source": "Group1",
+            "target": "Item1",
+            "dbname": "G1_I1",
+            "sort": "1-N",
+            "hide_inverted": false,
+            "max_target": 3,
+            "delete_behaviour": {
+              "forward": "cascade",
+              "inverted": "set_null"
+            },
+            "seeds": [
+              { "Group1Id": 1, "Item1Id": 1 },
+              { "Group1Id": 2, "Item1Id": 2 },
+              { "Group1Id": 3, "Item1Id": 3 },
+              { "Group1Id": 3, "Item1Id": 4 }
+            ]
+        },
+        {
+            "source": "Group2",
+            "target": "Item2A",
+            "sort": "N-N",
+            "max_source": 4,
+            "seeds": [
+              { "Group2Id": 1, "Item2AId": 1 },
+              { "Group2Id": 2, "Item2AId": 2 },
+              { "Group2Id": 3, "Item2AId": 3 },
+              { "Group2Id": 3, "Item2AId": 4 }
+            ]
+        },
+        {
+            "source": "Group2",
+            "target": "Item2B",
+            "sort": "N-N",
+            "seeds": [
+              { "Group2Id": 1, "Item2BId": 1 },
+              { "Group2Id": 2, "Item2BId": 2 },
+              { "Group2Id": 3, "Item2BId": 3 },
+              { "Group2Id": 3, "Item2BId": 4 }
+            ]
+        }
+    ]
+}

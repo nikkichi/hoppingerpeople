@@ -1,0 +1,9 @@
+/home/ronald/Projects/Samples/01/bin/Debug/netcoreapp1.1/SimpleModelsAndRelations.deps.json
+/home/ronald/Projects/Samples/01/bin/Debug/netcoreapp1.1/SimpleModelsAndRelations.runtimeconfig.json
+/home/ronald/Projects/Samples/01/bin/Debug/netcoreapp1.1/SimpleModelsAndRelations.runtimeconfig.dev.json
+/home/ronald/Projects/Samples/01/bin/Debug/netcoreapp1.1/SimpleModelsAndRelations.dll
+/home/ronald/Projects/Samples/01/bin/Debug/netcoreapp1.1/SimpleModelsAndRelations.pdb
+/home/ronald/Projects/Samples/01/obj/Debug/netcoreapp1.1/UserSecretsAssemblyInfo.cs
+/home/ronald/Projects/Samples/01/obj/Debug/netcoreapp1.1/SimpleModelsAndRelations.AssemblyInfo.cs
+/home/ronald/Projects/Samples/01/obj/Debug/netcoreapp1.1/SimpleModelsAndRelations.dll
+/home/ronald/Projects/Samples/01/obj/Debug/netcoreapp1.1/SimpleModelsAndRelations.pdb
