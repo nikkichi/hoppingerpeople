@@ -2,26 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SimpleModelsAndRelations.Models;
+using HoppingerPeople.Models;
 
-namespace SimpleModelsAndRelations.Data
+namespace HoppingerPeople.Data
 {
-  public static class SimpleModelsAndRelationsContextSeeds
+  public static class HoppingerPeopleContextSeeds
   {
         static Action seed_HomePages = null;
     static HomePage[] HomePages = null;
-     static Action seed_Group1S = null;
-    static Group1[] Group1S = null;
-     static Action seed_Item1S = null;
-    static Item1[] Item1S = null;
-     static Action seed_Group2S = null;
-    static Group2[] Group2S = null;
-     static Action seed_Item2AS = null;
-    static Item2A[] Item2AS = null;
-     static Action seed_Item2BS = null;
-    static Item2B[] Item2BS = null;
 
-    public static void InitializePagesAndSingletons(SimpleModelsAndRelationsContext context) {
+    public static void InitializePagesAndSingletons(HoppingerPeopleContext context) {
       context.Database.EnsureCreated();
       
       if (!context.HomePage.Any()) {
@@ -36,7 +26,7 @@ namespace SimpleModelsAndRelations.Data
         
     }
 
-    public static void Initialize(SimpleModelsAndRelationsContext context)
+    public static void Initialize(HoppingerPeopleContext context)
     {
       var white_pixel = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAMSURBVBhXY/j//z8ABf4C/qc1gYQAAAAASUVORK5CYII=";
       var cute_image = "data:image/gif;base64,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";
@@ -70,211 +60,8 @@ namespace SimpleModelsAndRelations.Data
         }
         HomePages = context.HomePage.ToArray();
       };
-      seed_Group1S = () => {
-        
-        if (!context.Group1.Any())
-        {
-          var _Group1 = new System.Collections.Generic.List<Group1>();
-          
-          
-            
-            _Group1.Add(new Group1 { Id = 1, CreatedDate = DateTime.Now, Letter = "A", RichText = null, Pic = null, IsRad = true, Name = "Group1 1", Time = DateTime.Now, Date = DateTime.Now, Url = "www.google.com", Int = 0, String = "String", Double = 0, DateTime = DateTime.Now, Tel = "0123456789", Email = "a@b.c",   });
-
-            
-            _Group1.Add(new Group1 { Id = 2, CreatedDate = DateTime.Now, Letter = "B", RichText = null, Pic = null, IsRad = false, Name = "Group1 2", Time = DateTime.Now, Date = DateTime.Now, Url = "www.google.com", Int = 0, String = "String", Double = 0, DateTime = DateTime.Now, Tel = "0123456789", Email = "a@b.c",   });
-
-            
-            _Group1.Add(new Group1 { Id = 3, CreatedDate = DateTime.Now, Letter = "C", RichText = null, Pic = null, IsRad = true, Name = "Group1 3", Time = DateTime.Now, Date = DateTime.Now, Url = "www.google.com", Int = 0, String = "String", Double = 0, DateTime = DateTime.Now, Tel = "0123456789", Email = "a@b.c",   });
-
-            
-            _Group1.Add(new Group1 { Id = 4, CreatedDate = DateTime.Now, Letter = "A", RichText = null, Pic = null, IsRad = false, Name = "Group1 4", Time = DateTime.Now, Date = DateTime.Now, Url = "www.google.com", Int = 0, String = "String", Double = 0, DateTime = DateTime.Now, Tel = "0123456789", Email = "a@b.c",   });
-
-          foreach (var x in _Group1)
-          {
-            context.Group1.Add(x);
-          }
-          context.SaveChanges();
-        }
-        Group1S = context.Group1.ToArray();
-      };
-      seed_Item1S = () => {
-        
-        if (!context.Item1.Any())
-        {
-          var _Item1 = new System.Collections.Generic.List<Item1>();
-          
-          
-            
-            _Item1.Add(new Item1 { Id = 1, CreatedDate = DateTime.Now, Name = "Item1 1", Description = "",   });
-
-            
-            _Item1.Add(new Item1 { Id = 2, CreatedDate = DateTime.Now, Name = "Item1 2", Description = "",   });
-
-            
-            _Item1.Add(new Item1 { Id = 3, CreatedDate = DateTime.Now, Name = "Item1 3", Description = "",   });
-
-            
-            _Item1.Add(new Item1 { Id = 4, CreatedDate = DateTime.Now, Name = "Item1 4", Description = "",   });
-
-          foreach (var x in _Item1)
-          {
-            context.Item1.Add(x);
-          }
-          context.SaveChanges();
-        }
-        Item1S = context.Item1.ToArray();
-      };
-      seed_Group2S = () => {
-        
-        if (!context.Group2.Any())
-        {
-          var _Group2 = new System.Collections.Generic.List<Group2>();
-          
-          
-            
-            _Group2.Add(new Group2 { Id = 1, CreatedDate = DateTime.Now, Name = "Group2 1",   });
-
-            
-            _Group2.Add(new Group2 { Id = 2, CreatedDate = DateTime.Now, Name = "Group2 2",   });
-
-            
-            _Group2.Add(new Group2 { Id = 3, CreatedDate = DateTime.Now, Name = "Group2 3",   });
-
-            
-            _Group2.Add(new Group2 { Id = 4, CreatedDate = DateTime.Now, Name = "Group2 4",   });
-
-          foreach (var x in _Group2)
-          {
-            context.Group2.Add(x);
-          }
-          context.SaveChanges();
-        }
-        Group2S = context.Group2.ToArray();
-      };
-      seed_Item2AS = () => {
-        
-        if (!context.Item2A.Any())
-        {
-          var _Item2A = new System.Collections.Generic.List<Item2A>();
-          
-          
-            
-            _Item2A.Add(new Item2A { Id = 1, CreatedDate = DateTime.Now, Name = "Item2A 1", Description = "An item of type 2",   });
-
-            
-            _Item2A.Add(new Item2A { Id = 2, CreatedDate = DateTime.Now, Name = "Item2A 2", Description = "An item of type 2",   });
-
-            
-            _Item2A.Add(new Item2A { Id = 3, CreatedDate = DateTime.Now, Name = "Item2A 3", Description = "An item of type 2",   });
-
-            
-            _Item2A.Add(new Item2A { Id = 4, CreatedDate = DateTime.Now, Name = "Item2A 4", Description = "An item of type 2",   });
-
-          foreach (var x in _Item2A)
-          {
-            context.Item2A.Add(x);
-          }
-          context.SaveChanges();
-        }
-        Item2AS = context.Item2A.ToArray();
-      };
-      seed_Item2BS = () => {
-        
-        if (!context.Item2B.Any())
-        {
-          var _Item2B = new System.Collections.Generic.List<Item2B>();
-          
-          
-            
-            _Item2B.Add(new Item2B { Id = 1, CreatedDate = DateTime.Now, Name = "Item2B 1", Content = "Content 1",   });
-
-            
-            _Item2B.Add(new Item2B { Id = 2, CreatedDate = DateTime.Now, Name = "Item2B 2", Content = "Content 2",   });
-
-            
-            _Item2B.Add(new Item2B { Id = 3, CreatedDate = DateTime.Now, Name = "Item2B 3", Content = "Content 3",   });
-
-            
-            _Item2B.Add(new Item2B { Id = 4, CreatedDate = DateTime.Now, Name = "Item2B 4", Content = "Content 4",   });
-
-          foreach (var x in _Item2B)
-          {
-            context.Item2B.Add(x);
-          }
-          context.SaveChanges();
-        }
-        Item2BS = context.Item2B.ToArray();
-      };
       seed_HomePages();
-      seed_Group1S();
-      seed_Item1S();
-      seed_Group2S();
-      seed_Item2AS();
-      seed_Item2BS();
 
-      if (!context.Group1_Item1.Any())
-      {
-        var _Group1_Item1 = new Group1_Item1[]
-        {
-            
-            new Group1_Item1 { Group1Id = 1, Item1Id = 1 },
-
-            new Group1_Item1 { Group1Id = 2, Item1Id = 2 },
-
-            new Group1_Item1 { Group1Id = 3, Item1Id = 3 },
-
-            new Group1_Item1 { Group1Id = 3, Item1Id = 4 },
-
-        };
-        foreach (var x in _Group1_Item1)
-        {
-          context.Group1_Item1.Add(x);
-        }
-        context.SaveChanges();
-      }
-      var Group1_Item1 = context.Group1_Item1.ToArray();
-      if (!context.Group2_Item2A.Any())
-      {
-        var _Group2_Item2A = new Group2_Item2A[]
-        {
-            
-            new Group2_Item2A { Group2Id = 1, Item2AId = 1 },
-
-            new Group2_Item2A { Group2Id = 2, Item2AId = 2 },
-
-            new Group2_Item2A { Group2Id = 3, Item2AId = 3 },
-
-            new Group2_Item2A { Group2Id = 3, Item2AId = 4 },
-
-        };
-        foreach (var x in _Group2_Item2A)
-        {
-          context.Group2_Item2A.Add(x);
-        }
-        context.SaveChanges();
-      }
-      var Group2_Item2A = context.Group2_Item2A.ToArray();
-      if (!context.Group2_Item2B.Any())
-      {
-        var _Group2_Item2B = new Group2_Item2B[]
-        {
-            
-            new Group2_Item2B { Group2Id = 1, Item2BId = 1 },
-
-            new Group2_Item2B { Group2Id = 2, Item2BId = 2 },
-
-            new Group2_Item2B { Group2Id = 3, Item2BId = 3 },
-
-            new Group2_Item2B { Group2Id = 3, Item2BId = 4 },
-
-        };
-        foreach (var x in _Group2_Item2B)
-        {
-          context.Group2_Item2B.Add(x);
-        }
-        context.SaveChanges();
-      }
-      var Group2_Item2B = context.Group2_Item2B.ToArray();
 
       InitializePagesAndSingletons(context);
     }

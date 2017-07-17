@@ -1,21 +1,16 @@
 {
   "en": {
     "translation": {
+      "Change language": "Change language",
       "HomePage": "Home",
-      "HomePage_Group1S": "Group1's",
-      "HomePage_Group2S": "Group2's",
-      "ItemsPage": "All Items",
-      "Group1S": "Group1's",
-      "Group2S": "Group2's",
-      "Item1S": "Item1's",
-      "Item2S": "Item2's",
-      "Item2AS": "Item2A's",
-      "Item2BS": "Item2B's"
-    },
-    "Item1": {
-        "Name":{
-          "inline": "Item1"
-          }
-      }
+      "WelcomeMessage": "Welcome message"
+    }
+  },
+  "nl": {
+    "translation": {
+      "Change language": "Kies taal",
+      "HomePage": "Home",
+      "WelcomeMessage": "Welkom bericht"
+    }
   }
 }

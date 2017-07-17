@@ -10,19 +10,19 @@ using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Hosting;
 using SendGrid;
 using SendGrid.Helpers.Mail;
-using SimpleModelsAndRelations;
-using SimpleModelsAndRelations.Models;
-using SimpleModelsAndRelations.Filters;
+using HoppingerPeople;
+using HoppingerPeople.Models;
+using HoppingerPeople.Filters;
 
 
 [Route("/[controller]")]
   public class HomePagesController : Controller
   {
     private readonly MailOptions _mailOptions;
-    public readonly SimpleModelsAndRelationsContext _context;
+    public readonly HoppingerPeopleContext _context;
     public IHostingEnvironment env;
 
-    public HomePagesController(SimpleModelsAndRelationsContext context, IHostingEnvironment env, IOptions<MailOptions> mailOptionsAccessor)
+    public HomePagesController(HoppingerPeopleContext context, IHostingEnvironment env, IOptions<MailOptions> mailOptionsAccessor)
     {
       _context = context;
       _mailOptions = mailOptionsAccessor.Value;

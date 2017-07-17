@@ -60,4 +60,3 @@ The application is an ASP. Net Core MVC application with the following directori
 - `webpack.config.js`, with the building system for the Client-side resources (typescript and scss files);
 - `Models`, with the server-side models and database connection specification;
 - `Views`, with the server-side views which only instantiate the React components.
-# Scaffolder-Clean-01

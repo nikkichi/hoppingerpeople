@@ -8,18 +8,18 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
-using SimpleModelsAndRelations;
-using SimpleModelsAndRelations.Models;
-using SimpleModelsAndRelations.Filters;
+using HoppingerPeople;
+using HoppingerPeople.Models;
+using HoppingerPeople.Filters;
 using System.IO;
 
 [Route("api/v1/keep_alive")]
 public class KeepAliveApiController : Controller
 {
   private readonly MailOptions _mailOptions;
-  public readonly SimpleModelsAndRelationsContext _context;
+  public readonly HoppingerPeopleContext _context;
 
-  public KeepAliveApiController(SimpleModelsAndRelationsContext context, IOptions<MailOptions> mailOptionsAccessor)
+  public KeepAliveApiController(HoppingerPeopleContext context, IOptions<MailOptions> mailOptionsAccessor)
   {
     _context = context;
     _mailOptions = mailOptionsAccessor.Value;

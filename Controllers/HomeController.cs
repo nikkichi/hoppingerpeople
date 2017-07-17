@@ -9,19 +9,19 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
-using SimpleModelsAndRelations;
-using SimpleModelsAndRelations.Models;
-using SimpleModelsAndRelations.Filters;
+using HoppingerPeople;
+using HoppingerPeople.Models;
+using HoppingerPeople.Filters;
 
 
-namespace SimpleModelsAndRelations.Controllers
+namespace HoppingerPeople.Controllers
 {
   public class HomeController : Controller
   {
     private readonly MailOptions _mailOptions;
-    private readonly SimpleModelsAndRelationsContext _context;
+    private readonly HoppingerPeopleContext _context;
 
-    public HomeController(SimpleModelsAndRelationsContext context, IOptions<MailOptions> mailOptionsAccessor)
+    public HomeController(HoppingerPeopleContext context, IOptions<MailOptions> mailOptionsAccessor)
     {
       _context = context;
       _mailOptions = mailOptionsAccessor.Value;

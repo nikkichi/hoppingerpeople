@@ -635,7 +635,7 @@ export async function render_page_manager(slug:string, target_element_id:string,
   i18next.init({
     lng:  "nl",
     fallbackLng: "en",
-    ns: ["common","HomePage","Group1","Item1","Group2","Item2A","Item2B"],
+    ns: ["common","HomePage"],
     resources: resources
   }, (err, t) => {
     ReactDOM.render(

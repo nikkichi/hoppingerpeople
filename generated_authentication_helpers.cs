@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Security.Cryptography;
-using SimpleModelsAndRelations;
-using SimpleModelsAndRelations.Models;
+using HoppingerPeople;
+using HoppingerPeople.Models;
 
-namespace SimpleModelsAndRelations.Filters
+namespace HoppingerPeople.Filters
 {
   public class RestrictToUserTypeAttribute : ActionFilterAttribute
   {
@@ -26,7 +26,7 @@ namespace SimpleModelsAndRelations.Filters
     {
       var HttpContext = context.HttpContext;
       dynamic controller = context.Controller;
-      var _context = controller._context as SimpleModelsAndRelationsContext;
+      var _context = controller._context as HoppingerPeopleContext;
       var session = HttpContext.Get<LoggableEntities>(_context);
 
 
@@ -42,28 +42,28 @@ namespace SimpleModelsAndRelations.Filters
   }
 }
 
-namespace SimpleModelsAndRelations
+namespace HoppingerPeople
 {
   public static class ApplicationSessionManager {
-    public static bool Exists(this HttpContext HttpContext, SimpleModelsAndRelationsContext _context) {
-      if (HttpContext.Request.Cookies.ContainsKey("SimpleModelsAndRelationsContext")) {
-        var old_cookie = HttpContext.Request.Cookies["SimpleModelsAndRelationsContext"];
+    public static bool Exists(this HttpContext HttpContext, HoppingerPeopleContext _context) {
+      if (HttpContext.Request.Cookies.ContainsKey("HoppingerPeopleContext")) {
+        var old_cookie = HttpContext.Request.Cookies["HoppingerPeopleContext"];
         var old_session = _context.Session.FirstOrDefault(s => s.CookieName == old_cookie);
         return old_session != null;
       }
       return false;
     }
-    public static T Get<T>(this HttpContext HttpContext, SimpleModelsAndRelationsContext _context) {
-      if (!HttpContext.Request.Cookies.ContainsKey("SimpleModelsAndRelationsContext"))
+    public static T Get<T>(this HttpContext HttpContext, HoppingerPeopleContext _context) {
+      if (!HttpContext.Request.Cookies.ContainsKey("HoppingerPeopleContext"))
         return default(T);
-      var old_cookie = HttpContext.Request.Cookies["SimpleModelsAndRelationsContext"];
+      var old_cookie = HttpContext.Request.Cookies["HoppingerPeopleContext"];
       var old_session = _context.Session.FirstOrDefault(s => s.CookieName == old_cookie);
       if (old_session != null)
         return JsonConvert.DeserializeObject<T>(old_session.Content);
       return default(T);
     }
-    public static void Set<T>(this HttpContext HttpContext, SimpleModelsAndRelationsContext _context, T payload) {
-      var cookie = HttpContext.Request.Cookies["SimpleModelsAndRelationsContext"];
+    public static void Set<T>(this HttpContext HttpContext, HoppingerPeopleContext _context, T payload) {
+      var cookie = HttpContext.Request.Cookies["HoppingerPeopleContext"];
       var session = _context.Session.FirstOrDefault(s => s.CookieName == cookie);
       if (session != null) {
         session.Content = JsonConvert.SerializeObject(payload);
@@ -73,7 +73,7 @@ namespace SimpleModelsAndRelations
       }
       _context.SaveChanges();
     }
-    public static void ChangedPassword<U>(this HttpContext HttpContext, SimpleModelsAndRelationsContext _context, string entity_name, U entity) where U : IEntity {
+    public static void ChangedPassword<U>(this HttpContext HttpContext, HoppingerPeopleContext _context, string entity_name, U entity) where U : IEntity {
       var now = DateTime.Now;
       _context.Session.RemoveRange(
         from s in _context.Session
@@ -83,7 +83,7 @@ namespace SimpleModelsAndRelations
         select s);
       _context.SaveChanges();
     }
-    public static void Deleted<U>(this HttpContext HttpContext, SimpleModelsAndRelationsContext _context, string entity_name, U entity) where U : IEntity {
+    public static void Deleted<U>(this HttpContext HttpContext, HoppingerPeopleContext _context, string entity_name, U entity) where U : IEntity {
       var now = DateTime.Now;
       _context.Session.RemoveRange(
         from s in _context.Session
@@ -93,7 +93,7 @@ namespace SimpleModelsAndRelations
         select s);
       _context.SaveChanges();
     }
-    public static void Login<T, U>(this HttpContext HttpContext, Microsoft.AspNetCore.Hosting.IHostingEnvironment env, SimpleModelsAndRelationsContext _context, string entity_name, U entity, T payload) where U : IEntity {
+    public static void Login<T, U>(this HttpContext HttpContext, Microsoft.AspNetCore.Hosting.IHostingEnvironment env, HoppingerPeopleContext _context, string entity_name, U entity, T payload) where U : IEntity {
       HttpContext.Logout(_context);
       var now = DateTime.Now;
       _context.Session.RemoveRange(
@@ -104,7 +104,7 @@ namespace SimpleModelsAndRelations
         select s);
       _context.SaveChanges();
       var random_id = PasswordHasher.RandomString;
-      HttpContext.Response.Cookies.Append("SimpleModelsAndRelationsContext", random_id,
+      HttpContext.Response.Cookies.Append("HoppingerPeopleContext", random_id,
         new Microsoft.AspNetCore.Http.CookieOptions()
         {
           Expires = DateTimeOffset.Now.AddDays(30),
@@ -120,9 +120,9 @@ namespace SimpleModelsAndRelations
       _context.Session.Add(new_session);
       _context.SaveChanges();
     }
-    public static void Logout(this HttpContext HttpContext, SimpleModelsAndRelationsContext _context) {
-      if (HttpContext.Request.Cookies.ContainsKey("SimpleModelsAndRelationsContext")) {
-        var old_cookie = HttpContext.Request.Cookies["SimpleModelsAndRelationsContext"];
+    public static void Logout(this HttpContext HttpContext, HoppingerPeopleContext _context) {
+      if (HttpContext.Request.Cookies.ContainsKey("HoppingerPeopleContext")) {
+        var old_cookie = HttpContext.Request.Cookies["HoppingerPeopleContext"];
         var old_session = _context.Session.FirstOrDefault(s => s.CookieName == old_cookie);
         if (old_session != null) {
           _context.Session.Remove(old_session);
@@ -134,13 +134,13 @@ namespace SimpleModelsAndRelations
             _context.SaveChanges();
           }
         }
-        HttpContext.Response.Cookies.Delete("SimpleModelsAndRelationsContext");
+        HttpContext.Response.Cookies.Delete("HoppingerPeopleContext");
       }
     }
   }
 }
 
-namespace SimpleModelsAndRelations.Models
+namespace HoppingerPeople.Models
 {
   public partial class RegistrationData
   {

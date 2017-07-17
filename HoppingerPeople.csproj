@@ -4,10 +4,10 @@
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <DebugType>portable</DebugType>
     <PreserveCompilationContext>true</PreserveCompilationContext>
-    <AssemblyName>SimpleModelsAndRelations</AssemblyName>
+    <AssemblyName>HoppingerPeople</AssemblyName>
     <OutputType>Exe</OutputType>
-    <PackageId>SimpleModelsAndRelations</PackageId>
-    <UserSecretsId>aspnet-SimpleModelsAndRelations-2dff800a-aaf5-40b7-b365-90ccdba3b26d</UserSecretsId>
+    <PackageId>HoppingerPeople</PackageId>
+    <UserSecretsId>aspnet-HoppingerPeople-2dff800a-aaf5-40b7-b365-90ccdba3b26d</UserSecretsId>
     <RuntimeFrameworkVersion>1.1.1</RuntimeFrameworkVersion>
     <PackageTargetFallback>$(PackageTargetFallback);dotnet5.6;portable-net45+win8</PackageTargetFallback>
     <TypeScriptCompileBlock>true</TypeScriptCompileBlock>

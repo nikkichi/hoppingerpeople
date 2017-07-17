@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
-using SimpleModelsAndRelations;
-using SimpleModelsAndRelations.Models;
-using SimpleModelsAndRelations.Filters;
+using HoppingerPeople;
+using HoppingerPeople.Models;
+using HoppingerPeople.Filters;
 
-namespace SimpleModelsAndRelations
+namespace HoppingerPeople
 {
   public interface IEntity {
     DateTime CreatedDate {get;}

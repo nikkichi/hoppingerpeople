@@ -45,7 +45,7 @@ end
 
 # Run DB migrations
 on cluster_nodes.first, in: :parallel do |host|
-  execute :docker, "run -t #{image_tag} dotnet ef database update -c SimpleModelsAndRelationsContext"
+  execute :docker, "run -t #{image_tag} dotnet ef database update -c HoppingerPeopleContext"
 end
 
 # Cleanup old images and fire up container

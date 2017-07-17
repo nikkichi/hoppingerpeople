@@ -2,9 +2,9 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace SimpleModelsAndRelations.Models{
-  public partial class SimpleModelsAndRelationsContext : DbContext {
+namespace HoppingerPeople.Models{
+  public partial class HoppingerPeopleContext : DbContext {
 
-      public SimpleModelsAndRelationsContext(DbContextOptions<SimpleModelsAndRelationsContext> options) : base(options){}
+      public HoppingerPeopleContext(DbContextOptions<HoppingerPeopleContext> options) : base(options){}
   }
 }

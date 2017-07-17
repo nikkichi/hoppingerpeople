@@ -15,10 +15,10 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NLog.Extensions.Logging;
 using NLog.Web;
-using SimpleModelsAndRelations.Data;
-using SimpleModelsAndRelations.Models;
+using HoppingerPeople.Data;
+using HoppingerPeople.Models;
 
-namespace SimpleModelsAndRelations
+namespace HoppingerPeople
 {
 
   static class StaticMailer {
@@ -66,9 +66,9 @@ namespace SimpleModelsAndRelations
     {
       services.AddAntiforgery(options => options.HeaderName = "X-XSRF-TOKEN");
 
-      services.AddDbContext<SimpleModelsAndRelationsContext>(options =>
+      services.AddDbContext<HoppingerPeopleContext>(options =>
       {
-        options.UseSqlite(Configuration.GetConnectionString("SimpleModelsAndRelationsConnection"));
+        options.UseSqlite(Configuration.GetConnectionString("HoppingerPeopleConnection"));
       });
 
       Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions.Configure<MailOptions>(services, Configuration);
@@ -95,14 +95,14 @@ namespace SimpleModelsAndRelations
 
       services.AddSession(options =>
       {
-        options.CookieName = ".SimpleModelsAndRelations.Session804";
+        options.CookieName = ".HoppingerPeople.Session804";
         options.IdleTimeout = TimeSpan.FromDays(365);
         options.CookieHttpOnly = true;
       });
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IOptions<ApiOptions> apiOptionsAccessor, IHostingEnvironment env, ILoggerFactory loggerFactory, SimpleModelsAndRelationsContext dbContext, IAntiforgery antiforgery)
+    public void Configure(IApplicationBuilder app, IOptions<ApiOptions> apiOptionsAccessor, IHostingEnvironment env, ILoggerFactory loggerFactory, HoppingerPeopleContext dbContext, IAntiforgery antiforgery)
     {
       // loggerFactory.AddConsole(Configuration.GetSection("Logging"));
       loggerFactory.AddConsole(LogLevel.Error);
@@ -114,7 +114,7 @@ namespace SimpleModelsAndRelations
         app.UseDeveloperExceptionPage();
         app.UseDatabaseErrorPage();
         app.UseBrowserLink();
-        SimpleModelsAndRelationsContextSeeds.Initialize(dbContext);
+        HoppingerPeopleContextSeeds.Initialize(dbContext);
       }
       else
       {
@@ -126,7 +126,7 @@ namespace SimpleModelsAndRelations
         context.Response.Headers.Add("X-Frame-Options", "SAMEORIGIN");
         await next();
       });
-      SimpleModelsAndRelationsContextSeeds.InitializePagesAndSingletons(dbContext);
+      HoppingerPeopleContextSeeds.InitializePagesAndSingletons(dbContext);
 
       app.UseStaticFiles();
 
