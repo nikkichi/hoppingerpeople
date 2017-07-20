@@ -9,11 +9,11 @@ export function getAanbiedingPromise() {
         function(resolve, reject){
             setTimeout(
                 () => {return {
-                        titel : Custom_Types.CreateValue("nieuwe titel"),
-                        gewijzigd : Custom_Types.CreateValue(new Date(2000,10,10)),
-                        ingezonden : Custom_Types.CreateValue(new Date(2000,10,10)),
-                        tonenvan : Custom_Types.CreateValue(new Date(2000,10,10)),
-                        tonentot : Custom_Types.CreateValue(new Date(2000,10,10))
+                        titel : "nieuwe titel",
+                        gewijzigd :  new Date(2000,10,10),
+                        ingezonden : new Date(2000,10,10),
+                        tonenvan :   new Date(2000,10,10),
+                        tonentot :   new Date(2000,10,10)
                         }}
                 , 2500)
         }
@@ -23,11 +23,11 @@ export function getAanbiedingPromise() {
 
 export function getAllAanbieding(){
     return JSON.parse(JSON.stringify({
-                        titel : Custom_Types.CreateValue("nieuwe titel"),
-                        gewijzigd : Custom_Types.CreateValue(new Date(2000,10,10)),
-                        ingezonden : Custom_Types.CreateValue(new Date(2000,10,10)),
-                        tonenvan : Custom_Types.CreateValue(new Date(2000,10,10)),
-                        tonentot : Custom_Types.CreateValue(new Date(2000,10,10))
+                        titel :      "nieuwe titel",
+                        gewijzigd :  new Date(2000,10,10),
+                        ingezonden : new Date(2000,10,10),
+                        tonenvan :   new Date(2000,10,10),
+                        tonentot :   new Date(2000,10,10)
                         }))//later change the stringify to something that retrieves data from a database
 }
 

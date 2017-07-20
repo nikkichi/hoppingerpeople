@@ -8,4 +8,4 @@ import * as Api from './generated_api'
 import * as pageManager from './pageManager'
 
 export let HomePage = function(slug: string) : JSX.Element {
-    return (<div><pageManager.PageManagerComponent/> </div>)
+    return (<div><pageManager.PageManagerComponent/> </div>) }
