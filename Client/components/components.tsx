@@ -102,7 +102,11 @@ export function Text(
   get_item:()=>string,
   set_item:(v:string)=>void,
   validation?:(_:string)=>"ok"|{ error:string }) : JSX.Element {
+<<<<<<< HEAD
   return <textarea disabled={!can_edit || mode == "view"} 
+=======
+  return <textarea disabled={!can_edit || mode == "view"}
+>>>>>>> master
         value={get_item()}
         onChange={(e) => {
           let new_value = (e.target as HTMLTextAreaElement).value
