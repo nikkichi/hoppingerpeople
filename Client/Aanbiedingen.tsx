@@ -68,6 +68,9 @@ export class PageComponent extends React.Component<PageComponentProps, PageCompo
     }
     componentWillMount(){}
 
+    list_cases() {
+    } 
+
     render(){
         return <div></div>
     }
