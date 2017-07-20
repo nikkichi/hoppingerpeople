@@ -47,11 +47,32 @@ export class AanbiedingenComponent extends React.Component<AanbiedingenComponent
         //veranderd de de tekst op de button als de state veranderd, dus als er op wordt geklikt
         let button_text = (this.state.is_expanded) ? "Lees minder" : "Lees meer"
 
+        //variabele die de favoriet button weergeeft wanneer is_expanded true is, anders niks 
+        let fav_button = (this.state.is_expanded) ? <div><button>Voeg toe aan uw favorieten</button></div> : ""
+
         //de method toggle_button wordt opgeroepen in als je op name en de button klikt, dus de state verandert en het laat de description zien
         return <div><a onClick={() => this.toggle_button()}><h1>{this.state.name}</h1></a>
-                        <button onClick={() => this.toggle_button()}>{button_text}</button>
-                        <br/><br/>{description}</div>
+                        <button onClick={() => this.toggle_button()}>{button_text}</button><br/><br/>
+                        {description}<br/><br/>
+                        {fav_button}</div>
     }        
 }
 
+type PageComponentProps = {}
+type PageComponentState = {} 
 
+export class PageComponent extends React.Component<PageComponentProps, PageComponentState>{
+    constructor(props: PageComponentProps, context){
+        super(props, context)
+        this.state = {}
+    }
+    componentWillMount(){}
+
+    list_cases() {
+    } 
+
+    render(){
+        return <div></div>
+    }
+}
+// maak een list van alle cases in je getAanbiedingen
