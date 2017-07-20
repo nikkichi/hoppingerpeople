@@ -8,7 +8,7 @@ function getAanbieding(id:number) {
         case 1:
             return Promise.resolve({Name: "Bootexcursie Rotterdam - Kinderdijk",
                                     Description: "Ook aankomende zomer (vanaf 1 april t/m 29 oktober 2017) voeren wij de enige echte bootexcursie Rotterdam - Kinderdijk uit. Een perfecte (fiets-)verbinding tussen het woelige, drukke centrum en het rustige en romantische landschap van Kinderdijk.Vaar mee met ons sfeervol passagierschip 'Nehalennia', waar service en klantvriendelijkheid op de eerste plaats staan."})
-
+                                        
         case 2:
             return Promise.resolve({Name: "Bewegen voor 50 plussers",
                                     Description: "Bewegen is goed voor de gezondheid, maar bovenal is bewegen leuk! U ontmoet mensen en beleeft plezier en gezelligheid met elkaar. U vindt alle sportaanbieders waar u korting krijgt met uw Ooievaarspas op deze website. Een proefles is meestal gratis en wie weet krijgt u er een nieuwe hobby bij. Op deze pagina vindt u tips en extra aanbiedingen. Bekijk het aanbod voor 50 plussers. Laatst bekeken aanbiedingen."})
