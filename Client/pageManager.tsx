@@ -5,6 +5,7 @@ import * as List from './containers/list'
 import * as Models from './generated_models'
 import * as Api from './generated_api'
 import * as Dagtochten from './Dagtochten'
+import * as detailPagina from './InfoComponent'
 
 //type dagtocht = [page1: "/Dagtochten", page2: "/Dagtochten/detailPagina"]
 
@@ -17,19 +18,17 @@ export class PageManagerComponent extends React.Component<PageManagerComponentPr
 
     constructor(props, context) {
         super(props, context);
-        this.state = { current_page: { kind:"about" } }}
+        this.state = { current_page: { kind:"dagtocht", id: 3 } }}
 
     render() {
 
     switch (this.state.current_page.kind) {
-        case "contact us":
+        case "dagtocht":
             return <div><Dagtochten.DagtochtenComponent onMovePage={(next_page) => this.moveToPage(next_page)}  />     </div>
         case "about":
-            return <div><Dagtochten.InforComponent onMovePage={(next_page) => this.moveToPage(next_page)} /> </div>
-        
+            return <div><detailPagina.InforComponent onMovePage={(next_page) => this.moveToPage(next_page)} /> </div>
         case "contact us": 
-                return<div>page 3</div>  
-                
+                return<div>Contact Us</div>   
     }}
 
     moveToPage(next_page: Page) {
