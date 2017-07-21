@@ -9,4 +9,5 @@ export type Dagtocht = {
 export type Category_Dagtocht={
     title: string,
     description: string
+    id: number
 }

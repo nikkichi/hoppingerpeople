@@ -18,6 +18,15 @@ export class InforComponent extends React.Component<InforComponentProps, InforCo
     componentWillMount() {
 
 
+        Api.get_dagtocht(2).then(x => this.setState({
+            ...this.state,
+            title: x.name,
+            description: x.description,
+            text: x.text,
+            prijs: x.prijs
+        }))
+        console.log(this.state.prijs)
+
     }
 
 
@@ -25,7 +34,7 @@ export class InforComponent extends React.Component<InforComponentProps, InforCo
 
         return <div>
 
-            <h1>InfoComponent</h1>
+            <h1>{this.state.title}</h1>
             <br></br>
             <div>{this.state.text}</div>
             <br></br>

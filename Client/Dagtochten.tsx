@@ -10,32 +10,71 @@ import * as Api from './api'
 let hyperlink = "lees meer "
 
 type DagtochtenComponentProps = { onMovePage: (id: Manager.Page) => void }
-type DagtochtenComponentState = { name: string, title: string, description: string }
+type DagtochtenComponentState = { kind: "dagtocht" } | { kind: "detailPagina", categories: Types.Category_Dagtocht[], dagtochten: Types.Dagtocht[] }
 
 export class DagtochtenComponent extends React.Component<DagtochtenComponentProps, DagtochtenComponentState>{
     constructor(props, context) {
         super(props, context)
-        this.state = { name: "loading", title: "", description: "" }
+        this.state = { kind: "dagtocht" }
     }
 
     componentWillMount() {
-        
+        this.loadCategories();
+        this.loadDagtochten();
+    }
+
+    loadCategories() {
+        Api
+            .get_categories()
+            .then(c => this.setState({ ...this.state, kind: "dagtocht", categories: c }))
+            .catch(_ => this.loadCategories())
+    }
+
+    loadDagtochten() {
+        Api
+            .get_dagtocht(1)
+             .then(d => this.setState({ ...this.state, kind: "detailPagina", dagtocht: d }))
+            .catch(_ => this.loadDagtochten())
     }
 
     render() {
+        if (this.state.kind == "dagtocht") {
+            let categoryView = function (category: Types.Category_Dagtocht) {
+                <div>
+                    <h2>{category.title}</h2>
+                    <p>{category.description}</p>
+                    <button onClick={(event) => this.props.onMovePage(this.state.kind)}>{hyperlink}</button>
+                </div>
 
-        return <div>
-            <h1>  opties dagtochten</h1>
-            <h2> {this.state.name}</h2>
-            <div> {this.state.description}</div>
+            }
 
-            <h2>Dagtochen</h2>
-            <h4> {this.state.title}</h4>
-            <button onClick={(event) => this.props.onMovePage({ kind:"dagtocht" , id:2 })}>{hyperlink}</button>
+            let dagtochtView = function (dagtocht: Types.Dagtocht) {
+                <div>{dagtocht.name}
+                        <p> {dagtocht.description}</p>
+                        <div> {dagtocht.text}</div>
+                        <div>  {dagtocht.prijs}</div>
+                </div>
+            }
 
 
-        </div>
+            return <div>{categoryView              
+                }</div>
+        }
+        else {
+            <div>Loading</div>
+        }
     }
 }
-
+//  this.setState(
+//                         {
+//                             ... this.state, dagtochten: this.state.dagtochten.map(dagtocht => {
+//                                 console.log()
+//                                 if (dagtochten.dagtochten.Kind != dagtocht.dagtochten.Kind) {
+//                                     return dagtocht
+//                                 }
+//                                 else {
+//    
+//                                     return { ...dagtocht }
+//                                 }
+//                             }).toList
 
