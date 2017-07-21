@@ -6,42 +6,51 @@ import * as Types from './custom_types'
 import * as Manager from './pageManager'
 import * as Api from './api'
 
-type InforComponentProps = { onMovePage: (id: Manager.Page) => void, }
-type InforComponentState = { text: string, title: string, description: string, categoryID: number, prijs: number }
+type InforComponentProps = { }
+type InforComponentState = { kind: "dagtochtPagina" } | { kind: "dagtochtDetailPagina", dagtochten: Types.Dagtocht[] }
 
 export class InforComponent extends React.Component<InforComponentProps, InforComponentState>{
     constructor(props, context) {
         super(props, context)
-        this.state = { text: "Loading", title: "", description: "", categoryID: null, prijs: null }
+        this.state = {kind: "dagtochtPagina" }
+    }
+    loadDagtochten() {
+        Api
+            .get_dagtocht()
+             .then(d => this.setState({ ...this.state, kind: "dagtochtDetailPagina", dagtochten: d }))
+            // .catch(_ => console.log('get dachtocht rejected ') || setTimeout( this.loadDagtochten ,5000))
+             
     }
 
-    // componentWillMount() {
-
-
-    //     Api.get_dagtocht(2).then(x => this.setState({
-    //         ...this.state,
-    //         title: x.name,
-    //         description: x.description,
-    //         text: x.text,
-    //         prijs: x.prijs
-    //     }))
-    //     console.log(this.state.prijs)
-
-    // }
+   componentWillMount() {
+        console.log('component will mount')
+        this.loadDagtochten();
+    }
 
 
     render() {
 
-        return <div>
+     if (this.state.kind == "dagtochtDetailPagina") {
 
-            <h1>{this.state.title}</h1>
-            <br></br>
-            <div>{this.state.text}</div>
-            <br></br>
-            <div>{this.state.prijs}</div>
-            <button onClick={(event) => this.props.onMovePage({ kind: "DagtochtPagina" })}> terug</button>
+            let dagtochtView = function (dagtocht: Types.Dagtocht) {
+                return <div>
+                    {dagtocht.name}
+                    {console.log('Haaai',dagtocht.name)}
+                        <p> {dagtocht.description}</p>
+              
+                  
+                </div>
+            }
 
-        </div>
+
+            return <div> 
+                {dagtochtView(this.state.dagtochten[0])}
+                {/*{console.log('return ',this.state.kind)}*/}
+                       </div>
+        }
+        else {
+            return <div> Else</div>
+           // return <div> Dachtochten {this.state.dagtochten.map((element,key) => <div> {key} </div>)}</div>
+        }
     }
 }
-

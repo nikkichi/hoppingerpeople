@@ -31,15 +31,13 @@ export class HomepageComponent extends React.Component<HomepageComponentProps, H
         Api.get_specialaanbieding().then(a => this.setState({...this.state, kind: "loaded", specialeAanbieding: a}))
     }
 
-    
-
     render(){
         if (this.state.kind == "loaded") {
             let specialAanbiedingView = function (value: Types.SpecialAanbieding) {
                 return <div>
             <button onClick={(event) => this.props.onMovePage({ kind: "homepage", id: 1})}>{homepageLink}</button>
-            <button onClick={(event) => this.props.onMovePage({ kind: "Dagtochtpagina", id: 2})}>{aanbiedingLink}</button>
-            <button onClick={(event) => this.props.onMovePage({ kind: "homepage", id: 3})}>{dagtochtLink}</button>
+            <button onClick={(event) => this.props.onMovePage({ kind: "homepage", id: 2})}>{aanbiedingLink}</button>
+            <button onClick={(event) => this.props.onMovePage({ kind: "dagtochtPagina", id: 3})}>{dagtochtLink}</button>
             <button onClick={(event) => this.props.onMovePage({ kind: "homepage", id: 4})}>{ooievaarLink}</button>
             <button onClick={(event) => this.props.onMovePage({ kind: "homepage", id: 5})}>{vragenLink}</button>
             <h1> Homepage</h1>
@@ -51,7 +49,8 @@ export class HomepageComponent extends React.Component<HomepageComponentProps, H
             <div> {value.description}</div>
             </div> 
             }
-            return <div> {specialAanbiedingView(this.state.specialeAanbieding[0])} </div>
+            return <div> 
+                {this.state.specialeAanbieding.map( value =>specialAanbiedingView(value))} </div>
         }
         else {return <div> else </div>}
     }

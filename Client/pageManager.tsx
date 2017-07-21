@@ -7,9 +7,9 @@ import * as Api from './generated_api'
 import * as Dagtochten from './Dagtochten'
 import * as detailPagina from './InfoComponent'
 import * as Ooievaarspasinfo from './Ooievaarspasinfo'
-import * as Homepage from './custom_views'
-import * as InfoPas from './InfoPas'
 import * as Homepage from './homepage'
+import * as InfoPas from './InfoPas'
+
 
 
 //type dagtocht = [page1: "/Dagtochten", page2: "/Dagtochten/detailPagina"]
@@ -24,7 +24,8 @@ export class PageManagerComponent extends React.Component<PageManagerComponentPr
  
     constructor(props, context) {
         super(props, context);
-        this.state = { current_page: { kind:"homepage", id: 3 } }}
+        this.state = { current_page: { kind:"infopas"} }
+    }
 
     render() {
 

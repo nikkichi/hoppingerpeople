@@ -8,14 +8,14 @@ import * as Api from './api'
 
 
 let hyperlink = "lees meer "
-
+let next_page ={ kind: "dagtochtDetailPagina"}
 type DagtochtenComponentProps = { onMovePage: (id: Manager.Page) => void }
-type DagtochtenComponentState = { kind: "dagtocht" } | { kind: "DagtochtPagina", categories: Types.Category_Dagtocht[], dagtochten: Types.Dagtocht[] }
+type DagtochtenComponentState = { kind: "loading" } | { kind: "dagtochtPagina", categories: Types.Category_Dagtocht[], dagtochten: Types.Dagtocht[]}| {kind: "dagtochtDetailPagina",  dagtochten: Types.Dagtocht[]} 
 
 export class DagtochtenComponent extends React.Component<DagtochtenComponentProps, DagtochtenComponentState>{
     constructor(props, context) {
         super(props, context)
-        this.state = { kind: "dagtocht" }
+        this.state = { kind: "loading" }
     }
 
     componentWillMount() {
@@ -27,26 +27,25 @@ export class DagtochtenComponent extends React.Component<DagtochtenComponentProp
     loadCategories() {
         Api
             .get_categories()
-            .then(c => this.setState({ ...this.state, kind: "DagtochtPagina", categories: c }))
+            .then(c => this.setState({ ...this.state, kind: "dagtochtPagina", categories: c }))
             //.catch(_ => this.loadCategories())
     }
 
     loadDagtochten() {
         Api
             .get_dagtocht()
-             .then(d => this.setState({ ...this.state, kind: "DagtochtPagina", dagtochten: d }))
+             .then(d => this.setState({ ...this.state, kind: "dagtochtPagina", dagtochten: d }))
             // .catch(_ => console.log('get dachtocht rejected ') || setTimeout( this.loadDagtochten ,5000))
              
     }
 
     render() {
-        if (this.state.kind == "DagtochtPagina") {
+        if (this.state.kind == "dagtochtPagina") {
             let categoryView = function (category: Types.Category_Dagtocht) {
                 return<div>
                      {console.log('hi',category.title)}
                     <h2>{category.title}</h2>
                     <p>{category.description}</p>
-                    <button onClick={(event) => this.props.onMovePage(this.state.kind)}>{hyperlink}</button>
                 </div>
 
             }
@@ -56,17 +55,22 @@ export class DagtochtenComponent extends React.Component<DagtochtenComponentProp
                     {dagtocht.name}
                     {console.log('Haaai',dagtocht.name)}
                         <p> {dagtocht.description}</p>
-                        <div> {dagtocht.text}</div>
-                        <div>  {dagtocht.prijs}</div>
+
+                       
+                  
                 </div>
             }
 
 
             return <div> 
-                {categoryView(this.state.categories[0])             
+                { this.state.categories.map( category => categoryView(category))           
                 }
-                {dagtochtView(this.state.dagtochten[0])}
-                {/*{console.log('return ',this.state.kind)}*/}
+               {this.state.dagtochten.map(dagtocht => dagtochtView(dagtocht))}
+            <button onClick={(event) => this.props.onMovePage({ kind: "dagtochtDetailPagina"})}>
+                     {hyperlink}
+                        </button>
+                 
+                
                        </div>
         }
         else {
@@ -75,16 +79,3 @@ export class DagtochtenComponent extends React.Component<DagtochtenComponentProp
         }
     }
 }
-//  this.setState(
-//                         {
-//                             ... this.state, dagtochten: this.state.dagtochten.map(dagtocht => {
-//                                 console.log()
-//                                 if (dagtochten.dagtochten.Kind != dagtocht.dagtochten.Kind) {
-//                                     return dagtocht
-//                                 }
-//                                 else {
-//    
-//                                     return { ...dagtocht }
-//                                 }
-//                             }).toList
-

@@ -12,10 +12,6 @@ import * as Manager from './pageManager'
 type InfoPasComponentProps = {onMovePage: (id: Manager.Page) => void}
 type InfoPasComponentState = { kind: "loading"} | {kind:"loaded", value: Types.Uitleg_InformatiePas[]}
 
-// function generateNumber(min:number, max:number){
-//     return Math.floor(Math.random()* max - min  1)  min
-// }
-
 export class InfoPasComponent extends React.Component<InfoPasComponentProps, InfoPasComponentState>{
     constructor(props, context){
         super(props, context);
@@ -25,7 +21,7 @@ export class InfoPasComponent extends React.Component<InfoPasComponentProps, Inf
     loadUitleg(){
         Api.get_uitleg('Over Ooievaarspas')
         .then(u => this.setState({...this.state, kind: 'loaded', Uitleginformatie: u}))
-        .catch(u=> this.loadUitleg())
+        // .catch(u=> this.loadUitleg())
     }
 
     componentWillMount(){
@@ -36,14 +32,18 @@ export class InfoPasComponent extends React.Component<InfoPasComponentProps, Inf
     render(){
         if(this.state.kind == 'loaded'){
             let uitleg_view = function(info: Types.Uitleg_InformatiePas){<div>
-                      
+                      console.log('hi')
                         <h1> {info.title}</h1>
                         <div> {info.description}</div>
                         <button> lees meer </button>
                         </div>
                 
             }
-            return <div> {uitleg_view(this.state.value[0])} </div>
+            return <div> 
+                {this.state.value.map(info => uitleg_view(info))}
+                <button onClick={(event) => this.props.onMovePage({kind:'infopas'})}/>
+                
+                 </div>
         }
         else{
             return <div>else</div>

@@ -50,7 +50,7 @@ import * as Manager from './pageManager'
            }
            
             return <div>
-           
+           {this.state.value.map(info => ooievaarspas_View(info))}
            <div>{ooievaarspas_View}</div>
  
            </div>

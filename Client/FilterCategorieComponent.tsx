@@ -16,7 +16,7 @@ export class FilterCategorieComponent extends React.Component<FilterCategorieCom
 
     render(){
         return <div>
-            Categorie<br/><br/>
+            Categorie<br/>
             <select>
                 <option selected hidden>Maak uw keuze: </option> 
                 <option value="Alle aanbiedingen">Alle aanbiedingen</option>

@@ -14,6 +14,13 @@ export function get_categories() : Promise<Types.Category_Dagtocht[]>{
     })
 }
 
+
+export function get_specialaanbieding() : Promise<Types.SpecialAanbieding[]>{
+    return new Promise((resolve, reject)=> {
+         resolve(speciale_aanbieding)
+    })
+}
+
 function filter() {
     console.log("olaa", dagTochten.filter((element) => element.categoryID == 1) )
     return dagTochten.filter((element) => element.categoryID == 1)
@@ -33,6 +40,11 @@ export function get_dagtocht(): Promise<Types.Dagtocht[]> {
            resolve(filter())
     })
 }
+export function get_aanbieding(): Promise<Types.aanbieding[]> {
+    return new Promise((resolve, reject) => {
+           resolve(aanbieding)
+    })
+}
 
 export function get_ooievaarsPas() : Promise<Types.InformatiePas[]>{
     return new Promise((resolve, reject) => {
@@ -43,24 +55,20 @@ export function get_ooievaarsPas() : Promise<Types.InformatiePas[]>{
     })
 
 }
-
-export function get_specialaanbieding() : Promise<Types.SpecialAanbieding[]>{
-    return new Promise((resolve, reject)=> {
-        resolve(speciale_aanbieding)
-    })
-}
-
-
-
- 
 export function get_uitleg(title) : Promise<Types.Uitleg_InformatiePas[]>{
     return new Promise((resolve, reject) => {
-        if (uitleg_informatiepas[title] == undefined )
+        if (Uitleg_InformatiePas[title] == undefined )
             reject("De titel komt niet voor")
-        else resolve(uitleg_informatiepas)
+        else resolve(Uitleg_InformatiePas)
     })
 }
-
+export function get_veelgesteldevragenonderwerp(): Promise<Types.vragen[]> {
+   return new Promise((resolve, reject) => {
+       if(vragen == undefined)
+        reject("Foutmelding")
+        else resolve(vragen)
+   })
+}
 
 
 
@@ -138,6 +146,12 @@ let informatiepas: Types.InformatiePas[] = [
         }
 
     ]
+    let Uitleg_InformatiePas: Types.Uitleg_InformatiePas[] = [
+    {
+        title: 'Over Ooievaarspas',
+        description: 'De Ooievaarspas geeft korting op sport, cultuur, contributie, lidmaatschap en entree. De Ooievaarspas is voor inwoners van Den Haag, Leidschendam-Voorburg en Rijswijk, met een inkomen tot maximaal 130% van de bijstandsnorm. '
+    }
+]
 
 let speciale_aanbieding: Types.SpecialAanbieding[] = [
        { 
@@ -162,3 +176,49 @@ let speciale_aanbieding: Types.SpecialAanbieding[] = [
         }
 
     ]
+let aanbieding: Types.aanbieding[] = [
+       {
+            title:'Join the Florence club!',
+            description:'In teamverband lekker actief zijn, dat kan in de Florence Clubs. Altijd al gedroomd om te kunnen hardlopen of handboogschieten? Dit is nu mogelijk, gezellig in teamverband!',
+            id: 1
+        },
+       {
+            title:'Ontdek je sport met de sportstrippenkaart',
+            description:'Woon je in Leidschendam-Voorburg en ben je op zoek naar een nieuwe sport? De sportstrippenkaart helpt je op weg! Hardlopen, volleybal of zwemmen: weet jij niet welke sport bij je past? Dit is je kans! Met de sportstrippenkaart mag je vier sporten uitproberen bij meer dan 30 sportverenigingen in Leidschendam-Voorburg. Gewoon gratis!',
+            id: 2
+        },
+        {
+            title: 'Gratis online coaching voor Haagse pashouders',
+            description:'Wil je gratis hulp bij het afvallen? Neem je je voor om te gaan bewegen, maar komt het er steeds niet van? Heb je plannen om je leefstijl te verbeteren? Wil je graag stoppen met roken of wordt het hoog tijd om je stress te verminderen? Ben je toe aan gezinshulp? Zet dan nu de stap en meld je aan voor een jaar lang gratis online coaching!',
+            id: 3
+        },
+        {
+            title: 'Ontdek Drievliet met de Ooievaarspas vanaf 1 april',
+            description:'Familiepark Drievliet, plezier voor jong en oud. Drievliet is in 2017 aanbieder van de Ooievaarspas en verwelkomt families! Ook heeft Drievliet er twee mooie attracties bij! Durf jij in de sportieve Tijdmachine en de snelle Chute?',
+            id: 4
+        }
+
+   ]
+
+   let vragen: Types.vragen[]=[
+   {
+       title: "Aanvragen en/of wijzigingen Ooievaarspas",
+       vraag: "Ik heb een Ooievaarspas. Hoef ik dan geen verlenging aan te vragen?",
+       antwoord:" In principe moet u altijd een aanvraag doen voor verlenging van de Ooievaarspas. Er is een beperkt aantal groepen voor wie de Ooievaarspas automatisch wordt verlengd. Wilt u weten of u hiertoe behoort? Lees dan meer over de voorwaarden voor het aanvragen van een Ooievaarspas.",
+      
+                
+  },
+   {
+       title: "Gebruik Ooievaarspas",
+       vraag: "Ik heb een Ooievaarspas, mag ik gratis reizen?"  ,    
+       antwoord:"Gratis reizen kan alleen als u inwoner bent van Den Haag en de AOW-gerechtigde leeftijd heeft bereikt, over een persoonlijke OV-chipkaart beschikt en recht heeft op een Ooievaarspas in het huidige kalenderjaar (1 januari tot en met 31 december).",        
+      
+   },
+   {
+       title: "Geblokkeerde Ooievaarspas",
+       vraag: "Mijn Ooievaarspas is geblokkeerd. Wat is daarvan de reden?",
+       antwoord: "Daar kunnen verschillende redenen voor zijn. Neem daarom contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur. Ooievaarspashouders uit Leidschendam-Voorburg en Rijswijk moeten hiervoor contact opnemen met hun eigen gemeente.",
+      
+   }
+
+]
