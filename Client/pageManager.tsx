@@ -8,6 +8,7 @@ import * as Dagtochten from './Dagtochten'
 import * as detailPagina from './InfoComponent'
 import * as Ooievaarspasinfo from './Ooievaarspasinfo'
 import * as Homepage from './custom_views'
+import * as InfoPas from './InfoPas'
 
 //type dagtocht = [page1: "/Dagtochten", page2: "/Dagtochten/detailPagina"]
 
@@ -15,7 +16,7 @@ type PageManagerComponentProps = {}
 type PageManagerComponentState = { current_page: Page }
 
 //export type Page = { kind:"dagtocht" , id:number } | { kind:"DagtochtPagina" } | { kind:"contact us", person:string }
-export type Page = { kind:"dagtocht" , id:number } | { kind:"DagtochtPagina" } | { kind:"contact us", person:string} | {kind: "ooievaarspas", id:number} | {kind: "homepage", id: number}
+export type Page = { kind:"dagtocht" , id:number } | { kind:"DagtochtPagina" } | { kind:"contact us", person:string} | {kind: "ooievaarspas", id:number} | {kind: "homepage", id: number} | {kind: "infopas"}
 
 export class PageManagerComponent extends React.Component<PageManagerComponentProps, PageManagerComponentState>{
  
@@ -34,6 +35,8 @@ export class PageManagerComponent extends React.Component<PageManagerComponentPr
             return <div><Ooievaarspasinfo.OoievaarsPasComponent onMovePage={(next_page) => this.moveToPage(next_page)}/></div>
         case "contact us": 
                 return<div>Contact Us</div>   
+        case "infopas": 
+                return<div><InfoPas.InfoPasComponent onMovePage={(next_page) => this.moveToPage(next_page)}/></div>
     }}
 
     moveToPage(next_page: Page) {
