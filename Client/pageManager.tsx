@@ -9,6 +9,8 @@ import * as detailPagina from './InfoComponent'
 import * as Ooievaarspasinfo from './Ooievaarspasinfo'
 import * as Homepage from './custom_views'
 import * as InfoPas from './InfoPas'
+import * as Homepage from './homepage'
+
 
 //type dagtocht = [page1: "/Dagtochten", page2: "/Dagtochten/detailPagina"]
 
@@ -30,7 +32,7 @@ export class PageManagerComponent extends React.Component<PageManagerComponentPr
         case "homepage":
             return <div><Homepage.HomepageComponent onMovePage={(next_page) => this.moveToPage(next_page)}  />     </div>
         case "DagtochtPagina":
-            return <div><detailPagina.InforComponent onMovePage={(next_page) => this.moveToPage(next_page)} /> </div>
+            return <div><Dagtochten.DagtochtenComponent onMovePage={(next_page) => this.moveToPage(next_page)} /> </div>
         case "ooievaarspas":
             return <div><Ooievaarspasinfo.OoievaarsPasComponent onMovePage={(next_page) => this.moveToPage(next_page)}/></div>
         case "contact us": 
