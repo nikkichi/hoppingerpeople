@@ -52,6 +52,16 @@ export function get_specialaanbieding() : Promise<Types.SpecialAanbieding[]>{
 
 
 
+ 
+export function get_uitleg(title) : Promise<Types.Uitleg_InformatiePas[]>{
+    return new Promise((resolve, reject) => {
+        if (uitleg_informatiepas[title] == undefined )
+            reject("De titel komt niet voor")
+        else resolve(uitleg_informatiepas)
+    })
+}
+
+
 
 
 let dagTochten: Types.Dagtocht[] = [
