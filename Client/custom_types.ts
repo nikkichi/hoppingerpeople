@@ -35,3 +35,9 @@ export type InformatiePas = {
     description: string,
     id: number
 }
+
+export type SpecialAanbieding = {
+    title: string,
+    description: string, 
+    id: number
+}
