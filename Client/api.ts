@@ -34,6 +34,16 @@ export function get_dagtocht(): Promise<Types.Dagtocht[]> {
     })
 }
 
+export function get_ooievaarsPas() : Promise<Types.InformatiePas[]>{
+    return new Promise((resolve, reject) => {
+        let random = generateNumber(0,10);
+        if (informatiepas == undefined)
+            reject("Foutmelding of some sort")
+        else resolve(informatiepas)
+    })
+
+}
+
 
 
 
@@ -85,5 +95,29 @@ let category: Types.Category_Dagtocht[] = [
          title: "Zomerdagtochten voor personen met begeleidingsbehoefte",
          description: "Ook als u aangepast vervoer nodig heeft kunt u mee op zomerdagtocht! Deze zomerdagtochten zijn bedoeld voor senioren met een begeleidingsbehoefte",
          id: 2
-}
+    }
 ]
+
+let informatiepas: Types.InformatiePas[] = [
+       { 
+            title:'Over de Ooievaarspas',
+            description:'De Ooievaarspas biedt korting op allerlei activiteiten op het gebied van sport, cultuur, contributie, lidmaatschap en entree. De Ooievaarspas is voor inwoners van Den Haag, Leidschendam-Voorburg en Rijswijk met een laag inkomen. Dit en meer informatie over de Ooievaarspas kunt u onderstaand vinden.',
+            id: 1
+        },
+       {
+            title:'Informatie voor aanbieders',
+            description:'Bent u een nieuwe aanbieder van de Ooievaarspas en nog niet helemaal thuis in het verzilveren van kortingen met de Ooievaarspas?',
+            id: 2 
+        },
+        {
+            title: 'Informatie over Ooievaarsregelingen',
+            description:'Bent u al bekend met de Ooievaarsregelingen? Of weet u niet precies hoe u er gebruik van kan maken? Dit en meer leest u hier.',
+            id: 3
+        },
+        {
+            title: 'Actuele Informatie',
+            description:'Op zoek naar contactinformatie of de laatste informatie? Zoals nieuwsberichten, onze interessante Ooievaarsnieuwsbrief of andere leuke nieuwtjes? Lees het hier.',
+            id: 4
+        }
+
+    ]

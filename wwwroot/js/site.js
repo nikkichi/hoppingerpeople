@@ -30536,10 +30536,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(67);
 const Dagtochten = __webpack_require__(322);
 const detailPagina = __webpack_require__(323);
+const Ooievaarspasinfo = __webpack_require__(626);
 class PageManagerComponent extends React.Component {
     constructor(props, context) {
         super(props, context);
-        this.state = { current_page: { kind: "dagtocht", id: 3 } };
+        this.state = { current_page: { kind: "ooievaarspas", id: 3 } };
     }
     render() {
         switch (this.state.current_page.kind) {
@@ -30551,6 +30552,9 @@ class PageManagerComponent extends React.Component {
                 return React.createElement("div", null,
                     React.createElement(detailPagina.InforComponent, { onMovePage: (next_page) => this.moveToPage(next_page) }),
                     " ");
+            case "ooievaarspas":
+                return React.createElement("div", null,
+                    React.createElement(Ooievaarspasinfo.OoievaarsPasComponent, { onMovePage: (next_page) => this.moveToPage(next_page) }));
             case "contact us":
                 return React.createElement("div", null, "Contact Us");
         }
@@ -55114,6 +55118,142 @@ module.exports = function(module) {
 	}
 	return module;
 };
+
+
+/***/ }),
+/* 626 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const React = __webpack_require__(67);
+const Api = __webpack_require__(627);
+let button;
+function generateNumber(min, max) {
+    return Math.floor(Math.random() * max - min + 1) + min;
+}
+class OoievaarsPasComponent extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = { kind: "Loading" };
+    }
+    loadInformatiePas() {
+        Api.get_ooievaarsPas()
+            .then(i => this.setState(Object.assign({}, this.state, { kind: "Loaded", InformatiePas: i })))
+            .catch(i => this.loadInformatiePas);
+    }
+    componentWillMount() {
+        this.loadInformatiePas();
+    }
+    render() {
+        if (this.state.kind == "Loaded") {
+            let oo;
+        }
+        return React.createElement("div", null);
+    }
+}
+exports.OoievaarsPasComponent = OoievaarsPasComponent;
+
+
+/***/ }),
+/* 627 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+function generateNumber(min, max) {
+    return Math.floor(Math.random() * max - min + 1) + min;
+}
+function get_categories() {
+    return new Promise((resolve, reject) => {
+        let random = generateNumber(0, 10);
+        if (random > 3)
+            reject("API failed");
+        else
+            resolve(category);
+    });
+}
+exports.get_categories = get_categories;
+function get_dagtocht(categoryID) {
+    return new Promise((resolve, reject) => {
+        if (dagTochten[categoryID] == undefined)
+            reject("Id is not in array in dagtocht");
+        else
+            resolve(dagTochten[categoryID]);
+    });
+}
+exports.get_dagtocht = get_dagtocht;
+function get_ooievaarsPas() {
+    return new Promise((resolve, reject) => {
+        let random = generateNumber(0, 10);
+        if (informatiepas == undefined)
+            reject("Foutmelding of some sort");
+        else
+            resolve(informatiepas);
+    });
+}
+exports.get_ooievaarsPas = get_ooievaarsPas;
+let dagTochten = [
+    {
+        name: "Dagtocht met Brouwer Travel naar de Efteling",
+        description: "Zin om er deze zomer een dagje op uit te gaan? Met uw Ooievaarspas kunt u deelnemen aan een...",
+        prijs: 25,
+        categoryID: 2,
+        text: "Ga mee naar het meest geliefde pretpark van Nederland: de Efteling. U gaat toch ook mee naar het meest geliefde pretpark van Nederland? De Efteling is een themapark geschikt voor alle leeftijden. U zult u hier absoluut niet vervelen; jong, oud, man of vrouw - voor iedereen is er entertainment."
+    },
+    {
+        name: "Dagtocht voor senioren met Brouwer Travel: Op stap in ",
+        description: "Bent u 50 jaar of ouder en heeft u zin om er deze zomer een dagje op uit te gaan? Met uw...",
+        prijs: 25,
+        categoryID: 3,
+        text: ""
+    },
+    {
+        name: "Dagtocht met BBD voor senioren tocht ",
+        description: "Ook als u aangepast vervoer nodig heeft kunt u mee op zomerdagtocht! De activiteit is...",
+        prijs: 25,
+        categoryID: 4,
+        text: ""
+    }
+];
+let category = [
+    {
+        title: "Zomerdagtochten voor gezinnen",
+        description: "Iedere zomer wordt een dagtocht georganiseerd voor gezinnen. Er is altijd keus uit een wisselend aanbod aan bestemmingen waaronder het bezoek aan een pretpark, museum of show. Voor €10,- per persoon kun je al met de bus mee naar een topbestemming.De dagjes uit zijn tussen 10 juli en 16 augustus 2017 en kunt u kiezen uit een aantal leuke bestemmingen."
+    },
+    {
+        title: "Zomerdagtochten voor senioren",
+        description: "Iedere zomer wordt een dagtocht georganiseerd voor senioren van 50 jaar of ouder. Met uw Ooievaarspas kunt u voor € 10 deelnemen aan een fantastische dagtocht. De dagjes uit zijn tussen 10 juli en 16 augustus 2017 en kunt u kiezen uit een aantal leuke bestemmingen."
+    },
+    {
+        title: "Zomerdagtochten voor personen met begeleidingsbehoefte",
+        description: "Ook als u aangepast vervoer nodig heeft kunt u mee op zomerdagtocht! Deze zomerdagtochten zijn bedoeld voor senioren met een begeleidingsbehoefte"
+    }
+];
+let informatiepas = [
+    {
+        title: 'Over de Ooievaarspas',
+        description: 'De Ooievaarspas biedt korting op allerlei activiteiten op het gebied van sport, cultuur, contributie, lidmaatschap en entree. De Ooievaarspas is voor inwoners van Den Haag, Leidschendam-Voorburg en Rijswijk met een laag inkomen. Dit en meer informatie over de Ooievaarspas kunt u onderstaand vinden.',
+        id: 1
+    },
+    {
+        title: 'Informatie voor aanbieders',
+        description: 'Bent u een nieuwe aanbieder van de Ooievaarspas en nog niet helemaal thuis in het verzilveren van kortingen met de Ooievaarspas?',
+        id: 2
+    },
+    {
+        title: 'Informatie over Ooievaarsregelingen',
+        description: 'Bent u al bekend met de Ooievaarsregelingen? Of weet u niet precies hoe u er gebruik van kan maken? Dit en meer leest u hier.',
+        id: 3
+    },
+    {
+        title: 'Actuele Informatie',
+        description: 'Op zoek naar contactinformatie of de laatste informatie? Zoals nieuwsberichten, onze interessante Ooievaarsnieuwsbrief of andere leuke nieuwtjes? Lees het hier.',
+        id: 4
+    }
+];
 
 
 /***/ })
