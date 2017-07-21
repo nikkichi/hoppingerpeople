@@ -12,10 +12,10 @@ import * as detailPagina from './InfoComponent'
 type PageManagerComponentProps = {}
 type PageManagerComponentState = { current_page: Page }
 
-export type Page = { kind:"dagtocht" , id:number } | { kind:"detailPagina" } | { kind:"contact us", person:string }
+export type Page = { kind:"dagtocht" , id:number } | { kind:"DagtochtPagina" } | { kind:"contact us", person:string }
 
 export class PageManagerComponent extends React.Component<PageManagerComponentProps, PageManagerComponentState>{
-
+ 
     constructor(props, context) {
         super(props, context);
         this.state = { current_page: { kind:"dagtocht", id: 3 } }}
@@ -25,7 +25,7 @@ export class PageManagerComponent extends React.Component<PageManagerComponentPr
     switch (this.state.current_page.kind) {
         case "dagtocht":
             return <div><Dagtochten.DagtochtenComponent onMovePage={(next_page) => this.moveToPage(next_page)}  />     </div>
-        case "detailPagina":
+        case "DagtochtPagina":
             return <div><detailPagina.InforComponent onMovePage={(next_page) => this.moveToPage(next_page)} /> </div>
         case "contact us": 
                 return<div>Contact Us</div>   

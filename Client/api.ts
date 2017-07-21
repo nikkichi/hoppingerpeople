@@ -7,18 +7,21 @@ function generateNumber(min: number, max:number) {
 
 export function get_categories() : Promise<Types.Category_Dagtocht[]>{
  return new Promise((resolve, reject) => {
-        let random = generateNumber(0, 10);
-        if (random > 3) reject("API failed");
-        else resolve(category)
+        // let random = generateNumber(0, 10);
+        // if (random > 10) reject("API failed");
+        // else 
+        resolve(category)
     })
 }
 
-export function get_dagtocht(categoryID: number): Promise<Types.Dagtocht> {
+export function get_dagtocht(categoryID: number): Promise<Types.Dagtocht[]> {
+   // dagTochten.filter((element) => element.categoryID == 1) 
+   
     return new Promise((resolve, reject) => {
-        if (dagTochten[categoryID] == undefined)
-            reject("Id is not in array in dagtocht")
-        else
-            resolve(dagTochten[categoryID])
+        // if (dagTochten[categoryID] == undefined)
+        //     reject("Id is not in array in dagtocht")
+        // else
+            resolve(dagTochten.filter((element) => element.categoryID == 1) )
     })
 }
 
@@ -45,6 +48,13 @@ let dagTochten: Types.Dagtocht[] = [
         description: "Ook als u aangepast vervoer nodig heeft kunt u mee op zomerdagtocht! De activiteit is...",
         prijs: 25,
         categoryID: 2,
+        text: ""
+    },
+        {
+        name: "ROBERT met BBD voor senioren tocht ",
+        description: "Ook als u aangepast vervoer nodig heeft kunt u mee op zomerdagtocht! De activiteit is...",
+        prijs: 25,
+        categoryID: 1,
         text: ""
     }
 ]

@@ -10,7 +10,7 @@ import * as Api from './api'
 let hyperlink = "lees meer "
 
 type DagtochtenComponentProps = { onMovePage: (id: Manager.Page) => void }
-type DagtochtenComponentState = { kind: "dagtocht" } | { kind: "detailPagina", categories: Types.Category_Dagtocht[], dagtochten: Types.Dagtocht[] }
+type DagtochtenComponentState = { kind: "dagtocht" } | { kind: "DagtochtPagina", categories: Types.Category_Dagtocht[], dagtochten: Types.Dagtocht[] }
 
 export class DagtochtenComponent extends React.Component<DagtochtenComponentProps, DagtochtenComponentState>{
     constructor(props, context) {
@@ -19,6 +19,7 @@ export class DagtochtenComponent extends React.Component<DagtochtenComponentProp
     }
 
     componentWillMount() {
+        console.log('component will mount')
         this.loadCategories();
         this.loadDagtochten();
     }
@@ -26,21 +27,22 @@ export class DagtochtenComponent extends React.Component<DagtochtenComponentProp
     loadCategories() {
         Api
             .get_categories()
-            .then(c => this.setState({ ...this.state, kind: "dagtocht", categories: c }))
-            .catch(_ => this.loadCategories())
+            .then(c => this.setState({ ...this.state, kind: "DagtochtPagina", categories: c }))
+            //.catch(_ => this.loadCategories())
     }
 
     loadDagtochten() {
         Api
             .get_dagtocht(1)
-             .then(d => this.setState({ ...this.state, kind: "detailPagina", dagtocht: d }))
-            .catch(_ => this.loadDagtochten())
+             .then(d => this.setState({ ...this.state, kind: "DagtochtPagina", dagtocht: d }))
+             .catch(_ => console.log('get dachtocht rejected ') || setTimeout( this.loadDagtochten ,5000))
     }
 
     render() {
-        if (this.state.kind == "dagtocht") {
+        if (this.state.kind == "DagtochtPagina") {
             let categoryView = function (category: Types.Category_Dagtocht) {
-                <div>
+                return<div>
+                     {console.log('hi',category.title)}
                     <h2>{category.title}</h2>
                     <p>{category.description}</p>
                     <button onClick={(event) => this.props.onMovePage(this.state.kind)}>{hyperlink}</button>
@@ -49,7 +51,9 @@ export class DagtochtenComponent extends React.Component<DagtochtenComponentProp
             }
 
             let dagtochtView = function (dagtocht: Types.Dagtocht) {
-                <div>{dagtocht.name}
+                return <div>
+                    {dagtocht.name}
+                    {console.log('Haaai',dagtocht.name)}
                         <p> {dagtocht.description}</p>
                         <div> {dagtocht.text}</div>
                         <div>  {dagtocht.prijs}</div>
@@ -57,11 +61,16 @@ export class DagtochtenComponent extends React.Component<DagtochtenComponentProp
             }
 
 
-            return <div>{categoryView              
-                }</div>
+            return <div> 
+                {categoryView(this.state.categories[0])             
+                }
+                {dagtochtView(this.state.dagtochten[1])}
+                {/*{console.log('return ',this.state.kind)}*/}
+                       </div>
         }
         else {
-            <div>Loading</div>
+            return <div> Else</div>
+           // return <div> Dachtochten {this.state.dagtochten.map((element,key) => <div> {key} </div>)}</div>
         }
     }
 }

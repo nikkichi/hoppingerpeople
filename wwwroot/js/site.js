@@ -14266,20 +14266,20 @@ function generateNumber(min, max) {
 }
 function get_categories() {
     return new Promise((resolve, reject) => {
-        let random = generateNumber(0, 10);
-        if (random > 10)
-            reject("API failed");
-        else
-            resolve(category);
+        // let random = generateNumber(0, 10);
+        // if (random > 10) reject("API failed");
+        // else 
+        resolve(category);
     });
 }
 exports.get_categories = get_categories;
 function get_dagtocht(categoryID) {
+    // dagTochten.filter((element) => element.categoryID == 1) 
     return new Promise((resolve, reject) => {
-        if (dagTochten[categoryID] == undefined)
-            reject("Id is not in array in dagtocht");
-        else
-            resolve(dagTochten[categoryID]);
+        // if (dagTochten[categoryID] == undefined)
+        //     reject("Id is not in array in dagtocht")
+        // else
+        resolve(dagTochten.filter((element) => element.categoryID == 1));
     });
 }
 exports.get_dagtocht = get_dagtocht;
@@ -14303,6 +14303,13 @@ let dagTochten = [
         description: "Ook als u aangepast vervoer nodig heeft kunt u mee op zomerdagtocht! De activiteit is...",
         prijs: 25,
         categoryID: 2,
+        text: ""
+    },
+    {
+        name: "ROBERT met BBD voor senioren tocht ",
+        description: "Ook als u aangepast vervoer nodig heeft kunt u mee op zomerdagtocht! De activiteit is...",
+        prijs: 25,
+        categoryID: 1,
         text: ""
     }
 ];
@@ -29649,32 +29656,35 @@ class DagtochtenComponent extends React.Component {
         this.state = { kind: "dagtocht" };
     }
     componentWillMount() {
+        console.log('component will mount');
         this.loadCategories();
         this.loadDagtochten();
     }
     loadCategories() {
         Api
             .get_categories()
-            .then(c => this.setState(Object.assign({}, this.state, { kind: "dagtocht", categories: c })))
-            .catch(_ => this.loadCategories());
+            .then(c => this.setState(Object.assign({}, this.state, { kind: "DagtochtPagina", categories: c })));
+        //.catch(_ => this.loadCategories())
     }
     loadDagtochten() {
         Api
             .get_dagtocht(1)
-            .then(d => this.setState(Object.assign({}, this.state, { kind: "detailPagina", dagtocht: d })))
-            .catch(_ => this.loadDagtochten());
+            .then(d => this.setState(Object.assign({}, this.state, { kind: "DagtochtPagina", dagtocht: d })))
+            .catch(_ => console.log('get dachtocht rejected ') || setTimeout(this.loadDagtochten, 5000));
     }
     render() {
-        if (this.state.kind == "dagtocht") {
+        if (this.state.kind == "DagtochtPagina") {
             let categoryView = function (category) {
-                React.createElement("div", null,
+                return React.createElement("div", null,
+                    console.log('hi', category.title),
                     React.createElement("h2", null, category.title),
                     React.createElement("p", null, category.description),
                     React.createElement("button", { onClick: (event) => this.props.onMovePage(this.state.kind) }, hyperlink));
             };
             let dagtochtView = function (dagtocht) {
-                React.createElement("div", null,
+                return React.createElement("div", null,
                     dagtocht.name,
+                    console.log('Haaai', dagtocht.name),
                     React.createElement("p", null,
                         " ",
                         dagtocht.description),
@@ -29685,10 +29695,13 @@ class DagtochtenComponent extends React.Component {
                         "  ",
                         dagtocht.prijs));
             };
-            return React.createElement("div", null, categoryView);
+            return React.createElement("div", null,
+                categoryView(this.state.categories[0]),
+                dagtochtView(this.state.dagtochten[1]));
         }
         else {
-            React.createElement("div", null, "Loading");
+            return React.createElement("div", null, " Else");
+            // return <div> Dachtochten {this.state.dagtochten.map((element,key) => <div> {key} </div>)}</div>
         }
     }
 }
@@ -29715,16 +29728,21 @@ exports.DagtochtenComponent = DagtochtenComponent;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(67);
-const Api = __webpack_require__(140);
 class InforComponent extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = { text: "Loading", title: "", description: "", categoryID: null, prijs: null };
     }
-    componentWillMount() {
-        Api.get_dagtocht(2).then(x => this.setState(Object.assign({}, this.state, { title: x.name, description: x.description, text: x.text, prijs: x.prijs })));
-        console.log(this.state.prijs);
-    }
+    // componentWillMount() {
+    //     Api.get_dagtocht(2).then(x => this.setState({
+    //         ...this.state,
+    //         title: x.name,
+    //         description: x.description,
+    //         text: x.text,
+    //         prijs: x.prijs
+    //     }))
+    //     console.log(this.state.prijs)
+    // }
     render() {
         return React.createElement("div", null,
             React.createElement("h1", null, this.state.title),
@@ -29732,7 +29750,7 @@ class InforComponent extends React.Component {
             React.createElement("div", null, this.state.text),
             React.createElement("br", null),
             React.createElement("div", null, this.state.prijs),
-            React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "about" }) }, " terug"));
+            React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "DagtochtPagina" }) }, " terug"));
     }
 }
 exports.InforComponent = InforComponent;
@@ -30524,7 +30542,7 @@ class PageManagerComponent extends React.Component {
                 return React.createElement("div", null,
                     React.createElement(Dagtochten.DagtochtenComponent, { onMovePage: (next_page) => this.moveToPage(next_page) }),
                     "     ");
-            case "detailPagina":
+            case "DagtochtPagina":
                 return React.createElement("div", null,
                     React.createElement(detailPagina.InforComponent, { onMovePage: (next_page) => this.moveToPage(next_page) }),
                     " ");

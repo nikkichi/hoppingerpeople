@@ -15,19 +15,19 @@ export class InforComponent extends React.Component<InforComponentProps, InforCo
         this.state = { text: "Loading", title: "", description: "", categoryID: null, prijs: null }
     }
 
-    componentWillMount() {
+    // componentWillMount() {
 
 
-        Api.get_dagtocht(2).then(x => this.setState({
-            ...this.state,
-            title: x.name,
-            description: x.description,
-            text: x.text,
-            prijs: x.prijs
-        }))
-        console.log(this.state.prijs)
+    //     Api.get_dagtocht(2).then(x => this.setState({
+    //         ...this.state,
+    //         title: x.name,
+    //         description: x.description,
+    //         text: x.text,
+    //         prijs: x.prijs
+    //     }))
+    //     console.log(this.state.prijs)
 
-    }
+    // }
 
 
     render() {
@@ -39,7 +39,7 @@ export class InforComponent extends React.Component<InforComponentProps, InforCo
             <div>{this.state.text}</div>
             <br></br>
             <div>{this.state.prijs}</div>
-            <button onClick={(event) => this.props.onMovePage({ kind: "about" })}> terug</button>
+            <button onClick={(event) => this.props.onMovePage({ kind: "DagtochtPagina" })}> terug</button>
 
         </div>
     }
