@@ -14,14 +14,23 @@ export function get_categories() : Promise<Types.Category_Dagtocht[]>{
     })
 }
 
-export function get_dagtocht(categoryID: number): Promise<Types.Dagtocht[]> {
-   // dagTochten.filter((element) => element.categoryID == 1) 
+function filter() {
+    console.log("olaa", dagTochten.filter((element) => element.categoryID == 1) )
+    return dagTochten.filter((element) => element.categoryID == 1)
+
+}
+
+export function get_dagtocht(): Promise<Types.Dagtocht[]> {
+   console.log( dagTochten.filter((element) => element.categoryID == 1) )
    
     return new Promise((resolve, reject) => {
+        // resolve(dagTochten)
+
         // if (dagTochten[categoryID] == undefined)
         //     reject("Id is not in array in dagtocht")
         // else
-            resolve(dagTochten.filter((element) => element.categoryID == 1) )
+        
+           resolve(filter())
     })
 }
 

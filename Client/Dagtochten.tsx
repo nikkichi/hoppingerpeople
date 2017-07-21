@@ -33,9 +33,10 @@ export class DagtochtenComponent extends React.Component<DagtochtenComponentProp
 
     loadDagtochten() {
         Api
-            .get_dagtocht(1)
-             .then(d => this.setState({ ...this.state, kind: "DagtochtPagina", dagtocht: d }))
-             .catch(_ => console.log('get dachtocht rejected ') || setTimeout( this.loadDagtochten ,5000))
+            .get_dagtocht()
+             .then(d => this.setState({ ...this.state, kind: "DagtochtPagina", dagtochten: d }))
+            // .catch(_ => console.log('get dachtocht rejected ') || setTimeout( this.loadDagtochten ,5000))
+             
     }
 
     render() {
@@ -64,7 +65,7 @@ export class DagtochtenComponent extends React.Component<DagtochtenComponentProp
             return <div> 
                 {categoryView(this.state.categories[0])             
                 }
-                {dagtochtView(this.state.dagtochten[1])}
+                {dagtochtView(this.state.dagtochten[0])}
                 {/*{console.log('return ',this.state.kind)}*/}
                        </div>
         }
