@@ -44,6 +44,13 @@ export function get_ooievaarsPas() : Promise<Types.InformatiePas[]>{
 
 }
 
+export function get_specialaanbieding() : Promise<Types.SpecialAanbieding[]>{
+    return new Promise((resolve, reject)=> {
+        resolve(speciale_aanbieding)
+    })
+}
+
+
 
 
 
