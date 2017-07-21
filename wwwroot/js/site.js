@@ -14285,7 +14285,7 @@ class HomepageComponent extends React.Component {
         return React.createElement("div", null,
             React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "homepage", id: 1 }) }, homepageLink),
             React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "homepage", id: 2 }) }, aanbiedingLink),
-            React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "homepage", id: 3 }) }, dagtochtLink),
+            React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "DagtochtPagina", id: 3 }) }, dagtochtLink),
             React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "homepage", id: 4 }) }, ooievaarLink),
             React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "homepage", id: 5 }) }, vragenLink),
             React.createElement("h1", null, " Homepage"),
@@ -14302,42 +14302,6 @@ class HomepageComponent extends React.Component {
     }
 }
 exports.HomepageComponent = HomepageComponent;
-// import * as React from 'react'
-// import * as ReactDOM from 'react-dom'
-// import * as Immutable from 'immutable'
-// import * as ViewUtils from './generated_views/view_utils'
-// import * as List from './containers/list'
-// import * as Models from './generated_models'
-// import * as Types from './custom_types'
-// import * as Api from './api'
-// import * as Manager from './pageManager'
-// let button: "Lees meer"
-// // This is the GrandParent I think
-// type HomepageComponentProps = {   onMovePage: (id: Manager.Page) => void}
-// type HomepageComponentState = { kind: "Loading"} | {kind:"Loaded", value: Types.SpecialAanbieding[]}
-// function generateNumber(min:number, max:number){
-//     return Math.floor(Math.random()* max - min + 1) + min
-// }
-// export class HomepageComponent extends React.Component<HomepageComponentProps, HomepageComponentState>{
-//     constructor(props, context) {
-//         super(props, context);
-//         this.state = { kind: "Loading"} 
-//     }
-//     loadSpecialAanbieding(){
-//             Api.get_specialaanbieding()
-//             .then(i => this.setState({ ...this.state, kind: "Loaded", SpecialAanbieding: i}))
-//             .catch (i => this.loadSpecialAanbieding )
-//     }
-//     componentWillMount() {
-//      this.loadSpecialAanbieding();       
-//     }    
-//     render() {
-//         if(this.state.kind == "Loaded"){
-//             console.log("yay")
-//         }
-//             return <div></div>
-//     }
-// }
 
 
 /***/ }),
@@ -29678,7 +29642,7 @@ class InforComponent extends React.Component {
             React.createElement("div", null, this.state.text),
             React.createElement("br", null),
             React.createElement("div", null, this.state.prijs),
-            React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "DagtochtPagina" }) }, " terug"));
+            React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "homepage", id: 1 }) }, " terug"));
     }
 }
 exports.InforComponent = InforComponent;

@@ -43,7 +43,6 @@ export class DagtochtenComponent extends React.Component<DagtochtenComponentProp
         if (this.state.kind == "DagtochtPagina") {
             let categoryView = function (category: Types.Category_Dagtocht) {
                 return<div>
-                     {console.log('hi',category.title)}
                     <h2>{category.title}</h2>
                     <p>{category.description}</p>
                     <button onClick={(event) => this.props.onMovePage(this.state.kind)}>{hyperlink}</button>
@@ -53,24 +52,22 @@ export class DagtochtenComponent extends React.Component<DagtochtenComponentProp
 
             let dagtochtView = function (dagtocht: Types.Dagtocht) {
                 return <div>
-                    {dagtocht.name}
-                    {console.log('Haaai',dagtocht.name)}
+                    dagtocht.name
                         <p> {dagtocht.description}</p>
                         <div> {dagtocht.text}</div>
                         <div>  {dagtocht.prijs}</div>
                 </div>
             }
-
-
-            return <div> 
-                {categoryView(this.state.categories[0])             
-                }
-                {dagtochtView(this.state.dagtochten[0])}
-                {/*{console.log('return ',this.state.kind)}*/}
-                       </div>
+            let renderItems = [];
+            this.state.categories.forEach((category) => {
+                    if(this.state.kind == "DagtochtPagina"){
+                        this.state.dagtochten.filter((dagtocht) => {dagtocht.categoryID == category.id}).forEach(
+                            (filteredDagtocht) => {renderItems.push(filteredDagtocht)})
+                    }})
+            return <div>{renderItems}</div>
         }
         else {
-            return <div> Else</div>
+            return <div>Render hier de algemene DagtochtPagina</div>
            // return <div> Dachtochten {this.state.dagtochten.map((element,key) => <div> {key} </div>)}</div>
         }
     }

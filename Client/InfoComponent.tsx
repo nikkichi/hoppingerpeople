@@ -39,7 +39,7 @@ export class InforComponent extends React.Component<InforComponentProps, InforCo
             <div>{this.state.text}</div>
             <br></br>
             <div>{this.state.prijs}</div>
-            <button onClick={(event) => this.props.onMovePage({ kind: "DagtochtPagina" })}> terug</button>
+            <button onClick={(event) => this.props.onMovePage({ kind: "homepage", id: 1})}> terug</button>
 
         </div>
     }
