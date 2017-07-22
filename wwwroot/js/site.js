@@ -29826,7 +29826,7 @@ class DagtochtenComponent extends React.Component {
             return React.createElement("div", null,
                 this.state.categories.map(category => categoryView(category)),
                 this.state.dagtochten.map(dagtocht => dagtochtView(dagtocht)),
-                React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "dagtochtDetailPagina" }) }, hyperlink));
+                React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "infopas" }) }, hyperlink));
         }
         else {
             return React.createElement("div", null, " Else");
@@ -30766,7 +30766,7 @@ const InfoPas = __webpack_require__(324);
 class PageManagerComponent extends React.Component {
     constructor(props, context) {
         super(props, context);
-        this.state = { current_page: { kind: "infopas" } };
+        this.state = { current_page: { kind: "homepage", id: 0 } };
     }
     render() {
         switch (this.state.current_page.kind) {

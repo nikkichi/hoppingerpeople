@@ -18,13 +18,19 @@ type PageManagerComponentProps = {}
 type PageManagerComponentState = { current_page: Page }
 
 //export type Page = { kind:"dagtocht" , id:number } | { kind:"DagtochtPagina" } | { kind:"contact us", person:string }
-export type Page = { kind:"dagtocht" , id:number } | { kind:"DagtochtPagina" } | { kind:"contact us", person:string} | {kind: "ooievaarspas", id:number} | {kind: "homepage", id: number} | {kind: "infopas"}
+export type Page =
+    | {kind:"dagtocht" , id:number }
+    | {kind:"DagtochtPagina" }
+    | {kind:"contact us", person:string}
+    | {kind: "ooievaarspas", id:number}
+    | {kind: "homepage", id: number}
+    | {kind: "infopas"}
 
 export class PageManagerComponent extends React.Component<PageManagerComponentProps, PageManagerComponentState>{
  
     constructor(props, context) {
         super(props, context);
-        this.state = { current_page: { kind:"infopas"} }
+        this.state = { current_page: { kind:"homepage", id:0} }
     }
 
     render() {

@@ -60,15 +60,10 @@ export class DagtochtenComponent extends React.Component<DagtochtenComponentProp
                   
                 </div>
             }
-
-
             return <div> 
-                { this.state.categories.map( category => categoryView(category))           
-                }
-               {this.state.dagtochten.map(dagtocht => dagtochtView(dagtocht))}
-            <button onClick={(event) => this.props.onMovePage({ kind: "dagtochtDetailPagina"})}>
-                     {hyperlink}
-                        </button>
+                { this.state.categories.map( category => categoryView(category))}
+                {this.state.dagtochten.map(dagtocht => dagtochtView(dagtocht))}
+            <button onClick={(event) => this.props.onMovePage({ kind: "infopas"})}>{hyperlink}</button>
                  
                 
                        </div>
