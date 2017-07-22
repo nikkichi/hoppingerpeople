@@ -30725,12 +30725,6 @@ class HomepageComponent extends React.Component {
         if (this.state.kind == "loaded") {
             let specialAanbiedingView = function (value) {
                 return React.createElement("div", null,
-                    React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "homepage", id: 1 }) }, homepageLink),
-                    React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "homepage", id: 2 }) }, aanbiedingLink),
-                    React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "dagtochtPagina", id: 3 }) }, dagtochtLink),
-                    React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "homepage", id: 4 }) }, ooievaarLink),
-                    React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "homepage", id: 5 }) }, vragenLink),
-                    React.createElement("h1", null, " Homepage"),
                     React.createElement("h2", null, "Speciale Aanbiedingen"),
                     React.createElement("h2", null,
                         " ",
@@ -30740,8 +30734,13 @@ class HomepageComponent extends React.Component {
                         value.description));
             };
             return React.createElement("div", null,
-                this.state.specialeAanbieding.map(value => specialAanbiedingView(value)),
-                " ");
+                React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "homepage", id: 1 }) }, homepageLink),
+                React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "homepage", id: 2 }) }, aanbiedingLink),
+                React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "DagtochtPagina", id: 3 }) }, dagtochtLink),
+                React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "homepage", id: 4 }) }, ooievaarLink),
+                React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "homepage", id: 5 }) }, vragenLink),
+                React.createElement("h1", null, "Homepage"),
+                this.state.specialeAanbieding.map(value => specialAanbiedingView(value)));
         }
         else {
             return React.createElement("div", null, " else ");
