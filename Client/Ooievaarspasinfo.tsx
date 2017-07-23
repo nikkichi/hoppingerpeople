@@ -29,8 +29,6 @@ import * as Manager from './pageManager'
      }
  
      componentWillMount() {
-      
-       console.log("will mount")
        this.loadInformatiePas();   
                  
      }    

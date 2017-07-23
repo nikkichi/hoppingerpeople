@@ -10,7 +10,7 @@ import * as Manager from './pageManager'
 
 
 type InfoPasComponentProps = {onMovePage: (id: Manager.Page) => void}
-type InfoPasComponentState = { kind: "loading"} | {kind:"loaded", value: Types.Uitleg_InformatiePas[]}
+type InfoPasComponentState = { kind: "loading"} | {kind:"loaded", Uitleginformatie: Types.Uitleg_InformatiePas[]}
 
 export class InfoPasComponent extends React.Component<InfoPasComponentProps, InfoPasComponentState>{
     constructor(props, context){
@@ -21,28 +21,25 @@ export class InfoPasComponent extends React.Component<InfoPasComponentProps, Inf
     loadUitleg(){
         Api.get_uitleg('Over Ooievaarspas')
         .then(u => this.setState({...this.state, kind: 'loaded', Uitleginformatie: u}))
-        // .catch(u=> this.loadUitleg())
+        .catch(u=> console.log(u))//this.loadUitleg())
     }
 
     componentWillMount(){
-        console.log('Will mount')
         this.loadUitleg();
     }
 
     render(){
         if(this.state.kind == 'loaded'){
             let uitleg_view = function(info: Types.Uitleg_InformatiePas){<div>
-                      console.log('hi')
                         <h1> {info.title}</h1>
                         <div> {info.description}</div>
-                        <button> lees meer </button>
+                        <button>Lees meer</button>
                         </div>
                 
             }
-            return <div> 
-                {this.state.value.map(info => uitleg_view(info))}
-                <button onClick={(event) => this.props.onMovePage({kind:'infopas'})}/>
-                
+            return <div>
+                {this.state.Uitleginformatie.map(info => uitleg_view(info))}
+                <button onClick={(event) => this.props.onMovePage({kind:'infopas'})}>{"Lees niet meer"}</button>
                  </div>
         }
         else{

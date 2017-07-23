@@ -34,7 +34,6 @@ export class PageManagerComponent extends React.Component<PageManagerComponentPr
     }
 
     render() {
-
     switch (this.state.current_page.kind) {
         case "homepage":
             return <div><Homepage.HomepageComponent onMovePage={(next_page) => this.moveToPage(next_page)}  />     </div>

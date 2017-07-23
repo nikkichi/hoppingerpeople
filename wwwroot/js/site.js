@@ -9594,9 +9594,6 @@ function generateNumber(min, max) {
 }
 function get_categories() {
     return new Promise((resolve, reject) => {
-        // let random = generateNumber(0, 10);
-        // if (random > 10) reject("API failed");
-        // else 
         resolve(category);
     });
 }
@@ -9608,11 +9605,9 @@ function get_specialaanbieding() {
 }
 exports.get_specialaanbieding = get_specialaanbieding;
 function filter() {
-    console.log("olaa", dagTochten.filter((element) => element.categoryID == 1));
     return dagTochten.filter((element) => element.categoryID == 1);
 }
 function get_dagtocht() {
-    console.log(dagTochten.filter((element) => element.categoryID == 1));
     return new Promise((resolve, reject) => {
         // resolve(dagTochten)
         // if (dagTochten[categoryID] == undefined)
@@ -9640,10 +9635,13 @@ function get_ooievaarsPas() {
 exports.get_ooievaarsPas = get_ooievaarsPas;
 function get_uitleg(title) {
     return new Promise((resolve, reject) => {
-        if (Uitleg_InformatiePas[title] == undefined)
+        if ('Over Ooievaarspas' == undefined)
             reject("De titel komt niet voor");
         else
-            resolve(Uitleg_InformatiePas);
+            resolve([{
+                    title: 'Over Ooievaarspas',
+                    description: 'De Ooievaarspas geeft korting op sport, cultuur, contributie, lidmaatschap en entree. De Ooievaarspas is voor inwoners van Den Haag, Leidschendam-Voorburg en Rijswijk, met een inkomen tot maximaal 130% van de bijstandsnorm. '
+                }]);
     });
 }
 exports.get_uitleg = get_uitleg;
@@ -29783,7 +29781,7 @@ define(String.prototype, "padRight", "".padEnd);
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(47);
 const Api = __webpack_require__(77);
-let hyperlink = "lees meer ";
+let hyperlink = "lees meer";
 let next_page = { kind: "dagtochtDetailPagina" };
 class DagtochtenComponent extends React.Component {
     constructor(props, context) {
@@ -29791,46 +29789,56 @@ class DagtochtenComponent extends React.Component {
         this.state = { kind: "loading" };
     }
     componentWillMount() {
-        console.log('component will mount');
         this.loadCategories();
         this.loadDagtochten();
     }
     loadCategories() {
         Api
             .get_categories()
-            .then(c => this.setState(Object.assign({}, this.state, { kind: "dagtochtPagina", categories: c })));
-        //.catch(_ => this.loadCategories())
-    }
+            .then(c => this.setState(Object.assign({}, this.state, { kind: "dagtochtPagina", categories: c, dagtochten: [] })), e => console.log("Error: ", e));
+    } //DONT REMOVE THE "dagtochten: []" part, it makes sure dagtochten is set so it won't crash because it's undefined
     loadDagtochten() {
         Api
             .get_dagtocht()
-            .then(d => this.setState(Object.assign({}, this.state, { kind: "dagtochtPagina", dagtochten: d })));
-        // .catch(_ => console.log('get dachtocht rejected ') || setTimeout( this.loadDagtochten ,5000))
+            .then(d => this.setState(Object.assign({}, this.state, { kind: "dagtochtPagina", dagtochten: d })), e => console.log("Error: ", e));
     }
     render() {
-        if (this.state.kind == "dagtochtPagina") {
+        if (this.state.kind == "dagtochtPagina" && this.state.dagtochten != undefined) {
             let categoryView = function (category) {
                 return React.createElement("div", null,
-                    console.log('hi', category.title),
                     React.createElement("h2", null, category.title),
                     React.createElement("p", null, category.description));
             };
-            let dagtochtView = function (dagtocht) {
-                return React.createElement("div", null,
+            let dagtochtView = function (dagtocht, thisRef) {
+                return React.createElement("div", { onClick: (event) => thisRef.setState({ kind: "dagtochtDetailPagina", detailDagtocht: dagtocht }) },
                     dagtocht.name,
-                    console.log('Haaai', dagtocht.name),
-                    React.createElement("p", null,
-                        " ",
-                        dagtocht.description));
+                    React.createElement("p", null, dagtocht.description));
             };
             return React.createElement("div", null,
-                this.state.categories.map(category => categoryView(category)),
-                this.state.dagtochten.map(dagtocht => dagtochtView(dagtocht)),
-                React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "infopas" }) }, hyperlink));
+                React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "infopas" }) }, hyperlink),
+                this.state.dagtochten.map(dagtocht => dagtochtView(dagtocht, this)));
+        }
+        else if (this.state.kind == "dagtochtDetailPagina") {
+            let x = localStorage.getItem('favoriteDagtocht') == this.state.detailDagtocht.name;
+            return React.createElement("div", null,
+                React.createElement("p", null, this.state.detailDagtocht.name),
+                React.createElement("br", null),
+                React.createElement("p", null, this.state.detailDagtocht.prijs),
+                React.createElement("br", null),
+                React.createElement("p", null, this.state.detailDagtocht.description),
+                React.createElement("br", null),
+                React.createElement("p", null, this.state.detailDagtocht.text),
+                React.createElement("br", null),
+                React.createElement("p", null,
+                    "Deze dagtocht is ",
+                    x ? "wel" : "niet",
+                    " als favoriet gekozen"),
+                React.createElement("button", { onClick: event => this.state.kind == "dagtochtDetailPagina" ?
+                        localStorage.setItem('favoriteDagtocht', this.state.detailDagtocht.name)
+                        : console.log("There is an error in DagtochtDetailPage") }, "Maak favoriet"));
         }
         else {
-            return React.createElement("div", null, " Else");
-            // return <div> Dachtochten {this.state.dagtochten.map((element,key) => <div> {key} </div>)}</div>
+            return React.createElement("div", null, "Else");
         }
     }
 }
@@ -29853,29 +29861,27 @@ class InfoPasComponent extends React.Component {
     }
     loadUitleg() {
         Api.get_uitleg('Over Ooievaarspas')
-            .then(u => this.setState(Object.assign({}, this.state, { kind: 'loaded', Uitleginformatie: u })));
-        // .catch(u=> this.loadUitleg())
+            .then(u => this.setState(Object.assign({}, this.state, { kind: 'loaded', Uitleginformatie: u })))
+            .catch(u => console.log(u)); //this.loadUitleg())
     }
     componentWillMount() {
-        console.log('Will mount');
         this.loadUitleg();
     }
     render() {
         if (this.state.kind == 'loaded') {
             let uitleg_view = function (info) {
                 React.createElement("div", null,
-                    "console.log('hi')",
                     React.createElement("h1", null,
                         " ",
                         info.title),
                     React.createElement("div", null,
                         " ",
                         info.description),
-                    React.createElement("button", null, " lees meer "));
+                    React.createElement("button", null, "Lees meer"));
             };
             return React.createElement("div", null,
-                this.state.value.map(info => uitleg_view(info)),
-                React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: 'infopas' }) }));
+                this.state.Uitleginformatie.map(info => uitleg_view(info)),
+                React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: 'infopas' }) }, "Lees niet meer"));
         }
         else {
             return React.createElement("div", null, "else");
@@ -29907,7 +29913,6 @@ class OoievaarsPasComponent extends React.Component {
             .catch(i => this.loadInformatiePas());
     }
     componentWillMount() {
-        console.log("will mount");
         this.loadInformatiePas();
     }
     render() {

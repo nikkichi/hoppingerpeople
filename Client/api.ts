@@ -1,35 +1,27 @@
 import * as Types from './custom_types'
 
-
 function generateNumber(min: number, max:number) {
     return Math.floor(Math.random() * max - min + 1) + min 
 }
 
 export function get_categories() : Promise<Types.Category_Dagtocht[]>{
- return new Promise((resolve, reject) => {
-        // let random = generateNumber(0, 10);
-        // if (random > 10) reject("API failed");
-        // else 
+    return new Promise((resolve, reject) => {
         resolve(category)
     })
 }
 
-
 export function get_specialaanbieding() : Promise<Types.SpecialAanbieding[]>{
     return new Promise((resolve, reject)=> {
-         resolve(speciale_aanbieding)
+        resolve(speciale_aanbieding)
     })
 }
 
 function filter() {
-    console.log("olaa", dagTochten.filter((element) => element.categoryID == 1) )
     return dagTochten.filter((element) => element.categoryID == 1)
 
 }
 
 export function get_dagtocht(): Promise<Types.Dagtocht[]> {
-   console.log( dagTochten.filter((element) => element.categoryID == 1) )
-   
     return new Promise((resolve, reject) => {
         // resolve(dagTochten)
 
@@ -57,9 +49,12 @@ export function get_ooievaarsPas() : Promise<Types.InformatiePas[]>{
 }
 export function get_uitleg(title) : Promise<Types.Uitleg_InformatiePas[]>{
     return new Promise((resolve, reject) => {
-        if (Uitleg_InformatiePas[title] == undefined )
+        if ('Over Ooievaarspas' == undefined )
             reject("De titel komt niet voor")
-        else resolve(Uitleg_InformatiePas)
+        else resolve([{
+                    title: 'Over Ooievaarspas',
+                    description: 'De Ooievaarspas geeft korting op sport, cultuur, contributie, lidmaatschap en entree. De Ooievaarspas is voor inwoners van Den Haag, Leidschendam-Voorburg en Rijswijk, met een inkomen tot maximaal 130% van de bijstandsnorm. '
+                }])
     })
 }
 export function get_veelgesteldevragenonderwerp(): Promise<Types.vragen[]> {
@@ -69,8 +64,6 @@ export function get_veelgesteldevragenonderwerp(): Promise<Types.vragen[]> {
         else resolve(vragen)
    })
 }
-
-
 
 let dagTochten: Types.Dagtocht[] = [
     {
@@ -220,5 +213,4 @@ let aanbieding: Types.aanbieding[] = [
        antwoord: "Daar kunnen verschillende redenen voor zijn. Neem daarom contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur. Ooievaarspashouders uit Leidschendam-Voorburg en Rijswijk moeten hiervoor contact opnemen met hun eigen gemeente.",
       
    }
-
 ]

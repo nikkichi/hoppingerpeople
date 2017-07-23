@@ -18,39 +18,27 @@ export class InforComponent extends React.Component<InforComponentProps, InforCo
         Api
             .get_dagtocht()
              .then(d => this.setState({ ...this.state, kind: "dagtochtDetailPagina", dagtochten: d }))
-            // .catch(_ => console.log('get dachtocht rejected ') || setTimeout( this.loadDagtochten ,5000))
-             
     }
 
    componentWillMount() {
-        console.log('component will mount')
         this.loadDagtochten();
     }
 
 
     render() {
-
-     if (this.state.kind == "dagtochtDetailPagina") {
-
+        if (this.state.kind == "dagtochtDetailPagina") {
             let dagtochtView = function (dagtocht: Types.Dagtocht) {
-                return <div>
-                    {dagtocht.name}
-                    {console.log('Haaai',dagtocht.name)}
-                        <p> {dagtocht.description}</p>
-              
-                  
-                </div>
+                return  <div>
+                            {dagtocht.name}
+                            <p>{dagtocht.description}</p>
+                        </div>
             }
-
-
-            return <div> 
-                {dagtochtView(this.state.dagtochten[0])}
-                {/*{console.log('return ',this.state.kind)}*/}
-                       </div>
+            return  <div> 
+                        {dagtochtView(this.state.dagtochten[0])}
+                    </div>
         }
         else {
-            return <div> Else</div>
-           // return <div> Dachtochten {this.state.dagtochten.map((element,key) => <div> {key} </div>)}</div>
+            return <div>Else</div>
         }
     }
 }

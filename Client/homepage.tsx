@@ -25,7 +25,7 @@ export class HomepageComponent extends React.Component<HomepageComponentProps, H
 
     componentWillMount(){
         this.loadSpecialeAanbiedingen()
-    } 
+    }
 
     loadSpecialeAanbiedingen() {
         Api.get_specialaanbieding().then(a => this.setState({...this.state, kind: "loaded", specialeAanbieding: a}))
