@@ -9,8 +9,11 @@ import * as Api from './api'
 import * as Manager from './pageManager'
 
 // This is the GrandParent I think
+let next_page = {kind: "infopas"}
+let hyperlink = 'lees meer'
  type OoievaarsPasComponentProps = {   onMovePage: (id: Manager.Page) => void}
- type OoievaarsPasComponentState = { kind: "loading"} | {kind:"loaded", value: Types.InformatiePas[]}
+ type OoievaarsPasComponentState = { kind: "loading"} 
+                                  | {kind:"loaded", value: Types.InformatiePas[]}
  
  
  function generateNumber(min:number, max:number){
@@ -24,12 +27,14 @@ import * as Manager from './pageManager'
  
      loadInformatiePas(){
              Api.get_ooievaarsPas()
-           .then(i => this.setState({ ...this.state, kind: "loaded", InformatiePas: i}))
-           .catch (i => this.loadInformatiePas() )
+           .then(i => this.setState({ ...this.state, kind: "loaded", value: i }),
+           e => console.log('Error: ', e)) 
+           console.log('loadinformatiepas')
      }
  
      componentWillMount() {
-       this.loadInformatiePas();   
+       this.loadInformatiePas();  
+       console.log('Ooievaarsinfo wordt geload') 
                  
      }    
              
@@ -37,23 +42,33 @@ import * as Manager from './pageManager'
  
      render() {
 
-       if(this.state.kind == "loaded"){
-           let ooievaarspas_View = function(info: Types.InformatiePas){ <div>
+       if(this.state.kind == "loaded" ){
+           let ooievaarspas_View = function(info: Types.InformatiePas){ 
+           return   <div>
                        <h1>  Informatie over de Ooievaarspas</h1>
                        <h2> {info.title}</h2>
-                       <div>{info.description
-                           }</div>
-                       <button> lees meer </button>
-                       </div>
+                       <div>{info.description }</div>
+                       deze knop is op de juiste plek maar geeft een foutmelding
+                     <button onClick={(event) => this.props.onMovePage({kind: "infopas"})}>{hyperlink}</button>
+                       
+                    </div>
+                 
            }
            
             return <div>
-           {this.state.value.map(info => ooievaarspas_View(info))}
-           <div>{ooievaarspas_View}</div>
- 
-           </div>
+                deze knop gaat naar next page
+                <button onClick={(event) => this.props.onMovePage({kind: "infopas"})}>{hyperlink}</button>
+                {this.state.value.map(info => ooievaarspas_View(info)}
+                <div>{ooievaarspas_View}</div>
+           
+          </div>
+           
        
        }
+
+      else{
+        return<div> else </div>
+      }
  
      }
  }

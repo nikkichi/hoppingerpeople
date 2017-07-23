@@ -22,14 +22,17 @@ export class InfoPasComponent extends React.Component<InfoPasComponentProps, Inf
         Api.get_uitleg('Over Ooievaarspas')
         .then(u => this.setState({...this.state, kind: 'loaded', Uitleginformatie: u}))
         .catch(u=> console.log(u))//this.loadUitleg())
+        console.log('test')
     }
 
     componentWillMount(){
         this.loadUitleg();
+        console.log('Uitleg wordt geload')
     }
 
     render(){
         if(this.state.kind == 'loaded'){
+
             let uitleg_view = function(info: Types.Uitleg_InformatiePas){<div>
                         <h1> {info.title}</h1>
                         <div> {info.description}</div>
@@ -40,7 +43,10 @@ export class InfoPasComponent extends React.Component<InfoPasComponentProps, Inf
             return <div>
                 {this.state.Uitleginformatie.map(info => uitleg_view(info))}
                 <button onClick={(event) => this.props.onMovePage({kind:'infopas'})}>{"Lees niet meer"}</button>
+                 
+                
                  </div>
+                 
         }
         else{
             return <div>else</div>

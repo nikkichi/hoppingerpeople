@@ -29863,9 +29863,11 @@ class InfoPasComponent extends React.Component {
         Api.get_uitleg('Over Ooievaarspas')
             .then(u => this.setState(Object.assign({}, this.state, { kind: 'loaded', Uitleginformatie: u })))
             .catch(u => console.log(u)); //this.loadUitleg())
+        console.log('test');
     }
     componentWillMount() {
         this.loadUitleg();
+        console.log('Uitleg wordt geload');
     }
     render() {
         if (this.state.kind == 'loaded') {
@@ -29900,6 +29902,9 @@ exports.InfoPasComponent = InfoPasComponent;
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(47);
 const Api = __webpack_require__(77);
+// This is the GrandParent I think
+let next_page = { kind: "infopas" };
+let hyperlink = 'lees meer';
 function generateNumber(min, max) {
 }
 class OoievaarsPasComponent extends React.Component {
@@ -29909,26 +29914,33 @@ class OoievaarsPasComponent extends React.Component {
     }
     loadInformatiePas() {
         Api.get_ooievaarsPas()
-            .then(i => this.setState(Object.assign({}, this.state, { kind: "loaded", InformatiePas: i })))
-            .catch(i => this.loadInformatiePas());
+            .then(i => this.setState(Object.assign({}, this.state, { kind: "loaded", value: i })), e => console.log('Error: ', e));
+        console.log('loadinformatiepas');
     }
     componentWillMount() {
         this.loadInformatiePas();
+        console.log('Ooievaarsinfo wordt geload');
     }
     render() {
         if (this.state.kind == "loaded") {
             let ooievaarspas_View = function (info) {
-                React.createElement("div", null,
+                return React.createElement("div", null,
                     React.createElement("h1", null, "  Informatie over de Ooievaarspas"),
                     React.createElement("h2", null,
                         " ",
                         info.title),
                     React.createElement("div", null, info.description),
-                    React.createElement("button", null, " lees meer "));
+                    "deze knop is op de juiste plek maar geeft een foutmelding",
+                    React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "infopas" }) }, hyperlink));
             };
             return React.createElement("div", null,
+                "deze knop gaat naar next page",
+                React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "infopas" }) }, hyperlink),
                 this.state.value.map(info => ooievaarspas_View(info)),
                 React.createElement("div", null, ooievaarspas_View));
+        }
+        else {
+            return React.createElement("div", null, " else ");
         }
     }
 }
