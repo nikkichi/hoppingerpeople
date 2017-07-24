@@ -30878,9 +30878,7 @@ exports.PageManagerComponent = PageManagerComponent;
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(42);
 const Api = __webpack_require__(68);
-// function generateNumber(min: number, max: number) {
-//     return Math.floor(Math.random() * max - min + 1) + min
-// }
+let homepageLink = "Home";
 class veelgesteldevragenComponent extends React.Component {
     constructor(props, context) {
         super(props, context);
@@ -30906,6 +30904,7 @@ class veelgesteldevragenComponent extends React.Component {
             };
             return React.createElement("div", null,
                 " ",
+                React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "homepage" }) }, homepageLink),
                 this.state.value.map(value => onderwerp_view(value)));
         }
         else {
