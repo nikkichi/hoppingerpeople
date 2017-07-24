@@ -36,28 +36,37 @@ export class PageManagerComponent extends React.Component<PageManagerComponentPr
     }
 
     render() {
-console.log('PAGEMANAGER', this.state.current_page.kind)
-    switch (this.state.current_page.kind) {
-        
-        case "homepage":
-            return <div><Homepage.HomepageComponent onMovePage={(next_page) => this.moveToPage(next_page)}  />     </div>
-        case "dagtochtPagina":
-            return <div><Dagtochten.DagtochtenComponent onMovePage={(next_page) => this.moveToPage(next_page)} /> </div>
-        case "aanbiedingPagina":
-            return <div><Aanbieding.AanbiedingenComponent onMovePage={(next_page) => this.moveToPage(next_page)}/></div>
-        case "veelgesteldeVragenPagina": 
-                return<div>< veelgesteldeVragen.veelgesteldevragenComponent onMovePage={(next_page) => this.moveToPage(next_page)}/> </div>   
-        case "infopas": 
-                return<div><InfoPas.InfoPasComponent onMovePage={(next_page) => this.moveToPage(next_page)}/></div>
-        case "DetailDagtocht": 
-                return<div><detailPagina.InforComponent/></div>
-        case "DetailAanbieding":
-           return<div><detailPagina.InforComponent/></div>
-        case "ooievaarspasPagina":
-            return <div><Ooievaarspasinfo.OoievaarsPasComponent onMovePage={(next_page) => this.moveToPage(next_page)}  />     </div>
-
-    }}
-
+        console.log('PAGEMANAGER', this.state.current_page.kind)
+        function PageContent(thisRef) {
+            switch (thisRef.state.current_page.kind) {
+                case "homepage":
+                    return <div><Homepage.HomepageComponent onMovePage={(next_page) => thisRef.moveToPage(next_page)}/></div>
+                case "dagtochtPagina":
+                    return <div><Dagtochten.DagtochtenComponent onMovePage={(next_page) => thisRef.moveToPage(next_page)} /> </div>
+                case "aanbiedingPagina":
+                    return <div><Aanbieding.AanbiedingenComponent onMovePage={(next_page) => thisRef.moveToPage(next_page)}/></div>
+                case "veelgesteldeVragenPagina": 
+                    return<div>< veelgesteldeVragen.veelgesteldevragenComponent onMovePage={(next_page) => thisRef.moveToPage(next_page)}/> </div>   
+                case "infopas": 
+                    return<div><InfoPas.InfoPasComponent onMovePage={(next_page) => thisRef.moveToPage(next_page)}/></div>
+                case "DetailDagtocht": 
+                    return<div><detailPagina.InforComponent/></div>
+                case "DetailAanbieding":
+                    return<div><detailPagina.InforComponent/></div>
+                case "ooievaarspasPagina":
+                    return <div><Ooievaarspasinfo.OoievaarsPasComponent onMovePage={(next_page) => thisRef.moveToPage(next_page)} /></div>
+            }
+        }
+        function Footer(){
+            return  <footer>
+                        <button onClick={event => location.reload()}>Ga naar Homepagina</button>
+                    </footer>
+        }
+        return  <div>
+                    {PageContent(this)}
+                    {Footer()}
+                </div>
+    }
     moveToPage(next_page: Page) {
         console.log("move to page")
         this.setState({ ...this.state, current_page: next_page })

@@ -50,6 +50,7 @@ export type vragen={
    vraag: string
    antwoord: string
    title: string
+   pagina: string
    
    
 }

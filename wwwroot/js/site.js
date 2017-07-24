@@ -8541,16 +8541,25 @@ let aanbieding = [
 ];
 let vragen = [
     {
+        pagina: "Veelgestelde vragen",
+        title: " ",
+        vraag: " ",
+        antwoord: " "
+    },
+    {
+        pagina: " ",
         title: "Aanvragen en/of wijzigingen Ooievaarspas",
         vraag: "Ik heb een Ooievaarspas. Hoef ik dan geen verlenging aan te vragen?",
         antwoord: " In principe moet u altijd een aanvraag doen voor verlenging van de Ooievaarspas. Er is een beperkt aantal groepen voor wie de Ooievaarspas automatisch wordt verlengd. Wilt u weten of u hiertoe behoort? Lees dan meer over de voorwaarden voor het aanvragen van een Ooievaarspas.",
     },
     {
+        pagina: " ",
         title: "Gebruik Ooievaarspas",
         vraag: "Ik heb een Ooievaarspas, mag ik gratis reizen?",
         antwoord: "Gratis reizen kan alleen als u inwoner bent van Den Haag en de AOW-gerechtigde leeftijd heeft bereikt, over een persoonlijke OV-chipkaart beschikt en recht heeft op een Ooievaarspas in het huidige kalenderjaar (1 januari tot en met 31 december).",
     },
     {
+        pagina: " ",
         title: "Geblokkeerde Ooievaarspas",
         vraag: "Mijn Ooievaarspas is geblokkeerd. Wat is daarvan de reden?",
         antwoord: "Daar kunnen verschillende redenen voor zijn. Neem daarom contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur. Ooievaarspashouders uit Leidschendam-Voorburg en Rijswijk moeten hiervoor contact opnemen met hun eigen gemeente.",
@@ -30965,7 +30974,7 @@ class HomepageComponent extends React.Component {
                 React.createElement("button", { onClick: onClickAanbieding }, aanbiedingLink),
                 React.createElement("button", { onClick: onClickDagtocht }, dagtochtLink),
                 React.createElement("button", { onClick: onClickOoievaarsinfo }, ooievaarLink),
-                React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "homepage" }) }, vragenLink),
+                React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "veelgesteldeVragenPagina" }) }, vragenLink),
                 React.createElement("h1", null, "Homepage"),
                 React.createElement("h2", null, "Speciale Aanbiedingen"),
                 this.state.specialeAanbieding.map(value => specialAanbiedingView(value)));
@@ -31000,36 +31009,43 @@ class PageManagerComponent extends React.Component {
     }
     render() {
         console.log('PAGEMANAGER', this.state.current_page.kind);
-        switch (this.state.current_page.kind) {
-            case "homepage":
-                return React.createElement("div", null,
-                    React.createElement(Homepage.HomepageComponent, { onMovePage: (next_page) => this.moveToPage(next_page) }),
-                    "     ");
-            case "dagtochtPagina":
-                return React.createElement("div", null,
-                    React.createElement(Dagtochten.DagtochtenComponent, { onMovePage: (next_page) => this.moveToPage(next_page) }),
-                    " ");
-            case "aanbiedingPagina":
-                return React.createElement("div", null,
-                    React.createElement(Aanbieding.AanbiedingenComponent, { onMovePage: (next_page) => this.moveToPage(next_page) }));
-            case "veelgesteldeVragenPagina":
-                return React.createElement("div", null,
-                    React.createElement(veelgesteldeVragen.veelgesteldevragenComponent, { onMovePage: (next_page) => this.moveToPage(next_page) }),
-                    " ");
-            case "infopas":
-                return React.createElement("div", null,
-                    React.createElement(InfoPas.InfoPasComponent, { onMovePage: (next_page) => this.moveToPage(next_page) }));
-            case "DetailDagtocht":
-                return React.createElement("div", null,
-                    React.createElement(detailPagina.InforComponent, null));
-            case "DetailAanbieding":
-                return React.createElement("div", null,
-                    React.createElement(detailPagina.InforComponent, null));
-            case "ooievaarspasPagina":
-                return React.createElement("div", null,
-                    React.createElement(Ooievaarspasinfo.OoievaarsPasComponent, { onMovePage: (next_page) => this.moveToPage(next_page) }),
-                    "     ");
+        function PageContent(thisRef) {
+            switch (thisRef.state.current_page.kind) {
+                case "homepage":
+                    return React.createElement("div", null,
+                        React.createElement(Homepage.HomepageComponent, { onMovePage: (next_page) => thisRef.moveToPage(next_page) }));
+                case "dagtochtPagina":
+                    return React.createElement("div", null,
+                        React.createElement(Dagtochten.DagtochtenComponent, { onMovePage: (next_page) => thisRef.moveToPage(next_page) }),
+                        " ");
+                case "aanbiedingPagina":
+                    return React.createElement("div", null,
+                        React.createElement(Aanbieding.AanbiedingenComponent, { onMovePage: (next_page) => thisRef.moveToPage(next_page) }));
+                case "veelgesteldeVragenPagina":
+                    return React.createElement("div", null,
+                        React.createElement(veelgesteldeVragen.veelgesteldevragenComponent, { onMovePage: (next_page) => thisRef.moveToPage(next_page) }),
+                        " ");
+                case "infopas":
+                    return React.createElement("div", null,
+                        React.createElement(InfoPas.InfoPasComponent, { onMovePage: (next_page) => thisRef.moveToPage(next_page) }));
+                case "DetailDagtocht":
+                    return React.createElement("div", null,
+                        React.createElement(detailPagina.InforComponent, null));
+                case "DetailAanbieding":
+                    return React.createElement("div", null,
+                        React.createElement(detailPagina.InforComponent, null));
+                case "ooievaarspasPagina":
+                    return React.createElement("div", null,
+                        React.createElement(Ooievaarspasinfo.OoievaarsPasComponent, { onMovePage: (next_page) => thisRef.moveToPage(next_page) }));
+            }
         }
+        function Footer() {
+            return React.createElement("footer", null,
+                React.createElement("button", { onClick: event => location.reload() }, "Ga naar Homepagina"));
+        }
+        return React.createElement("div", null,
+            PageContent(this),
+            Footer());
     }
     moveToPage(next_page) {
         console.log("move to page");
@@ -31048,9 +31064,7 @@ exports.PageManagerComponent = PageManagerComponent;
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(37);
 const Api = __webpack_require__(59);
-// function generateNumber(min: number, max: number) {
-//     return Math.floor(Math.random() * max - min + 1) + min
-// }
+let homepageLink = "Home";
 class veelgesteldevragenComponent extends React.Component {
     constructor(props, context) {
         super(props, context);
@@ -31064,10 +31078,10 @@ class veelgesteldevragenComponent extends React.Component {
         //.catch(o => this.loadonderwerp())
     }
     render() {
-        React.createElement("h1", null, "Veelgestelde Vragen");
         if (this.state.kind == "loaded") {
             let onderwerp_view = function (info) {
                 return React.createElement("div", null,
+                    React.createElement("h1", null, info.pagina),
                     React.createElement("h2", null,
                         " ",
                         info.title),
@@ -31076,6 +31090,7 @@ class veelgesteldevragenComponent extends React.Component {
             };
             return React.createElement("div", null,
                 " ",
+                React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "homepage" }) }, homepageLink),
                 this.state.value.map(value => onderwerp_view(value)));
         }
         else {

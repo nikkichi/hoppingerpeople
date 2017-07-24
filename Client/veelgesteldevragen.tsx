@@ -7,12 +7,9 @@ import * as Manager from './pageManager'
 import * as Api from './api'
 
 type veelgesteldevragenComponentProps = { onMovePage: (id: Manager.Page) => void }
-type veelgesteldevragenComponentState = { kind: "loading" } | { kind: "loaded", value: Types.vragen[] }
+type veelgesteldevragenComponentState = { kind: "loading" } | { kind: "loaded", value: Types.vragen[] }|{kind: "veelgesteldevragenpagina", value: Types.vragen[]}
 
-// function generateNumber(min: number, max: number) {
-//     return Math.floor(Math.random() * max - min + 1) + min
-// }
-
+let homepageLink = "Home"
 
 
 export class veelgesteldevragenComponent extends React.Component<veelgesteldevragenComponentProps, veelgesteldevragenComponentState>{
@@ -33,21 +30,25 @@ export class veelgesteldevragenComponent extends React.Component<veelgesteldevra
     }
 
     render() {
-        <h1>Veelgestelde Vragen</h1>
+        
         if (this.state.kind == "loaded") {
             let onderwerp_view = function (info: Types.vragen) {
                 return <div>
-                
+                <h1>{info.pagina}</h1>
                 <h2> {info.title}</h2>
                 <div>{info.vraag}</div>
                 <div>{info.antwoord}</div>
 
 
             </div>
+            
 
             }
 
-          return<div> {this.state.value.map( value =>onderwerp_view(value))} 
+          return<div> <button onClick={(event) => this.props.onMovePage({ kind: "homepage"})}>{homepageLink}</button>
+              
+              
+              {this.state.value.map( value =>onderwerp_view(value))} 
         
           </div>
 
