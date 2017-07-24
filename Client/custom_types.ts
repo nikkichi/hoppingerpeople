@@ -61,10 +61,16 @@ export type vragen={
    antwoord: string
    title: string
    pagina: string
+   id : number
 }
 
 export type Uitleg_InformatiePas={
     title: string,
     description: string,
+    id: number
+}
+
+export type categorienvragen={
+    categorie: string
     id: number
 }

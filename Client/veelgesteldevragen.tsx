@@ -39,7 +39,7 @@ export class veelgesteldevragenComponent extends React.Component<veelgesteldevra
                 }
                 return <div>
                 <h1>{info.pagina}</h1>
-                <h2> {info.title}</h2>
+                <h2> {info.categorie}</h2>
                 <div onClick={(event) => antwoordToggler(thisRef, 0)}>{info.vraag}</div>
                 {!thisRef.state.antwoorden[0]?info.antwoord:"ANTWOORD IS VERBORGEN"}
             </div>
@@ -48,7 +48,7 @@ export class veelgesteldevragenComponent extends React.Component<veelgesteldevra
             }
 
           return<div> <button onClick={(event) => this.props.onMovePage({ kind: "homepage"})}>{homepageLink}</button>
-              
+                
               
               {this.state.value.map( value =>onderwerp_view(value, this))} 
         
