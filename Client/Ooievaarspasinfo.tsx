@@ -8,7 +8,7 @@ import * as Types from './custom_types'
 import * as Api from './api'
 import * as Manager from './pageManager'
 
-
+// This is the GrandParent I think
 let next_page = {kind: "infopas"}
 let hyperlink = 'lees meer'
  type OoievaarsPasComponentProps = {   onMovePage: (id: Manager.Page) => void}
