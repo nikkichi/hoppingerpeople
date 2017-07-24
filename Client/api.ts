@@ -236,6 +236,14 @@ let aanbieding: Types.aanbieding[] = [
       
                 
   },
+  {
+      pagina: " ",
+       title: "",
+       vraag: "Wat gebeurt er nadat u een aanvraag voor een Ooievaarspas heeft gedaan?"  ,    
+       antwoord:"Nadat u een aanvraag heeft gedaan ontvangt u schriftelijk een ontvangstbevestiging. De gemeente bekijkt binnen 8 weken of u voldoet aan de voorwaarden en stelt vast of u recht heeft op de Ooievaarspas. Mocht u na 8 weken geen bericht hebben ontvangen, dan kunt u contact opnemen met de klantenservice. ",        
+      
+
+  },
    {
        title: "Gebruik Ooievaarspas",
        vraag: "Ik heb een Ooievaarspas, mag ik gratis reizen?"  ,    
@@ -243,9 +251,27 @@ let aanbieding: Types.aanbieding[] = [
       
    },
    {
+       pagina: "",
+       title: "",
+       vraag: "Ik heb een brief gekregen over het ophalen van het gratis reisproduct, maar het lukt niet?",
+       antwoord: "Neem contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur of stuur een e-mail aan: ooievaarsregelingen@gemeentedenhaag.helptu.nl  "
+
+
+   },
+   {
+       pagina: " ",
        title: "Geblokkeerde Ooievaarspas",
        vraag: "Mijn Ooievaarspas is geblokkeerd. Wat is daarvan de reden?",
        antwoord: "Daar kunnen verschillende redenen voor zijn. Neem daarom contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur. Ooievaarspashouders uit Leidschendam-Voorburg en Rijswijk moeten hiervoor contact opnemen met hun eigen gemeente.",
       
+   },
+
+   {
+       pagina: " ",
+       title: "",
+       vraag: "Hoe lang duurt het voordat mijn Ooievaarspas (weer) is geactiveerd?",
+       antwoord: "Als u een aanvraag heeft gedaan en het recht op de Ooievaarspas is vastgesteld, dan wordt uw pas binnen maximaal 15 werkdagen weer geactiveerd.Heeft u geen brief ontvangen? Neem dan contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur.Ooievaarspashouders uit Leidschendam-Voorburg en Rijswijk moeten hiervoor contact opnemen met hun eigen gemeente.",
+      
+
    }
 ]
