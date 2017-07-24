@@ -66,14 +66,11 @@ export function get_ooievaarsPas() : Promise<Types.InformatiePas[]>{
     })
 
 }
-export function get_uitleg(title) : Promise<Types.Uitleg_InformatiePas[]>{
+export function get_uitleg() : Promise<Types.Uitleg_InformatiePas[]>{
     return new Promise((resolve, reject) => {
         if ('Over Ooievaarspas' == undefined )
             reject("De titel komt niet voor")
-        else resolve([{
-                    title: 'Over Ooievaarspas',
-                    description: 'De Ooievaarspas geeft korting op sport, cultuur, contributie, lidmaatschap en entree. De Ooievaarspas is voor inwoners van Den Haag, Leidschendam-Voorburg en Rijswijk, met een inkomen tot maximaal 130% van de bijstandsnorm. '
-                }])
+        else resolve(Uitleg_InformatiePas)
     })
 }
 export function get_veelgesteldevragenonderwerp(): Promise<Types.vragen[]> {
@@ -162,6 +159,14 @@ let informatiepas: Types.InformatiePas[] = [
     {
         title: 'Over Ooievaarspas',
         description: 'De Ooievaarspas geeft korting op sport, cultuur, contributie, lidmaatschap en entree. De Ooievaarspas is voor inwoners van Den Haag, Leidschendam-Voorburg en Rijswijk, met een inkomen tot maximaal 130% van de bijstandsnorm. '
+    },
+    {
+        title:'Aanvragen Ooievaarspas',
+        description:'Woont u in Den Haag, Leidschendam-Voorburg of Rijswijk en heeft u een laag inkomen? Dan biedt de Ooievaarspas heel veel voordelen. Vraag daarom de Ooievaarspas aan.'
+    },
+    {
+        title: 'Verloop na aanvraag Ooievaarspas',
+        description:'Nadat u een aanvraag heeft gedaan ontvangt u schriftelijk een ontvangstbevestiging. De gemeente bekijkt binnen 8 weken of u voldoet aan de voorwaarden en stelt vast of u recht heeft op de Ooievaarspas.'
     }
 ]
 

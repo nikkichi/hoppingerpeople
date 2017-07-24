@@ -53,6 +53,8 @@ console.log('PAGEMANAGER', this.state.current_page.kind)
                 return<div><detailPagina.InforComponent/></div>
         case "DetailAanbieding":
            return<div><detailPagina.InforComponent/></div>
+        case "ooievaarspasPagina":
+            return <div><Ooievaarspasinfo.OoievaarsPasComponent onMovePage={(next_page) => this.moveToPage(next_page)}  />     </div>
 
     }}
 

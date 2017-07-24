@@ -8258,9 +8258,6 @@ function generateNumber(min, max) {
 }
 function get_categories() {
     return new Promise((resolve, reject) => {
-        // let random = generateNumber(0, 10);
-        // if (random > 10) reject("API failed");
-        // else 
         resolve(category);
     });
 }
@@ -8314,9 +8311,9 @@ function get_ooievaarsPas() {
     });
 }
 exports.get_ooievaarsPas = get_ooievaarsPas;
-function get_uitleg(title) {
+function get_uitleg() {
     return new Promise((resolve, reject) => {
-        if (Uitleg_InformatiePas[title] == undefined)
+        if ('Over Ooievaarspas' == undefined)
             reject("De titel komt niet voor");
         else
             resolve(Uitleg_InformatiePas);
@@ -8405,6 +8402,14 @@ let Uitleg_InformatiePas = [
     {
         title: 'Over Ooievaarspas',
         description: 'De Ooievaarspas geeft korting op sport, cultuur, contributie, lidmaatschap en entree. De Ooievaarspas is voor inwoners van Den Haag, Leidschendam-Voorburg en Rijswijk, met een inkomen tot maximaal 130% van de bijstandsnorm. '
+    },
+    {
+        title: 'Aanvragen Ooievaarspas',
+        description: 'Woont u in Den Haag, Leidschendam-Voorburg of Rijswijk en heeft u een laag inkomen? Dan biedt de Ooievaarspas heel veel voordelen. Vraag daarom de Ooievaarspas aan.'
+    },
+    {
+        title: 'Verloop na aanvraag Ooievaarspas',
+        description: 'Nadat u een aanvraag heeft gedaan ontvangt u schriftelijk een ontvangstbevestiging. De gemeente bekijkt binnen 8 weken of u voldoet aan de voorwaarden en stelt vast of u recht heeft op de Ooievaarspas.'
     }
 ];
 let speciale_aanbieding = [
@@ -29796,22 +29801,78 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(37);
 const Api = __webpack_require__(59);
 let hyperlink = "lees meer ";
-class DagtochtenComponent extends React.Component {
+//main component voor aanbiedingen pagina
+class AanbiedingenComponent extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = { kind: "loading" };
     }
     componentWillMount() {
         console.log('component will mount');
+        this.loadAanbieding();
+    }
+    loadAanbieding() {
+        Api
+            .get_aanbiedingen()
+            .then(c => this.setState(Object.assign({}, this.state, { kind: "aanbiedingPagina", aanbieding: c })));
+        //.catch(_ => this.loadCategories())
+    }
+    render() {
+        let onclickAanbieding = (event) => this.props.onMovePage({ kind: "DetailAanbieding" });
+        console.log(this.state.kind);
+        if (this.state.kind == "aanbiedingPagina") {
+            let AanbiedingView = function (aanbieding) {
+                return React.createElement("div", null,
+                    React.createElement("h2", null,
+                        " ",
+                        aanbieding.title),
+                    React.createElement("br", null),
+                    React.createElement("p", null,
+                        " ",
+                        aanbieding.description),
+                    React.createElement("br", null),
+                    React.createElement("button", { onClick: onclickAanbieding }, hyperlink));
+            };
+            return React.createElement("div", null, this.state.aanbieding.map(aanbieding => AanbiedingView(aanbieding)));
+        }
+        else {
+            return React.createElement("div", null, " Else");
+            // return <div> Dachtochten {this.state.dagtochten.map((element,key) => <div> {key} </div>)}</div>
+        }
+    }
+}
+exports.AanbiedingenComponent = AanbiedingenComponent;
+//    return <div><a onClick={() => this.toggle_button()}><h1>{this.state.name}</h1></a>
+//                         <button onClick={() => this.toggle_button()}>{button_text}</button><br/><br/>
+//                         {description}<br/><br/>
+//                         {fav_button}</div>
+
+
+/***/ }),
+/* 324 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const React = __webpack_require__(37);
+const Api = __webpack_require__(59);
+let hyperlink = "lees meer";
+let next_page = { kind: "dagtochtDetailPagina" };
+class DagtochtenComponent extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = { kind: "loading" };
+    }
+    componentWillMount() {
         this.loadCategories();
         this.loadDagtochten();
     }
     loadCategories() {
         Api
             .get_categories()
-            .then(c => this.setState(Object.assign({}, this.state, { kind: "dagtochtPagina", categories: c })));
-        //.catch(_ => this.loadCategories())
-    }
+            .then(c => this.setState(Object.assign({}, this.state, { kind: "dagtochtPagina", categories: c, dagtochten: [] })), e => console.log("Error: ", e));
+    } //DONT REMOVE THE "dagtochten: []" part, it makes sure dagtochten is set so it won't crash because it's undefined
     loadDagtochten() {
         Api
             .get_dagtocht(2)
@@ -29843,6 +29904,25 @@ class DagtochtenComponent extends React.Component {
                     " ",
                     this.state.dagtochten.map(dagtocht => dagtochtView(dagtocht))));
         }
+        else if (this.state.kind == "dagtochtDetailPagina") {
+            let x = localStorage.getItem('favoriteDagtocht') == this.state.detailDagtocht.name;
+            return React.createElement("div", null,
+                React.createElement("p", null, this.state.detailDagtocht.name),
+                React.createElement("br", null),
+                React.createElement("p", null, this.state.detailDagtocht.prijs),
+                React.createElement("br", null),
+                React.createElement("p", null, this.state.detailDagtocht.description),
+                React.createElement("br", null),
+                React.createElement("p", null, this.state.detailDagtocht.text),
+                React.createElement("br", null),
+                React.createElement("p", null,
+                    "Deze dagtocht is ",
+                    x ? "wel" : "niet",
+                    " als favoriet gekozen"),
+                React.createElement("button", { onClick: event => this.state.kind == "dagtochtDetailPagina" ?
+                        localStorage.setItem('favoriteDagtocht', this.state.detailDagtocht.name)
+                        : console.log("There is an error in DagtochtDetailPage") }, "Maak favoriet"));
+        }
         else {
             return React.createElement("div", null, " Else");
             // return <div> Dachtochten {this.state.dagtochten.map((element,key) => <div> {key} </div>)}</div>
@@ -29853,7 +29933,7 @@ exports.DagtochtenComponent = DagtochtenComponent;
 
 
 /***/ }),
-/* 324 */
+/* 325 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29948,7 +30028,7 @@ exports.InforComponent = InforComponent;
 
 
 /***/ }),
-/* 325 */
+/* 326 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29962,30 +30042,30 @@ class InfoPasComponent extends React.Component {
         this.state = { kind: 'loading' };
     }
     loadUitleg() {
-        Api.get_uitleg('Over Ooievaarspas')
-            .then(u => this.setState(Object.assign({}, this.state, { kind: 'loaded', Uitleginformatie: u })));
-        // .catch(u=> this.loadUitleg())
+        Api.get_uitleg()
+            .then(u => this.setState(Object.assign({}, this.state, { kind: 'loaded', Uitleginformatie: u })))
+            .catch(u => console.log(u)); //this.loadUitleg())
+        console.log('test');
     }
     componentWillMount() {
-        console.log('Will mount');
         this.loadUitleg();
+        console.log('Uitleg wordt geload');
     }
     render() {
         if (this.state.kind == 'loaded') {
             let uitleg_view = function (info) {
-                React.createElement("div", null,
-                    "console.log('hi')",
+                React.createElement("div", { id: info.title },
                     React.createElement("h1", null,
                         " ",
                         info.title),
                     React.createElement("div", null,
                         " ",
                         info.description),
-                    React.createElement("button", null, " lees meer "));
+                    React.createElement("button", null, "Lees meer"));
             };
             return React.createElement("div", null,
-                this.state.value.map(info => uitleg_view(info)),
-                React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: 'infopas' }) }));
+                this.state.Uitleginformatie.map(info => uitleg_view(info)),
+                React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: 'infopas' }) }, "Lees niet meer"));
         }
         else {
             return React.createElement("div", null, "else");
@@ -29996,7 +30076,6 @@ exports.InfoPasComponent = InfoPasComponent;
 
 
 /***/ }),
-/* 326 */,
 /* 327 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -30790,16 +30869,10 @@ class HomepageComponent extends React.Component {
     render() {
         let onClickDagtocht = (event) => this.props.onMovePage({ kind: "dagtochtPagina" });
         let onClickAanbieding = (event) => this.props.onMovePage({ kind: "aanbiedingPagina" });
+        let onClickOoievaarsinfo = (event) => this.props.onMovePage({ kind: "ooievaarspasPagina" });
         if (this.state.kind == "loaded") {
             let specialAanbiedingView = function (value) {
                 return React.createElement("div", null,
-                    React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "homepage" }) }, homepageLink),
-                    React.createElement("button", { onClick: onClickAanbieding }, aanbiedingLink),
-                    React.createElement("button", { onClick: onClickDagtocht }, dagtochtLink),
-                    React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "homepage" }) }, ooievaarLink),
-                    React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "homepage" }) }, vragenLink),
-                    React.createElement("h1", null, " Homepage"),
-                    React.createElement("h2", null, "Speciale Aanbiedingen"),
                     React.createElement("h2", null,
                         " ",
                         value.title),
@@ -30808,8 +30881,14 @@ class HomepageComponent extends React.Component {
                         value.description));
             };
             return React.createElement("div", null,
-                this.state.specialeAanbieding.map(value => specialAanbiedingView(value)),
-                " ");
+                React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "homepage" }) }, homepageLink),
+                React.createElement("button", { onClick: onClickAanbieding }, aanbiedingLink),
+                React.createElement("button", { onClick: onClickDagtocht }, dagtochtLink),
+                React.createElement("button", { onClick: onClickOoievaarsinfo }, ooievaarLink),
+                React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "homepage" }) }, vragenLink),
+                React.createElement("h1", null, "Homepage"),
+                React.createElement("h2", null, "Speciale Aanbiedingen"),
+                this.state.specialeAanbieding.map(value => specialAanbiedingView(value)));
         }
         else {
             return React.createElement("div", null, " else ");
@@ -30827,11 +30906,12 @@ exports.HomepageComponent = HomepageComponent;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(37);
-const Dagtochten = __webpack_require__(323);
-const detailPagina = __webpack_require__(324);
+const Dagtochten = __webpack_require__(324);
+const detailPagina = __webpack_require__(325);
+const Ooievaarspasinfo = __webpack_require__(631);
 const Homepage = __webpack_require__(334);
-const InfoPas = __webpack_require__(325);
-const Aanbieding = __webpack_require__(631);
+const InfoPas = __webpack_require__(326);
+const Aanbieding = __webpack_require__(323);
 const veelgesteldeVragen = __webpack_require__(336);
 class PageManagerComponent extends React.Component {
     constructor(props, context) {
@@ -30865,6 +30945,10 @@ class PageManagerComponent extends React.Component {
             case "DetailAanbieding":
                 return React.createElement("div", null,
                     React.createElement(detailPagina.InforComponent, null));
+            case "ooievaarspasPagina":
+                return React.createElement("div", null,
+                    React.createElement(Ooievaarspasinfo.OoievaarsPasComponent, { onMovePage: (next_page) => this.moveToPage(next_page) }),
+                    "     ");
         }
     }
     moveToPage(next_page) {
@@ -55484,52 +55568,48 @@ module.exports = function(module) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(37);
 const Api = __webpack_require__(59);
-let hyperlink = "lees meer ";
-//main component voor aanbiedingen pagina
-class AanbiedingenComponent extends React.Component {
+// This is the GrandParent I think
+let next_page = { kind: "infopas" };
+let hyperlink = 'lees meer';
+function generateNumber(min, max) {
+}
+class OoievaarsPasComponent extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = { kind: "loading" };
     }
-    componentWillMount() {
-        console.log('component will mount');
-        this.loadAanbieding();
+    loadInformatiePas() {
+        Api.get_ooievaarsPas()
+            .then(i => this.setState(Object.assign({}, this.state, { kind: "loaded", value: i })), e => console.log('Error: ', e));
+        console.log('loadinformatiepas');
     }
-    loadAanbieding() {
-        Api
-            .get_aanbiedingen()
-            .then(c => this.setState(Object.assign({}, this.state, { kind: "aanbiedingPagina", aanbieding: c })));
-        //.catch(_ => this.loadCategories())
+    componentWillMount() {
+        this.loadInformatiePas();
+        console.log('Ooievaarsinfo wordt geload');
     }
     render() {
-        let onclickAanbieding = (event) => this.props.onMovePage({ kind: "DetailAanbieding" });
-        console.log(this.state.kind);
-        if (this.state.kind == "aanbiedingPagina") {
-            let AanbiedingView = function (aanbieding) {
-                return React.createElement("div", null,
+        if (this.state.kind == "loaded") {
+            let ooievaarspas_View = function (info) {
+                return React.createElement("div", { key: info.title },
+                    React.createElement("h1", null, "  Informatie over de Ooievaarspas"),
                     React.createElement("h2", null,
                         " ",
-                        aanbieding.title),
-                    React.createElement("br", null),
-                    React.createElement("p", null,
-                        " ",
-                        aanbieding.description),
-                    React.createElement("br", null),
-                    React.createElement("button", { onClick: onclickAanbieding }, hyperlink));
+                        info.title),
+                    React.createElement("div", null, info.description),
+                    "deze knop is op de juiste plek maar geeft een foutmelding",
+                    React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "infopas" }) }, hyperlink));
             };
-            return React.createElement("div", null, this.state.aanbieding.map(aanbieding => AanbiedingView(aanbieding)));
+            return React.createElement("div", null,
+                "deze knop gaat naar next page",
+                React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "infopas" }) }, hyperlink),
+                this.state.value.map(info => ooievaarspas_View(info)));
         }
         else {
-            return React.createElement("div", null, " Else");
-            // return <div> Dachtochten {this.state.dagtochten.map((element,key) => <div> {key} </div>)}</div>
+            return React.createElement("div", null, " else ");
         }
     }
 }
-exports.AanbiedingenComponent = AanbiedingenComponent;
-//    return <div><a onClick={() => this.toggle_button()}><h1>{this.state.name}</h1></a>
-//                         <button onClick={() => this.toggle_button()}>{button_text}</button><br/><br/>
-//                         {description}<br/><br/>
-//                         {fav_button}</div>
+exports.OoievaarsPasComponent = OoievaarsPasComponent;
 
 
 /***/ })

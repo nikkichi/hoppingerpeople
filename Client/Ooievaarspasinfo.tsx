@@ -44,7 +44,7 @@ let hyperlink = 'lees meer'
 
        if(this.state.kind == "loaded" ){
            let ooievaarspas_View = function(info: Types.InformatiePas){ 
-           return   <div>
+           return   <div key={info.title}>
                        <h1>  Informatie over de Ooievaarspas</h1>
                        <h2> {info.title}</h2>
                        <div>{info.description }</div>
@@ -58,10 +58,9 @@ let hyperlink = 'lees meer'
             return <div>
                 deze knop gaat naar next page
                 <button onClick={(event) => this.props.onMovePage({kind: "infopas"})}>{hyperlink}</button>
-                {this.state.value.map(info => ooievaarspas_View(info)}
-                <div>{ooievaarspas_View}</div>
-           
-          </div>
+                {this.state.value.map(info => ooievaarspas_View(info))}
+                {/* <div>{ooievaarspas_View}</div> */}
+                </div>
            
        
        }
