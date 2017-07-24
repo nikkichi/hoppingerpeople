@@ -288,22 +288,38 @@ let aanbieding: Types.aanbieding[] = [
        {
             title:'Join the Florence club!',
             description:'In teamverband lekker actief zijn, dat kan in de Florence Clubs. Altijd al gedroomd om te kunnen hardlopen of handboogschieten? Dit is nu mogelijk, gezellig in teamverband!',
-            id: 1
+            id: 1,
+            category: 'alle aanbiedingen',
+            activity: 'sport',
+            location: 'centrum',
+            target: 'ouder dan 17 jaar'
         },
        {
             title:'Ontdek je sport met de sportstrippenkaart',
             description:'Woon je in Leidschendam-Voorburg en ben je op zoek naar een nieuwe sport? De sportstrippenkaart helpt je op weg! Hardlopen, volleybal of zwemmen: weet jij niet welke sport bij je past? Dit is je kans! Met de sportstrippenkaart mag je vier sporten uitproberen bij meer dan 30 sportverenigingen in Leidschendam-Voorburg. Gewoon gratis!',
-            id: 2
+            id: 2,
+            category: 'alle aanbiedingen',
+            activity: { kind: 'sport', subKind: 'badminton' }
+            location: 'centrum',
+            target: 'alle leeftijden'
         },
         {
             title: 'Gratis online coaching voor Haagse pashouders',
             description:'Wil je gratis hulp bij het afvallen? Neem je je voor om te gaan bewegen, maar komt het er steeds niet van? Heb je plannen om je leefstijl te verbeteren? Wil je graag stoppen met roken of wordt het hoog tijd om je stress te verminderen? Ben je toe aan gezinshulp? Zet dan nu de stap en meld je aan voor een jaar lang gratis online coaching!',
-            id: 3
+            id: 3,
+            category: 'alle aanbiedingen',
+            activity: 'cultuur',
+            location: 'centrum',
+            target: 'ouder dan 50 jaar'
         },
         {
             title: 'Ontdek Drievliet met de Ooievaarspas vanaf 1 april',
             description:'Familiepark Drievliet, plezier voor jong en oud. Drievliet is in 2017 aanbieder van de Ooievaarspas en verwelkomt families! Ook heeft Drievliet er twee mooie attracties bij! Durf jij in de sportieve Tijdmachine en de snelle Chute?',
-            id: 4
+            id: 4,
+            category: 'speciale aanbiedingen',
+            activity: 'cultuur',
+            location: 'centrum',
+            target: 'alle leeftijden'
         }
 
    ]

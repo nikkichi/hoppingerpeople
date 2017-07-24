@@ -7,23 +7,45 @@ import * as Manager from './pageManager'
 import * as Api from './api'
 
 type FilterWatComponentProps = { }
-type FilterWatComponentState = { }
+type FilterWatComponentState = { kind: 'loading' } | { kind: 'loaded', aanbiedingen: Types.aanbieding[] }
 
 export class FilterWatComponent extends React.Component<FilterWatComponentProps, FilterWatComponentState>{
     constructor(props, context) {
         super(props, context)
-        this.state = { }
+        this.state = { kind: 'loading'}
+    }
+
+
+    componentWillMount(){
+    }    
+
+    load_aanbiedingen(){
+        Api.get_aanbiedingen()
+        .then(a => this.setState({...this.state, kind: "loaded", aanbiedingen: a}))
+        .catch(_ => this.load_aanbiedingen())
     }
 
    render() {
-        return <div>
-            Wat?<br/>
-            <select>
-                <option selected hidden>Alle activiteiten </option>
-                <option value="cultuur">Cultuur</option>
-                <option value="sport">Sport</option>
-            </select>
-        </div>
+
+        if (this.state.kind == "loaded")
+        {
+            let activityStrings = 
+                Immutable.List(this.state.aanbiedingen)
+                
+
+        return <ul></ul>
+        }
+
+       
+
+        // return <div>
+        //     Wat?<br/>
+        //     <select>
+        //         <option selected hidden>Alle activiteiten </option>
+        //         <option value="cultuur">Cultuur</option>
+        //         <option value="sport">Sport</option>
+        //     </select>
+        // </div>
    }
 }
 
@@ -37,35 +59,35 @@ export class CheckboxCultuur extends React.Component<CheckboxCultuurProps, Check
     }
 
     render(){
-        
+               
         return <div>
-                <input name="bibliotheek" type="checkbox"/> Bibliotheek
-                <br/>
-                <input name="cursussen" type="checkbox"/> Cursussen
-                <br/>
-                <input name="dans" type="checkbox"/> Dans
-                <br/>
-                <input name="musea" type="checkbox"/> Musea
-                <br/>
-                <input name="muziek" type="checkbox"/> Muziek
-                <br/>
-                <input name="recreatie" type="checkbox"/> Recreatie
-                <br/>
-                <input name="schilderen en tekenen" type="checkbox"/> Schilderen en tekenen
-                <br/>
-                <input name="scouting" type="checkbox"/> Scouting
-                <br/>
-                <input name="speciaal voor ouderen" type="checkbox"/> Speciaal voor ouderen
-                <br/>
-                <input name="theater en uitgaan" type="checkbox"/> Theater en Uitgaan
-                <br/>
-                <input name="toneel" type="checkbox"/> Toneel
-                <br/>
-                <input name="yoga" type="checkbox"/> Yoga
-                <br/>
-                <input name="zingen" type="checkbox"/> Zingen
-                {/* //nog components toevoegen met een sum van alle aanbiedingen en speciale aanbiedingen */}
-            </div>
+        {/*//         <input name="bibliotheek" type="checkbox"/> Bibliotheek
+        //         <br/>
+        //         <input name="cursussen" type="checkbox"/> Cursussen
+        //         <br/>
+        //         <input name="dans" type="checkbox"/> Dans
+        //         <br/>
+        //         <input name="musea" type="checkbox"/> Musea
+        //         <br/>
+        //         <input name="muziek" type="checkbox"/> Muziek
+        //         <br/>
+        //         <input name="recreatie" type="checkbox"/> Recreatie
+        //         <br/>
+        //         <input name="schilderen en tekenen" type="checkbox"/> Schilderen en tekenen
+        //         <br/>
+        //         <input name="scouting" type="checkbox"/> Scouting
+        //         <br/>
+        //         <input name="speciaal voor ouderen" type="checkbox"/> Speciaal voor ouderen
+        //         <br/>
+        //         <input name="theater en uitgaan" type="checkbox"/> Theater en Uitgaan
+        //         <br/>
+        //         <input name="toneel" type="checkbox"/> Toneel
+        //         <br/>
+        //         <input name="yoga" type="checkbox"/> Yoga
+        //         <br/>
+        //         <input name="zingen" type="checkbox"/> Zingen
+        //          //nog components toevoegen met een sum van alle aanbiedingen en speciale aanbiedingen */}
+        //     </div>
     }
 }
 
