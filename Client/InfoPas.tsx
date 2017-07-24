@@ -42,7 +42,7 @@ export class InfoPasComponent extends React.Component<InfoPasComponentProps, Inf
             let uitleg_view = function(information: Types.Uitleg_InformatiePas){ 
                 return <div key={information.title}>
                             
-                            <h1> {information.title}</h1>
+                           <a onClick={(id) => onClickInformatieDetail(information.id)}>  <h2> {information.title}</h2></a>
                             <div> {information.description}</div>
                             <button onClick={() => onClickInformatieDetail(information.id)}>{hyperlink}</button>
                             </div>

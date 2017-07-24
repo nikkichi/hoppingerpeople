@@ -7275,6 +7275,12 @@ function get_categories() {
     });
 }
 exports.get_categories = get_categories;
+function get_special(id) {
+    return new Promise((resolve, reject) => {
+        resolve(speciale_aanbieding.filter((element) => element.id == id));
+    });
+}
+exports.get_special = get_special;
 function get_specialaanbieding() {
     return new Promise((resolve, reject) => {
         resolve(speciale_aanbieding);
@@ -7290,7 +7296,7 @@ function filterAanbieding(id) {
     return value;
 }
 function filterDagtocht(id) {
-    let value = dagTochten.filter((element) => element.categoryID == id);
+    let value = dagTochten.filter((element) => element.id == id);
     return value;
 }
 function get_dagtochten(id) {
@@ -7301,7 +7307,7 @@ function get_dagtochten(id) {
 }
 exports.get_dagtochten = get_dagtochten;
 function get_dagtocht(id) {
-    console.log('get_dagtocht', dagTochten.filter((element) => element.categoryID == id));
+    console.log('get_dagtocht', dagTochten.filter((element) => element.id == id));
     return new Promise((resolve, reject) => {
         resolve(filterDagtocht(id));
     });
@@ -7358,7 +7364,7 @@ let dagTochten = [
         description: "Zin om er deze zomer een dagje op uit te gaan? Met uw Ooievaarspas kunt u deelnemen aan een...",
         prijs: 25,
         categoryID: 0,
-        id: 1,
+        id: 0,
         text: "Ga mee naar het meest geliefde pretpark van Nederland: de Efteling. U gaat toch ook mee naar het meest geliefde pretpark van Nederland? De Efteling is een themapark geschikt voor alle leeftijden. U zult u hier absoluut niet vervelen; jong, oud, man of vrouw - voor iedereen is er entertainment."
     },
     {
@@ -7374,7 +7380,7 @@ let dagTochten = [
         description: "Ook als u aangepast vervoer nodig heeft kunt u mee op zomerdagtocht! De activiteit is...",
         prijs: 25,
         categoryID: 2,
-        id: 1,
+        id: 2,
         text: ""
     },
     {
@@ -7382,7 +7388,7 @@ let dagTochten = [
         description: "Ook als u aangepast vervoer nodig heeft kunt u mee op zomerdagtocht! De activiteit is...",
         prijs: 25,
         categoryID: 1,
-        id: 1,
+        id: 3,
         text: ""
     }
 ];
@@ -7390,17 +7396,17 @@ let category = [
     {
         title: "Zomerdagtochten voor gezinnen",
         description: "Iedere zomer wordt een dagtocht georganiseerd voor gezinnen. Er is altijd keus uit een wisselend aanbod aan bestemmingen waaronder het bezoek aan een pretpark, museum of show. Voor €10,- per persoon kun je al met de bus mee naar een topbestemming.De dagjes uit zijn tussen 10 juli en 16 augustus 2017 en kunt u kiezen uit een aantal leuke bestemmingen.",
-        id: 0
+        categoryID: 0
     },
     {
         title: "Zomerdagtochten voor senioren",
         description: "Iedere zomer wordt een dagtocht georganiseerd voor senioren van 50 jaar of ouder. Met uw Ooievaarspas kunt u voor € 10 deelnemen aan een fantastische dagtocht. De dagjes uit zijn tussen 10 juli en 16 augustus 2017 en kunt u kiezen uit een aantal leuke bestemmingen.",
-        id: 1
+        categoryID: 1
     },
     {
         title: "Zomerdagtochten voor personen met begeleidingsbehoefte",
         description: "Ook als u aangepast vervoer nodig heeft kunt u mee op zomerdagtocht! Deze zomerdagtochten zijn bedoeld voor senioren met een begeleidingsbehoefte",
-        id: 2
+        categoryID: 2
     }
 ];
 let informatiepas = [
@@ -7427,22 +7433,22 @@ let informatiepas = [
 ];
 let speciale_aanbieding = [
     {
-        title: 'Join the Florence club!',
+        title: 'Join the Florence club! Speciaal',
         description: 'In teamverband lekker actief zijn, dat kan in de Florence Clubs. Altijd al gedroomd om te kunnen hardlopen of handboogschieten? Dit is nu mogelijk, gezellig in teamverband!',
         id: 1
     },
     {
-        title: 'Ontdek je sport met de sportstrippenkaart',
+        title: 'Ontdek je sport met de sportstrippenkaart Speciaal',
         description: 'Woon je in Leidschendam-Voorburg en ben je op zoek naar een nieuwe sport? De sportstrippenkaart helpt je op weg! Hardlopen, volleybal of zwemmen: weet jij niet welke sport bij je past? Dit is je kans! Met de sportstrippenkaart mag je vier sporten uitproberen bij meer dan 30 sportverenigingen in Leidschendam-Voorburg. Gewoon gratis!',
         id: 2
     },
     {
-        title: 'Gratis online coaching voor Haagse pashouders',
+        title: 'Gratis online coaching voor Haagse pashouders Speciaal',
         description: 'Wil je gratis hulp bij het afvallen? Neem je je voor om te gaan bewegen, maar komt het er steeds niet van? Heb je plannen om je leefstijl te verbeteren? Wil je graag stoppen met roken of wordt het hoog tijd om je stress te verminderen? Ben je toe aan gezinshulp? Zet dan nu de stap en meld je aan voor een jaar lang gratis online coaching!',
         id: 3
     },
     {
-        title: 'Ontdek Drievliet met de Ooievaarspas vanaf 1 april',
+        title: 'Ontdek Drievliet met de Ooievaarspas vanaf 1 april Speciaal',
         description: 'Familiepark Drievliet, plezier voor jong en oud. Drievliet is in 2017 aanbieder van de Ooievaarspas en verwelkomt families! Ook heeft Drievliet er twee mooie attracties bij! Durf jij in de sportieve Tijdmachine en de snelle Chute?',
         id: 4
     }
@@ -7485,8 +7491,7 @@ let aanbieding = [
         target: 'alle leeftijden'
     }
 ];
-let vragen = [
-    {
+let vragen = [{
         pagina: "Veelgestelde vragen",
         title: " ",
         vraag: " ",
@@ -30010,23 +30015,21 @@ class AanbiedingenComponent extends React.Component {
         //.catch(_ => this.loadCategories())
     }
     render() {
-        let onclickAanbieding = (id) => this.props.onMovePage({ kind: "DetailAanbieding", id: id });
+        let onclickAanbieding = (id) => this.props.onMovePage({ kind: "DetailAanbieding", id: id, checkPage: 1 });
         console.log(this.state.kind);
         if (this.state.kind == "aanbiedingPagina") {
             let AanbiedingView = function (aanbieding) {
-                return React.createElement("div", null,
-                    React.createElement("h2", null,
+                return React.createElement("div", { key: aanbieding.id },
+                    React.createElement("a", { onClick: (id) => onclickAanbieding(aanbieding.id) },
                         " ",
-                        aanbieding.title),
+                        React.createElement("h2", null, aanbieding.title),
+                        " "),
                     React.createElement("br", null),
                     React.createElement("p", null,
                         " ",
                         aanbieding.description),
                     React.createElement("br", null),
-                    React.createElement("button", { onClick: () => onclickAanbieding(aanbieding.id) }, hyperlink),
-                    React.createElement("button", { onClick: event => this.state.kind == "DetailDagtocht" ?
-                            localStorage.setItem('favoriteDagtocht', this.state.detailDagtocht.name)
-                            : console.log("There is an error in DagtochtDetailPage") }, "Maak favoriet"));
+                    React.createElement("button", { onClick: () => onclickAanbieding(aanbieding.id) }, hyperlink));
             };
             return React.createElement("div", null, this.state.aanbieding.map(aanbieding => AanbiedingView(aanbieding)));
         }
@@ -30052,6 +30055,7 @@ exports.AanbiedingenComponent = AanbiedingenComponent;
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(25);
 const Api = __webpack_require__(43);
+let checkdagtocht = true;
 let hyperlink = "lees meer";
 let next_page = { kind: "DetailDagtocht" };
 class DagtochtenComponent extends React.Component {
@@ -30067,16 +30071,16 @@ class DagtochtenComponent extends React.Component {
         Api
             .get_categories()
             .then(c => this.setState(Object.assign({}, this.state, { kind: "dagtochtPagina", categories: c, dagtochten: [] })), e => console.log("Error: ", e));
-        //DONT REMOVE THE "dagtochten: []" part, it makes sure dagtochten is set so it won't crash because it's undefined
     }
     loadDagtochten() {
         Api
-            .get_dagtochten(this.props.id)
+            .get_dagtocht(this.props.id)
             .then(d => this.setState(Object.assign({}, this.state, { kind: "dagtochtPagina", dagtochten: d })));
-        // .catch(_ => console.log('get dachtocht rejected ') || setTimeout( this.loadDagtochten ,5000))
+        // .catch(_ => console.log('get dachtocht rejected ') 
+        //         || setTimeout( this.loadDagtochten ,5000))
     }
     render() {
-        let onclickdagtocht = (id, checkPage) => this.props.onMovePage({ kind: "DetailDagtocht", id: id });
+        let onclickdagtocht = (id) => this.props.onMovePage({ kind: "DetailDagtocht", id: id, checkPage: 2 });
         console.log(this.state.kind);
         if (this.state.kind == "dagtochtPagina") {
             let categoryView = function (category) {
@@ -30086,43 +30090,49 @@ class DagtochtenComponent extends React.Component {
             };
             let dagtochtView = function (dagtocht) {
                 return React.createElement("div", { key: dagtocht.name },
-                    React.createElement("h2", null,
-                        " ",
-                        dagtocht.name),
-                    React.createElement("p", null,
-                        " ",
-                        dagtocht.description),
-                    React.createElement("button", { onClick: () => onclickdagtocht(dagtocht.categoryID, dagtocht.id) }, hyperlink));
+                    React.createElement("a", { onClick: (id) => onclickdagtocht(dagtocht.id) },
+                        "  ",
+                        React.createElement("h2", null,
+                            " ",
+                            dagtocht.description)),
+                    React.createElement("button", { onClick: () => onclickdagtocht(dagtocht.id) }, hyperlink));
             };
-            //dit ordend de dagtochten
+            let dag = this.state.detailDagtocht;
+            let id = this.state.detailcat;
             return React.createElement("div", null,
                 this.state.categories.map(category => categoryView(category)),
                 React.createElement("div", null,
                     " ",
-                    this.state.dagtochten.map(dagtocht => dagtochtView(dagtocht))));
+                    this.state.dagtochten.map(dagtocht => dagtochtView(dagtocht))),
+                this.state.dagtochten.filter(dagtocht => { dagtocht.categoryID == dagtocht.categoryID; }));
         }
         else if (this.state.kind == "DetailDagtocht") {
-            let x = localStorage.getItem('favoriteDagtocht') == this.state.detailDagtocht.name;
-            return React.createElement("div", null,
-                React.createElement("p", null, this.state.detailDagtocht.name),
-                React.createElement("br", null),
-                React.createElement("p", null, this.state.detailDagtocht.prijs),
-                React.createElement("br", null),
-                React.createElement("p", null, this.state.detailDagtocht.description),
-                React.createElement("br", null),
-                React.createElement("p", null, this.state.detailDagtocht.text),
-                React.createElement("br", null),
-                React.createElement("p", null,
-                    "Deze dagtocht is ",
-                    x ? "wel" : "niet",
-                    " als favoriet gekozen"),
-                React.createElement("button", { onClick: event => this.state.kind == "DetailDagtocht" ?
-                        localStorage.setItem('favoriteDagtocht', this.state.detailDagtocht.name)
-                        : console.log("There is an error in DagtochtDetailPage") }, "Maak favoriet"));
+            let dagtochtView = function (dagtocht) {
+                return React.createElement("div", { key: dagtocht.name },
+                    React.createElement("a", { onClick: (id) => onclickdagtocht(dagtocht.id) },
+                        " ",
+                        dagtocht.name),
+                    "+",
+                    React.createElement("p", null,
+                        " ",
+                        dagtocht.description),
+                    React.createElement("button", { onClick: (id) => onclickdagtocht(dagtocht.id) }, hyperlink));
+            };
+            // let x = localStorage.getItem('favoriteDagtocht') == this.state.detailDagtocht.name
+            // // return <div>
+            //     <p>{this.state.detailDagtocht.name}</p><br></br>
+            //     <p>{this.state.detailDagtocht.prijs}</p><br></br>
+            //     <p>{this.state.detailDagtocht.description}</p><br></br>
+            //     <p>{this.state.detailDagtocht.text}</p><br></br>
+            //     <p>Deze dagtocht is {x ? "wel" : "niet"} als favoriet gekozen</p>
+            //     <button onClick={event =>
+            //         this.state.kind == "DetailDagtocht" ?
+            //             localStorage.setItem('favoriteDagtocht', this.state.detailDagtocht.name)
+            //             : console.log("There is an error in DagtochtDetailPage")}>Maak favoriet</button>
+            // </div>
         }
         else {
             return React.createElement("div", null, " Else");
-            // return <div> Dachtochten {this.state.dagtochten.map((element,key) => <div> {key} </div>)}</div>
         }
     }
 }
@@ -30176,29 +30186,45 @@ class InforComponent extends React.Component {
         this.state = { kind: "loading" };
     }
     loadAanbieding() {
+        console.log("id checker", this.props.id);
         Api
             .get_aanbieding(this.props.id)
             .then(d => this.setState(Object.assign({}, this.state, { kind: "DetailAanbieding", aanbieding: d })));
         // .catch(_ => console.log('get dachtocht rejected ') || setTimeout( this.loadDagtochten ,5000))
     }
-    loadDagtocht() {
+    loadSpeciaal() {
+        console.log("id checker", this.props.id);
         Api
-            .get_dagtochten(1)
+            .get_special(this.props.id)
+            .then(d => this.setState(Object.assign({}, this.state, { kind: "DetailSpecial", special: d })));
+        // .catch(_ => console.log('get dachtocht rejected ') || setTimeout( this.loadDagtochten ,5000))
+    }
+    loadDagtocht() {
+        // console.log("id checker",this.props.id)
+        Api
+            .get_dagtocht(this.props.id)
             .then(d => this.setState(Object.assign({}, this.state, { kind: "DetailDagtocht", dagtochten: d })));
         // .catch(_ => console.log('get dachtocht rejected ') || setTimeout( this.loadDagtochten ,5000))
     }
     componentWillMount() {
-        console.log('component will mount');
-        // if (this.props.checkPage == 1){
-        return this.loadAanbieding();
-        // else if (this.props.checkPage == 2){
-        //     return   this.loadDagtocht();
-        // }
+        console.log('component will mount', this.props.checkPage);
+        if (this.props.checkPage == 1) {
+            return this.loadAanbieding();
+        }
+        else if (this.props.checkPage == 2) {
+            return this.loadDagtocht();
+        }
+        else if (this.props.checkPage == 3) {
+            return this.loadSpeciaal();
+        }
     }
     render() {
         console.log(this.state.kind);
         if (this.state.kind == "DetailAanbieding") {
             let AanbiedingView = function (aanbieding) {
+                let onclickFavoriete = (event) => (this.state.kind == "DetailAanbieding" ?
+                    localStorage.setItem('favoriteDagtocht', this.state.favoriete.name)
+                    : console.log("There is an error in DagtochtDetailPage"));
                 return React.createElement("div", { key: aanbieding.title },
                     React.createElement("h2", null,
                         " ",
@@ -30207,11 +30233,33 @@ class InforComponent extends React.Component {
                     React.createElement("p", null,
                         " ",
                         aanbieding.description),
-                    React.createElement("br", null));
+                    React.createElement("br", null),
+                    React.createElement("button", { onClick: onclickFavoriete }, "Maak favoriet"));
             };
             return React.createElement("div", null, this.state.aanbieding.map(aanbiedingen => AanbiedingView(aanbiedingen)));
         }
+        else if (this.state.kind == "DetailSpecial") {
+            let SpecialView = function (special) {
+                let onclickFavoriete = (event) => (this.state.kind == "DetailSpecial" ?
+                    localStorage.setItem('favoriteDagtocht', this.state.favoriete.name)
+                    : console.log("There is an error in DagtochtDetailPage"));
+                return React.createElement("div", { key: special.title },
+                    React.createElement("h2", null,
+                        " ",
+                        special.title),
+                    React.createElement("br", null),
+                    React.createElement("p", null,
+                        " ",
+                        special.description),
+                    React.createElement("br", null),
+                    React.createElement("button", { onClick: onclickFavoriete }, "Maak favoriet"));
+            };
+            return React.createElement("div", null, this.state.special.map(special => SpecialView(special)));
+        }
         else if (this.state.kind == "DetailDagtocht") {
+            let onclickFavoriete = (event) => (this.state.kind == "DetailDagtocht" ?
+                localStorage.setItem('favoriteDagtocht', this.state.favoriete.name)
+                : console.log("There is an error in DagtochtDetailPage"));
             let dagtochtView = function (dagtocht) {
                 return React.createElement("div", { key: dagtocht.name },
                     React.createElement("h2", null,
@@ -30224,7 +30272,8 @@ class InforComponent extends React.Component {
                     React.createElement("br", null),
                     React.createElement("p", null, dagtocht.prijs),
                     React.createElement("br", null),
-                    React.createElement("p", null, dagtocht.categoryID));
+                    React.createElement("p", null, dagtocht.categoryID),
+                    React.createElement("button", { onClick: onclickFavoriete }, "Maak favoriet"));
             };
             return React.createElement("div", null, this.state.dagtochten.map(dagtocht => dagtochtView(dagtocht)));
         }
@@ -30266,9 +30315,11 @@ class InfoPasComponent extends React.Component {
         if (this.state.kind == 'loaded') {
             let uitleg_view = function (information) {
                 return React.createElement("div", { key: information.title },
-                    React.createElement("h1", null,
-                        " ",
-                        information.title),
+                    React.createElement("a", { onClick: (id) => onClickInformatieDetail(information.id) },
+                        "  ",
+                        React.createElement("h2", null,
+                            " ",
+                            information.title)),
                     React.createElement("div", null,
                         " ",
                         information.description),
@@ -30356,9 +30407,11 @@ class OoievaarsPasComponent extends React.Component {
         if (this.state.kind == "loaded") {
             let ooievaarspas_View = function (info) {
                 return React.createElement("div", { key: info.title },
-                    React.createElement("h2", null,
-                        " ",
-                        info.title),
+                    React.createElement("a", { onClick: (id) => onClickInfoPas(info.id) },
+                        "  ",
+                        React.createElement("h2", null,
+                            " ",
+                            info.title)),
                     React.createElement("div", null, info.description),
                     React.createElement("button", { onClick: () => onClickInfoPas(info.id) }, hyperlink));
             };
@@ -31166,15 +31219,20 @@ class HomepageComponent extends React.Component {
         Api.get_specialaanbieding().then(a => this.setState(Object.assign({}, this.state, { kind: "loaded", specialeAanbieding: a })));
     }
     render() {
+        let onclickAanbieding = (id) => this.props.onMovePage({ kind: "DetailAanbieding", id: id, checkPage: 3 });
         if (this.state.kind == "loaded") {
-            let specialAanbiedingView = function (value) {
-                return React.createElement("div", null,
-                    React.createElement("h2", null,
+            let specialAanbiedingView = function (special_aanbieding) {
+                return React.createElement("div", { key: special_aanbieding.id },
+                    React.createElement("a", { onClick: (id) => onclickAanbieding(special_aanbieding.id) },
                         " ",
-                        value.title),
-                    React.createElement("div", null,
+                        React.createElement("h2", null, special_aanbieding.title),
+                        " "),
+                    React.createElement("br", null),
+                    React.createElement("p", null,
                         " ",
-                        value.description));
+                        special_aanbieding.description),
+                    React.createElement("br", null),
+                    React.createElement("button", { onClick: () => onclickAanbieding(special_aanbieding.id) }, hyperlink));
             };
             return React.createElement("div", null,
                 React.createElement("h1", null, "Homepage"),
@@ -31243,11 +31301,11 @@ class PageManagerComponent extends React.Component {
             case "DetailDagtocht":
                 return React.createElement("div", null,
                     menubar,
-                    React.createElement(detailPagina.InforComponent, { id: this.state.current_page.id }));
+                    React.createElement(detailPagina.InforComponent, { id: this.state.current_page.id, checkPage: this.state.current_page.checkPage }));
             case "DetailAanbieding":
                 return React.createElement("div", null,
                     menubar,
-                    React.createElement(detailPagina.InforComponent, { id: this.state.current_page.id }));
+                    React.createElement(detailPagina.InforComponent, { id: this.state.current_page.id, checkPage: this.state.current_page.checkPage }));
             case "ooievaarspasPagina":
                 return React.createElement("div", null,
                     menubar,

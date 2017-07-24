@@ -76,5 +76,5 @@ export type Category_Dagtocht={
 
     title: string,
     description: string,
-    id:number
+    categoryID:number
 }

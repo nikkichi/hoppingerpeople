@@ -27,8 +27,8 @@ export type Page = { kind:"homepage"} |
                    {kind: "ooievaarspasPagina"} |
                    {kind: "veelgesteldeVragenPagina"} |
                    {kind: "infopas", id:number}|
-                   {kind: "DetailDagtocht", id: number }|
-                   {kind: "DetailAanbieding", id: number} |
+                   {kind: "DetailDagtocht", id: number, checkPage: number }|
+                   {kind: "DetailAanbieding", id: number, checkPage: number} |
                    {kind: "InformatieDetail", id: number}
 
 export class PageManagerComponent extends React.Component<PageManagerComponentProps, PageManagerComponentState>{
@@ -56,9 +56,9 @@ let menubar = <div> <Header onMovePage={(next_page) => this.moveToPage(next_page
         case "infopas": 
                     return<div>{menubar}<InfoPas.InfoPasComponent onMovePage={(next_page) => this.moveToPage(next_page)} id= {this.state.current_page.id}/></div>
         case "DetailDagtocht":
-                return<div>{menubar}<detailPagina.InforComponent id= {this.state.current_page.id} /></div>
+                return<div>{menubar}<detailPagina.InforComponent id= {this.state.current_page.id} checkPage= {this.state.current_page.checkPage}/></div>
         case "DetailAanbieding":
-           return<div>{menubar}<detailPagina.InforComponent id={this.state.current_page.id} /></div>
+           return<div>{menubar}<detailPagina.InforComponent id={this.state.current_page.id} checkPage= {this.state.current_page.checkPage} /></div>
         case "ooievaarspasPagina":
             return <div>{menubar}<Ooievaarspasinfo.OoievaarsPasComponent onMovePage={(next_page) => this.moveToPage(next_page)}  /> </div>  
         case "InformatieDetail": 

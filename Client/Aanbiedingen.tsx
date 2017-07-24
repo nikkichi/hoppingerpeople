@@ -9,7 +9,7 @@ let hyperlink = "lees meer "
 
 type AanbiedingenComponentProps = { onMovePage: (id: Manager.Page) => void }
 type AanbiedingenComponentState = { kind: "loading" } |
-    { kind: "aanbiedingPagina", aanbieding: Types.aanbieding[] }
+    { kind: "aanbiedingPagina", aanbieding: Types.aanbieding[] , favoriete: Types.aanbieding}
 
 //main component voor aanbiedingen pagina
 export class AanbiedingenComponent extends React.Component<AanbiedingenComponentProps, AanbiedingenComponentState>
@@ -34,24 +34,22 @@ export class AanbiedingenComponent extends React.Component<AanbiedingenComponent
     }
 
     render() {
-        let onclickAanbieding = (id: number) => this.props.onMovePage({ kind: "DetailAanbieding", id: id})
+        let onclickAanbieding = (id: number) => this.props.onMovePage({ kind: "DetailAanbieding", id: id, checkPage: 1})
+        
         console.log(this.state.kind)
         if (this.state.kind == "aanbiedingPagina") {
 
 
             let AanbiedingView = function (aanbieding: Types.aanbieding) {
-                return <div>
-                    <h2> {aanbieding.title}</h2>
+                return <div key={aanbieding.id}>
+                       <a onClick={(id) => onclickAanbieding(aanbieding.id)}> <h2>{aanbieding.title}</h2> </a>
                     <br></br>
                     <p> {aanbieding.description}</p>
                     <br></br>
                     <button onClick={() => onclickAanbieding(aanbieding.id)}>
                         {hyperlink}
                     </button>
-                    <button onClick={event =>
-                            this.state.kind=="DetailDagtocht" ?
-                                localStorage.setItem('favoriteDagtocht', this.state.detailDagtocht.name)
-                            :   console.log("There is an error in DagtochtDetailPage")}>Maak favoriet</button>
+
 
                 </div>
 

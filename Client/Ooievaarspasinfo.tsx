@@ -46,7 +46,7 @@ let hyperlink = 'lees meer'
         {
            let ooievaarspas_View = function(info: Types.InformatiePas){ 
            return   <div key={info.title}>
-                       <h2> {info.title}</h2>
+                       <a onClick={(id) => onClickInfoPas(info.id)}>  <h2> {info.title}</h2></a>
                        <div>{info.description }</div>
                        <button onClick={() => onClickInfoPas(info.id)}>{hyperlink}</button>
                     </div>
