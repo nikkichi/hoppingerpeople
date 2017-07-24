@@ -8311,15 +8311,15 @@ function get_ooievaarsPas() {
     });
 }
 exports.get_ooievaarsPas = get_ooievaarsPas;
-function get_uitleg() {
+function get_OverDeOoievaarspas() {
     return new Promise((resolve, reject) => {
-        if ('Over Ooievaarspas' == undefined)
+        if (OverDeOoievaarspas == undefined)
             reject("De titel komt niet voor");
         else
-            resolve(Uitleg_InformatiePas);
+            resolve(OverDeOoievaarspas);
     });
 }
-exports.get_uitleg = get_uitleg;
+exports.get_OverDeOoievaarspas = get_OverDeOoievaarspas;
 function get_veelgesteldevragenonderwerp() {
     return new Promise((resolve, reject) => {
         if (vragen == undefined)
@@ -8385,31 +8385,114 @@ let informatiepas = [
     {
         title: 'Informatie voor aanbieders',
         description: 'Bent u een nieuwe aanbieder van de Ooievaarspas en nog niet helemaal thuis in het verzilveren van kortingen met de Ooievaarspas?',
-        id: 2
+        id: 3
     },
     {
         title: 'Informatie over Ooievaarsregelingen',
         description: 'Bent u al bekend met de Ooievaarsregelingen? Of weet u niet precies hoe u er gebruik van kan maken? Dit en meer leest u hier.',
-        id: 3
+        id: 2
     },
     {
         title: 'Actuele Informatie',
         description: 'Op zoek naar contactinformatie of de laatste informatie? Zoals nieuwsberichten, onze interessante Ooievaarsnieuwsbrief of andere leuke nieuwtjes? Lees het hier.',
         id: 4
+    },
+    {
+        title: 'Nieuws',
+        description: '',
+        id: 5
     }
 ];
-let Uitleg_InformatiePas = [
+let OverDeOoievaarspas = [
     {
         title: 'Over Ooievaarspas',
-        description: 'De Ooievaarspas geeft korting op sport, cultuur, contributie, lidmaatschap en entree. De Ooievaarspas is voor inwoners van Den Haag, Leidschendam-Voorburg en Rijswijk, met een inkomen tot maximaal 130% van de bijstandsnorm. '
+        description: 'De Ooievaarspas geeft korting op sport, cultuur, contributie, lidmaatschap en entree. De Ooievaarspas is voor inwoners van Den Haag, Leidschendam-Voorburg en Rijswijk, met een inkomen tot maximaal 130% van de bijstandsnorm. ',
+        id: 1
     },
     {
         title: 'Aanvragen Ooievaarspas',
-        description: 'Woont u in Den Haag, Leidschendam-Voorburg of Rijswijk en heeft u een laag inkomen? Dan biedt de Ooievaarspas heel veel voordelen. Vraag daarom de Ooievaarspas aan.'
+        description: 'Woont u in Den Haag, Leidschendam-Voorburg of Rijswijk en heeft u een laag inkomen? Dan biedt de Ooievaarspas heel veel voordelen. Vraag daarom de Ooievaarspas aan.',
+        id: 1
     },
     {
         title: 'Verloop na aanvraag Ooievaarspas',
-        description: 'Nadat u een aanvraag heeft gedaan ontvangt u schriftelijk een ontvangstbevestiging. De gemeente bekijkt binnen 8 weken of u voldoet aan de voorwaarden en stelt vast of u recht heeft op de Ooievaarspas.'
+        description: 'Nadat u een aanvraag heeft gedaan ontvangt u schriftelijk een ontvangstbevestiging. De gemeente bekijkt binnen 8 weken of u voldoet aan de voorwaarden en stelt vast of u recht heeft op de Ooievaarspas.',
+        id: 1
+    },
+    {
+        title: 'Computerset',
+        description: 'Om goed te kunnen leren is het belangrijk dat kinderen een computer hebben. Daarmee kunnen zij meedoen op school, spreekbeurten voorbereiden, werkstukken maken en spelletjes spelen',
+        id: 2
+    },
+    {
+        title: '',
+        description: '',
+        id: 2
+    },
+    {
+        title: '',
+        description: '',
+        id: 2
+    },
+    {
+        title: 'Aanbieder worden?',
+        description: 'Wilt u aanbieder van de Ooievaarspas worden maar niet zeker of u voldoet aan ons aanbiedersprofiel? De voorwaarden kunt u hier vinden.',
+        id: 3
+    },
+    {
+        title: '',
+        description: '',
+        id: 3
+    },
+    {
+        title: '',
+        description: '',
+        id: 3
+    },
+    {
+        title: '',
+        description: '',
+        id: 3
+    },
+    {
+        title: 'Nieuwsberichten Ooievaarspas',
+        description: 'Wilt u op de meer weten over de laatste nieuwsberichten van onder andere lopende projecten, acties en informatie over aanbieders? Dat kan onze nieuws pagina.',
+        id: 4
+    },
+    {
+        title: '',
+        description: '',
+        id: 4
+    },
+    {
+        title: '',
+        description: '',
+        id: 4
+    },
+    {
+        title: '',
+        description: '',
+        id: 4
+    },
+    {
+        title: 'Pinguïn geboren in Sea Life Scheveningen',
+        description: '',
+        id: 5
+    },
+    {
+        title: '',
+        description: '',
+        id: 5
+    },
+    {
+        title: '',
+        description: '',
+        id: 5
+    },
+    {
+        title: '',
+        description: '',
+        id: 5
     }
 ];
 let speciale_aanbieding = [
@@ -30042,7 +30125,7 @@ class InfoPasComponent extends React.Component {
         this.state = { kind: 'loading' };
     }
     loadUitleg() {
-        Api.get_uitleg()
+        Api.get_OverDeOoievaarspas()
             .then(u => this.setState(Object.assign({}, this.state, { kind: 'loaded', Uitleginformatie: u })))
             .catch(u => console.log(u)); //this.loadUitleg())
         console.log('test');
@@ -30053,19 +30136,16 @@ class InfoPasComponent extends React.Component {
     }
     render() {
         if (this.state.kind == 'loaded') {
-            let uitleg_view = function (info) {
-                React.createElement("div", { id: info.title },
+            let uitleg_view = function (information) {
+                return React.createElement("div", { key: information.title },
                     React.createElement("h1", null,
                         " ",
-                        info.title),
+                        information.title),
                     React.createElement("div", null,
                         " ",
-                        info.description),
-                    React.createElement("button", null, "Lees meer"));
+                        information.description));
             };
-            return React.createElement("div", null,
-                this.state.Uitleginformatie.map(info => uitleg_view(info)),
-                React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: 'infopas' }) }, "Lees niet meer"));
+            return React.createElement("div", null, this.state.Uitleginformatie.map(information => uitleg_view(information)));
         }
         else {
             return React.createElement("div", null, "else");
@@ -55571,8 +55651,6 @@ const Api = __webpack_require__(59);
 // This is the GrandParent I think
 let next_page = { kind: "infopas" };
 let hyperlink = 'lees meer';
-function generateNumber(min, max) {
-}
 class OoievaarsPasComponent extends React.Component {
     constructor(props, context) {
         super(props, context);
@@ -55588,20 +55666,18 @@ class OoievaarsPasComponent extends React.Component {
         console.log('Ooievaarsinfo wordt geload');
     }
     render() {
+        let onClickInfoPas = (event) => this.props.onMovePage({ kind: "infopas" });
         if (this.state.kind == "loaded") {
             let ooievaarspas_View = function (info) {
                 return React.createElement("div", { key: info.title },
-                    React.createElement("h1", null, "  Informatie over de Ooievaarspas"),
                     React.createElement("h2", null,
                         " ",
                         info.title),
                     React.createElement("div", null, info.description),
-                    "deze knop is op de juiste plek maar geeft een foutmelding",
-                    React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "infopas" }) }, hyperlink));
+                    React.createElement("button", { onClick: onClickInfoPas }, hyperlink));
             };
             return React.createElement("div", null,
-                "deze knop gaat naar next page",
-                React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "infopas" }) }, hyperlink),
+                React.createElement("h1", null, "  Informatie over de Ooievaarspas"),
                 this.state.value.map(info => ooievaarspas_View(info)));
         }
         else {

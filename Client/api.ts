@@ -66,13 +66,14 @@ export function get_ooievaarsPas() : Promise<Types.InformatiePas[]>{
     })
 
 }
-export function get_uitleg() : Promise<Types.Uitleg_InformatiePas[]>{
+export function get_OverDeOoievaarspas() : Promise<Types.Uitleg_InformatiePas[]>{
     return new Promise((resolve, reject) => {
-        if ('Over Ooievaarspas' == undefined )
+        if (OverDeOoievaarspas == undefined )
             reject("De titel komt niet voor")
-        else resolve(Uitleg_InformatiePas)
+        else resolve(OverDeOoievaarspas)
     })
 }
+
 export function get_veelgesteldevragenonderwerp(): Promise<Types.vragen[]> {
    return new Promise((resolve, reject) => {
        if(vragen == undefined)
@@ -141,32 +142,115 @@ let informatiepas: Types.InformatiePas[] = [
        {
             title:'Informatie voor aanbieders',
             description:'Bent u een nieuwe aanbieder van de Ooievaarspas en nog niet helemaal thuis in het verzilveren van kortingen met de Ooievaarspas?',
-            id: 2 
+            id: 3
         },
         {
             title: 'Informatie over Ooievaarsregelingen',
             description:'Bent u al bekend met de Ooievaarsregelingen? Of weet u niet precies hoe u er gebruik van kan maken? Dit en meer leest u hier.',
-            id: 3
+            id: 2
         },
         {
             title: 'Actuele Informatie',
             description:'Op zoek naar contactinformatie of de laatste informatie? Zoals nieuwsberichten, onze interessante Ooievaarsnieuwsbrief of andere leuke nieuwtjes? Lees het hier.',
             id: 4
+        },
+        {
+            title: 'Nieuws',
+            description: '',
+            id: 5
         }
 
     ]
-    let Uitleg_InformatiePas: Types.Uitleg_InformatiePas[] = [
+    let OverDeOoievaarspas: Types.Uitleg_InformatiePas[] = [
     {
         title: 'Over Ooievaarspas',
-        description: 'De Ooievaarspas geeft korting op sport, cultuur, contributie, lidmaatschap en entree. De Ooievaarspas is voor inwoners van Den Haag, Leidschendam-Voorburg en Rijswijk, met een inkomen tot maximaal 130% van de bijstandsnorm. '
+        description: 'De Ooievaarspas geeft korting op sport, cultuur, contributie, lidmaatschap en entree. De Ooievaarspas is voor inwoners van Den Haag, Leidschendam-Voorburg en Rijswijk, met een inkomen tot maximaal 130% van de bijstandsnorm. ',
+        id: 1
     },
     {
         title:'Aanvragen Ooievaarspas',
-        description:'Woont u in Den Haag, Leidschendam-Voorburg of Rijswijk en heeft u een laag inkomen? Dan biedt de Ooievaarspas heel veel voordelen. Vraag daarom de Ooievaarspas aan.'
+        description:'Woont u in Den Haag, Leidschendam-Voorburg of Rijswijk en heeft u een laag inkomen? Dan biedt de Ooievaarspas heel veel voordelen. Vraag daarom de Ooievaarspas aan.',
+        id: 1
     },
     {
         title: 'Verloop na aanvraag Ooievaarspas',
-        description:'Nadat u een aanvraag heeft gedaan ontvangt u schriftelijk een ontvangstbevestiging. De gemeente bekijkt binnen 8 weken of u voldoet aan de voorwaarden en stelt vast of u recht heeft op de Ooievaarspas.'
+        description:'Nadat u een aanvraag heeft gedaan ontvangt u schriftelijk een ontvangstbevestiging. De gemeente bekijkt binnen 8 weken of u voldoet aan de voorwaarden en stelt vast of u recht heeft op de Ooievaarspas.',
+        id: 1
+    },
+    {
+        title: 'Computerset',
+        description: 'Om goed te kunnen leren is het belangrijk dat kinderen een computer hebben. Daarmee kunnen zij meedoen op school, spreekbeurten voorbereiden, werkstukken maken en spelletjes spelen',
+        id: 2
+    },
+    {
+        title:'',
+        description:'',
+        id: 2
+    },
+    {
+        title:'',
+        description:'',
+        id: 2
+    },
+    {
+        title:'Aanbieder worden?',
+        description:'Wilt u aanbieder van de Ooievaarspas worden maar niet zeker of u voldoet aan ons aanbiedersprofiel? De voorwaarden kunt u hier vinden.',
+        id: 3
+    },
+    {
+        title:'',
+        description:'',
+        id: 3
+    },
+    {
+        title:'',
+        description:'',
+        id: 3
+    },
+    {
+        title:'',
+        description:'',
+        id: 3
+    },
+    {
+        title:'Nieuwsberichten Ooievaarspas',
+        description:'Wilt u op de meer weten over de laatste nieuwsberichten van onder andere lopende projecten, acties en informatie over aanbieders? Dat kan onze nieuws pagina.',
+        id: 4
+    },
+    {
+        title:'',
+        description:'',
+        id: 4
+    },
+    {
+        title:'',
+        description:'',
+        id: 4
+    },
+    {
+        title:'',
+        description:'',
+        id: 4
+    },
+    {
+        title:'Pinguïn geboren in Sea Life Scheveningen',
+        description:'',
+        id: 5
+    },
+    {
+        title:'',
+        description:'',
+        id: 5
+    },
+    {
+        title:'',
+        description:'',
+        id: 5
+    },
+    {
+        title:'',
+        description:'',
+        id: 5
     }
 ]
 
@@ -193,6 +277,8 @@ let speciale_aanbieding: Types.SpecialAanbieding[] = [
         }
 
     ]
+
+
 let aanbieding: Types.aanbieding[] = [
        {
             title:'Join the Florence club!',
