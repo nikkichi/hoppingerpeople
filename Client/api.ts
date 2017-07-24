@@ -29,6 +29,16 @@ function filterAanbieding(id: number) {
 
 }
 
+export function get_categorienVragen(id: number): Promise<Types.categorienvragen[]>{
+    console.log('get_categorienVragen', categorienVragen.filter((element)=>element.id == id))
+    return new Promise((resolve, reject)=>{
+         resolve(filter(id))
+    })
+}
+
+    
+
+
 export function get_dagtocht(id: number): Promise<Types.Dagtocht[]> {
    console.log('get_dagtocht', dagTochten.filter((element) => element.categoryID == id) )
    
@@ -66,19 +76,16 @@ export function get_ooievaarsPas() : Promise<Types.InformatiePas[]>{
     })
 
 }
-export function get_OverDeOoievaarspas(id: number) : Promise<Types.Uitleg_InformatiePas[]>{
-    //let value = aanbieding.filter((element) => element.id == 1)
-    // return value
-
+export function get_uitleg(title) : Promise<Types.Uitleg_InformatiePas[]>{
     return new Promise((resolve, reject) => {
-        if (OverDeOoievaarspas == undefined )
+        if ('Over Ooievaarspas' == undefined )
             reject("De titel komt niet voor")
-        else {
-            return resolve(OverDeOoievaarspas.filter((element) => element.id == id))
-        }
+        else resolve([{
+                    title: 'Over Ooievaarspas',
+                    description: 'De Ooievaarspas geeft korting op sport, cultuur, contributie, lidmaatschap en entree. De Ooievaarspas is voor inwoners van Den Haag, Leidschendam-Voorburg en Rijswijk, met een inkomen tot maximaal 130% van de bijstandsnorm. '
+                }])
     })
 }
-
 export function get_veelgesteldevragenonderwerp(): Promise<Types.vragen[]> {
    return new Promise((resolve, reject) => {
        if(vragen == undefined)
@@ -147,26 +154,21 @@ let informatiepas: Types.InformatiePas[] = [
        {
             title:'Informatie voor aanbieders',
             description:'Bent u een nieuwe aanbieder van de Ooievaarspas en nog niet helemaal thuis in het verzilveren van kortingen met de Ooievaarspas?',
-            id: 3
+            id: 2 
         },
         {
             title: 'Informatie over Ooievaarsregelingen',
             description:'Bent u al bekend met de Ooievaarsregelingen? Of weet u niet precies hoe u er gebruik van kan maken? Dit en meer leest u hier.',
-            id: 2
+            id: 3
         },
         {
             title: 'Actuele Informatie',
             description:'Op zoek naar contactinformatie of de laatste informatie? Zoals nieuwsberichten, onze interessante Ooievaarsnieuwsbrief of andere leuke nieuwtjes? Lees het hier.',
             id: 4
-        },
-        {
-            title: 'Nieuws',
-            description: '',
-            id: 5
         }
 
     ]
-    let OverDeOoievaarspas: Types.Uitleg_InformatiePas[] = [
+    let Uitleg_InformatiePas: Types.Uitleg_InformatiePas[] = [
     {
         title: 'Over Ooievaarspas',
         description: 'De Ooievaarspas geeft korting op sport, cultuur, contributie, lidmaatschap en entree. De Ooievaarspas is voor inwoners van Den Haag, Leidschendam-Voorburg en Rijswijk, met een inkomen tot maximaal 130% van de bijstandsnorm. ',
@@ -292,6 +294,7 @@ let informatiepas: Types.InformatiePas[] = [
         id: 5,
         text:'',
         Image: ''
+
     }
 ]
 
@@ -318,28 +321,42 @@ let speciale_aanbieding: Types.SpecialAanbieding[] = [
         }
 
     ]
-
-
 let aanbieding: Types.aanbieding[] = [
        {
             title:'Join the Florence club!',
             description:'In teamverband lekker actief zijn, dat kan in de Florence Clubs. Altijd al gedroomd om te kunnen hardlopen of handboogschieten? Dit is nu mogelijk, gezellig in teamverband!',
-            id: 1
+            id: 1,
+            category: 'alle aanbiedingen',
+            activity:  { kind: 'sport', sub: 'badminton' },
+            location: 'centrum',
+            target: 'ouder dan 17 jaar'
         },
        {
             title:'Ontdek je sport met de sportstrippenkaart',
             description:'Woon je in Leidschendam-Voorburg en ben je op zoek naar een nieuwe sport? De sportstrippenkaart helpt je op weg! Hardlopen, volleybal of zwemmen: weet jij niet welke sport bij je past? Dit is je kans! Met de sportstrippenkaart mag je vier sporten uitproberen bij meer dan 30 sportverenigingen in Leidschendam-Voorburg. Gewoon gratis!',
-            id: 2
+            id: 2,
+            category: 'alle aanbiedingen',
+            activity: { kind: 'sport', sub: 'badminton' },
+            location: 'centrum',
+            target: 'alle leeftijden'
         },
         {
             title: 'Gratis online coaching voor Haagse pashouders',
             description:'Wil je gratis hulp bij het afvallen? Neem je je voor om te gaan bewegen, maar komt het er steeds niet van? Heb je plannen om je leefstijl te verbeteren? Wil je graag stoppen met roken of wordt het hoog tijd om je stress te verminderen? Ben je toe aan gezinshulp? Zet dan nu de stap en meld je aan voor een jaar lang gratis online coaching!',
-            id: 3
+            id: 3,
+            category: 'alle aanbiedingen',
+            activity: { kind: 'cultuur', sub: 'toneel' },
+            location: 'centrum',
+            target: 'ouder dan 50 jaar'
         },
         {
             title: 'Ontdek Drievliet met de Ooievaarspas vanaf 1 april',
             description:'Familiepark Drievliet, plezier voor jong en oud. Drievliet is in 2017 aanbieder van de Ooievaarspas en verwelkomt families! Ook heeft Drievliet er twee mooie attracties bij! Durf jij in de sportieve Tijdmachine en de snelle Chute?',
-            id: 4
+            id: 4,
+            category: 'speciale aanbiedingen',
+            activity: { kind: 'cultuur', sub: 'badminton' },
+            location: 'centrum',
+            target: 'alle leeftijden'
         }
 
    ]
@@ -349,7 +366,8 @@ let aanbieding: Types.aanbieding[] = [
        pagina: "Veelgestelde vragen",
        title:" ",
        vraag: " ",
-       antwoord: " "
+       antwoord: " ",
+       id: 0
                 
    },
    {    
@@ -357,22 +375,65 @@ let aanbieding: Types.aanbieding[] = [
        title: "Aanvragen en/of wijzigingen Ooievaarspas",
        vraag: "Ik heb een Ooievaarspas. Hoef ik dan geen verlenging aan te vragen?",
        antwoord:" In principe moet u altijd een aanvraag doen voor verlenging van de Ooievaarspas. Er is een beperkt aantal groepen voor wie de Ooievaarspas automatisch wordt verlengd. Wilt u weten of u hiertoe behoort? Lees dan meer over de voorwaarden voor het aanvragen van een Ooievaarspas.",
-      
+       id: 1
                 
   },
+  {
+      pagina: " ",
+       title: "",
+       vraag: "Wat gebeurt er nadat u een aanvraag voor een Ooievaarspas heeft gedaan?"  ,    
+       antwoord:"Nadat u een aanvraag heeft gedaan ontvangt u schriftelijk een ontvangstbevestiging. De gemeente bekijkt binnen 8 weken of u voldoet aan de voorwaarden en stelt vast of u recht heeft op de Ooievaarspas. Mocht u na 8 weken geen bericht hebben ontvangen, dan kunt u contact opnemen met de klantenservice. ",        
+      id: 1
+
+  },
    {
-       pagina: " ",
+       pagina: "",
        title: "Gebruik Ooievaarspas",
        vraag: "Ik heb een Ooievaarspas, mag ik gratis reizen?"  ,    
        antwoord:"Gratis reizen kan alleen als u inwoner bent van Den Haag en de AOW-gerechtigde leeftijd heeft bereikt, over een persoonlijke OV-chipkaart beschikt en recht heeft op een Ooievaarspas in het huidige kalenderjaar (1 januari tot en met 31 december).",        
-      
+      id : 2
+   },
+   {
+       pagina: "",
+       title: "",
+       vraag: "Ik heb een brief gekregen over het ophalen van het gratis reisproduct, maar het lukt niet?",
+       antwoord: "Neem contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur of stuur een e-mail aan: ooievaarsregelingen@gemeentedenhaag.helptu.nl  ",
+       id : 2
+
    },
    {
        pagina: " ",
        title: "Geblokkeerde Ooievaarspas",
        vraag: "Mijn Ooievaarspas is geblokkeerd. Wat is daarvan de reden?",
        antwoord: "Daar kunnen verschillende redenen voor zijn. Neem daarom contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur. Ooievaarspashouders uit Leidschendam-Voorburg en Rijswijk moeten hiervoor contact opnemen met hun eigen gemeente.",
-      
+      id: 3
+   },
+
+   {
+       pagina: " ",
+       title: "",
+       vraag: "Hoe lang duurt het voordat mijn Ooievaarspas (weer) is geactiveerd?",
+       antwoord: "Als u een aanvraag heeft gedaan en het recht op de Ooievaarspas is vastgesteld, dan wordt uw pas binnen maximaal 15 werkdagen weer geactiveerd.Heeft u geen brief ontvangen? Neem dan contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur.Ooievaarspashouders uit Leidschendam-Voorburg en Rijswijk moeten hiervoor contact opnemen met hun eigen gemeente.",
+      id: 3
+
    }
+]
+
+
+let categorienVragen : Types.categorienvragen[]=[
+    {
+        categorie: "Aanvragen en/of wijzigingen Ooievaarspas",
+        id: 1
+    },
+    {
+       categorie: "Gebruik Ooievaarspas",
+       id: 2
+    },
+    {
+        categorie: "Geblokkeerde Ooievaarspas",
+        id: 3
+
+    }
+
 ]
 

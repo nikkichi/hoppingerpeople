@@ -23,8 +23,8 @@ export type Dagtocht = {
     categoryID: number,
     text: string
 }
-export type Category_Dagtocht={
 
+export type Category_Dagtocht={
     title: string,
     description: string,
     id:number
@@ -41,18 +41,32 @@ export type SpecialAanbieding = {
     description: string, 
     id: number
 }
+
+type ActivityKind = "cultuur" | "sport"
+
+export type Activy = { kind: ActivityKind, sub: string }
+
 export type aanbieding = {
     title: string,
     description: string, 
-    id: number
+    id: number,
+    category: string,
+    activity: Activy,
+    location: string,
+    target: string 
 }
 export type vragen={
+   pagina: string
    vraag: string
    antwoord: string
    title: string
-   pagina: string
-   
-   
+   id: number
+}
+
+export type categorienvragen = {
+    categorie: string
+    id : number
+
 }
 
 export type Uitleg_InformatiePas={
