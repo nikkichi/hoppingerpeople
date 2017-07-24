@@ -8,12 +8,12 @@ import * as Api from './api'
 
 
 let hyperlink = "lees meer"
-let next_page ={ kind: "dagtochtDetailPagina"}
-type DagtochtenComponentProps = { onMovePage: (id: Manager.Page) => void }
+let next_page ={ kind: "DetailDagtocht"}
+type DagtochtenComponentProps = { onMovePage: (id: Manager.Page) => void , id: number}
 type DagtochtenComponentState =
     | {kind: "loading" }
     | {kind: "dagtochtPagina", categories: Types.Category_Dagtocht[], dagtochten: Types.Dagtocht[]}
-    | {kind: "dagtochtDetailPagina", detailDagtocht: Types.Dagtocht} 
+    | {kind: "DetailDagtocht", detailDagtocht: Types.Dagtocht} 
 
 export class DagtochtenComponent extends React.Component<DagtochtenComponentProps, DagtochtenComponentState>{
     constructor(props, context) {
@@ -31,19 +31,19 @@ export class DagtochtenComponent extends React.Component<DagtochtenComponentProp
             .get_categories()
             .then(c => this.setState({...this.state, kind: "dagtochtPagina", categories: c, dagtochten: []}),
                 e => console.log("Error: ", e))
-    }//DONT REMOVE THE "dagtochten: []" part, it makes sure dagtochten is set so it won't crash because it's undefined
-
-    loadDagtochten() {
+    //DONT REMOVE THE "dagtochten: []" part, it makes sure dagtochten is set so it won't crash because it's undefined
+    }
+loadDagtochten(){
 
         Api
-            .get_dagtocht(2)
+            .get_dagtochten(this.props.id)
             .then(d => this.setState({ ...this.state, kind: "dagtochtPagina", dagtochten: d }))
         // .catch(_ => console.log('get dachtocht rejected ') || setTimeout( this.loadDagtochten ,5000))
 
     }
 
     render() {
-        let onclickdagtocht = (event) => this.props.onMovePage({ kind: "DetailDagtocht" })
+        let onclickdagtocht = (id: number, checkPage: number) => this.props.onMovePage({ kind: "DetailDagtocht" , id: id })
         console.log(this.state.kind)
         if (this.state.kind == "dagtochtPagina") {
             let categoryView = function (category: Types.Category_Dagtocht) {
@@ -58,7 +58,7 @@ export class DagtochtenComponent extends React.Component<DagtochtenComponentProp
                 return <div>
                     <h2> {dagtocht.name}</h2>
                     <p> {dagtocht.description}</p>
-                    <button onClick={onclickdagtocht}>
+                    <button onClick={() => onclickdagtocht(dagtocht.categoryID, dagtocht.id)}>
                         {hyperlink}
                     </button>
 
@@ -66,11 +66,33 @@ export class DagtochtenComponent extends React.Component<DagtochtenComponentProp
 
                 </div>
             }
-
-
-            return <div>
-                {this.state.categories.map(category => categoryView(category))
+            
+            function dagtochtOrdenFunc(categories : Types.Category_Dagtocht[], dagtochtenGeordend:Types.Dagtocht[][]){
+                function InnerOrderFunc(y : Types.Dagtocht[]){
+                    return  <div>
+                                {y.map(dagtocht => {
+                                {<p>{dagtocht.name}</p>}
+                                {<p>{dagtocht.description}</p>}
+                                {<p>{dagtocht.prijs}</p>}
+                                {<p>{dagtocht.text}</p>}
+                                })}</div>
                 }
+                return  <div>
+                        
+                            {dagtochtenGeordend.map(listofDagtocht =>
+                                {InnerOrderFunc(listofDagtocht)}
+                                )}
+                        </div>
+            }
+            let x = this.state.categories.map(
+                                category => this.state.kind=="dagtochtPagina" ? this.state.dagtochten.filter(dagtocht =>
+                                        dagtocht.categoryID == category.id) :
+                                        []
+                            )
+            //dit ordend de dagtochten
+            return <div>
+                {dagtochtOrdenFunc(x)}
+                {this.state.categories.map(category => categoryView(category))}
                 <div> {this.state.dagtochten.map(dagtocht => dagtochtView(dagtocht))}</div>
 
 
@@ -78,7 +100,7 @@ export class DagtochtenComponent extends React.Component<DagtochtenComponentProp
 
             </div>
         }
-else if(this.state.kind == "dagtochtDetailPagina"){
+else if(this.state.kind == "DetailDagtocht"){
             let x = localStorage.getItem('favoriteDagtocht') == this.state.detailDagtocht.name
             return  <div>
                         <p>{this.state.detailDagtocht.name}</p><br></br>
@@ -87,7 +109,7 @@ else if(this.state.kind == "dagtochtDetailPagina"){
                         <p>{this.state.detailDagtocht.text}</p><br></br>
                         <p>Deze dagtocht is {x ? "wel" : "niet"} als favoriet gekozen</p>
                         <button onClick={event =>
-                            this.state.kind=="dagtochtDetailPagina" ?
+                            this.state.kind=="DetailDagtocht" ?
                                 localStorage.setItem('favoriteDagtocht', this.state.detailDagtocht.name)
                             :   console.log("There is an error in DagtochtDetailPage")}>Maak favoriet</button>
                     </div>

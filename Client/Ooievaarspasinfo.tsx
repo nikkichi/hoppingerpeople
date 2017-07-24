@@ -41,7 +41,7 @@ let hyperlink = 'lees meer'
  
  
      render() {
-
+  
        if(this.state.kind == "loaded" ){
            let ooievaarspas_View = function(info: Types.InformatiePas){ 
            return   <div>
@@ -51,14 +51,13 @@ let hyperlink = 'lees meer'
                        deze knop is op de juiste plek maar geeft een foutmelding
                      <button onClick={(event) => this.props.onMovePage({kind: "infopas"})}>{hyperlink}</button>
                        
-                    </div>
-                 
+                    </div>   
            }
            
             return <div>
                 deze knop gaat naar next page
                 <button onClick={(event) => this.props.onMovePage({kind: "infopas"})}>{hyperlink}</button>
-                {this.state.value.map(info => ooievaarspas_View(info)}
+                {this.state.value.map(info => ooievaarspas_View(info))}
                 <div>{ooievaarspas_View}</div>
            
           </div>

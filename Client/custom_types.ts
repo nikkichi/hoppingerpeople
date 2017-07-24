@@ -17,11 +17,13 @@ export type AanbiedingState =
     }
 
 export type Dagtocht = {
+    checkPage: number,
     name: string,
     description: string,
     prijs: number,
     categoryID: number,
-    text: string
+    text: string,
+    id:number
 }
 export type Category_Dagtocht={
 
@@ -42,6 +44,7 @@ export type SpecialAanbieding = {
     id: number
 }
 export type aanbieding = {
+    checkPage: number
     title: string,
     description: string, 
     id: number

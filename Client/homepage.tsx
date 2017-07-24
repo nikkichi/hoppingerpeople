@@ -7,7 +7,7 @@ import * as Manager from './pageManager'
 import * as Api from './api'
 
 type HomepageComponentProps = { onMovePage: (id: Manager.Page) => void}
-type HomepageComponentState = { kind: "loading"} | {kind: "loaded", specialeAanbieding: Types.SpecialAanbieding[]}
+type HomepageComponentState = { kind: "loading"} | {kind: "loaded", specialeAanbieding: Types.SpecialAanbieding[], dagtochten: Types.Category_Dagtocht}
 
 let hyperlink = "Lees meer"
 let homepageLink = "Home"
@@ -32,14 +32,14 @@ export class HomepageComponent extends React.Component<HomepageComponentProps, H
     }
 
     render(){
-        let onClickDagtocht = (event) => this.props.onMovePage({ kind: "dagtochtPagina"})
+        let onClickDagtocht = (id) => this.props.onMovePage({ kind: "dagtochtPagina", id: id})
         let onClickAanbieding = (event) => this.props.onMovePage({ kind: "aanbiedingPagina"})
         if (this.state.kind == "loaded") {
             let specialAanbiedingView = function (value: Types.SpecialAanbieding) {
                 return <div>
             <button onClick={(event) => this.props.onMovePage({ kind: "homepage"})}>{homepageLink}</button>
             <button onClick={onClickAanbieding}>{aanbiedingLink}</button>
-            <button onClick={onClickDagtocht}>{dagtochtLink}</button>
+            <button onClick={onClickDagtocht({this.state.kind.})}>{dagtochtLink}</button>
             <button onClick={(event) => this.props.onMovePage({ kind: "homepage"})}>{ooievaarLink}</button>
             <button onClick={(event) => this.props.onMovePage({ kind: "homepage"})}>{vragenLink}</button>
             <h1> Homepage</h1>

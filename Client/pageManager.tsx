@@ -18,14 +18,13 @@ type PageManagerComponentProps = {}
 type PageManagerComponentState = { current_page: Page }
 
 export type Page = { kind:"homepage"} | 
-                   { kind:"dagtochtPagina" } | 
+                   { kind:"dagtochtPagina" , id: number} | 
                    { kind:"aanbiedingPagina"} | 
                    {kind: "ooievaarspasPagina"} | 
                    {kind: "veelgesteldeVragenPagina"} | 
                    {kind: "infopas"}|
-                   {kind: "DetailDagtocht"}|
-                   {kind: "DetailAanbieding"}
-
+                   {kind: "DetailDagtocht", id: number }|
+                   {kind: "DetailAanbieding", id: number}
                    
 
 export class PageManagerComponent extends React.Component<PageManagerComponentProps, PageManagerComponentState>{
@@ -42,7 +41,7 @@ console.log('PAGEMANAGER', this.state.current_page.kind)
         case "homepage":
             return <div><Homepage.HomepageComponent onMovePage={(next_page) => this.moveToPage(next_page)}  />     </div>
         case "dagtochtPagina":
-            return <div><Dagtochten.DagtochtenComponent onMovePage={(next_page) => this.moveToPage(next_page)} /> </div>
+            return <div><Dagtochten.DagtochtenComponent onMovePage={(next_page) => this.moveToPage(next_page)} id= {this.state.current_page.id} /> </div>
         case "aanbiedingPagina":
             return <div><Aanbieding.AanbiedingenComponent onMovePage={(next_page) => this.moveToPage(next_page)}/></div>
         case "veelgesteldeVragenPagina": 
@@ -50,9 +49,9 @@ console.log('PAGEMANAGER', this.state.current_page.kind)
         case "infopas": 
                 return<div><InfoPas.InfoPasComponent onMovePage={(next_page) => this.moveToPage(next_page)}/></div>
         case "DetailDagtocht": 
-                return<div><detailPagina.InforComponent/></div>
+                return<div><detailPagina.InforComponent id= {this.state.current_page.id} /></div>
         case "DetailAanbieding":
-           return<div><detailPagina.InforComponent/></div>
+           return<div><detailPagina.InforComponent id={this.state.current_page.id} /></div>
 
     }}
 

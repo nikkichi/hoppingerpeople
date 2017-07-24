@@ -7,20 +7,19 @@ import * as Types from './custom_types'
 
 let hyperlink = "lees meer "
 
-type AanbiedingenComponentProps = {onMovePage: (id: Manager.Page) => void}
+type AanbiedingenComponentProps = { onMovePage: (id: Manager.Page) => void }
 type AanbiedingenComponentState = { kind: "loading" } |
     { kind: "aanbiedingPagina", aanbieding: Types.aanbieding[] }
 
 //main component voor aanbiedingen pagina
-export class AanbiedingenComponent extends React.Component<AanbiedingenComponentProps, AanbiedingenComponentState> 
+export class AanbiedingenComponent extends React.Component<AanbiedingenComponentProps, AanbiedingenComponentState>
 {
-    constructor(props: AanbiedingenComponentProps, context)
-    {
+    constructor(props: AanbiedingenComponentProps, context) {
         super(props, context)
-        this.state = {kind: "loading"}
-    } 
+        this.state = { kind: "loading" }
+    }
 
-      componentWillMount() {
+    componentWillMount() {
 
         console.log('component will mount')
         this.loadAanbieding();
@@ -33,37 +32,33 @@ export class AanbiedingenComponent extends React.Component<AanbiedingenComponent
             .then(c => this.setState({ ...this.state, kind: "aanbiedingPagina", aanbieding: c }))
         //.catch(_ => this.loadCategories())
     }
+
     render() {
-        let onclickAanbieding= (event) => this.props.onMovePage({ kind: "DetailAanbieding" })
+        let onclickAanbieding = (id: number) => this.props.onMovePage({ kind: "DetailAanbieding", id: id})
         console.log(this.state.kind)
         if (this.state.kind == "aanbiedingPagina") {
-   
-            
-    let AanbiedingView = function (aanbieding: Types.aanbieding) {
+
+
+            let AanbiedingView = function (aanbieding: Types.aanbieding) {
                 return <div>
                     <h2> {aanbieding.title}</h2>
                     <br></br>
                     <p> {aanbieding.description}</p>
                     <br></br>
-                      <button onClick={onclickAanbieding}>
+                    <button onClick={() => onclickAanbieding(aanbieding.id)}>
                         {hyperlink}
                     </button>
 
-   </div>   
-            
-        }
-                return <div>
+                </div>
+
+            }
+            return <div>
                 {this.state.aanbieding.map(aanbieding => AanbiedingView(aanbieding))
                 }
-               
+
             </div>
-               
-
-
-
-
-           
         }
+
         else {
             return <div> Else</div>
             // return <div> Dachtochten {this.state.dagtochten.map((element,key) => <div> {key} </div>)}</div>
