@@ -22,7 +22,7 @@ export type Page = { kind:"homepage"} |
                    { kind:"aanbiedingPagina"} | 
                    {kind: "ooievaarspasPagina"} | 
                    {kind: "veelgesteldeVragenPagina"} | 
-                   {kind: "infopas"}|
+                   {kind: "infopas", id:number}|
                    {kind: "DetailDagtocht"}|
                    {kind: "DetailAanbieding"}
 
@@ -37,7 +37,7 @@ export class PageManagerComponent extends React.Component<PageManagerComponentPr
 
     render() {
         console.log('PAGEMANAGER', this.state.current_page.kind)
-        function PageContent(thisRef) {
+        function PageContent(thisRef: PageManagerComponent) {
             switch (thisRef.state.current_page.kind) {
                 case "homepage":
                     return <div><Homepage.HomepageComponent onMovePage={(next_page) => thisRef.moveToPage(next_page)}/></div>
@@ -48,7 +48,7 @@ export class PageManagerComponent extends React.Component<PageManagerComponentPr
                 case "veelgesteldeVragenPagina": 
                     return<div>< veelgesteldeVragen.veelgesteldevragenComponent onMovePage={(next_page) => thisRef.moveToPage(next_page)}/> </div>   
                 case "infopas": 
-                    return<div><InfoPas.InfoPasComponent onMovePage={(next_page) => thisRef.moveToPage(next_page)}/></div>
+                    return<div><InfoPas.InfoPasComponent onMovePage={(next_page) => thisRef.moveToPage(next_page)} id= {thisRef.state.current_page.id}/></div>
                 case "DetailDagtocht": 
                     return<div><detailPagina.InforComponent/></div>
                 case "DetailAanbieding":

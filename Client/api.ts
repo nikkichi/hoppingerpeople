@@ -66,11 +66,16 @@ export function get_ooievaarsPas() : Promise<Types.InformatiePas[]>{
     })
 
 }
-export function get_OverDeOoievaarspas() : Promise<Types.Uitleg_InformatiePas[]>{
+export function get_OverDeOoievaarspas(id: number) : Promise<Types.Uitleg_InformatiePas[]>{
+    //let value = aanbieding.filter((element) => element.id == 1)
+    // return value
+
     return new Promise((resolve, reject) => {
         if (OverDeOoievaarspas == undefined )
             reject("De titel komt niet voor")
-        else resolve(OverDeOoievaarspas)
+        else {
+            return resolve(OverDeOoievaarspas.filter((element) => element.id == id))
+        }
     })
 }
 

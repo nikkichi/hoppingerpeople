@@ -9,7 +9,7 @@ import * as Api from './api'
 import * as Manager from './pageManager'
 import * as Ooievaarspasinfo from './Ooievaarspasinfo'
 
-type InfoPasComponentProps = {onMovePage: (id: Manager.Page) => void}
+type InfoPasComponentProps = {onMovePage: (id: Manager.Page) => void, id: number}
 type InfoPasComponentState = { kind: "loading"} 
                             | {kind:"loaded", Uitleginformatie: Types.Uitleg_InformatiePas[]}
 
@@ -20,9 +20,9 @@ export class InfoPasComponent extends React.Component<InfoPasComponentProps, Inf
     }
 
     loadUitleg(){
-        Api.get_OverDeOoievaarspas()
+        Api.get_OverDeOoievaarspas(this.props.id)
         .then(u => this.setState({...this.state, kind: 'loaded', Uitleginformatie: u}))
-        .catch(u=> console.log(u))//this.loadUitleg())
+        .catch(u=> console.log("error"))//this.loadUitleg())
         console.log('test')
 
     }
