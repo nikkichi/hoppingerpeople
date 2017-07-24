@@ -68,20 +68,26 @@ loadDagtochten(){
             }
             
             function dagtochtOrdenFunc(categories : Types.Category_Dagtocht[], dagtochtenGeordend:Types.Dagtocht[][]){
-                function InnerOrderFunc(y : Types.Dagtocht[]){
+                function dagtochtFormatFunc(a:Types.Dagtocht){
                     return  <div>
-                                {y.map(dagtocht => {
-                                {<p>{dagtocht.name}</p>}
-                                {<p>{dagtocht.description}</p>}
-                                {<p>{dagtocht.prijs}</p>}
-                                {<p>{dagtocht.text}</p>}
-                                })}</div>
+                                {a.name}
+                                {a.prijs}
+                                {a.description}
+                                {a.text}
+                            </div>
+                }
+                function SuperSpecificFunc(a : Types.Category_Dagtocht[], dagtochtLijst : Types.Dagtocht[]){
+                    return <div>{a.map(category =>
+                            <div>
+                                {category.title}
+                                {category.description}
+                                {dagtochtLijst.map(dagtocht =>
+                                dagtochtFormatFunc(dagtocht))}
+                            </div>}</div>
                 }
                 return  <div>
-                        
                             {dagtochtenGeordend.map(listofDagtocht =>
-                                {InnerOrderFunc(listofDagtocht)}
-                                )}
+                            {SuperSpecificFunc(categories, listofDagtocht)}
                         </div>
             }
             let x = this.state.categories.map(
