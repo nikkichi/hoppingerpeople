@@ -16,19 +16,7 @@ export type AanbiedingState =
         // is_expanded: boolean
     }
 
-export type Dagtocht = {
-    name: string,
-    description: string,
-    prijs: number,
-    categoryID: number,
-    text: string
-}
 
-export type Category_Dagtocht={
-    title: string,
-    description: string,
-    id:number
-}
 
 export type InformatiePas = {
     title: string, 
@@ -71,5 +59,22 @@ export type categorienvragen = {
 
 export type Uitleg_InformatiePas={
     title: string,
-    description: string
+    description: string,
+    id: number,
+    text: string,
+    Image: ''
+}
+export type Dagtocht = {
+    name: string,
+    description: string,
+    prijs: number,
+    categoryID: number,
+    text: string,
+    id:number
+}
+export type Category_Dagtocht={
+
+    title: string,
+    description: string,
+    id:number
 }

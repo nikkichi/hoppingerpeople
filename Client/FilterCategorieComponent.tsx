@@ -14,6 +14,10 @@ export class FilterCategorieComponent extends React.Component<FilterCategorieCom
         this.state = { kind: 'loading' }
     } 
 
+    componentWillAmount(){
+        this.load_aanbiedingen()
+    }
+
     load_aanbiedingen(){
         Api.get_aanbiedingen()
         .catch( a => this.setState({... this.state, kind: 'loaded', aanbiedingen: a}))
@@ -31,17 +35,18 @@ export class FilterCategorieComponent extends React.Component<FilterCategorieCom
                     if (accumulator.includes(value)) return accumulator
                     else return accumulator.push(value)
             }, Immutable.List())
-                    console.log()
-        }
 
-        return <div>
-            Categorie<br/>
-            <select>
-                <option selected hidden>Maak uw keuze: </option> 
-                <option value="Alle aanbiedingen">{}</option>
-                <option value="Speciale aanbiedingen">Speciale aanbiedingen</option> {/* //nog components toevoegen met een sum van alle aanbiedingen en speciale aanbiedingen */}
-                        {/*/ voeg onClick toe na de value="" */}
-            </select>
-        </div>
+        let stringToOption = (x: string) => <option value={x}>{x}</option>
+
+            return <div>
+                Categorie<br/>
+                
+                <select>
+                    <option selected hidden>Maak uw keuze: </option> 
+                    {categories.map(stringToOption)}
+                </select>
+            </div>
+        }
+        else <div>else</div>
     }
 }

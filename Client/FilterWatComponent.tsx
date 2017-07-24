@@ -5,66 +5,52 @@ import * as List from './containers/list'
 import * as Types from './custom_types'
 import * as Manager from './pageManager'
 import * as Api from './api'
-
 type FilterWatComponentProps = { }
 type FilterWatComponentState = { kind: 'loading' } | { kind: 'loaded', activityKind: string, aanbiedingen: Types.aanbieding[] } 
-
 export class FilterWatComponent extends React.Component<FilterWatComponentProps, FilterWatComponentState>{
     constructor(props, context) {
         super(props, context)
         this.state = { kind: 'loading'}
     }
-
-
     componentWillMount(){
     }    
-
     load_aanbiedingen(){
         Api.get_aanbiedingen()
         .then(a => this.setState({...this.state, kind: "loaded", aanbiedingen: a}))
         .catch(_ => this.load_aanbiedingen())
     }
-
    render() {
-
         if (this.state.kind == "loaded")
         {
+            let activityKind = this.state.activityKind
             let activityStrings = 
                 Immutable.List(this.state.aanbiedingen)
                 .map((aanbieding) => aanbieding.activity)
-                .filter((activity) => activity.kind == this.state.)
+                .filter((activity) => activity.kind == activityKind)
                 .map((activity) => activity.sub)
                 .reduce((accumulator, value) => {
                     if (accumulator.includes(value)) return accumulator
                     else return accumulator.push(value)
-            }, Immutable.List())
+            }, Immutable.List<string>())
                     
-
-        return <ul></ul>
+        return <div>
+            Wat?<br/>
+            <select>
+                <option selected hidden>Alle activiteiten </option>
+                <option value="cultuur">Cultuur</option>
+                { activityStrings.map((x)=> <option value={x}>{x}</option>)}
+            </select>
+        </div>
         }
-
-       
-
-        // return <div>
-        //     Wat?<br/>
-        //     <select>
-        //         <option selected hidden>Alle activiteiten </option>
-        //         <option value="cultuur">Cultuur</option>
-        //         <option value="sport">Sport</option>
-        //     </select>
-        // </div>
    }
 }
-
 type CheckboxCultuurProps = {}
 type CheckboxCultuurState = {}
-
 export class CheckboxCultuur extends React.Component<CheckboxCultuurProps, CheckboxCultuurState>{
     constructor(props, context){
         super(props, context)
         this.state = {} 
     }
-
     render(){
                
         return <div>
@@ -97,17 +83,13 @@ export class CheckboxCultuur extends React.Component<CheckboxCultuurProps, Check
         //     </div>
     }
 }
-
-
 type CheckboxSportProps = {}
 type CheckboxSportState = {}
-
 export class CheckboxSport extends React.Component<CheckboxSportProps, CheckboxSportState>{
     constructor(props, context){
         super(props, context)
         this.state = {} 
     }
-
     render(){
         return <div>
                     <input name="badminton" type="checkbox"/> Badminton

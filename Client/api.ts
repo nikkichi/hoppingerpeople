@@ -17,51 +17,48 @@ export function get_specialaanbieding() : Promise<Types.SpecialAanbieding[]>{
 }
 
 function filter(id: number) {
-   
-    let value = dagTochten.filter((element) => element.categoryID == 1)
+
+   let value = dagTochten.filter((element) => element.categoryID == id)
     return value
 
 }
 function filterAanbieding(id: number) {
-   
-    let value = aanbieding.filter((element) => element.id == 1)
+
+   let value = aanbieding.filter((element) => element.id == id)
+    return value
+
+}
+function filterDagtocht(id: number) {
+
+   let value = dagTochten.filter((element) => element.categoryID == id)
     return value
 
 }
 
-export function get_categorienVragen(id: number): Promise<Types.categorienvragen[]>{
-    console.log('get_categorienVragen', categorienVragen.filter((element)=>element.id == id))
-    return new Promise((resolve, reject)=>{
-         resolve(filter(id))
+export function get_dagtochten(id: number): Promise<Types.Dagtocht[]> {
+    console.log('get_dagtocht', dagTochten.filter((element) => element.categoryID == id))
+
+   return new Promise((resolve, reject) => {
+        resolve(filter(id))
     })
 }
-
-    
-
-
 export function get_dagtocht(id: number): Promise<Types.Dagtocht[]> {
-   console.log('get_dagtocht', dagTochten.filter((element) => element.categoryID == id) )
-   
-    return new Promise((resolve, reject) => {
-        // resolve(dagTochten)
+    console.log('get_dagtocht', dagTochten.filter((element) => element.categoryID == id))
 
-        // if (dagTochten[categoryID] == undefined)
-        //     reject("Id is not in array in dagtocht")
-        // else
-        
-           resolve(filter(id))
+   return new Promise((resolve, reject) => {
+        resolve(filterDagtocht(id))
     })
 }
 export function get_aanbiedingen(): Promise<Types.aanbieding[]> {
     return new Promise((resolve, reject) => {
         console.log("aanbiedingen", aanbieding)
-         resolve(aanbieding)
+        resolve(aanbieding)
     })
 }
-export function get_aanbieding(): Promise<Types.aanbieding[]> {
+export function get_aanbieding(id: number): Promise<Types.aanbieding[]> {
     return new Promise((resolve, reject) => {
         console.log("aanbiedingen", aanbieding)
-         resolve(filterAanbieding(1))
+        resolve(filterAanbieding(id))
     })
 }
 
@@ -76,16 +73,19 @@ export function get_ooievaarsPas() : Promise<Types.InformatiePas[]>{
     })
 
 }
-export function get_uitleg(title) : Promise<Types.Uitleg_InformatiePas[]>{
+export function get_OverDeOoievaarspas(id: number) : Promise<Types.Uitleg_InformatiePas[]>{
+    //let value = aanbieding.filter((element) => element.id == 1)
+    // return value
+
     return new Promise((resolve, reject) => {
-        if ('Over Ooievaarspas' == undefined )
+        if (OverDeOoievaarspas == undefined )
             reject("De titel komt niet voor")
-        else resolve([{
-                    title: 'Over Ooievaarspas',
-                    description: 'De Ooievaarspas geeft korting op sport, cultuur, contributie, lidmaatschap en entree. De Ooievaarspas is voor inwoners van Den Haag, Leidschendam-Voorburg en Rijswijk, met een inkomen tot maximaal 130% van de bijstandsnorm. '
-                }])
+        else {
+            return resolve(OverDeOoievaarspas.filter((element) => element.id == id))
+        }
     })
 }
+
 export function get_veelgesteldevragenonderwerp(): Promise<Types.vragen[]> {
    return new Promise((resolve, reject) => {
        if(vragen == undefined)
@@ -100,12 +100,14 @@ let dagTochten: Types.Dagtocht[] = [
         description: "Zin om er deze zomer een dagje op uit te gaan? Met uw Ooievaarspas kunt u deelnemen aan een...",
         prijs: 25,
         categoryID: 0,
+        id: 1,
         text: "Ga mee naar het meest geliefde pretpark van Nederland: de Efteling. U gaat toch ook mee naar het meest geliefde pretpark van Nederland? De Efteling is een themapark geschikt voor alle leeftijden. U zult u hier absoluut niet vervelen; jong, oud, man of vrouw - voor iedereen is er entertainment."
     },
     {
         name: "Dagtocht voor senioren met Brouwer Travel: Op stap in ",
         description: "Bent u 50 jaar of ouder en heeft u zin om er deze zomer een dagje op uit te gaan? Met uw...",
         prijs: 25,
+        id:1,
         categoryID: 1,
         text: ""
     },
@@ -114,6 +116,7 @@ let dagTochten: Types.Dagtocht[] = [
         description: "Ook als u aangepast vervoer nodig heeft kunt u mee op zomerdagtocht! De activiteit is...",
         prijs: 25,
         categoryID: 2,
+        id: 1,
         text: ""
     },
         {
@@ -121,6 +124,7 @@ let dagTochten: Types.Dagtocht[] = [
         description: "Ook als u aangepast vervoer nodig heeft kunt u mee op zomerdagtocht! De activiteit is...",
         prijs: 25,
         categoryID: 1,
+        id: 1,
         text: ""
     }
 ]
@@ -165,15 +169,11 @@ let informatiepas: Types.InformatiePas[] = [
             title: 'Actuele Informatie',
             description:'Op zoek naar contactinformatie of de laatste informatie? Zoals nieuwsberichten, onze interessante Ooievaarsnieuwsbrief of andere leuke nieuwtjes? Lees het hier.',
             id: 4
-        }
+        },
+
 
     ]
-    let Uitleg_InformatiePas: Types.Uitleg_InformatiePas[] = [
-    {
-        title: 'Over Ooievaarspas',
-        description: 'De Ooievaarspas geeft korting op sport, cultuur, contributie, lidmaatschap en entree. De Ooievaarspas is voor inwoners van Den Haag, Leidschendam-Voorburg en Rijswijk, met een inkomen tot maximaal 130% van de bijstandsnorm. '
-    }
-]
+
 
 let speciale_aanbieding: Types.SpecialAanbieding[] = [
        { 
@@ -311,4 +311,132 @@ let categorienVragen : Types.categorienvragen[]=[
 
     }
 
+]
+let OverDeOoievaarspas: Types.Uitleg_InformatiePas[] = [
+    {
+        title: 'Over Ooievaarspas',
+        description: 'De Ooievaarspas geeft korting op sport, cultuur, contributie, lidmaatschap en entree. De Ooievaarspas is voor inwoners van Den Haag, Leidschendam-Voorburg en Rijswijk, met een inkomen tot maximaal 130% van de bijstandsnorm. ',
+        id: 1,
+        text:'',
+        Image: ''
+    },
+    {
+        title:'Aanvragen Ooievaarspas',
+        description:'Woont u in Den Haag, Leidschendam-Voorburg of Rijswijk en heeft u een laag inkomen? Dan biedt de Ooievaarspas heel veel voordelen. Vraag daarom de Ooievaarspas aan.',
+        id: 1,
+        text:'',
+        Image: ''
+    },
+    {
+        title: 'Verloop na aanvraag Ooievaarspas',
+        description:'Nadat u een aanvraag heeft gedaan ontvangt u schriftelijk een ontvangstbevestiging. De gemeente bekijkt binnen 8 weken of u voldoet aan de voorwaarden en stelt vast of u recht heeft op de Ooievaarspas.',
+        id: 1,
+        text:'',
+        Image: ''
+    },
+    {
+        title: 'Computerset',
+        description: 'Om goed te kunnen leren is het belangrijk dat kinderen een computer hebben. Daarmee kunnen zij meedoen op school, spreekbeurten voorbereiden, werkstukken maken en spelletjes spelen',
+        id: 2,
+        text:'Heeft uw kind een Haagse Ooievaarspas? En is uw kind 6 jaar of ouder, maar nog geen 18 jaar? Zo ja, dan kan uw kind mogelijk in aanmerking komen voor een computerset van Stichting Leergeld Den Haag. De computers zijn zo ingericht dat deze vooral bruikbaar zijn voor schoolwerk.',
+        Image: ''
+    },
+    {
+        title:'Fiets',
+        description:'',
+        id: 2,
+        text:'Als u een minimuminkomen heeft en uw kind is 10 jaar of ouder, maar nog geen 18 jaar, dan kunt u via Stichting Leergeld Den Haag een aanvraag voor een nieuwe fiets indienen. Voor een nieuwe fiets betaalt u een eigen bijdrage van € 25,-. Gaat deze fiets kapot? Dan komt de fiets mogelijk éénmalig in aanmerking voor reparatie. Meer informatie? Kijk op www.denhaag.nl/ooievaarsregelingen',
+        Image: ''
+    },
+    {
+        title:'',
+        description:'',
+        id: 2,
+        text:'',
+        Image: ''
+    },
+    {
+        title:'Aanbieder worden?',
+        description:'Wilt u aanbieder van de Ooievaarspas worden maar niet zeker of u voldoet aan ons aanbiedersprofiel? De voorwaarden kunt u hier vinden.',
+        id: 3,
+        text:'Iedereen moet mee kunnen doen in de samenleving. Ook mensen voor wie dat moeilijk is, zoals mensen met een minimum inkomen. De gemeente biedt die mensen met een laag inkomen graag de mogelijkheid om met korting lid te worden van een sport of culturele vereniging of instelling. Ook kunnen tentoonstellingen en evenementen worden bezocht. Dat kan allemaal met de Ooievaarspas.',
+        Image: ''
+    },
+    {
+        title:'Doel en Voorwaarden',
+        description:'Bent u gevestigd in Den Haag, Leidschendam-Voorburg of Rijswijk en wilt u een aanbod doen tegen gereduceerd tarief? Lees onze doel en de belangrijkste voorwaarden om aanbieder te kunnen worden.',
+        id: 3,
+        text:'Het doel van de Ooievaarspas is er voor te zorgen dat iedereen mee moet kunnen doen in de samenleving. Ook mensen met een minimum inkomen voor wie dat moeilijk is. De gemeente biedt die mensen met een laag inkomen graag de mogelijkheid om met korting lid te worden van een sport, culture en/of recreatieve vereniging of organisatie. Dit gebeurt langs twee lijnen: 1. Door financiële drempels, die mensen met een minimuminkomen ervan weerhouden aan maatschappelijke activiteiten deel te nemen, weg te nemen dan wel te verlagen; 2. Door Ooievaarspas houders actief te stimuleren gebruik te maken van het aanbod van de Ooievaarspas.',
+        Image: ''
+    },
+    {
+        title:'',
+        description:'',
+        id: 3,
+        text:'',
+        Image: ''
+    },
+    {
+        title:'',
+        description:'',
+        id: 3,
+        text:'',
+        Image: ''
+    },
+    {
+        title:'Nieuwsberichten Ooievaarspas',
+        description:'Wilt u op de meer weten over de laatste nieuwsberichten van onder andere lopende projecten, acties en informatie over aanbieders? Dat kan onze nieuws pagina.',
+        id: 4,
+        text:'',
+        Image: ''
+    },
+    {
+        title:'Aanmelden Ooievaarsnieuwsbrief',
+        description:'Wilt u op de meer weten over de laatste nieuwsberichten van onder andere lopende projecten, acties en informatie over aanbieders? Dat kan onze nieuws pagina.',
+        id: 4,
+        text:'Onze nieuwsbrieven staan altijd boordevol nieuws zoals nieuwe aanbieders, leuke aanbiedingen, (gratis) evenementen en dagtochten. Ook lees je meer over verschillende regelingen zoals pedicurebonnen, maaltijdvoorzieningen en de digitale wereld voor senioren. Onze eerdere nieuwsbrieven vind je hier. Meld je hieronder aan en blijf altijd als eerste op de hoogte van het laatste Ooievaarsnieuws. Veel leesplezier!',
+        Image: ''
+    },
+    {
+        title:'',
+        description:'',
+        id: 4,
+        text:'',
+        Image: ''
+    },
+    {
+        title:'',
+        description:'',
+        id: 4,
+        text:'',
+        Image: ''
+    },
+    {
+        title:'Pinguïn geboren in Sea Life Scheveningen',
+        description:'Onze nieuwsbrieven staan altijd boordevol nieuws zoals nieuwe aanbieders, leuke aanbiedingen, (gratis) evenementen en dagtochten. Ook lees je meer over verschillende regelingen zoals pedicurebonnen, maaltijdvoorzieningen en de digitale wereld voor senioren. Onze eerdere nieuwsbrieven vind je hier. Meld je hieronder aan en blijf altijd als eerste op de hoogte van het laatste Ooievaarsnieuws. Veel leesplezier!',
+        id: 5,
+        text:'Na ruim 30 dagen is het dan zover – een Humboldt pinguïnkuiken is uit het ei gekropen. De gelukkige ouders zijn de 8 jarige pinguïn Janneke en vader Jip. Het is het allereerste kuiken dat we in Sea  Life Scheveningen mogen verwelkomen.',
+        Image: ''
+    },
+    {
+        title:'',
+        description:'',
+        id: 5,
+        text:'',
+        Image: ''
+    },
+    {
+        title:'',
+        description:'',
+        id: 5,
+        text:'',
+        Image: ''
+    },
+    {
+        title:'',
+        description:'',
+        id: 5,
+        text:'',
+        Image: ''
+    }
 ]

@@ -9,25 +9,27 @@ import * as detailPagina from './InfoComponent'
 import * as Ooievaarspasinfo from './Ooievaarspasinfo'
 import * as Homepage from './homepage'
 import * as InfoPas from './InfoPas'
-
 import * as Aanbieding from './Aanbiedingen'
 import * as veelgesteldeVragen from './veelgesteldevragen'
 import * as DetailPage from './InfoComponent'
 import Header from './Header'
 import * as Manager from './pageManager'
+import * as InformatieDetail from './InformatieDetail'
 
 //type dagtocht = [page1: "/Dagtochten", page2: "/Dagtochten/detailPagina"]
 type PageManagerComponentProps = {}
 type PageManagerComponentState = { current_page: Page }
 
 //export type Page = { kind:"dagtocht" , id:number } | { kind:"DagtochtPagina" } | { kind:"contact us", person:string }
-export type Page =
-    | {kind:"dagtocht" , id:number }
-    | {kind:"DagtochtPagina" }
-    | {kind:"contact us", person:string}
-    | {kind: "ooievaarspas", id:number}
-    | {kind: "homepage", id: number}
-    | {kind: "infopas"}
+export type Page = { kind:"homepage"} |
+                   { kind:"dagtochtPagina" , id: number} |
+                   { kind:"aanbiedingPagina"} |
+                   {kind: "ooievaarspasPagina"} |
+                   {kind: "veelgesteldeVragenPagina"} |
+                   {kind: "infopas", id:number}|
+                   {kind: "DetailDagtocht", id: number }|
+                   {kind: "DetailAanbieding", id: number} |
+                   {kind: "InformatieDetail", id: number}
 
 export class PageManagerComponent extends React.Component<PageManagerComponentProps, PageManagerComponentState>{
  
@@ -44,32 +46,38 @@ let menubar = <div> <Header onMovePage={(next_page) => this.moveToPage(next_page
         
         case "homepage":
             return <div>{menubar}<Homepage.HomepageComponent onMovePage={(next_page) => this.moveToPage(next_page)}  />  </div>
-        case "dagtochtPagina":
-            return <div>{menubar}<Dagtochten.DagtochtenComponent onMovePage={(next_page) => this.moveToPage(next_page)} /> </div> 
+       case "dagtochtPagina":
+            
+		return <div>{menubar}<Dagtochten.DagtochtenComponent onMovePage={(next_page) => this.moveToPage(next_page)} id= {this.state.current_page.id} /> </div>
         case "aanbiedingPagina":
             return <div>{menubar}<Aanbieding.AanbiedingenComponent onMovePage={(next_page) => this.moveToPage(next_page)}/> </div> 
         case "veelgesteldeVragenPagina": 
                 return<div>{menubar}< veelgesteldeVragen.veelgesteldevragenComponent onMovePage={(next_page) => this.moveToPage(next_page)}/></div>   
         case "infopas": 
-                return<div>{menubar}<InfoPas.InfoPasComponent onMovePage={(next_page) => this.moveToPage(next_page)}/></div>
-        case "DetailDagtocht": 
-                return<div>{menubar}<detailPagina.InforComponent/></div>
+                    return<div>{menubar}<InfoPas.InfoPasComponent onMovePage={(next_page) => this.moveToPage(next_page)} id= {this.state.current_page.id}/></div>
+        case "DetailDagtocht":
+                return<div>{menubar}<detailPagina.InforComponent id= {this.state.current_page.id} /></div>
         case "DetailAanbieding":
-           return<div>{menubar}<detailPagina.InforComponent/></div>
+           return<div>{menubar}<detailPagina.InforComponent id={this.state.current_page.id} /></div>
         case "ooievaarspasPagina":
             return <div>{menubar}<Ooievaarspasinfo.OoievaarsPasComponent onMovePage={(next_page) => this.moveToPage(next_page)}  /> </div>  
+        case "InformatieDetail": 
+                    return<div>{menubar}<InformatieDetail.InformatieDetailComponent onMovePage={(next_page) => this.moveToPage(next_page)} id= {this.state.current_page.id}/></div>
+
 
     }}
-        function Footer(){
-            return  <footer>
-                        <button onClick={event => location.reload()}>Ga naar Homepagina</button>
-                    </footer>
-        }
-        return  <div>
-                    {PageContent(this)}
-                    {Footer()}
-                </div>
-    }
+
+    
+    //     function Footer(){
+    //         return  <footer>
+    //                     <button onClick={event => location.reload()}>Ga naar Homepagina</button>
+    //                 </footer>
+    //     }
+    //     return  <div>
+    //                 {PageContent(this)}
+    //                 {Footer()}
+    //             </div>
+    // }
 
     moveToPage(next_page: Page) {
         console.log("move to page")
