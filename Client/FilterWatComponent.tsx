@@ -7,7 +7,7 @@ import * as Manager from './pageManager'
 import * as Api from './api'
 
 type FilterWatComponentProps = { }
-type FilterWatComponentState = { kind: 'loading' } | { kind: 'loaded', aanbiedingen: Types.aanbieding[] }
+type FilterWatComponentState = { kind: 'loading' } | { kind: 'loaded', activityKind: string, aanbiedingen: Types.aanbieding[] } 
 
 export class FilterWatComponent extends React.Component<FilterWatComponentProps, FilterWatComponentState>{
     constructor(props, context) {
@@ -31,7 +31,14 @@ export class FilterWatComponent extends React.Component<FilterWatComponentProps,
         {
             let activityStrings = 
                 Immutable.List(this.state.aanbiedingen)
-                
+                .map((aanbieding) => aanbieding.activity)
+                .filter((activity) => activity.kind == this.state.)
+                .map((activity) => activity.sub)
+                .reduce((accumulator, value) => {
+                    if (accumulator.includes(value)) return accumulator
+                    else return accumulator.push(value)
+            }, Immutable.List())
+                    
 
         return <ul></ul>
         }
