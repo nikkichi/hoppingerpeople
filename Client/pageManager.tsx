@@ -24,7 +24,7 @@ export type Page = { kind:"homepage"} |
                    { kind:"aanbiedingPagina"} | 
                    {kind: "ooievaarspasPagina"} | 
                    {kind: "veelgesteldeVragenPagina"} | 
-                   {kind: "infopas"}|
+                   {kind: "infopas", id:number}|
                    {kind: "DetailDagtocht"}|
                    {kind: "DetailAanbieding"}
 
@@ -60,7 +60,16 @@ let menubar = <div> <Header onMovePage={(next_page) => this.moveToPage(next_page
             return <div>{menubar}<Ooievaarspasinfo.OoievaarsPasComponent onMovePage={(next_page) => this.moveToPage(next_page)}  /> </div>  
 
     }}
-
+        function Footer(){
+            return  <footer>
+                        <button onClick={event => location.reload()}>Ga naar Homepagina</button>
+                    </footer>
+        }
+        return  <div>
+                    {PageContent(this)}
+                    {Footer()}
+                </div>
+    }
     moveToPage(next_page: Page) {
         console.log("move to page")
         this.setState({ ...this.state, current_page: next_page })
