@@ -25,7 +25,7 @@ export class HomepageComponent extends React.Component<HomepageComponentProps, H
 
     componentWillMount(){
         this.loadSpecialeAanbiedingen()
-    } 
+    }
 
     loadSpecialeAanbiedingen() {
         Api.get_specialaanbieding().then(a => this.setState({...this.state, kind: "loaded", specialeAanbieding: a}))
@@ -51,8 +51,15 @@ export class HomepageComponent extends React.Component<HomepageComponentProps, H
             <div> {value.description}</div>
             </div> 
             }
-            return <div> 
-                {this.state.specialeAanbieding.map( value =>specialAanbiedingView(value))} </div>
+            return  <div>
+                    {/* <button onClick={(event) => this.props.onMovePage({ kind: "homepage"})}>{homepageLink}</button>
+                    <button onClick={(event) => this.props.onMovePage({ kind: "homepage", id: 2})}>{aanbiedingLink}</button>
+                    <button onClick={(event) => this.props.onMovePage({ kind: "DagtochtPagina", id: 3})}>{dagtochtLink}</button>
+                    <button onClick={(event) => this.props.onMovePage({ kind: "homepage", id: 4})}>{ooievaarLink}</button>
+                    <button onClick={(event) => this.props.onMovePage({ kind: "homepage", id: 5})}>{vragenLink}</button> */}
+                    <h1>Homepage</h1>
+                        {this.state.specialeAanbieding.map( value =>specialAanbiedingView(value))}
+                    </div>
         }
         else {return <div> else </div>}
     }

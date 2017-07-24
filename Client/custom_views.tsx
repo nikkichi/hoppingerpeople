@@ -10,4 +10,3 @@ import * as Api from './api'
 
 export let HomePage = function(slug: string) : JSX.Element {
     return (<div><Manager.PageManagerComponent/> </div>) }
-

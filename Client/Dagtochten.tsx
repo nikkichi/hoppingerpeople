@@ -7,13 +7,13 @@ import * as Manager from './pageManager'
 import * as Api from './api'
 
 
-let hyperlink = "lees meer "
-
-
+let hyperlink = "lees meer"
+let next_page ={ kind: "dagtochtDetailPagina"}
 type DagtochtenComponentProps = { onMovePage: (id: Manager.Page) => void }
-type DagtochtenComponentState = { kind: "loading" } |
-    { kind: "dagtochtPagina", categories: Types.Category_Dagtocht[], dagtochten: Types.Dagtocht[] } |
-    { kind: "detailPagina", dagtochten: Types.Dagtocht[] }
+type DagtochtenComponentState =
+    | {kind: "loading" }
+    | {kind: "dagtochtPagina", categories: Types.Category_Dagtocht[], dagtochten: Types.Dagtocht[]}
+    | {kind: "dagtochtDetailPagina", detailDagtocht: Types.Dagtocht} 
 
 export class DagtochtenComponent extends React.Component<DagtochtenComponentProps, DagtochtenComponentState>{
     constructor(props, context) {
@@ -22,8 +22,6 @@ export class DagtochtenComponent extends React.Component<DagtochtenComponentProp
     }
 
     componentWillMount() {
-
-        console.log('component will mount')
         this.loadCategories();
         this.loadDagtochten();
     }
@@ -31,9 +29,9 @@ export class DagtochtenComponent extends React.Component<DagtochtenComponentProp
     loadCategories() {
         Api
             .get_categories()
-            .then(c => this.setState({ ...this.state, kind: "dagtochtPagina", categories: c }))
-        //.catch(_ => this.loadCategories())
-    }
+            .then(c => this.setState({...this.state, kind: "dagtochtPagina", categories: c, dagtochten: []}),
+                e => console.log("Error: ", e))
+    }//DONT REMOVE THE "dagtochten: []" part, it makes sure dagtochten is set so it won't crash because it's undefined
 
     loadDagtochten() {
 
@@ -80,7 +78,20 @@ export class DagtochtenComponent extends React.Component<DagtochtenComponentProp
 
             </div>
         }
-
+else if(this.state.kind == "dagtochtDetailPagina"){
+            let x = localStorage.getItem('favoriteDagtocht') == this.state.detailDagtocht.name
+            return  <div>
+                        <p>{this.state.detailDagtocht.name}</p><br></br>
+                        <p>{this.state.detailDagtocht.prijs}</p><br></br>
+                        <p>{this.state.detailDagtocht.description}</p><br></br>
+                        <p>{this.state.detailDagtocht.text}</p><br></br>
+                        <p>Deze dagtocht is {x ? "wel" : "niet"} als favoriet gekozen</p>
+                        <button onClick={event =>
+                            this.state.kind=="dagtochtDetailPagina" ?
+                                localStorage.setItem('favoriteDagtocht', this.state.detailDagtocht.name)
+                            :   console.log("There is an error in DagtochtDetailPage")}>Maak favoriet</button>
+                    </div>
+        }
         
         else {
             return <div> Else</div>
