@@ -30787,7 +30787,6 @@ class HomepageComponent extends React.Component {
                 React.createElement("button", { onClick: onClickDagtocht }, dagtochtLink),
                 React.createElement("button", { onClick: onClickOoievaarsinfo }, ooievaarLink),
                 React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "veelgesteldeVragenPagina" }) }, vragenLink),
-                React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "homepage" }) }, vragenLink),
                 React.createElement("h1", null, "Homepage"),
                 React.createElement("h2", null, "Speciale Aanbiedingen"),
                 this.state.specialeAanbieding.map(value => specialAanbiedingView(value)));
