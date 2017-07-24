@@ -56,9 +56,17 @@ export type aanbieding = {
     target: string 
 }
 export type vragen={
+   pagina: string
    vraag: string
    antwoord: string
    title: string
+   id: number
+}
+
+export type categorienvragen = {
+    categorie: string
+    id : number
+
 }
 
 export type Uitleg_InformatiePas={

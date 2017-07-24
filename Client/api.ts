@@ -29,6 +29,16 @@ function filterAanbieding(id: number) {
 
 }
 
+export function get_categorienVragen(id: number): Promise<Types.categorienvragen[]>{
+    console.log('get_categorienVragen', categorienVragen.filter((element)=>element.id == id))
+    return new Promise((resolve, reject)=>{
+         resolve(filter(id))
+    })
+}
+
+    
+
+
 export function get_dagtocht(id: number): Promise<Types.Dagtocht[]> {
    console.log('get_dagtocht', dagTochten.filter((element) => element.categoryID == id) )
    
@@ -229,11 +239,20 @@ let aanbieding: Types.aanbieding[] = [
    ]
 
    let vragen: Types.vragen[]=[
-   {
+    {
+       pagina: "Veelgestelde vragen",
+       title:" ",
+       vraag: " ",
+       antwoord: " ",
+       id: 0
+                
+   },
+   {    
+       pagina: " ",
        title: "Aanvragen en/of wijzigingen Ooievaarspas",
        vraag: "Ik heb een Ooievaarspas. Hoef ik dan geen verlenging aan te vragen?",
        antwoord:" In principe moet u altijd een aanvraag doen voor verlenging van de Ooievaarspas. Er is een beperkt aantal groepen voor wie de Ooievaarspas automatisch wordt verlengd. Wilt u weten of u hiertoe behoort? Lees dan meer over de voorwaarden voor het aanvragen van een Ooievaarspas.",
-      
+       id: 1
                 
   },
   {
@@ -241,21 +260,22 @@ let aanbieding: Types.aanbieding[] = [
        title: "",
        vraag: "Wat gebeurt er nadat u een aanvraag voor een Ooievaarspas heeft gedaan?"  ,    
        antwoord:"Nadat u een aanvraag heeft gedaan ontvangt u schriftelijk een ontvangstbevestiging. De gemeente bekijkt binnen 8 weken of u voldoet aan de voorwaarden en stelt vast of u recht heeft op de Ooievaarspas. Mocht u na 8 weken geen bericht hebben ontvangen, dan kunt u contact opnemen met de klantenservice. ",        
-      
+      id: 1
 
   },
    {
+       pagina: "",
        title: "Gebruik Ooievaarspas",
        vraag: "Ik heb een Ooievaarspas, mag ik gratis reizen?"  ,    
        antwoord:"Gratis reizen kan alleen als u inwoner bent van Den Haag en de AOW-gerechtigde leeftijd heeft bereikt, over een persoonlijke OV-chipkaart beschikt en recht heeft op een Ooievaarspas in het huidige kalenderjaar (1 januari tot en met 31 december).",        
-      
+      id : 2
    },
    {
        pagina: "",
        title: "",
        vraag: "Ik heb een brief gekregen over het ophalen van het gratis reisproduct, maar het lukt niet?",
-       antwoord: "Neem contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur of stuur een e-mail aan: ooievaarsregelingen@gemeentedenhaag.helptu.nl  "
-
+       antwoord: "Neem contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur of stuur een e-mail aan: ooievaarsregelingen@gemeentedenhaag.helptu.nl  ",
+       id : 2
 
    },
    {
@@ -263,7 +283,7 @@ let aanbieding: Types.aanbieding[] = [
        title: "Geblokkeerde Ooievaarspas",
        vraag: "Mijn Ooievaarspas is geblokkeerd. Wat is daarvan de reden?",
        antwoord: "Daar kunnen verschillende redenen voor zijn. Neem daarom contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur. Ooievaarspashouders uit Leidschendam-Voorburg en Rijswijk moeten hiervoor contact opnemen met hun eigen gemeente.",
-      
+      id: 3
    },
 
    {
@@ -271,7 +291,24 @@ let aanbieding: Types.aanbieding[] = [
        title: "",
        vraag: "Hoe lang duurt het voordat mijn Ooievaarspas (weer) is geactiveerd?",
        antwoord: "Als u een aanvraag heeft gedaan en het recht op de Ooievaarspas is vastgesteld, dan wordt uw pas binnen maximaal 15 werkdagen weer geactiveerd.Heeft u geen brief ontvangen? Neem dan contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur.Ooievaarspashouders uit Leidschendam-Voorburg en Rijswijk moeten hiervoor contact opnemen met hun eigen gemeente.",
-      
+      id: 3
 
    }
+]
+
+let categorienVragen : Types.categorienvragen[]=[
+    {
+        categorie: "Aanvragen en/of wijzigingen Ooievaarspas",
+        id: 1
+    },
+    {
+       categorie: "Gebruik Ooievaarspas",
+       id: 2
+    },
+    {
+        categorie: "Geblokkeerde Ooievaarspas",
+        id: 3
+
+    }
+
 ]
