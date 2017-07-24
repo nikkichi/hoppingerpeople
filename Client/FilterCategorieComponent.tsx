@@ -3,23 +3,42 @@ import * as ReactDOM from "react-dom";
 import * as Immutable from "immutable";
 import * as Types from "./custom_types";
 import * as Manager from "./pageManager";
-import * as api from "./api";
+import * as Api from "./api";
 
 type FilterCategorieComponentProps = { }
-type FilterCategorieComponentState = { }
+type FilterCategorieComponentState = { kind: 'loading' } | { kind: 'loaded', aanbiedingen: Types.aanbieding[] }
 
 export class FilterCategorieComponent extends React.Component<FilterCategorieComponentProps, FilterCategorieComponentState>{
     constructor(props: FilterCategorieComponentProps, context){
         super(props, context)
-        this.state = { }
+        this.state = { kind: 'loading' }
     } 
 
+    load_aanbiedingen(){
+        Api.get_aanbiedingen()
+        .catch( a => this.setState({... this.state, kind: 'loaded', aanbiedingen: a}))
+        .catch( _ => this.load_aanbiedingen())
+
+    }
+
     render(){
+
+        if (this.state.kind == 'loaded'){
+            let categories =
+            Immutable.List(this.state.aanbiedingen)
+            .map((aanbieding) => aanbieding.category)
+            .reduce((accumulator, value) => {
+                    if (accumulator.includes(value)) return accumulator
+                    else return accumulator.push(value)
+            }, Immutable.List())
+                    console.log()
+        }
+
         return <div>
             Categorie<br/>
             <select>
                 <option selected hidden>Maak uw keuze: </option> 
-                <option value="Alle aanbiedingen">Alle aanbiedingen</option>
+                <option value="Alle aanbiedingen">{}</option>
                 <option value="Speciale aanbiedingen">Speciale aanbiedingen</option> {/* //nog components toevoegen met een sum van alle aanbiedingen en speciale aanbiedingen */}
                         {/*/ voeg onClick toe na de value="" */}
             </select>
