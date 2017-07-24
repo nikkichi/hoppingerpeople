@@ -71,5 +71,9 @@ export type categorienvragen = {
 
 export type Uitleg_InformatiePas={
     title: string,
-    description: string
+    description: string,
+    id: number,
+    text: string,
+    Image: ''
 }
+
