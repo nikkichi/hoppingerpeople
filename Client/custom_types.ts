@@ -58,5 +58,8 @@ export type vragen={
 export type Uitleg_InformatiePas={
     title: string,
     description: string,
-    id: number
+    id: number,
+    text: string,
+    Image: ''
 }
+

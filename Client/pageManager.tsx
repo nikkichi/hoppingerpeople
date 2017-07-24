@@ -12,6 +12,7 @@ import * as InfoPas from './InfoPas'
 import * as Aanbieding from './Aanbiedingen'
 import * as veelgesteldeVragen from './veelgesteldevragen'
 import * as DetailPage from './InfoComponent'
+import * as InformatieDetail from './InformatieDetail'
 
 
 type PageManagerComponentProps = {}
@@ -20,11 +21,12 @@ type PageManagerComponentState = { current_page: Page }
 export type Page = { kind:"homepage"} | 
                    { kind:"dagtochtPagina" } | 
                    { kind:"aanbiedingPagina"} | 
-                   {kind: "ooievaarspasPagina"} | 
-                   {kind: "veelgesteldeVragenPagina"} | 
-                   {kind: "infopas", id:number}|
-                   {kind: "DetailDagtocht"}|
-                   {kind: "DetailAanbieding"}
+                   { kind: "ooievaarspasPagina"} | 
+                   { kind: "veelgesteldeVragenPagina"} | 
+                   { kind: "infopas", id:number}|
+                   { kind: "DetailDagtocht"}|
+                   { kind: "DetailAanbieding"}|
+                   { kind: "InformatieDetail", id:number}
 
                    
 
@@ -55,6 +57,8 @@ export class PageManagerComponent extends React.Component<PageManagerComponentPr
                     return<div><detailPagina.InforComponent/></div>
                 case "ooievaarspasPagina":
                     return <div><Ooievaarspasinfo.OoievaarsPasComponent onMovePage={(next_page) => thisRef.moveToPage(next_page)} /></div>
+                case "InformatieDetail": 
+                    return<div><InformatieDetail.InformatieDetailComponent onMovePage={(next_page) => thisRef.moveToPage(next_page)} id= {thisRef.state.current_page.id}/></div>
             }
         }
         function Footer(){
