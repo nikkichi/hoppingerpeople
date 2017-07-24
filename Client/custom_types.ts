@@ -42,35 +42,34 @@ export type SpecialAanbieding = {
     id: number
 }
 
-export type ActivyKind =
-    | { kind: 'cultuur', sub: string }
-    | { kind: 'sport', sub: string }
+type ActivityKind = "cultuur" | "sport"
+
+export type Activy = { kind: ActivityKind, sub: string }
 
 export type aanbieding = {
     title: string,
     description: string, 
     id: number,
     category: string,
-    activity: ActivyKind,
+    activity: Activy,
     location: string,
     target: string 
 }
-
 export type vragen={
+   pagina: string
    vraag: string
    antwoord: string
    title: string
-   pagina: string
-   id : number
+   id: number
+}
+
+export type categorienvragen = {
+    categorie: string
+    id : number
+
 }
 
 export type Uitleg_InformatiePas={
     title: string,
-    description: string,
-    id: number
-}
-
-export type categorienvragen={
-    categorie: string
-    id: number
+    description: string
 }
