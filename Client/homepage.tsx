@@ -47,6 +47,7 @@ export class HomepageComponent extends React.Component<HomepageComponentProps, H
             <button onClick={onClickAanbieding}>{aanbiedingLink}</button>
             <button onClick={onClickDagtocht}>{dagtochtLink}</button>
             <button onClick={onClickOoievaarsinfo}>{ooievaarLink}</button>
+            <button onClick={(event) => this.props.onMovePage({ kind: "veelgesteldeVragenPagina"})}>{vragenLink}</button>
             <button onClick={(event) => this.props.onMovePage({ kind: "homepage"})}>{vragenLink}</button>
                     <h1>Homepage</h1>
                     <h2>Speciale Aanbiedingen</h2>

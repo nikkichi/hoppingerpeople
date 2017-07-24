@@ -7,8 +7,7 @@ import * as Manager from './pageManager'
 import * as Api from './api'
 
 type veelgesteldevragenComponentProps = { onMovePage: (id: Manager.Page) => void }
-type veelgesteldevragenComponentState = { kind: "loading" } | { kind: "loaded", value: Types.vragen[] }
-
+type veelgesteldevragenComponentState = { kind: "loading" } | { kind: "loaded", value: Types.vragen[] }|{kind: "veelgesteldevragenpagina", value: Types.vragen[]}
 // function generateNumber(min: number, max: number) {
 //     return Math.floor(Math.random() * max - min + 1) + min
 // }
