@@ -21,14 +21,21 @@ export function get_specialaanbieding() : Promise<Types.SpecialAanbieding[]>{
     })
 }
 
-function filter() {
-    console.log("olaa", dagTochten.filter((element) => element.categoryID == 1) )
-    return dagTochten.filter((element) => element.categoryID == 1)
+function filter(id: number) {
+   
+    let value = dagTochten.filter((element) => element.categoryID == 1)
+    return value
+
+}
+function filterAanbieding(id: number) {
+   
+    let value = aanbieding.filter((element) => element.id == 1)
+    return value
 
 }
 
-export function get_dagtocht(): Promise<Types.Dagtocht[]> {
-   console.log( dagTochten.filter((element) => element.categoryID == 1) )
+export function get_dagtocht(id: number): Promise<Types.Dagtocht[]> {
+   console.log('get_dagtocht', dagTochten.filter((element) => element.categoryID == id) )
    
     return new Promise((resolve, reject) => {
         // resolve(dagTochten)
@@ -37,14 +44,23 @@ export function get_dagtocht(): Promise<Types.Dagtocht[]> {
         //     reject("Id is not in array in dagtocht")
         // else
         
-           resolve(filter())
+           resolve(filter(id))
+    })
+}
+export function get_aanbiedingen(): Promise<Types.aanbieding[]> {
+    return new Promise((resolve, reject) => {
+        console.log("aanbiedingen", aanbieding)
+         resolve(aanbieding)
     })
 }
 export function get_aanbieding(): Promise<Types.aanbieding[]> {
     return new Promise((resolve, reject) => {
-           resolve(aanbieding)
+        console.log("aanbiedingen", aanbieding)
+         resolve(filterAanbieding(1))
     })
 }
+
+
 
 export function get_ooievaarsPas() : Promise<Types.InformatiePas[]>{
     return new Promise((resolve, reject) => {

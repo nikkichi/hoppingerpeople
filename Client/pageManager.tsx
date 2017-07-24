@@ -9,37 +9,51 @@ import * as detailPagina from './InfoComponent'
 import * as Ooievaarspasinfo from './Ooievaarspasinfo'
 import * as Homepage from './homepage'
 import * as InfoPas from './InfoPas'
+import * as Aanbieding from './Aanbiedingen'
+import * as veelgesteldeVragen from './veelgesteldevragen'
+import * as DetailPage from './InfoComponent'
 
-
-
-//type dagtocht = [page1: "/Dagtochten", page2: "/Dagtochten/detailPagina"]
 
 type PageManagerComponentProps = {}
 type PageManagerComponentState = { current_page: Page }
 
-//export type Page = { kind:"dagtocht" , id:number } | { kind:"DagtochtPagina" } | { kind:"contact us", person:string }
-export type Page = { kind:"dagtocht" , id:number } | { kind:"DagtochtPagina" } | { kind:"contact us", person:string} | {kind: "ooievaarspas", id:number} | {kind: "homepage", id: number} | {kind: "infopas"}
+export type Page = { kind:"homepage"} | 
+                   { kind:"dagtochtPagina" } | 
+                   { kind:"aanbiedingPagina"} | 
+                   {kind: "ooievaarspasPagina"} | 
+                   {kind: "veelgesteldeVragenPagina"} | 
+                   {kind: "infopas"}|
+                   {kind: "DetailDagtocht"}|
+                   {kind: "DetailAanbieding"}
+
+                   
 
 export class PageManagerComponent extends React.Component<PageManagerComponentProps, PageManagerComponentState>{
  
     constructor(props, context) {
         super(props, context);
-        this.state = { current_page: { kind:"infopas"} }
+        this.state = { current_page: { kind:"homepage"} }
     }
 
     render() {
-
+console.log('PAGEMANAGER', this.state.current_page.kind)
     switch (this.state.current_page.kind) {
+        
         case "homepage":
             return <div><Homepage.HomepageComponent onMovePage={(next_page) => this.moveToPage(next_page)}  />     </div>
-        case "DagtochtPagina":
+        case "dagtochtPagina":
             return <div><Dagtochten.DagtochtenComponent onMovePage={(next_page) => this.moveToPage(next_page)} /> </div>
-        case "ooievaarspas":
-            return <div><Ooievaarspasinfo.OoievaarsPasComponent onMovePage={(next_page) => this.moveToPage(next_page)}/></div>
-        case "contact us": 
-                return<div>Contact Us</div>   
+        case "aanbiedingPagina":
+            return <div><Aanbieding.AanbiedingenComponent onMovePage={(next_page) => this.moveToPage(next_page)}/></div>
+        case "veelgesteldeVragenPagina": 
+                return<div>< veelgesteldeVragen.veelgesteldevragenComponent onMovePage={(next_page) => this.moveToPage(next_page)}/> </div>   
         case "infopas": 
                 return<div><InfoPas.InfoPasComponent onMovePage={(next_page) => this.moveToPage(next_page)}/></div>
+        case "DetailDagtocht": 
+                return<div><detailPagina.InforComponent/></div>
+        case "DetailAanbieding":
+           return<div><detailPagina.InforComponent/></div>
+
     }}
 
     moveToPage(next_page: Page) {
