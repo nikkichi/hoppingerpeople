@@ -13,27 +13,12 @@ import * as InfoPas from './InfoPas'
 import * as Aanbieding from './Aanbiedingen'
 import * as veelgesteldeVragen from './veelgesteldevragen'
 import * as DetailPage from './InfoComponent'
-import * as InformatieDetail from './InformatieDetail'
 import Header from './Header'
 import * as Manager from './pageManager'
-
 
 //type dagtocht = [page1: "/Dagtochten", page2: "/Dagtochten/detailPagina"]
 type PageManagerComponentProps = {}
 type PageManagerComponentState = { current_page: Page }
-
-
-export type Page = { kind:"homepage"} | 
-                   { kind:"dagtochtPagina" } | 
-                   { kind:"aanbiedingPagina"} | 
-                   { kind: "ooievaarspasPagina"} | 
-                   { kind: "veelgesteldeVragenPagina"} | 
-                   { kind: "infopas", id:number}|
-                   { kind: "DetailDagtocht"}|
-                   { kind: "DetailAanbieding"}|
-                   { kind: "InformatieDetail", id:number}
-
-                   
 
 //export type Page = { kind:"dagtocht" , id:number } | { kind:"DagtochtPagina" } | { kind:"contact us", person:string }
 export type Page =
@@ -44,7 +29,6 @@ export type Page =
     | {kind: "homepage", id: number}
     | {kind: "infopas"}
 
-
 export class PageManagerComponent extends React.Component<PageManagerComponentProps, PageManagerComponentState>{
  
     constructor(props: PageManagerComponentProps, context) {
@@ -53,31 +37,6 @@ export class PageManagerComponent extends React.Component<PageManagerComponentPr
     }
 
     render() {
-
-        console.log('PAGEMANAGER', this.state.current_page.kind)
-        function PageContent(thisRef: PageManagerComponent) {
-            switch (thisRef.state.current_page.kind) {
-                case "homepage":
-                    return <div><Homepage.HomepageComponent onMovePage={(next_page) => thisRef.moveToPage(next_page)}/></div>
-                case "dagtochtPagina":
-                    return <div><Dagtochten.DagtochtenComponent onMovePage={(next_page) => thisRef.moveToPage(next_page)} /> </div>
-                case "aanbiedingPagina":
-                    return <div><Aanbieding.AanbiedingenComponent onMovePage={(next_page) => thisRef.moveToPage(next_page)}/></div>
-                case "veelgesteldeVragenPagina": 
-                    return<div>< veelgesteldeVragen.veelgesteldevragenComponent onMovePage={(next_page) => thisRef.moveToPage(next_page)}/> </div>   
-                case "infopas": 
-                    return<div><InfoPas.InfoPasComponent onMovePage={(next_page) => thisRef.moveToPage(next_page)} id= {thisRef.state.current_page.id}/></div>
-                case "DetailDagtocht": 
-                    return<div><detailPagina.InforComponent/></div>
-                case "DetailAanbieding":
-                    return<div><detailPagina.InforComponent/></div>
-                case "ooievaarspasPagina":
-                    return <div><Ooievaarspasinfo.OoievaarsPasComponent onMovePage={(next_page) => thisRef.moveToPage(next_page)} /></div>
-                case "InformatieDetail": 
-                    return<div><InformatieDetail.InformatieDetailComponent onMovePage={(next_page) => thisRef.moveToPage(next_page)} id= {thisRef.state.current_page.id}/></div>
-            }
-        }
-
 
 console.log('PAGEMANAGER', this.state.current_page.kind);
 let menubar = <div> <Header onMovePage={(next_page) => this.moveToPage(next_page)}/></div>
@@ -101,7 +60,6 @@ let menubar = <div> <Header onMovePage={(next_page) => this.moveToPage(next_page
             return <div>{menubar}<Ooievaarspasinfo.OoievaarsPasComponent onMovePage={(next_page) => this.moveToPage(next_page)}  /> </div>  
 
     }}
-
         function Footer(){
             return  <footer>
                         <button onClick={event => location.reload()}>Ga naar Homepagina</button>
