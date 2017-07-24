@@ -32,20 +32,31 @@ export class HomepageComponent extends React.Component<HomepageComponentProps, H
     }
 
     render(){
+        let onClickDagtocht = (event) => this.props.onMovePage({ kind: "dagtochtPagina"})
+        let onClickAanbieding = (event) => this.props.onMovePage({ kind: "aanbiedingPagina"})
         if (this.state.kind == "loaded") {
             let specialAanbiedingView = function (value: Types.SpecialAanbieding) {
-                return  <div>
-                        <h2>Speciale Aanbiedingen</h2>
-                        <h2> {value.title}</h2>
-                        <div> {value.description}</div>
-                        </div>
+                return <div>
+            <button onClick={(event) => this.props.onMovePage({ kind: "homepage"})}>{homepageLink}</button>
+            <button onClick={onClickAanbieding}>{aanbiedingLink}</button>
+            <button onClick={onClickDagtocht}>{dagtochtLink}</button>
+            <button onClick={(event) => this.props.onMovePage({ kind: "homepage"})}>{ooievaarLink}</button>
+            <button onClick={(event) => this.props.onMovePage({ kind: "homepage"})}>{vragenLink}</button>
+            <h1> Homepage</h1>
+            {/* <h2> {value.title}</h2>
+            <div> {value.description}</div> */}
+
+            <h2>Speciale Aanbiedingen</h2>
+            <h2> {value.title}</h2>
+            <div> {value.description}</div>
+            </div> 
             }
             return  <div>
-                    <button onClick={(event) => this.props.onMovePage({ kind: "homepage", id: 1})}>{homepageLink}</button>
+                    {/* <button onClick={(event) => this.props.onMovePage({ kind: "homepage"})}>{homepageLink}</button>
                     <button onClick={(event) => this.props.onMovePage({ kind: "homepage", id: 2})}>{aanbiedingLink}</button>
                     <button onClick={(event) => this.props.onMovePage({ kind: "DagtochtPagina", id: 3})}>{dagtochtLink}</button>
                     <button onClick={(event) => this.props.onMovePage({ kind: "homepage", id: 4})}>{ooievaarLink}</button>
-                    <button onClick={(event) => this.props.onMovePage({ kind: "homepage", id: 5})}>{vragenLink}</button>
+                    <button onClick={(event) => this.props.onMovePage({ kind: "homepage", id: 5})}>{vragenLink}</button> */}
                     <h1>Homepage</h1>
                         {this.state.specialeAanbieding.map( value =>specialAanbiedingView(value))}
                     </div>

@@ -34,32 +34,51 @@ export class DagtochtenComponent extends React.Component<DagtochtenComponentProp
     }//DONT REMOVE THE "dagtochten: []" part, it makes sure dagtochten is set so it won't crash because it's undefined
 
     loadDagtochten() {
+
         Api
-            .get_dagtocht()
-            .then(d => this.setState({...this.state, kind: "dagtochtPagina", dagtochten: d }), e => console.log("Error: ", e))
-             
+            .get_dagtocht(2)
+            .then(d => this.setState({ ...this.state, kind: "dagtochtPagina", dagtochten: d }))
+        // .catch(_ => console.log('get dachtocht rejected ') || setTimeout( this.loadDagtochten ,5000))
+
     }
 
     render() {
-        if (this.state.kind == "dagtochtPagina" && this.state.dagtochten != undefined) {
+        let onclickdagtocht = (event) => this.props.onMovePage({ kind: "DetailDagtocht" })
+        console.log(this.state.kind)
+        if (this.state.kind == "dagtochtPagina") {
             let categoryView = function (category: Types.Category_Dagtocht) {
-                return  <div>
-                            <h2>{category.title}</h2>
-                            <p>{category.description}</p>
-                        </div>
-            }
-            let dagtochtView = function (dagtocht: Types.Dagtocht, thisRef) {
-                return  <div onClick={(event) => thisRef.setState({kind:"dagtochtDetailPagina", detailDagtocht:dagtocht})}>
-                            {dagtocht.name}
-                            <p>{dagtocht.description}</p>
-                        </div>
+                return <div>
+                    <h2>{category.title}</h2>
+                    <p>{category.description}</p>
+                </div>
+
             }
 
-            return  <div>
-                        <button onClick={(event) => this.props.onMovePage({kind: "infopas"})}>{hyperlink}</button>
-                        {this.state.dagtochten.map(dagtocht => dagtochtView(dagtocht, this))}
-                    </div>
-        }else if(this.state.kind == "dagtochtDetailPagina"){
+            let dagtochtView = function (dagtocht: Types.Dagtocht) {
+                return <div>
+                    <h2> {dagtocht.name}</h2>
+                    <p> {dagtocht.description}</p>
+                    <button onClick={onclickdagtocht}>
+                        {hyperlink}
+                    </button>
+
+
+
+                </div>
+            }
+
+
+            return <div>
+                {this.state.categories.map(category => categoryView(category))
+                }
+                <div> {this.state.dagtochten.map(dagtocht => dagtochtView(dagtocht))}</div>
+
+
+
+
+            </div>
+        }
+else if(this.state.kind == "dagtochtDetailPagina"){
             let x = localStorage.getItem('favoriteDagtocht') == this.state.detailDagtocht.name
             return  <div>
                         <p>{this.state.detailDagtocht.name}</p><br></br>
@@ -72,8 +91,11 @@ export class DagtochtenComponent extends React.Component<DagtochtenComponentProp
                                 localStorage.setItem('favoriteDagtocht', this.state.detailDagtocht.name)
                             :   console.log("There is an error in DagtochtDetailPage")}>Maak favoriet</button>
                     </div>
-        }else{
-            return <div>Else</div>
+        }
+        
+        else {
+            return <div> Else</div>
+            // return <div> Dachtochten {this.state.dagtochten.map((element,key) => <div> {key} </div>)}</div>
         }
     }
 }
