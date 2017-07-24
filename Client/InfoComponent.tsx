@@ -26,7 +26,7 @@ export class InforComponent extends React.Component<InforComponentProps, InforCo
 
         loadDagtocht() {
         Api
-            .get_dagtochten(1)
+            .get_dagtochten()
             .then(d => this.setState({ ...this.state, kind: "DetailDagtocht", dagtochten: d }))
         // .catch(_ => console.log('get dachtocht rejected ') || setTimeout( this.loadDagtochten ,5000))
 
