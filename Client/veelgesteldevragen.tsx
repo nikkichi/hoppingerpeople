@@ -32,17 +32,18 @@ export class veelgesteldevragenComponent extends React.Component<veelgesteldevra
     }
 
     render() {
-        <h1>Veelgestelde Vragen</h1>
+        
         if (this.state.kind == "loaded") {
             let onderwerp_view = function (info: Types.vragen) {
                 return <div>
-                
+                <h1>{info.pagina}</h1>
                 <h2> {info.title}</h2>
                 <div>{info.vraag}</div>
                 <div>{info.antwoord}</div>
 
 
             </div>
+            
 
             }
 
