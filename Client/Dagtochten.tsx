@@ -46,14 +46,26 @@ loadDagtochten(){
         let onclickdagtocht = (id: number, checkPage: number) => this.props.onMovePage({ kind: "DetailDagtocht" , id: id })
         console.log(this.state.kind)
         if (this.state.kind == "dagtochtPagina") {
+            function FormatDagtochten(dagtochten : Types.Dagtocht[]){
+                return  <div>
+                            {dagtochten.map(dagtocht =>
+                                dagtochtView(dagtocht))}
+                        </div>
+            }
+            function ordenDagtochten(dagtochten : Types.Dagtocht[], categories : Types.Category_Dagtocht[]) {
+                return  <div>
+                            {categories.map(category =>
+                                {   categoryView(category)
+                                    FormatDagtochten(dagtochten.filter(dagtocht =>
+                                    dagtocht.categoryID == category.id))})}
+                        </div>
+            }
             let categoryView = function (category: Types.Category_Dagtocht) {
                 return <div>
                     <h2>{category.title}</h2>
                     <p>{category.description}</p>
                 </div>
-
             }
-
             let dagtochtView = function (dagtocht: Types.Dagtocht) {
                 return <div>
                     <h2> {dagtocht.name}</h2>
@@ -61,52 +73,10 @@ loadDagtochten(){
                     <button onClick={() => onclickdagtocht(dagtocht.categoryID, dagtocht.id)}>
                         {hyperlink}
                     </button>
-
-
-
                 </div>
             }
-            
-            function dagtochtOrdenFunc(categories : Types.Category_Dagtocht[], dagtochtenGeordend:Types.Dagtocht[][]){
-                function dagtochtFormatFunc(a:Types.Dagtocht){
-                    return  <div>
-                                {a.name}
-                                {a.prijs}
-                                {a.description}
-                                {a.text}
-                            </div>
-                }
-                function SuperSpecificFunc(a : Types.Category_Dagtocht[], dagtochtLijst : Types.Dagtocht[]){
-                    return <div>{a.map(category =>
-                            <div>
-                                {category.title}
-                                {category.description}
-                                {dagtochtLijst.map(dagtocht =>
-                                dagtochtFormatFunc(dagtocht))}
-                            </div>}</div>
-                }
-                return  <div>
-                            {dagtochtenGeordend.map(listofDagtocht =>
-                            {SuperSpecificFunc(categories, listofDagtocht)}
-                        </div>
-            }
-            let x = this.state.categories.map(
-                                category => this.state.kind=="dagtochtPagina" ? this.state.dagtochten.filter(dagtocht =>
-                                        dagtocht.categoryID == category.id) :
-                                        []
-                            )
-            //dit ordend de dagtochten
-            return <div>
-                {dagtochtOrdenFunc(x)}
-                {this.state.categories.map(category => categoryView(category))}
-                <div> {this.state.dagtochten.map(dagtocht => dagtochtView(dagtocht))}</div>
-
-
-
-
-            </div>
-        }
-else if(this.state.kind == "DetailDagtocht"){
+            return ordenDagtochten(this.state.dagtochten, this.state.categories);
+        }else if(this.state.kind == "DetailDagtocht"){
             let x = localStorage.getItem('favoriteDagtocht') == this.state.detailDagtocht.name
             return  <div>
                         <p>{this.state.detailDagtocht.name}</p><br></br>
@@ -120,7 +90,6 @@ else if(this.state.kind == "DetailDagtocht"){
                             :   console.log("There is an error in DagtochtDetailPage")}>Maak favoriet</button>
                     </div>
         }
-        
         else {
             return <div> Else</div>
             // return <div> Dachtochten {this.state.dagtochten.map((element,key) => <div> {key} </div>)}</div>
