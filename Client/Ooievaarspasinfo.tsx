@@ -16,6 +16,8 @@ let hyperlink = 'lees meer'
                                   | {kind:"loaded", value: Types.InformatiePas[]}
  
  
+ function generateNumber(min:number, max:number){
+ }
  export class OoievaarsPasComponent extends React.Component<OoievaarsPasComponentProps, OoievaarsPasComponentState>{
      constructor(props, context) {
          super(props, context);
@@ -38,32 +40,35 @@ let hyperlink = 'lees meer'
              
  
  
-     render()
-     {
-       let onClickInfoPas = (id: number) => this.props.onMovePage({kind: "infopas", id: id})
+     render() {
 
-       if(this.state.kind == "loaded" )
-        {
+       if(this.state.kind == "loaded" ){
            let ooievaarspas_View = function(info: Types.InformatiePas){ 
-           return   <div key={info.title}>
+           return   <div>
+                       <h1>  Informatie over de Ooievaarspas</h1>
                        <h2> {info.title}</h2>
                        <div>{info.description }</div>
-                       <button onClick={() => onClickInfoPas(info.id)}>{hyperlink}</button>
+                       deze knop is op de juiste plek maar geeft een foutmelding
+                     <button onClick={(event) => this.props.onMovePage({kind: "infopas"})}>{hyperlink}</button>
+                       
                     </div>
                  
-          }
+           }
            
             return <div>
-                      <h1>  Informatie over de Ooievaarspas</h1>
-                      {this.state.value.map(info => ooievaarspas_View(info))}
-                  </div>
+                deze knop gaat naar next page
+                <button onClick={(event) => this.props.onMovePage({kind: "infopas"})}>{hyperlink}</button>
+              {this.state.value.map(info => ooievaarspas_View(info))}
+                <div>{ooievaarspas_View}</div>
+           
+          </div>
            
        
-      }
+       }
 
       else{
-            return<div> else </div>
-          }
+        return<div> else </div>
+      }
  
      }
  }
