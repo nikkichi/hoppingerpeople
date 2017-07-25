@@ -69,14 +69,6 @@ export class AanbiedingenComponent extends React.Component<AanbiedingenComponent
                     <button onClick={() => onclickAanbieding(aanbieding.id)}>
                         {hyperlink}
                     </button>
-<<<<<<< HEAD
-                      <button onClick={() => onclickAanbieding(2)}>
-                        sho de saaf
-                    </button>
-
-
-=======
->>>>>>> 66c3bc7aa2ca1a1bb850da1fef058e7514b087a3
                 </div>
             }
 
