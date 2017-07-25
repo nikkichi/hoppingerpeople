@@ -8,13 +8,28 @@
   padding: $base-spacing $base-spacing 0;
 }
 
+[class^="header__inner"] {
+   padding: 20px;
+   margin: 10px;
+   color: #fff;
+   font-size: 21px;
+   font-weight: bold;
+   line-height: 1.3em;
+   border: 2px dashed white;
+   border-radius: 10px;
+   box-shadow: 0 0 0 4px lightcoral, 2px 1px 6px 4px rgba(10, 10, 0, 0.5);
+   text-shadow: -1px -1px #aa3030;
+   font-weight: normal;
+}
+
+
 .header {
   &__inner {
-    background-color: $background-color;
+    background-color: white;
 
     &--sub {
       display: none;
-      background-color: $white-800;
+      background-color: white; 
 
       &.active {
         display: block;
