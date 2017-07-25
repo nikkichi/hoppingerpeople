@@ -1,10 +1,54 @@
-import * as React from "react"
-import * as ReactDOM from "react-dom"
-import * as Immutable from "immutable"
-import * as List from './containers/list'
-import * as Types from './custom_types'
-import * as Manager from './pageManager'
-import * as Api from './api'
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import * as Immutable from "immutable";
+import * as List from "immutable";
+import * as Types from "./custom_types";
+import * as Manager from "./pageManager";
+import * as Api from "./api";
+import { FilterState } from "./Aanbiedingen"
+
+type FilterCategorieComponentProps = { aanbiedingen: Types.aanbieding[], setFilterState: (newState: FilterState) => void, filterState: FilterState }
+
+export class FilterCategorieComponent extends React.Component<FilterCategorieComponentProps, {}>{
+    constructor(props: FilterCategorieComponentProps, context) {
+        super(props, context)
+    }
+
+    setCategory(value) {
+        this.props.setFilterState({ ...this.props.filterState, Categorie: { kind: "on", value: value } })
+    }
+
+    render() {
+        // let onclickAanbieding = (id: number) => this.props.onMovePage({ kind: "DetailAanbieding", id: id, checkPage: 1})
+
+        let stringToOption = (x: string) => <option value={x}>{x}</option>
+
+        let categories =
+            Immutable.List(this.props.aanbiedingen)
+                .map((aanbieding) => aanbieding.category)
+                .reduce((accumulator, value) => {
+                    if (accumulator.includes(value))
+                    { return accumulator }
+                    else { return accumulator.push(value) }
+                }, Immutable.List<string>())
+
+        return <div>
+            Categorie<br />
+            <div>
+                <select onChange={s => {
+                    this.setCategory(s.currentTarget.value)
+                    console.log(s.currentTarget.value)
+                }}>
+                    <option selected hidden>Maak uw keuze: </option>
+                    {categories.map(category => stringToOption(category))}
+                </select>
+            </div>
+        </div>
+
+    }
+}
+
+//activiteit filter
 type FilterWatComponentProps = { }
 type FilterWatComponentState = { kind: 'loading' } | { kind: 'loaded', activityKind: string, aanbiedingen: Types.aanbieding[] } 
 
@@ -132,3 +176,103 @@ export class CheckboxSport extends React.Component<CheckboxSportProps, CheckboxS
                </div>
     }
 }
+
+//locatie filter
+
+type FilterWaarComponentProps = {}
+type FilterWaarComponentState = { kind: 'loading' } | { kind: 'loaded', aanbiedingen: Types.aanbieding[]}
+
+export class FilterWaarComponent extends React.Component<FilterWaarComponentProps, FilterWaarComponentState>{
+    constructor(props, context){
+        super(props, context)
+        this.state = { kind: 'loading'}
+    }
+
+    load_locations(){
+        api.get_aanbiedingen()
+        .then(a => this.setState({... this.state, kind: 'loaded', aanbieding: a}))
+        .catch( _ => this.load_locations())
+    }
+
+    render(){
+
+        if (this.state.kind == 'loaded'){
+            let locations = Immutable.List(this.state.aanbiedingen)
+                            .map((aanbieding) => aanbieding.location)
+                            .reduce((accumulator, value) => {
+                                    if (accumulator.includes(value))
+                                        { return accumulator}
+                                    else {return accumulator.push(value)}
+                            }, Immutable.List<string>())
+
+        let stringToOption = (x: string) => <option>{x}</option>        
+
+        return <div>
+            Waar?<br/>
+            <select>
+                <option selected hidden>Alle locaties </option>
+                <optgroup label="Den Haag">
+                    <option value="archipelbuurt en willemspark">Archipelbuurt en Willemspark</option>
+                    <option value="zeeheldenkwartier">Zeeheldenkwartier</option>
+                </optgroup>
+                <optgroup label="Overige randgemeenten">
+                    <option value="buiten regio">Buiten regio</option>
+                </optgroup>
+            </select>
+        </div>
+        }
+    }
+}
+
+// wie filter
+
+type FilterVoorWieComponentProps = { }
+type FilterVoorWieComponentState = { kind: 'loading' } | { kind: 'loaded', aanbiedingen: Types.aanbieding[] }
+
+export class FilterVoorWieComponent extends React.Component<FilterVoorWieComponentProps, FilterVoorWieComponentState>{
+    constructor(props, context) {
+        super(props, context)
+        this.state = { kind: 'loading' }
+    }
+
+    componentWillMount(){
+        this.load_voorwie();
+    }
+
+
+    load_voorwie(){
+        Api.get_aanbiedingen()
+        .then( a => this.setState({... this.state, kind: 'loaded', aanbiedingen: a}))
+        .catch( _ => this.load_voorwie())
+    }
+
+    render() {
+
+        if (this.state.kind == 'loaded'){
+            let targets = 
+                        Immutable.List(this.state.aanbiedingen)
+                        .map((aanbieding) => aanbieding.target)
+                        .reduce((accumulator, value) => {
+                            if (accumulator.includes(value)){
+                                return accumulator
+                            }
+                            else {return accumulator.push(value)}
+                        }, Immutable.List<string>())
+
+        let stringToOption = (x: string) => <option>{x}</option>
+        
+            return <div>
+                Wie?<br/>
+                <select>
+                    <option selected hidden>Voor iedereen </option>
+                   {targets.map(target => stringToOption(target))}
+                </select>
+            </div>
+            }
+
+        else {
+            return <div> {this.state.kind} </div>
+            }
+
+        }
+    }

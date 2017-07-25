@@ -23,7 +23,7 @@ type PageManagerComponentState = { current_page: Page }
 //export type Page = { kind:"dagtocht" , id:number } | { kind:"DagtochtPagina" } | { kind:"contact us", person:string }
 export type Page = { kind:"homepage"} |
                    { kind:"dagtochtPagina" , id: number} |
-                   { kind:"aanbiedingPagina"} |
+                   { kind:"loaded"} |
                    {kind: "ooievaarspasPagina"} |
                    {kind: "veelgesteldeVragenPagina"} |
                    {kind: "infopas", id:number}|
@@ -49,7 +49,7 @@ let menubar = <div> <Header onMovePage={(next_page) => this.moveToPage(next_page
        case "dagtochtPagina":
             
 		return <div>{menubar}<Dagtochten.DagtochtenComponent onMovePage={(next_page) => this.moveToPage(next_page)} id= {this.state.current_page.id} /> </div>
-        case "aanbiedingPagina":
+        case "loaded":
             return <div>{menubar}<Aanbieding.AanbiedingenComponent onMovePage={(next_page) => this.moveToPage(next_page)}/> </div> 
         case "veelgesteldeVragenPagina": 
                 return<div>{menubar}< veelgesteldeVragen.veelgesteldevragenComponent onMovePage={(next_page) => this.moveToPage(next_page)}/></div>   

@@ -20,8 +20,8 @@ let vragenLink = "Veelgestelde vragen"
 export default class Menu extends React.Component<MenubarComponentProps, MenubarComponentState> {
     
     render(){
-                let onClickDagtocht = (event) => this.props.onMovePage({ kind: "dagtochtPagina", id: 1})
-        let onClickAanbieding = (event) => this.props.onMovePage({ kind: "aanbiedingPagina"})
+        let onClickDagtocht = (event) => this.props.onMovePage({ kind: "dagtochtPagina", id: 1})
+        let onClickAanbieding = (event) => this.props.onMovePage({ kind: "loaded"})
         let onClickOoievaarsinfo = (event) => this.props.onMovePage({kind: "ooievaarspasPagina"})
             return (
             <header>  
