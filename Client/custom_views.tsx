@@ -10,15 +10,4 @@ import { AanbiedingenComponent } from "./Aanbiedingen";
 
 
 export let HomePage = function(slug: string) : JSX.Element {
-<<<<<<< HEAD
     return (<div><Manager.PageManagerComponent/></div>) }
-=======
-    return (<div><Manager.PageManagerComponent/> </div>) }
-    /*(<div>
-            {<Manager.PageManagerComponent/>}
-            <filtercat.FilterCategorieComponent/>
-            <filterwat.FilterWatComponent/>
-            <filterwaar.FilterWaarComponent/>     
-            <filtervoorwie.FilterVoorWieComponent/>   
-        </div>) }*/
->>>>>>> 67d20aa5451e560cafc399fed5b71f35c78c6931
