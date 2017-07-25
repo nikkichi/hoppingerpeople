@@ -15,6 +15,7 @@ import * as DetailPage from './InfoComponent'
 import Header from './Header'
 import * as Manager from './pageManager'
 import * as InformatieDetail from './InformatieDetail'
+import * as ExtraInformatie from './ExtraInformatie'
 
 //type dagtocht = [page1: "/Dagtochten", page2: "/Dagtochten/detailPagina"]
 type PageManagerComponentProps = {}
@@ -26,10 +27,11 @@ export type Page = { kind:"homepage"} |
                    { kind:"aanbiedingPagina"} |
                    {kind: "ooievaarspasPagina"} |
                    {kind: "veelgesteldeVragenPagina"} |
-                   {kind: "infopas", id:number}|
+                   {kind: "infopas", id:number, title:string}|
                    {kind: "DetailDagtocht", id: number, checkPage: number }|
                    {kind: "DetailAanbieding", id: number, checkPage: number} |
-                   {kind: "InformatieDetail", title: string}
+                   {kind: "InformatieDetail", title: string}|
+                   {kind: "ExtraInformatie", title: string}
 
 export class PageManagerComponent extends React.Component<PageManagerComponentProps, PageManagerComponentState>{
  
@@ -54,7 +56,7 @@ let menubar = <div> <Header onMovePage={(next_page) => this.moveToPage(next_page
         case "veelgesteldeVragenPagina": 
                 return<div>{menubar}< veelgesteldeVragen.veelgesteldevragenComponent onMovePage={(next_page) => this.moveToPage(next_page)}/></div>   
         case "infopas": 
-                    return<div>{menubar}<InfoPas.InfoPasComponent onMovePage={(next_page) => this.moveToPage(next_page)} id= {this.state.current_page.id}/></div>
+                    return<div>{menubar}<InfoPas.InfoPasComponent onMovePage={(next_page) => this.moveToPage(next_page)} id= {this.state.current_page.id} title={this.state.current_page.title} /></div>
         case "DetailDagtocht":
                 return<div>{menubar}<detailPagina.InforComponent id= {this.state.current_page.id} checkPage= {this.state.current_page.checkPage}/></div>
         case "DetailAanbieding":
@@ -63,6 +65,8 @@ let menubar = <div> <Header onMovePage={(next_page) => this.moveToPage(next_page
             return <div>{menubar}<Ooievaarspasinfo.OoievaarsPasComponent onMovePage={(next_page) => this.moveToPage(next_page)}  /> </div>  
         case "InformatieDetail": 
                     return<div>{menubar}<InformatieDetail.InformatieDetailComponent onMovePage={(next_page) => this.moveToPage(next_page)} title= {this.state.current_page.title}/></div>
+        case "ExtraInformatie":
+            return <div>{menubar}<ExtraInformatie.ExtrainformatieComponent onMovePage={(next_page) => this.moveToPage(next_page)} title = {this.state.current_page.title}  /></div>
 
 
     }}
