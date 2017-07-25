@@ -36,15 +36,15 @@ export class InfoPasComponent extends React.Component<InfoPasComponentProps, Inf
     }
 
     render(){
-        let onClickInformatieDetail = (id: number) => this.props.onMovePage({kind: "InformatieDetail", id: id})
+        let onClickInformatieDetail = (title: string) => this.props.onMovePage({kind: "InformatieDetail", title: title})
         if(this.state.kind == 'loaded'){
 
             let uitleg_view = function(information: Types.Uitleg_InformatiePas){ 
                 return <div key={information.title}>
                             
-                           <a onClick={(id) => onClickInformatieDetail(information.id)}>  <h2> {information.title}</h2></a>
+                           <a onClick={(id) => onClickInformatieDetail(information.title)}>  <h2> {information.title}</h2></a>
                             <div> {information.description}</div>
-                            <button onClick={() => onClickInformatieDetail(information.id)}>{hyperlink}</button>
+                            <button onClick={() => onClickInformatieDetail(information.title)}>{hyperlink}</button>
                             </div>
                     
                 }

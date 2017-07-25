@@ -60,9 +60,13 @@ export type categorienvragen = {
 export type Uitleg_InformatiePas={
     title: string,
     description: string,
-    id: number,
+    id: number
+}
+
+export type Detail_Uitleg={
     text: string,
-    Image: ''
+    image: string,
+    title: string
 }
 export type Dagtocht = {
     name: string,
