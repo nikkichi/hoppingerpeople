@@ -29,7 +29,7 @@ export type Page = { kind:"homepage"} |
                    {kind: "infopas", id:number}|
                    {kind: "DetailDagtocht", id: number, checkPage: number }|
                    {kind: "DetailAanbieding", id: number, checkPage: number} |
-                   {kind: "InformatieDetail", id: number}
+                   {kind: "InformatieDetail", title: string}
 
 export class PageManagerComponent extends React.Component<PageManagerComponentProps, PageManagerComponentState>{
  
@@ -62,7 +62,7 @@ let menubar = <div> <Header onMovePage={(next_page) => this.moveToPage(next_page
         case "ooievaarspasPagina":
             return <div>{menubar}<Ooievaarspasinfo.OoievaarsPasComponent onMovePage={(next_page) => this.moveToPage(next_page)}  /> </div>  
         case "InformatieDetail": 
-                    return<div>{menubar}<InformatieDetail.InformatieDetailComponent onMovePage={(next_page) => this.moveToPage(next_page)} id= {this.state.current_page.id}/></div>
+                    return<div>{menubar}<InformatieDetail.InformatieDetailComponent onMovePage={(next_page) => this.moveToPage(next_page)} title= {this.state.current_page.title}/></div>
 
 
     }}
