@@ -82,3 +82,9 @@ export type Category_Dagtocht={
     description: string,
     categoryID:number
 }
+export type Extra_Informatie={
+    title: string,
+    description: string,
+    text: string,
+    id: number
+}
