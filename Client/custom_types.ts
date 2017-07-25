@@ -25,9 +25,11 @@ export type InformatiePas = {
 }
 
 export type SpecialAanbieding = {
+    image: string,
     title: string,
     description: string, 
-    id: number
+    id: number,
+    reserveren: string
 }
 
 type ActivityKind = "cultuur" | "sport"
@@ -35,13 +37,15 @@ type ActivityKind = "cultuur" | "sport"
 export type Activy = { kind: ActivityKind, sub: string }
 
 export type aanbieding = {
+    image: string,
     title: string,
     description: string, 
     id: number,
     category: string,
     activity: Activy,
     location: string,
-    target: string 
+    target: string ,
+    reserveren: string
 }
 
 
@@ -81,15 +85,17 @@ export type Detail_Uitleg={
     title: string
 }
 export type Dagtocht = {
+    image: string,
     name: string,
     description: string,
     prijs: number,
     categoryID: number,
     text: string,
-    id:number
+    id:number,
+    reserveren: string
 }
 export type Category_Dagtocht={
-
+    image: string
     title: string,
     description: string,
     categoryID:number

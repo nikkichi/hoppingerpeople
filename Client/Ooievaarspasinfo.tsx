@@ -40,7 +40,7 @@ let hyperlink = 'lees meer'
  
      render()
      {
-       let onClickInfoPas = (id: number) => this.props.onMovePage({kind: "infopas", id: id})
+       let onClickInfoPas = (id: number) => this.props.onMovePage({kind: "infopas", id: id, title: "ja"})
 
        if(this.state.kind == "loaded" )
         {

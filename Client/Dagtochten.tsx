@@ -7,7 +7,7 @@ import * as Manager from './pageManager'
 import * as Api from './api'
 
 let checkdagtocht = true
-let hyperlink = "lees meer"
+let hyperlink = "Klik hier voor de dagtochten"
 let next_page = { kind: "DetailDagtocht" }
 type DagtochtenComponentProps = { onMovePage: (id: Manager.Page) => void, id: number }
 type DagtochtenComponentState =
@@ -52,6 +52,7 @@ export class DagtochtenComponent extends React.Component<DagtochtenComponentProp
             let categoryView = function (category: Types.Category_Dagtocht) {
                 return <div key={category.title}>
                     <h2>{category.title}</h2>
+                     <img src = {category.image} ></img>
                     <p>{category.description}</p>
                          <button onClick={(id) => onclickdagtocht(category.categoryID)}>
                         {hyperlink}
@@ -60,41 +61,11 @@ export class DagtochtenComponent extends React.Component<DagtochtenComponentProp
                 </div>
             }
 
-            let dag = this.state.detailDagtocht
-            let id = this.state.detailcat
             return <div className="box box--fourth">
-                {this.state.categories.map(category => categoryView(category))}}
+                {this.state.categories.map(category => categoryView(category))}
                </div>
         }
 
-        else if (this.state.kind == "DetailDagtocht") {
-            let dagtochtView = function (dagtocht: Types.Dagtocht) {
-                return <div key={dagtocht.name}>
-                    <a onClick={(id) => onclickdagtocht(dagtocht.id)}> {dagtocht.name}</a>
-                    +
-                                <p> {dagtocht.description}</p>
-                    <button onClick={(id) => onclickdagtocht(dagtocht.id)}>
-                        {hyperlink}
-                    </button>
-                </div>
-
-            }
-
-            // let x = localStorage.getItem('favoriteDagtocht') == this.state.detailDagtocht.name
-            // // return <div>
-            //     <p>{this.state.detailDagtocht.name}</p><br></br>
-            //     <p>{this.state.detailDagtocht.prijs}</p><br></br>
-            //     <p>{this.state.detailDagtocht.description}</p><br></br>
-            //     <p>{this.state.detailDagtocht.text}</p><br></br>
-            //     <p>Deze dagtocht is {x ? "wel" : "niet"} als favoriet gekozen</p>
-            //     <button onClick={event =>
-            //         this.state.kind == "DetailDagtocht" ?
-            //             localStorage.setItem('favoriteDagtocht', this.state.detailDagtocht.name)
-            //             : console.log("There is an error in DagtochtDetailPage")}>Maak favoriet</button>
-            // </div>
-
-
-        }
 
         else {
             return <div> Else</div>

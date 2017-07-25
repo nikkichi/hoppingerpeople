@@ -37,12 +37,14 @@ export class category_dagtochtComponenet extends React.Component<category_dagtoc
     }
 
     render(){
+        
          let onclickdagtocht = (id: number) => this.props.onMovePage({ kind: "DetailDagtocht", id: id, checkPage: 2 })
         if(this.state.kind == 'loaded'){
-
+{console.log("dagtochten...", this.state.dagtochten)}
            let dagtochtView = function (dagtocht: Types.Dagtocht) {
                 return <div key={dagtocht.name}>
                     <a onClick={(id) => onclickdagtocht(dagtocht.id)}>  <h2> {dagtocht.name}</h2></a>
+                    <img src = {dagtocht.image} ></img>
                      <div> {dagtocht.description}</div>
                 
 
@@ -58,7 +60,7 @@ export class category_dagtochtComponenet extends React.Component<category_dagtoc
                 <div> {
 
                     this.state.dagtochten.map(dagtocht => dagtochtView(dagtocht))}</div>
-                {this.state.dagtochten.filter(dagtocht => { dagtocht.categoryID == dagtocht.categoryID })
+                {/* {this.state.dagtochten.filter(dagtocht => { dagtocht.categoryID == dagtocht.categoryID }) */}
 
 
 

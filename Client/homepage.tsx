@@ -38,6 +38,7 @@ export class HomepageComponent extends React.Component<HomepageComponentProps, H
             let specialAanbiedingView = function (special_aanbieding: Types.SpecialAanbieding) {
                 return <div className="box--fourth" key={special_aanbieding.id}>
                        <a onClick={(id) => onclickAanbieding(special_aanbieding.id)}> <h2>{special_aanbieding.title}</h2> </a>
+                              <img src = {special_aanbieding.image} ></img> 
                     <br></br>
                     <p className="box--special"> {special_aanbieding.description}</p>
                     <br></br>

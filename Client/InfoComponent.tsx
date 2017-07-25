@@ -7,10 +7,10 @@ import * as Manager from './pageManager'
 import * as Api from './api'
 
 type InforComponentProps = { id: number, checkPage: number }
-type InforComponentState = { kind: "loading" } | 
-                           { kind: "DetailDagtocht", dagtochten: Types.Dagtocht[], favoriete: Types.Dagtocht } |
-                           { kind: "DetailAanbieding", aanbieding: Types.aanbieding[] }|
-                            { kind: "DetailSpecial", special: Types.SpecialAanbieding[] }
+type InforComponentState = { kind: "loading" } |
+    { kind: "DetailDagtocht", dagtochten: Types.Dagtocht[], favoriete: Types.Dagtocht } |
+    { kind: "DetailAanbieding", aanbieding: Types.aanbieding[] } |
+    { kind: "DetailSpecial", special: Types.SpecialAanbieding[] }
 
 
 export class InforComponent extends React.Component<InforComponentProps, InforComponentState>{
@@ -20,16 +20,16 @@ export class InforComponent extends React.Component<InforComponentProps, InforCo
     }
 
     loadAanbieding() {
-         console.log("id checker",this.props.id)
+        console.log("id checker", this.props.id)
         Api
             .get_aanbieding(this.props.id)
             .then(d => this.setState({ ...this.state, kind: "DetailAanbieding", aanbieding: d }))
         // .catch(_ => console.log('get dachtocht rejected ') || setTimeout( this.loadDagtochten ,5000))
 
     }
-    
+
     loadSpeciaal() {
-         console.log("id checker",this.props.id)
+        console.log("id checker", this.props.id)
         Api
             .get_special(this.props.id)
             .then(d => this.setState({ ...this.state, kind: "DetailSpecial", special: d }))
@@ -41,7 +41,7 @@ export class InforComponent extends React.Component<InforComponentProps, InforCo
     loadDagtocht() {
         // console.log("id checker",this.props.id)
         Api
-            .get_dagtocht(this.props.id)
+            .get_OneDagtocht(this.props.id)
             .then(d => this.setState({ ...this.state, kind: "DetailDagtocht", dagtochten: d }))
         // .catch(_ => console.log('get dachtocht rejected ') || setTimeout( this.loadDagtochten ,5000))
 
@@ -50,34 +50,37 @@ export class InforComponent extends React.Component<InforComponentProps, InforCo
     componentWillMount() {
         console.log('component will mount', this.props.checkPage)
 
-        if (this.props.checkPage == 1){
-        return this.loadAanbieding();}
-        else if (this.props.checkPage == 2){
-            return   this.loadDagtocht();}
-        else if (this.props.checkPage == 3){
+        if (this.props.checkPage == 1) {
+            return this.loadAanbieding();
+        }
+        else if (this.props.checkPage == 2) {
+            return this.loadDagtocht();
+        }
+        else if (this.props.checkPage == 3) {
             return this.loadSpeciaal()
         }
 
-        }
-    
+    }
+
 
 
     render() {
         console.log(this.state.kind)
         if (this.state.kind == "DetailAanbieding") {
             let AanbiedingView = function (aanbieding: Types.aanbieding) {
-                let onclickFavoriete = (event) => (
-                    this.state.kind == "DetailAanbieding" ?
-                        localStorage.setItem('favoriteDagtocht', this.state.favoriete.name)
-                        : console.log("There is an error in DagtochtDetailPage"))
+
 
                 return <div key={aanbieding.title}>
-
                     <h2> {aanbieding.title}</h2>
+                    <img src={aanbieding.image} ></img>
                     <br></br>
+                    <h2>Omschrijving</h2>
                     <p> {aanbieding.description}</p>
                     <br></br>
-                    <button onClick={onclickFavoriete}>Maak favoriet</button>
+                    <h2>reserveren</h2>
+                    <p>{aanbieding.reserveren}</p>
+                    <br></br>
+
 
                 </div>
             }
@@ -87,21 +90,19 @@ export class InforComponent extends React.Component<InforComponentProps, InforCo
 
             </div>
         }
-else if (this.state.kind == "DetailSpecial") {
-            let  SpecialView = function (special: Types.SpecialAanbieding) {
-                let onclickFavoriete = (event) => (
-                    this.state.kind == "DetailSpecial" ?
-                        localStorage.setItem('favoriteDagtocht', this.state.favoriete.name)
-                        : console.log("There is an error in DagtochtDetailPage"))
-
+        else if (this.state.kind == "DetailSpecial") {
+            let SpecialView = function (special: Types.SpecialAanbieding) {
                 return <div key={special.title}>
-
                     <h2> {special.title}</h2>
+                    <img src = {special.image} ></img> 
                     <br></br>
+                    <h2>Omschrijving</h2>
                     <p> {special.description}</p>
                     <br></br>
-                     <button onClick={onclickFavoriete}>Maak favoriet</button> 
-
+                    <h2>reserveren</h2>
+                    <p>{special.reserveren}</p>
+              
+                    <br></br>
                 </div>
             }
             return <div>
@@ -114,15 +115,19 @@ else if (this.state.kind == "DetailSpecial") {
             let dagtochtView = function (dagtocht: Types.Dagtocht) {
                 return <div key={dagtocht.name}>
                     <h2> {dagtocht.name}</h2>
+                    <img src={dagtocht.image} ></img>
                     <br></br>
                     <h2>Omschrijving</h2>
                     <p> {dagtocht.text}</p>
-                    <br></br> 
+                    <br></br>
                     <h2>prijs</h2>
                     <p> €{dagtocht.prijs}</p>
                     <br></br>
-        
-       
+                    <h2>reserveren</h2>
+                    <p>{dagtocht.reserveren}</p>
+                    <br></br>
+
+
 
 
                 </div>

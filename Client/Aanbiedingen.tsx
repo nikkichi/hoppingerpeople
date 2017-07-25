@@ -6,6 +6,7 @@ import * as Manager from "./pageManager"
 import * as Types from './custom_types'
 import { FilterCategorieComponent } from './FilterComponent'
 
+
 let hyperlink = "lees meer "
 
 type AanbiedingenComponentProps = { onMovePage: (id: Manager.Page) => void }
@@ -28,6 +29,9 @@ export class AanbiedingenComponent extends React.Component<AanbiedingenComponent
     }
 
     componentWillMount() {
+        if (this.state.kind == "loading"){
+
+        }
         this.loadAanbieding()
     }
 
@@ -64,6 +68,9 @@ export class AanbiedingenComponent extends React.Component<AanbiedingenComponent
                 return <div className="box--fourth" key={aanbieding.id}>
                        <a onClick={(id) => onclickAanbieding(aanbieding.id)}> <h2>{aanbieding.title}</h2> </a>
                     <br></br>
+                    <img src = {aanbieding.image} ></img>
+            
+            
                     <p className="box--special"> {aanbieding.description}</p>
                     <br></br>
                     <button onClick={() => onclickAanbieding(aanbieding.id)}>
@@ -102,4 +109,6 @@ export class AanbiedingenComponent extends React.Component<AanbiedingenComponent
             return <div>Else</div>
         }
     }
+    
 }
+
