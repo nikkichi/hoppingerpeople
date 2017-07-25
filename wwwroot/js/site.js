@@ -30428,6 +30428,13 @@ exports.HomePage = function (slug) {
         React.createElement(Manager.PageManagerComponent, null),
         " "));
 };
+/*(<div>
+        {<Manager.PageManagerComponent/>}
+        <filtercat.FilterCategorieComponent/>
+        <filterwat.FilterWatComponent/>
+        <filterwaar.FilterWaarComponent/>
+        <filtervoorwie.FilterVoorWieComponent/>
+    </div>) }*/ 
 
 
 /***/ }),

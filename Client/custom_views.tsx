@@ -13,10 +13,11 @@ import * as filterwaar from './FilterWaarComponent'
 
 
 export let HomePage = function(slug: string) : JSX.Element {
-    return (<div>
-            {/* <Manager.PageManagerComponent/>  */}
+    return (<div><Manager.PageManagerComponent/> </div>) }
+    /*(<div>
+            {<Manager.PageManagerComponent/>}
             <filtercat.FilterCategorieComponent/>
             <filterwat.FilterWatComponent/>
             <filterwaar.FilterWaarComponent/>     
             <filtervoorwie.FilterVoorWieComponent/>   
-        </div>) }
+        </div>) }*/
