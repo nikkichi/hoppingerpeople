@@ -7,7 +7,9 @@ import * as Manager from './pageManager'
 import * as Api from './api'
 
 type veelgesteldevragenComponentProps = { onMovePage: (id: Manager.Page) => void }
-type veelgesteldevragenComponentState = { kind: "loading" } | { kind: "loaded", value: Types.vragen[] }|{kind: "veelgesteldevragenpagina", vragen: Types.vragen[], antwoorden:boolean[]}
+type veelgesteldevragenComponentState = 
+  { kind: "loading" } 
+| {kind: "loaded", cat1: Types.cat1vragen[], cat2: Types.cat2vragen[], cat3: Types.cat3vragen[], antwoorden:boolean[]}
 
 let homepageLink = "Home"
 
@@ -21,46 +23,66 @@ export class veelgesteldevragenComponent extends React.Component<veelgesteldevra
 
    componentWillMount() {
         this.loadonderwerp()
-
+        //dit is om de vrgen te initialiseren
+        this.setState({...this.state, antwoorden:[false, false, false, false, false, false]})
    }
 
    loadonderwerp() {
-        Api.get_veelgesteldevragenonderwerp().then(o => this.setState({ ...this.state, kind: "veelgesteldevragenpagina",
-        vragen: o, antwoorden:[true, false, false, false, false, false]}))
-        //.catch(o => this.loadonderwerp())
+        Api.get_cat1vragen().then((cat1 => this.setState({ ...this.state, kind: "loaded", cat1: cat1})), (e => console.log("Error", e)))
+        Api.get_cat2vragen().then((cat2 => this.setState({ ...this.state, kind: "loaded", cat2: cat2})), (e => console.log("Error", e)))
+        Api.get_cat3vragen().then((cat3 => this.setState({ ...this.state, kind: "loaded", cat3: cat3})), (e => console.log("Error", e)))
     }
 
    render() {
-        console.log("ik ben aan het renderen")
-        if (this.state.kind == "veelgesteldevragenpagina") {
-            let onderwerp_view = function (info: Types.vragen, thisRef) {
-                function antwoordToggler(thisRef, antwoordNummer){
-                    thisRef.state.antwoorden[antwoordNummer] = !thisRef.state.antwoorden[antwoordNummer]
-                    thisRef.forceUpdate()
-                }
-                return <div>
-                <h1>{info.pagina}</h1>
-                <h2> {info.vraag}</h2>
-                <div onClick={(event) => antwoordToggler(thisRef, 0)}>{info.vraag}</div>
-                {!thisRef.state.antwoorden[0]?info.antwoord:"ANTWOORD IS VERBORGEN"}
-            </div>
+        console.log("state", this.state)
+        if (this.state.kind == "loaded" && this.state.cat1 != undefined && this.state.cat2 != undefined && this.state.cat3 != undefined) {
+            function antwoordToggler(thisRef, antwoordNummer){
+                thisRef.state.antwoorden[antwoordNummer] = !thisRef.state.antwoorden[antwoordNummer]
+                thisRef.forceUpdate()
+            }
+            let onderwerp_view1 = function (info1:Types.cat1vragen, thisRef){
+                return  <div>
+                            <h1>{info1.categorie}</h1>
+                            <h4 onClick={(event) => antwoordToggler(this, info1.id)}>{info1.vraag}</h4>
+                            {!thisRef.state.antwoorden[info1.id]?info1.antwoord:""}
+                        </div>
+                        
+           } // info1.id refereert naar de vraag zelf, dus die moet getoggled en gecheckt worden
+           let onderwerp_view2 = function (info2:Types.cat2vragen, thisRef){
+                return  <div>
+                            <h1>{info2.categorie}</h1>
+                            <h4 onClick={(event) => antwoordToggler(thisRef, info2.id)}>{info2.vraag}</h4>
+                            {!thisRef.state.antwoorden[info2.id]?info2.antwoord:""}
+                        </div>
+            }
+            let onderwerp_view3 = function (info3:Types.cat2vragen, thisRef){
+                return  <div>
+                            <h1>{info3.categorie}</h1>
+                            <h4 onClick={(event) => antwoordToggler(thisRef, info3.id)}>{info3.vraag}</h4>
+                            {!thisRef.state.antwoorden[info3.id]?info3.antwoord:""}
+                        </div>
+            }
             
 
-           }
-
-         return<div> <button onClick={(event) => this.props.onMovePage({ kind: "homepage"})}>{homepageLink}</button>
-                
-             
-             {this.state.vragen.map( value =>onderwerp_view(value, this))}
+         return <div> 
+             {this.state.cat1.map( value =>onderwerp_view1(value, this))}
+             {this.state.cat2.map( value =>onderwerp_view2(value, this))}
+             {this.state.cat3.map( value =>onderwerp_view3(value, this))}
         
          </div>
 
 
 
 
-       }
-        else {
-            return <div>else</div>
-        }
-    }
+       
+       
+    
 }
+ else {
+            return <div>else</div>
+ }
+}
+}
+
+
+//                             <p><button onClick={(event) => thisRef.setState({...thisRef.state, antwoorden: thisRef.state.antwoorden.map(x => false)})}>klik mij</button></p>

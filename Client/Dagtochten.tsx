@@ -24,10 +24,6 @@ export class DagtochtenComponent extends React.Component<DagtochtenComponentProp
     componentWillMount() {
 
         this.loadCategories();
-        this.loadDagtochten();
-
-
-
     }
 
     loadCategories() {
@@ -42,23 +38,14 @@ export class DagtochtenComponent extends React.Component<DagtochtenComponentProp
             e => console.log("Error: ", e))
     }
 
-    loadDagtochten() {
-        Api
-            .get_dagtocht(this.props.id)
-            .then(d => this.setState({
-                ...this.state,
-                kind: "dagtochtPagina",
-                dagtochten: d
-            }))
+    // .catch(_ => console.log('get dachtocht rejected ') 
+    //         || setTimeout( this.loadDagtochten ,5000))
 
-        // .catch(_ => console.log('get dachtocht rejected ') 
-        //         || setTimeout( this.loadDagtochten ,5000))
 
-    }
 
     render() {
 
-        let onclickdagtocht = (id: number) => this.props.onMovePage({ kind: "DetailDagtocht", id: id, checkPage: 2 })
+        let onclickdagtocht = (id: number) => this.props.onMovePage({ kind: "category_dagtocht", id: id })
         console.log(this.state.kind)
         if (this.state.kind == "dagtochtPagina") {
 
@@ -66,32 +53,18 @@ export class DagtochtenComponent extends React.Component<DagtochtenComponentProp
                 return <div key={category.title}>
                     <h2>{category.title}</h2>
                     <p>{category.description}</p>
-                </div>
-            }
-            let dagtochtView = function (dagtocht: Types.Dagtocht) {
-                return <div key={dagtocht.name}>
-                    <a onClick={(id) => onclickdagtocht(dagtocht.id)}>  <h2> {dagtocht.description}</h2></a>
-
-
-                    <button
-                        onClick={() => onclickdagtocht(dagtocht.id)}>
+                         <button onClick={(id) => onclickdagtocht(category.categoryID)}>
                         {hyperlink}
                     </button>
+
                 </div>
             }
+
             let dag = this.state.detailDagtocht
             let id = this.state.detailcat
             return <div className="box box--fourth">
-                {this.state.categories.map(category => categoryView(category))}
-
-                <div> {
-
-                    this.state.dagtochten.map(dagtocht => dagtochtView(dagtocht))}</div>
-                {this.state.dagtochten.filter(dagtocht => { dagtocht.categoryID == dagtocht.categoryID })
-
-
-
-                }</div>
+                {this.state.categories.map(category => categoryView(category))}}
+               </div>
         }
 
         else if (this.state.kind == "DetailDagtocht") {

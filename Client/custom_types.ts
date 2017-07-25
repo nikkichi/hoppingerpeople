@@ -43,26 +43,42 @@ export type aanbieding = {
     location: string,
     target: string 
 }
-export type vragen={
+
+
+
+export type title={
    pagina: string
-   vraag: string
-   antwoord: string
-   title: string
-   id: number
+   
 }
-
-export type categorienvragen = {
+export type cat1vragen={
     categorie: string
-    id : number
-
+    vraag : string
+    antwoord: string
+    id: number
+}
+export type cat2vragen={
+    categorie: string
+    vraag : string
+    antwoord: string
+    id: number
+}
+export type cat3vragen={
+    categorie: string
+    vraag : string
+    antwoord: string
+    id: number
 }
 
 export type Uitleg_InformatiePas={
     title: string,
     description: string,
-    id: number,
+    id: number
+}
+
+export type Detail_Uitleg={
     text: string,
-    Image: ''
+    image: string,
+    title: string
 }
 export type Dagtocht = {
     name: string,
@@ -77,4 +93,10 @@ export type Category_Dagtocht={
     title: string,
     description: string,
     categoryID:number
+}
+export type Extra_Informatie={
+    title: string,
+    description: string,
+    text: string,
+    id: number
 }

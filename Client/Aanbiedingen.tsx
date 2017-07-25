@@ -4,12 +4,20 @@ import * as Immutable from "immutable"
 import * as Api from "./api"
 import * as Manager from "./pageManager"
 import * as Types from './custom_types'
+import { FilterCategorieComponent } from './FilterComponent'
 
 let hyperlink = "lees meer "
 
 type AanbiedingenComponentProps = { onMovePage: (id: Manager.Page) => void }
 type AanbiedingenComponentState = { kind: "loading" } |
-    { kind: "aanbiedingPagina", aanbieding: Types.aanbieding[] , favoriete: Types.aanbieding}
+    { kind: "loaded", aanbiedingen: Types.aanbieding[], favoriete: Types.aanbieding, filterState: FilterState }
+
+export type FilterState =
+    {
+        Categorie: { kind: "off" } | { kind: "on", value: string }
+    }
+
+let EmptyFilterState = { Categorie: { kind: "off" } }
 
 //main component voor aanbiedingen pagina
 export class AanbiedingenComponent extends React.Component<AanbiedingenComponentProps, AanbiedingenComponentState>
@@ -20,24 +28,37 @@ export class AanbiedingenComponent extends React.Component<AanbiedingenComponent
     }
 
     componentWillMount() {
+        this.loadAanbieding()
+    }
 
-        console.log('component will mount')
-        this.loadAanbieding();
-
+    setFilterState(newFilterState: FilterState) {
+        if (this.state.kind == "loaded") {
+            let newState = {...this.state, filterState: newFilterState}
+            this.setState(newState)
+        }
+        if (newFilterState.Categorie.kind == "on"){
+            console.log(newFilterState.Categorie.value)
+        }
     }
 
     loadAanbieding() {
         Api
             .get_aanbiedingen()
-            .then(c => this.setState({ ...this.state, kind: "aanbiedingPagina", aanbieding: c }))
-        //.catch(_ => this.loadCategories())
-    }
+            .then(c => { this.setState(
+                {
+                    ...this.state,
+                    kind: "loaded",
+                    aanbiedingen: c,
+                    filterState: EmptyFilterState
+                }
+            )} )
+        }
 
     render() {
         let onclickAanbieding = (id: number) => this.props.onMovePage({ kind: "DetailAanbieding", id: id, checkPage: 1})
         
         console.log(this.state.kind)
-        if (this.state.kind == "aanbiedingPagina") {
+        if (this.state.kind == "loaded") {
 
             let AanbiedingView = function (aanbieding: Types.aanbieding) {
                 return <div className="box--fourth" key={aanbieding.id}>
@@ -49,25 +70,36 @@ export class AanbiedingenComponent extends React.Component<AanbiedingenComponent
                         {hyperlink}
                     </button>   
                 </div>
-
             }
+
+            let filteredAanbiedingen = this.state.aanbiedingen
+                .filter((a) => {
+                    if (this.state.kind == "loaded") {
+                        if(this.state.filterState.Categorie.kind == "off") {
+                            return true;
+                        } else {
+                            if (a.category == this.state.filterState.Categorie.value) { return true }
+                            else { return false }
+                        }
+                    }
+                })
+
             return <div>
                 <h1 className="homepage--title">Aanbiedingen</h1>
                 <h2 className="box--aanbieding">Alle aanbiedingen</h2>
-                {this.state.aanbieding.map(aanbieding => AanbiedingView(aanbieding))
+                {/* {this.state.aanbiedingen.map(aanbieding => AanbiedingView(aanbieding)) */}
                 }
+                <FilterCategorieComponent 
+                aanbiedingen={this.state.aanbiedingen}
+                filterState={this.state.filterState} 
+                setFilterState={this.setFilterState.bind(this)} />
 
+                {filteredAanbiedingen.map(aanbieding => AanbiedingView(aanbieding))}
             </div>
         }
 
         else {
-            return <div> Else</div>
-            // return <div> Dachtochten {this.state.dagtochten.map((element,key) => <div> {key} </div>)}</div>
+            return <div>Else</div>
         }
     }
 }
-
-//    return <div><a onClick={() => this.toggle_button()}><h1>{this.state.name}</h1></a>
-//                         <button onClick={() => this.toggle_button()}>{button_text}</button><br/><br/>
-//                         {description}<br/><br/>
-//                         {fav_button}</div>
