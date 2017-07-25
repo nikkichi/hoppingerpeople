@@ -7,6 +7,7 @@ import * as Manager from './pageManager'
 import * as Api from './api'
 type FilterWatComponentProps = { }
 type FilterWatComponentState = { kind: 'loading' } | { kind: 'loaded', activityKind: string, aanbiedingen: Types.aanbieding[] } 
+
 export class FilterWatComponent extends React.Component<FilterWatComponentProps, FilterWatComponentState>{
     constructor(props, context) {
         super(props, context)

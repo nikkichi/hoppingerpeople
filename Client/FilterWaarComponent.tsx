@@ -6,15 +6,33 @@ import * as Manager from "./pageManager";
 import * as api from "./api";
 
 type FilterWaarComponentProps = {}
-type FilterWaarComponentState = {}
+type FilterWaarComponentState = { kind: 'loading' } | { kind: 'loaded', aanbiedingen: Types.aanbieding[]}
 
 export class FilterWaarComponent extends React.Component<FilterWaarComponentProps, FilterWaarComponentState>{
     constructor(props, context){
         super(props, context)
-        this.state = {}
+        this.state = { kind: 'loading'}
+    }
+
+    load_locations(){
+        api.get_aanbiedingen()
+        .then(a => this.setState({... this.state, kind: 'loaded', aanbieding: a}))
+        .catch( _ => this.load_locations())
     }
 
     render(){
+
+        if (this.state.kind == 'loaded'){
+            let locations = Immutable.List(this.state.aanbiedingen)
+                            .map((aanbieding) => aanbieding.location)
+                            .reduce((accumulator, value) => {
+                                    if (accumulator.includes(value))
+                                        { return accumulator}
+                                    else {return accumulator.push(value)}
+                            }, Immutable.List<string>())
+
+        let stringToOption = (x: string) => <option>{x}</option>        
+
         return <div>
             Waar?<br/>
             <select>
@@ -28,5 +46,6 @@ export class FilterWaarComponent extends React.Component<FilterWaarComponentProp
                 </optgroup>
             </select>
         </div>
+        }
     }
 }
