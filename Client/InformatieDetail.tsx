@@ -8,9 +8,9 @@ import * as Types from './custom_types'
 import * as Api from './api'
 import * as Manager from './pageManager'
 
-type InformatieDetailComponentProps = {onMovePage: (id: Manager.Page) => void, id: number}
+type InformatieDetailComponentProps = {onMovePage: (id: Manager.Page) => void, title: string}
 type InformatieDetailComponentState = { kind: "loading"} 
-                                     | {kind:"loaded", Uitleginformatie: Types.Uitleg_InformatiePas[]}
+                                     | {kind:"loaded", Uitleginformatie: Types.Detail_Uitleg[]}
 
 export class InformatieDetailComponent extends React.Component<InformatieDetailComponentProps, InformatieDetailComponentState>{
     constructor(props, context){
@@ -19,7 +19,7 @@ export class InformatieDetailComponent extends React.Component<InformatieDetailC
     }
 
     loadDetailinfo(){
-        Api.get_OverDeOoievaarspas(this.props.id)
+        Api.get_InformatieDetail(this.props.title)
         .then(u => this.setState({...this.state, kind: 'loaded', Uitleginformatie: u}))
         .catch(u=> console.log("error"))//this.loadUitleg())
         console.log('test')
@@ -32,11 +32,11 @@ export class InformatieDetailComponent extends React.Component<InformatieDetailC
 
     render(){
         if (this.state.kind == 'loaded'){
-            let detail_view = function(details: Types.Uitleg_InformatiePas){
+            let detail_view = function(details: Types.Detail_Uitleg){
                 return <div key={details.title}>
                     <h1>{details.title}</h1>
                     <div>{details.text}</div>
-                    <div>{details.id}</div>
+                    <div>{details.image}</div>
                     </div>
             }
                 return<div>

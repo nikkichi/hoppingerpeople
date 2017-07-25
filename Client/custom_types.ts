@@ -72,9 +72,13 @@ export type cat3vragen={
 export type Uitleg_InformatiePas={
     title: string,
     description: string,
-    id: number,
+    id: number
+}
+
+export type Detail_Uitleg={
     text: string,
-    Image: ''
+    image: string,
+    title: string
 }
 export type Dagtocht = {
     name: string,
@@ -89,4 +93,10 @@ export type Category_Dagtocht={
     title: string,
     description: string,
     categoryID:number
+}
+export type Extra_Informatie={
+    title: string,
+    description: string,
+    text: string,
+    id: number
 }

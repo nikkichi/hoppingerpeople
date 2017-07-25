@@ -15,6 +15,12 @@ import * as DetailPage from './InfoComponent'
 import Header from './Header'
 import * as Manager from './pageManager'
 import * as InformatieDetail from './InformatieDetail'
+<<<<<<< HEAD
+import * as category_dagtocht from './category_dagtocht'
+
+=======
+import * as ExtraInformatie from './ExtraInformatie'
+>>>>>>> b80ade85524750182948c7a74a95e2a7167577e0
 
 //type dagtocht = [page1: "/Dagtochten", page2: "/Dagtochten/detailPagina"]
 type PageManagerComponentProps = {}
@@ -23,13 +29,15 @@ type PageManagerComponentState = { current_page: Page }
 //export type Page = { kind:"dagtocht" , id:number } | { kind:"DagtochtPagina" } | { kind:"contact us", person:string }
 export type Page = { kind:"homepage"} |
                    { kind:"dagtochtPagina" , id: number} |
-                   { kind:"aanbiedingPagina"} |
+                   { kind:"loaded"} |
                    {kind: "ooievaarspasPagina"} |
                    {kind: "veelgesteldeVragenPagina"} |
-                   {kind: "infopas", id:number}|
+                   {kind: "infopas", id:number, title:string}|
                    {kind: "DetailDagtocht", id: number, checkPage: number }|
                    {kind: "DetailAanbieding", id: number, checkPage: number} |
-                   {kind: "InformatieDetail", id: number}
+                   {kind: "InformatieDetail", title: string}|
+                   {kind: "category_dagtocht", id: number}|
+                   {kind: "ExtraInformatie", title: string}
 
 export class PageManagerComponent extends React.Component<PageManagerComponentProps, PageManagerComponentState>{
  
@@ -49,12 +57,12 @@ let menubar = <div> <Header onMovePage={(next_page) => this.moveToPage(next_page
        case "dagtochtPagina":
             
 		return <div>{menubar}<Dagtochten.DagtochtenComponent onMovePage={(next_page) => this.moveToPage(next_page)} id= {this.state.current_page.id} /> </div>
-        case "aanbiedingPagina":
+        case "loaded":
             return <div>{menubar}<Aanbieding.AanbiedingenComponent onMovePage={(next_page) => this.moveToPage(next_page)}/> </div> 
         case "veelgesteldeVragenPagina": 
                 return<div>{menubar}< veelgesteldeVragen.veelgesteldevragenComponent onMovePage={(next_page) => this.moveToPage(next_page)}/></div>   
         case "infopas": 
-                    return<div>{menubar}<InfoPas.InfoPasComponent onMovePage={(next_page) => this.moveToPage(next_page)} id= {this.state.current_page.id}/></div>
+                    return<div>{menubar}<InfoPas.InfoPasComponent onMovePage={(next_page) => this.moveToPage(next_page)} id= {this.state.current_page.id} title={this.state.current_page.title} /></div>
         case "DetailDagtocht":
                 return<div>{menubar}<detailPagina.InforComponent id= {this.state.current_page.id} checkPage= {this.state.current_page.checkPage}/></div>
         case "DetailAanbieding":
@@ -62,7 +70,15 @@ let menubar = <div> <Header onMovePage={(next_page) => this.moveToPage(next_page
         case "ooievaarspasPagina":
             return <div>{menubar}<Ooievaarspasinfo.OoievaarsPasComponent onMovePage={(next_page) => this.moveToPage(next_page)}  /> </div>  
         case "InformatieDetail": 
-                    return<div>{menubar}<InformatieDetail.InformatieDetailComponent onMovePage={(next_page) => this.moveToPage(next_page)} id= {this.state.current_page.id}/></div>
+                    return<div>{menubar}<InformatieDetail.InformatieDetailComponent onMovePage={(next_page) => this.moveToPage(next_page)} title= {this.state.current_page.title}/></div>
+<<<<<<< HEAD
+        case "category_dagtocht": 
+                    return<div>{menubar}<category_dagtocht.category_dagtochtComponenet onMovePage={(next_page) => this.moveToPage(next_page)} id={this.state.current_page.id}/></div>
+
+=======
+        case "ExtraInformatie":
+            return <div>{menubar}<ExtraInformatie.ExtrainformatieComponent onMovePage={(next_page) => this.moveToPage(next_page)} title = {this.state.current_page.title}  /></div>
+>>>>>>> b80ade85524750182948c7a74a95e2a7167577e0
 
 
     }}
