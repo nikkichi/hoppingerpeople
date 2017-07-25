@@ -111,20 +111,18 @@ else if (this.state.kind == "DetailSpecial") {
             </div>
         }
         else if (this.state.kind == "DetailDagtocht") {
-            let onclickFavoriete = (event) => (
-                this.state.kind == "DetailDagtocht" ?
-                    localStorage.setItem('favoriteDagtocht', this.state.favoriete.name)
-                    : console.log("There is an error in DagtochtDetailPage"))
             let dagtochtView = function (dagtocht: Types.Dagtocht) {
                 return <div key={dagtocht.name}>
                     <h2> {dagtocht.name}</h2>
                     <br></br>
+                    <h2>Omschrijving</h2>
                     <p> {dagtocht.text}</p>
+                    <br></br> 
+                    <h2>prijs</h2>
+                    <p> €{dagtocht.prijs}</p>
                     <br></br>
-                    <p>{dagtocht.prijs}</p>
-                    <br></br>
-                    <p>{dagtocht.categoryID}</p>
-                    <button onClick={onclickFavoriete}>Maak favoriet</button>
+        
+       
 
 
                 </div>

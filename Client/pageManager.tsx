@@ -15,6 +15,8 @@ import * as DetailPage from './InfoComponent'
 import Header from './Header'
 import * as Manager from './pageManager'
 import * as InformatieDetail from './InformatieDetail'
+import * as category_dagtocht from './category_dagtocht'
+
 
 //type dagtocht = [page1: "/Dagtochten", page2: "/Dagtochten/detailPagina"]
 type PageManagerComponentProps = {}
@@ -29,7 +31,9 @@ export type Page = { kind:"homepage"} |
                    {kind: "infopas", id:number}|
                    {kind: "DetailDagtocht", id: number, checkPage: number }|
                    {kind: "DetailAanbieding", id: number, checkPage: number} |
-                   {kind: "InformatieDetail", title: string}
+                   {kind: "InformatieDetail", title: string}|
+                   {kind: "category_dagtocht", id: number}
+
 
 export class PageManagerComponent extends React.Component<PageManagerComponentProps, PageManagerComponentState>{
  
@@ -63,6 +67,9 @@ let menubar = <div> <Header onMovePage={(next_page) => this.moveToPage(next_page
             return <div>{menubar}<Ooievaarspasinfo.OoievaarsPasComponent onMovePage={(next_page) => this.moveToPage(next_page)}  /> </div>  
         case "InformatieDetail": 
                     return<div>{menubar}<InformatieDetail.InformatieDetailComponent onMovePage={(next_page) => this.moveToPage(next_page)} title= {this.state.current_page.title}/></div>
+        case "category_dagtocht": 
+                    return<div>{menubar}<category_dagtocht.category_dagtochtComponenet onMovePage={(next_page) => this.moveToPage(next_page)} id={this.state.current_page.id}/></div>
+
 
 
     }}
