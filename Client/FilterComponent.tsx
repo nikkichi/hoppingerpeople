@@ -189,7 +189,7 @@ export class FilterWaarComponent extends React.Component<FilterWaarComponentProp
     }
 
     load_locations(){
-        api.get_aanbiedingen()
+        Api.get_aanbiedingen()
         .then(a => this.setState({... this.state, kind: 'loaded', aanbieding: a}))
         .catch( _ => this.load_locations())
     }
