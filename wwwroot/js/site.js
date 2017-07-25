@@ -31244,10 +31244,15 @@ const Aanbieding = __webpack_require__(323);
 const veelgesteldeVragen = __webpack_require__(339);
 const Header_1 = __webpack_require__(325);
 const InformatieDetail = __webpack_require__(328);
+const Zoek = __webpack_require__(639);
 class PageManagerComponent extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = { current_page: { kind: "homepage", id: 0 } };
+    }
+    moveToPage(next_page) {
+        console.log("move to page");
+        this.setState(Object.assign({}, this.state, { current_page: next_page }));
     }
     render() {
         console.log('PAGEMANAGER', this.state.current_page.kind);
@@ -31295,21 +31300,15 @@ class PageManagerComponent extends React.Component {
                 return React.createElement("div", null,
                     menubar,
                     React.createElement(InformatieDetail.InformatieDetailComponent, { onMovePage: (next_page) => this.moveToPage(next_page), title: this.state.current_page.title }));
+            case "zoekresultatenPagina":
+                return React.createElement("div", null,
+                    React.createElement("div", null,
+                        " ",
+                        React.createElement(Header_1.default, { onMovePage: (next_page) => this.moveToPage(next_page) })),
+                    React.createElement(Zoek.Zoekbalk, { onMovePage: (next_page) => this.moveToPage(next_page) }));
+            default:
+                return React.createElement("h1", null, "HERES THE MISTAKE");
         }
-    }
-    //     function Footer(){
-    //         return  <footer>
-    //                     <button onClick={event => location.reload()}>Ga naar Homepagina</button>
-    //                 </footer>
-    //     }
-    //     return  <div>
-    //                 {PageContent(this)}
-    //                 {Footer()}
-    //             </div>
-    // }
-    moveToPage(next_page) {
-        console.log("move to page");
-        this.setState(Object.assign({}, this.state, { current_page: next_page }));
     }
 }
 exports.PageManagerComponent = PageManagerComponent;
@@ -55917,6 +55916,45 @@ module.exports = function(module) {
 	}
 	return module;
 };
+
+
+/***/ }),
+/* 634 */,
+/* 635 */,
+/* 636 */,
+/* 637 */,
+/* 638 */,
+/* 639 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const React = __webpack_require__(25);
+class Zoekbalk extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = { kind: "idle" };
+    }
+    AutoCorrect(searchterm) {
+        return [searchterm]; //for now just returns the term itself
+    }
+    SearchFunction(searchterm) {
+        let options = this.AutoCorrect(searchterm);
+    }
+    render() {
+        if (this.state.kind == "idle") {
+            return (React.createElement("div", null,
+                React.createElement("input", { type: "text", id: "searchInput" }),
+                React.createElement("button", { onClick: event => this.props.onMovePage("zoekresultatenPagina") }, "Zoeken!")));
+        }
+        else {
+            return React.createElement("h1", null, "SEARCHBAR IS NOT IDLE ANYMORE");
+        }
+    }
+}
+exports.Zoekbalk = Zoekbalk;
+//this.SearchFunction((document.getElementById("SearchInput")).nodeValue) 
 
 
 /***/ })

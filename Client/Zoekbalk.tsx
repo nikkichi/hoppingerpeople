@@ -18,7 +18,7 @@ import * as InformatieDetail from './InformatieDetail'
 
 type Result = string //hier moet ook een hyperlink bij
 
-export type ZoekbalkProps = { onMovePage: () => void}
+export type ZoekbalkProps = { onMovePage: (id) => void}
 export type ZoekbalkState =
   | {kind:"idle"}
   | {kind:"searching" , searchterm:string}
@@ -41,9 +41,9 @@ export class Zoekbalk extends React.Component<ZoekbalkProps, ZoekbalkState> {
       return (
         <div>
           <input type="text" id="searchInput" />
-          <button onClick={event => this.props.onMovePage()}>Zoeken!</button>
+          <button onClick={event => this.props.onMovePage("zoekresultatenPagina")}>Zoeken!</button>
         </div>
-      );
+      )
     }else{
       return <h1>SEARCHBAR IS NOT IDLE ANYMORE</h1>
     }

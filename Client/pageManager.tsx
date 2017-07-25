@@ -15,6 +15,7 @@ import * as DetailPage from './InfoComponent'
 import Header from './Header'
 import * as Manager from './pageManager'
 import * as InformatieDetail from './InformatieDetail'
+import * as Zoek from './Zoekbalk'
 
 //type dagtocht = [page1: "/Dagtochten", page2: "/Dagtochten/detailPagina"]
 type PageManagerComponentProps = {}
@@ -24,12 +25,13 @@ type PageManagerComponentState = { current_page: Page }
 export type Page = { kind:"homepage"} |
                    { kind:"dagtochtPagina" , id: number} |
                    { kind:"aanbiedingPagina"} |
-                   {kind: "ooievaarspasPagina"} |
-                   {kind: "veelgesteldeVragenPagina"} |
-                   {kind: "infopas", id:number}|
-                   {kind: "DetailDagtocht", id: number, checkPage: number }|
-                   {kind: "DetailAanbieding", id: number, checkPage: number} |
-                   {kind: "InformatieDetail", title: string}
+                   { kind: "ooievaarspasPagina"} |
+                   { kind: "veelgesteldeVragenPagina"} |
+                   { kind: "infopas", id:number}|
+                   { kind: "DetailDagtocht", id: number, checkPage: number }|
+                   { kind: "DetailAanbieding", id: number, checkPage: number} |
+                   { kind: "InformatieDetail", title: string} |
+                   { kind: "zoekresultatenPagina", results: JSX.Element[]}
 
 export class PageManagerComponent extends React.Component<PageManagerComponentProps, PageManagerComponentState>{
  
@@ -38,33 +40,41 @@ export class PageManagerComponent extends React.Component<PageManagerComponentPr
         this.state = { current_page: { kind:"homepage", id:0} }
     }
 
+    moveToPage(next_page: Page) {
+        console.log("move to page")
+        this.setState({ ...this.state, current_page: next_page })
+    }
+
     render() {
 
-console.log('PAGEMANAGER', this.state.current_page.kind);
-let menubar = <div> <Header onMovePage={(next_page) => this.moveToPage(next_page)}/></div>
-    switch (this.state.current_page.kind) {
-        
-        case "homepage":
-            return <div>{menubar}<Homepage.HomepageComponent onMovePage={(next_page) => this.moveToPage(next_page)}  />  </div>
-       case "dagtochtPagina":
-            
-		return <div>{menubar}<Dagtochten.DagtochtenComponent onMovePage={(next_page) => this.moveToPage(next_page)} id= {this.state.current_page.id} /> </div>
-        case "aanbiedingPagina":
-            return <div>{menubar}<Aanbieding.AanbiedingenComponent onMovePage={(next_page) => this.moveToPage(next_page)}/> </div> 
-        case "veelgesteldeVragenPagina": 
-                return<div>{menubar}< veelgesteldeVragen.veelgesteldevragenComponent onMovePage={(next_page) => this.moveToPage(next_page)}/></div>   
-        case "infopas": 
-                    return<div>{menubar}<InfoPas.InfoPasComponent onMovePage={(next_page) => this.moveToPage(next_page)} id= {this.state.current_page.id}/></div>
-        case "DetailDagtocht":
+    console.log('PAGEMANAGER', this.state.current_page.kind);
+    let menubar = <div> <Header onMovePage={(next_page) => this.moveToPage(next_page)}/></div>
+        switch (this.state.current_page.kind) {
+            case "homepage":
+                return <div>{menubar}<Homepage.HomepageComponent onMovePage={(next_page) => this.moveToPage(next_page)}  />  </div>
+            case "dagtochtPagina":
+                return <div>{menubar}<Dagtochten.DagtochtenComponent onMovePage={(next_page) => this.moveToPage(next_page)} id= {this.state.current_page.id} /> </div>
+            case "aanbiedingPagina":
+                return <div>{menubar}<Aanbieding.AanbiedingenComponent onMovePage={(next_page) => this.moveToPage(next_page)}/> </div> 
+            case "veelgesteldeVragenPagina": 
+                return<div>{menubar}<veelgesteldeVragen.veelgesteldevragenComponent onMovePage={(next_page) => this.moveToPage(next_page)}/></div>   
+            case "infopas": 
+                return<div>{menubar}<InfoPas.InfoPasComponent onMovePage={(next_page) => this.moveToPage(next_page)} id= {this.state.current_page.id}/></div>
+            case "DetailDagtocht":
                 return<div>{menubar}<detailPagina.InforComponent id= {this.state.current_page.id} checkPage= {this.state.current_page.checkPage}/></div>
-        case "DetailAanbieding":
-           return<div>{menubar}<detailPagina.InforComponent id={this.state.current_page.id} checkPage= {this.state.current_page.checkPage} /></div>
-        case "ooievaarspasPagina":
-            return <div>{menubar}<Ooievaarspasinfo.OoievaarsPasComponent onMovePage={(next_page) => this.moveToPage(next_page)}  /> </div>  
-        case "InformatieDetail": 
-                    return<div>{menubar}<InformatieDetail.InformatieDetailComponent onMovePage={(next_page) => this.moveToPage(next_page)} title= {this.state.current_page.title}/></div>
-
-
+            case "DetailAanbieding":
+                return<div>{menubar}<detailPagina.InforComponent id={this.state.current_page.id} checkPage= {this.state.current_page.checkPage} /></div>
+            case "ooievaarspasPagina":
+                return <div>{menubar}<Ooievaarspasinfo.OoievaarsPasComponent onMovePage={(next_page) => this.moveToPage(next_page)}  /> </div>  
+            case "InformatieDetail": 
+                return<div>{menubar}<InformatieDetail.InformatieDetailComponent onMovePage={(next_page) => this.moveToPage(next_page)} title= {this.state.current_page.title}/></div>
+            case "zoekresultatenPagina":
+                return  <div>
+                            {<div> <Header onMovePage={(next_page) => this.moveToPage(next_page)}/></div>}
+                            <Zoek.Zoekbalk onMovePage={(next_page) => this.moveToPage(next_page)}/>
+                        </div>
+            default:
+                return <h1>HERES THE MISTAKE</h1>
     }}
 
     
@@ -79,8 +89,5 @@ let menubar = <div> <Header onMovePage={(next_page) => this.moveToPage(next_page
     //             </div>
     // }
 
-    moveToPage(next_page: Page) {
-        console.log("move to page")
-        this.setState({ ...this.state, current_page: next_page })
-    }
+    
 }
