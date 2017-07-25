@@ -15,12 +15,9 @@ import * as DetailPage from './InfoComponent'
 import Header from './Header'
 import * as Manager from './pageManager'
 import * as InformatieDetail from './InformatieDetail'
-<<<<<<< HEAD
 import * as category_dagtocht from './category_dagtocht'
 
-=======
 import * as ExtraInformatie from './ExtraInformatie'
->>>>>>> b80ade85524750182948c7a74a95e2a7167577e0
 
 //type dagtocht = [page1: "/Dagtochten", page2: "/Dagtochten/detailPagina"]
 type PageManagerComponentProps = {}
@@ -71,14 +68,11 @@ let menubar = <div> <Header onMovePage={(next_page) => this.moveToPage(next_page
             return <div>{menubar}<Ooievaarspasinfo.OoievaarsPasComponent onMovePage={(next_page) => this.moveToPage(next_page)}  /> </div>  
         case "InformatieDetail": 
                     return<div>{menubar}<InformatieDetail.InformatieDetailComponent onMovePage={(next_page) => this.moveToPage(next_page)} title= {this.state.current_page.title}/></div>
-<<<<<<< HEAD
         case "category_dagtocht": 
                     return<div>{menubar}<category_dagtocht.category_dagtochtComponenet onMovePage={(next_page) => this.moveToPage(next_page)} id={this.state.current_page.id}/></div>
 
-=======
         case "ExtraInformatie":
             return <div>{menubar}<ExtraInformatie.ExtrainformatieComponent onMovePage={(next_page) => this.moveToPage(next_page)} title = {this.state.current_page.title}  /></div>
->>>>>>> b80ade85524750182948c7a74a95e2a7167577e0
 
 
     }}
