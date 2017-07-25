@@ -7349,15 +7349,42 @@ function get_OverDeOoievaarspas(id) {
     });
 }
 exports.get_OverDeOoievaarspas = get_OverDeOoievaarspas;
-function get_veelgesteldevragenonderwerp() {
+function get_Title() {
     return new Promise((resolve, reject) => {
-        if (vragen == undefined)
+        if (Title == undefined)
             reject("Foutmelding");
         else
-            resolve(vragen);
+            resolve(Title);
     });
 }
-exports.get_veelgesteldevragenonderwerp = get_veelgesteldevragenonderwerp;
+exports.get_Title = get_Title;
+function get_cat1vragen() {
+    return new Promise((resolve, reject) => {
+        if (cat1Vragen == undefined)
+            reject("Foutmelding");
+        else
+            resolve(cat1Vragen);
+    });
+}
+exports.get_cat1vragen = get_cat1vragen;
+function get_cat2vragen() {
+    return new Promise((resolve, reject) => {
+        if (cat2Vragen == undefined)
+            reject("Foutmelding");
+        else
+            resolve(cat2Vragen);
+    });
+}
+exports.get_cat2vragen = get_cat2vragen;
+function get_cat3vragen() {
+    return new Promise((resolve, reject) => {
+        if (cat3Vragen == undefined)
+            reject("Foutmelding");
+        else
+            resolve(cat3Vragen);
+    });
+}
+exports.get_cat3vragen = get_cat3vragen;
 let dagTochten = [
     {
         name: "Dagtocht met Brouwer Travel naar de Efteling",
@@ -7491,68 +7518,47 @@ let aanbieding = [
         target: 'alle leeftijden'
     }
 ];
-let vragen = [{
-        pagina: "Veelgestelde vragen",
-        title: " ",
-        vraag: " ",
-        antwoord: " ",
-        id: 0
-    },
+let Title = [{
+        pagina: "Veelgestelde vragen"
+    }];
+let cat1Vragen = [
     {
-        pagina: " ",
-        title: "Aanvragen en/of wijzigingen Ooievaarspas",
+        categorie: "Aanvragen en/of wijzigingen Ooievaarspas",
         vraag: "Ik heb een Ooievaarspas. Hoef ik dan geen verlenging aan te vragen?",
         antwoord: " In principe moet u altijd een aanvraag doen voor verlenging van de Ooievaarspas. Er is een beperkt aantal groepen voor wie de Ooievaarspas automatisch wordt verlengd. Wilt u weten of u hiertoe behoort? Lees dan meer over de voorwaarden voor het aanvragen van een Ooievaarspas.",
         id: 1
     },
     {
-        pagina: " ",
-        title: "",
+        categorie: "",
         vraag: "Wat gebeurt er nadat u een aanvraag voor een Ooievaarspas heeft gedaan?",
         antwoord: "Nadat u een aanvraag heeft gedaan ontvangt u schriftelijk een ontvangstbevestiging. De gemeente bekijkt binnen 8 weken of u voldoet aan de voorwaarden en stelt vast of u recht heeft op de Ooievaarspas. Mocht u na 8 weken geen bericht hebben ontvangen, dan kunt u contact opnemen met de klantenservice. ",
-        id: 1
-    },
-    {
-        pagina: "",
-        title: "Gebruik Ooievaarspas",
-        vraag: "Ik heb een Ooievaarspas, mag ik gratis reizen?",
-        antwoord: "Gratis reizen kan alleen als u inwoner bent van Den Haag en de AOW-gerechtigde leeftijd heeft bereikt, over een persoonlijke OV-chipkaart beschikt en recht heeft op een Ooievaarspas in het huidige kalenderjaar (1 januari tot en met 31 december).",
         id: 2
-    },
-    {
-        pagina: "",
-        title: "",
-        vraag: "Ik heb een brief gekregen over het ophalen van het gratis reisproduct, maar het lukt niet?",
-        antwoord: "Neem contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur of stuur een e-mail aan: ooievaarsregelingen@gemeentedenhaag.helptu.nl  ",
-        id: 2
-    },
-    {
-        pagina: " ",
-        title: "Geblokkeerde Ooievaarspas",
-        vraag: "Mijn Ooievaarspas is geblokkeerd. Wat is daarvan de reden?",
-        antwoord: "Daar kunnen verschillende redenen voor zijn. Neem daarom contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur. Ooievaarspashouders uit Leidschendam-Voorburg en Rijswijk moeten hiervoor contact opnemen met hun eigen gemeente.",
-        id: 3
-    },
-    {
-        pagina: " ",
-        title: "",
-        vraag: "Hoe lang duurt het voordat mijn Ooievaarspas (weer) is geactiveerd?",
-        antwoord: "Als u een aanvraag heeft gedaan en het recht op de Ooievaarspas is vastgesteld, dan wordt uw pas binnen maximaal 15 werkdagen weer geactiveerd.Heeft u geen brief ontvangen? Neem dan contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur.Ooievaarspashouders uit Leidschendam-Voorburg en Rijswijk moeten hiervoor contact opnemen met hun eigen gemeente.",
-        id: 3
     }
 ];
-let categorienVragen = [
-    {
-        categorie: "Aanvragen en/of wijzigingen Ooievaarspas",
-        id: 1
-    },
-    {
+let cat2Vragen = [{
         categorie: "Gebruik Ooievaarspas",
-        id: 2
+        vraag: "Ik heb een Ooievaarspas, mag ik gratis reizen?",
+        antwoord: "Gratis reizen kan alleen als u inwoner bent van Den Haag en de AOW-gerechtigde leeftijd heeft bereikt, over een persoonlijke OV-chipkaart beschikt en recht heeft op een Ooievaarspas in het huidige kalenderjaar (1 januari tot en met 31 december).",
+        id: 3
     },
+    {
+        categorie: " ",
+        vraag: "Ik heb een brief gekregen over het ophalen van het gratis reisproduct, maar het lukt niet?",
+        antwoord: "Neem contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur of stuur een e-mail aan: ooievaarsregelingen@gemeentedenhaag.helptu.nl  ",
+        id: 4
+    }];
+let cat3Vragen = [
     {
         categorie: "Geblokkeerde Ooievaarspas",
-        id: 3
+        vraag: "Mijn Ooievaarspas is geblokkeerd. Wat is daarvan de reden?",
+        antwoord: "Daar kunnen verschillende redenen voor zijn. Neem daarom contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur. Ooievaarspashouders uit Leidschendam-Voorburg en Rijswijk moeten hiervoor contact opnemen met hun eigen gemeente.",
+        id: 5
+    },
+    {
+        categorie: "",
+        vraag: "Hoe lang duurt het voordat mijn Ooievaarspas (weer) is geactiveerd?",
+        antwoord: "Als u een aanvraag heeft gedaan en het recht op de Ooievaarspas is vastgesteld, dan wordt uw pas binnen maximaal 15 werkdagen weer geactiveerd.Heeft u geen brief ontvangen? Neem dan contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur.Ooievaarspashouders uit Leidschendam-Voorburg en Rijswijk moeten hiervoor contact opnemen met hun eigen gemeente.",
+        id: 6
     }
 ];
 let OverDeOoievaarspas = [
@@ -30029,7 +30035,8 @@ class AanbiedingenComponent extends React.Component {
                         " ",
                         aanbieding.description),
                     React.createElement("br", null),
-                    React.createElement("button", { onClick: () => onclickAanbieding(aanbieding.id) }, hyperlink));
+                    React.createElement("button", { onClick: () => onclickAanbieding(aanbieding.id) }, hyperlink),
+                    React.createElement("button", { onClick: () => onclickAanbieding(2) }, "sho de saaf"));
             };
             return React.createElement("div", null, this.state.aanbieding.map(aanbieding => AanbiedingView(aanbieding)));
         }
@@ -31352,31 +31359,43 @@ class veelgesteldevragenComponent extends React.Component {
     }
     componentWillMount() {
         this.loadonderwerp();
+        //dit is om de vrgen te initialiseren
+        this.setState(Object.assign({}, this.state, { antwoorden: [false, false, false, false, false, false] }));
     }
     loadonderwerp() {
-        Api.get_veelgesteldevragenonderwerp().then(o => this.setState(Object.assign({}, this.state, { kind: "veelgesteldevragenpagina", vragen: o, antwoorden: [true, false, false, false, false, false] })));
-        //.catch(o => this.loadonderwerp())
+        Api.get_cat1vragen().then((cat1 => this.setState(Object.assign({}, this.state, { kind: "loaded", cat1: cat1 }))), (e => console.log("Error", e)));
+        Api.get_cat2vragen().then((cat2 => this.setState(Object.assign({}, this.state, { kind: "loaded", cat2: cat2 }))), (e => console.log("Error", e)));
+        Api.get_cat3vragen().then((cat3 => this.setState(Object.assign({}, this.state, { kind: "loaded", cat3: cat3 }))), (e => console.log("Error", e)));
     }
     render() {
-        console.log("ik ben aan het renderen");
-        if (this.state.kind == "veelgesteldevragenpagina") {
-            let onderwerp_view = function (info, thisRef) {
-                function antwoordToggler(thisRef, antwoordNummer) {
-                    thisRef.state.antwoorden[antwoordNummer] = !thisRef.state.antwoorden[antwoordNummer];
-                    thisRef.forceUpdate();
-                }
+        console.log("state", this.state);
+        if (this.state.kind == "loaded" && this.state.cat1 != undefined && this.state.cat2 != undefined && this.state.cat3 != undefined) {
+            function antwoordToggler(thisRef, antwoordNummer) {
+                thisRef.state.antwoorden[antwoordNummer] = !thisRef.state.antwoorden[antwoordNummer];
+                thisRef.forceUpdate();
+            }
+            let onderwerp_view1 = function (info1, thisRef) {
                 return React.createElement("div", null,
-                    React.createElement("h1", null, info.pagina),
-                    React.createElement("h2", null,
-                        " ",
-                        info.vraag),
-                    React.createElement("div", { onClick: (event) => antwoordToggler(thisRef, 0) }, info.vraag),
-                    !thisRef.state.antwoorden[0] ? info.antwoord : "ANTWOORD IS VERBORGEN");
+                    React.createElement("h1", null, info1.categorie),
+                    React.createElement("h4", { onClick: (event) => antwoordToggler(this, info1.id) }, info1.vraag),
+                    !thisRef.state.antwoorden[info1.id] ? info1.antwoord : "");
+            }; // info1.id refereert naar de vraag zelf, dus die moet getoggled en gecheckt worden
+            let onderwerp_view2 = function (info2, thisRef) {
+                return React.createElement("div", null,
+                    React.createElement("h1", null, info2.categorie),
+                    React.createElement("h4", { onClick: (event) => antwoordToggler(thisRef, info2.id) }, info2.vraag),
+                    !thisRef.state.antwoorden[info2.id] ? info2.antwoord : "");
+            };
+            let onderwerp_view3 = function (info3, thisRef) {
+                return React.createElement("div", null,
+                    React.createElement("h1", null, info3.categorie),
+                    React.createElement("h4", { onClick: (event) => antwoordToggler(thisRef, info3.id) }, info3.vraag),
+                    !thisRef.state.antwoorden[info3.id] ? info3.antwoord : "");
             };
             return React.createElement("div", null,
-                " ",
-                React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "homepage" }) }, homepageLink),
-                this.state.vragen.map(value => onderwerp_view(value, this)));
+                this.state.cat1.map(value => onderwerp_view1(value, this)),
+                this.state.cat2.map(value => onderwerp_view2(value, this)),
+                this.state.cat3.map(value => onderwerp_view3(value, this)));
         }
         else {
             return React.createElement("div", null, "else");
@@ -31384,6 +31403,7 @@ class veelgesteldevragenComponent extends React.Component {
     }
 }
 exports.veelgesteldevragenComponent = veelgesteldevragenComponent;
+//                             <p><button onClick={(event) => thisRef.setState({...thisRef.state, antwoorden: thisRef.state.antwoorden.map(x => false)})}>klik mij</button></p>
 
 
 /***/ }),

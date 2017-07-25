@@ -43,18 +43,30 @@ export type aanbieding = {
     location: string,
     target: string 
 }
-export type vragen={
+
+
+
+export type title={
    pagina: string
-   vraag: string
-   antwoord: string
-   title: string
-   id: number
+   
 }
-
-export type categorienvragen = {
+export type cat1vragen={
     categorie: string
-    id : number
-
+    vraag : string
+    antwoord: string
+    id: number
+}
+export type cat2vragen={
+    categorie: string
+    vraag : string
+    antwoord: string
+    id: number
+}
+export type cat3vragen={
+    categorie: string
+    vraag : string
+    antwoord: string
+    id: number
 }
 
 export type Uitleg_InformatiePas={
