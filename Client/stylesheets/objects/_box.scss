@@ -1,0 +1,49 @@
+.box {
+
+}
+
+.box--fourth {
+    font-family: Cambria; 
+    float: left;
+    width: 375px;    
+    padding-right: 50px;
+     padding-left: 60px;
+     border-style: dashed;
+     border-color: royalblue; 
+     border-width: 2px; 
+     background-color: white;  
+     border-radius: 10px;
+     margin-left: 4px; 
+
+}
+
+ .box--description {
+     float: left;
+     width: 350px;    
+     padding-right: 60px;
+     padding-left: 5px;
+     word-wrap: break-word; 
+     font-family: Cambria;
+     
+ }
+
+ .box--special {
+     font-family: Cambria; 
+     border-style: solid; 
+     padding-left: 40px;  
+     border-color: skyblue; 
+     background-color:white; 
+     border-right: lightblue;
+     border-left: lightblue;  
+ }
+ .box--aanbieding {
+     font-family: Cambria; 
+     color: skyblue; 
+     margin-left: 40px;
+     border-style: solid;  
+     background-color: whitesmoke; 
+     border-right: lightblue;
+     border-left: lightblue;  
+ }
+
+

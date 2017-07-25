@@ -24,9 +24,11 @@ export default class Menu extends React.Component<MenubarComponentProps, Menubar
         let onClickAanbieding = (event) => this.props.onMovePage({ kind: "aanbiedingPagina"})
         let onClickOoievaarsinfo = (event) => this.props.onMovePage({kind: "ooievaarspasPagina"})
             return (
-            <header>  
+            
+            <header className="header__inner">  
                 <nav>
                 <div>
+            <img height="150px" width="230" src="https://www.denhaag.nl/static/denhaagrestylepresentation/images/DH-NL-Rgb-CS6.svg" alt="logo" />
             <button onClick={(event) => this.props.onMovePage({ kind: "homepage"})}>{homepageLink}</button>
             <button onClick={onClickAanbieding}>{aanbiedingLink}</button>
             <button onClick={onClickDagtocht}>{dagtochtLink}</button>

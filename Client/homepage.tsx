@@ -33,24 +33,22 @@ export class HomepageComponent extends React.Component<HomepageComponentProps, H
 
     render(){
          let onclickAanbieding = (id: number) => this.props.onMovePage({ kind: "DetailAanbieding", id: id, checkPage: 3})
+
         if (this.state.kind == "loaded") {
             let specialAanbiedingView = function (special_aanbieding: Types.SpecialAanbieding) {
-            return <div key={special_aanbieding.id}>
+                return <div className="box--fourth" key={special_aanbieding.id}>
                        <a onClick={(id) => onclickAanbieding(special_aanbieding.id)}> <h2>{special_aanbieding.title}</h2> </a>
                     <br></br>
-                    <p> {special_aanbieding.description}</p>
+                    <p className="box--special"> {special_aanbieding.description}</p>
                     <br></br>
                     <button onClick={() => onclickAanbieding(special_aanbieding.id)}>
                         {hyperlink}
                     </button>
-
-
                 </div>
-
             }
             return  <div>
-                    <h1>Homepage</h1>
-                    <h2>Speciale Aanbiedingen</h2>
+                    <h1 className="homepage--title">Ooievaarspas</h1>
+                    <h2 className="homepage--special">Speciale Aanbiedingen</h2>
                         {this.state.specialeAanbieding.map( value =>specialAanbiedingView(value))}
                     </div>
         }

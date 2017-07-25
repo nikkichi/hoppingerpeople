@@ -81,7 +81,7 @@ export class DagtochtenComponent extends React.Component<DagtochtenComponentProp
             }
             let dag = this.state.detailDagtocht
             let id = this.state.detailcat
-            return <div>
+            return <div className="box box--fourth">
                 {this.state.categories.map(category => categoryView(category))}
 
                 <div> {
