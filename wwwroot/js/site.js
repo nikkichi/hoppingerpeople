@@ -7250,7 +7250,410 @@ function getPooledWarningPropertyDefinition(propName, getVal) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
+<<<<<<< HEAD
 /* 42 */
+=======
+/* 43 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+function generateNumber(min, max) {
+    return Math.floor(Math.random() * max - min + 1) + min;
+}
+function get_categories() {
+    return new Promise((resolve, reject) => {
+        resolve(category);
+    });
+}
+exports.get_categories = get_categories;
+function get_special(id) {
+    return new Promise((resolve, reject) => {
+        resolve(speciale_aanbieding.filter((element) => element.id == id));
+    });
+}
+exports.get_special = get_special;
+function get_specialaanbieding() {
+    return new Promise((resolve, reject) => {
+        resolve(speciale_aanbieding);
+    });
+}
+exports.get_specialaanbieding = get_specialaanbieding;
+function filter(id) {
+    let value = dagTochten.filter((element) => element.categoryID == id);
+    return value;
+}
+function filterAanbieding(id) {
+    let value = aanbieding.filter((element) => element.id == id);
+    return value;
+}
+function filterDagtocht(id) {
+    let value = dagTochten.filter((element) => element.id == id);
+    return value;
+}
+function get_dagtochten(id) {
+    console.log('get_dagtocht', dagTochten.filter((element) => element.categoryID == id));
+    return new Promise((resolve, reject) => {
+        resolve(filter(id));
+    });
+}
+exports.get_dagtochten = get_dagtochten;
+function get_dagtocht(id) {
+    console.log('get_dagtocht', dagTochten.filter((element) => element.id == id));
+    return new Promise((resolve, reject) => {
+        resolve(filterDagtocht(id));
+    });
+}
+exports.get_dagtocht = get_dagtocht;
+function get_aanbiedingen() {
+    return new Promise((resolve, reject) => {
+        console.log("aanbiedingen", aanbieding);
+        resolve(aanbieding);
+    });
+}
+exports.get_aanbiedingen = get_aanbiedingen;
+function get_aanbieding(id) {
+    return new Promise((resolve, reject) => {
+        console.log("aanbiedingen", aanbieding);
+        resolve(filterAanbieding(id));
+    });
+}
+exports.get_aanbieding = get_aanbieding;
+function get_ooievaarsPas() {
+    return new Promise((resolve, reject) => {
+        let random = generateNumber(0, 10);
+        if (informatiepas == undefined)
+            reject("Foutmelding of some sort");
+        else
+            resolve(informatiepas);
+    });
+}
+exports.get_ooievaarsPas = get_ooievaarsPas;
+function get_OverDeOoievaarspas(id) {
+    //let value = aanbieding.filter((element) => element.id == 1)
+    // return value
+    return new Promise((resolve, reject) => {
+        if (OverDeOoievaarspas == undefined)
+            reject("De titel komt niet voor");
+        else {
+            return resolve(OverDeOoievaarspas.filter((element) => element.id == id));
+        }
+    });
+}
+exports.get_OverDeOoievaarspas = get_OverDeOoievaarspas;
+function get_InformatieDetail(title) {
+    //let value = aanbieding.filter((element) => element.id == 1)
+    // return value
+    return new Promise((resolve, reject) => {
+        if (detailuitleg == undefined)
+            reject("De titel komt niet voor");
+        else {
+            return resolve(detailuitleg.filter((element) => element.title == title));
+        }
+    });
+}
+exports.get_InformatieDetail = get_InformatieDetail;
+function get_veelgesteldevragenonderwerp() {
+    return new Promise((resolve, reject) => {
+        if (vragen == undefined)
+            reject("Foutmelding");
+        else
+            resolve(vragen);
+    });
+}
+exports.get_veelgesteldevragenonderwerp = get_veelgesteldevragenonderwerp;
+let dagTochten = [
+    {
+        name: "Dagtocht met Brouwer Travel naar de Efteling",
+        description: "Zin om er deze zomer een dagje op uit te gaan? Met uw Ooievaarspas kunt u deelnemen aan een...",
+        prijs: 25,
+        categoryID: 0,
+        id: 0,
+        text: "Ga mee naar het meest geliefde pretpark van Nederland: de Efteling. U gaat toch ook mee naar het meest geliefde pretpark van Nederland? De Efteling is een themapark geschikt voor alle leeftijden. U zult u hier absoluut niet vervelen; jong, oud, man of vrouw - voor iedereen is er entertainment."
+    },
+    {
+        name: "Dagtocht voor senioren met Brouwer Travel: Op stap in ",
+        description: "Bent u 50 jaar of ouder en heeft u zin om er deze zomer een dagje op uit te gaan? Met uw...",
+        prijs: 25,
+        id: 1,
+        categoryID: 1,
+        text: ""
+    },
+    {
+        name: "Dagtocht met BBD voor senioren tocht ",
+        description: "Ook als u aangepast vervoer nodig heeft kunt u mee op zomerdagtocht! De activiteit is...",
+        prijs: 25,
+        categoryID: 2,
+        id: 2,
+        text: ""
+    },
+    {
+        name: "ROBERT met BBD voor senioren tocht ",
+        description: "Ook als u aangepast vervoer nodig heeft kunt u mee op zomerdagtocht! De activiteit is...",
+        prijs: 25,
+        categoryID: 1,
+        id: 3,
+        text: ""
+    }
+];
+let category = [
+    {
+        title: "Zomerdagtochten voor gezinnen",
+        description: "Iedere zomer wordt een dagtocht georganiseerd voor gezinnen. Er is altijd keus uit een wisselend aanbod aan bestemmingen waaronder het bezoek aan een pretpark, museum of show. Voor €10,- per persoon kun je al met de bus mee naar een topbestemming.De dagjes uit zijn tussen 10 juli en 16 augustus 2017 en kunt u kiezen uit een aantal leuke bestemmingen.",
+        categoryID: 0
+    },
+    {
+        title: "Zomerdagtochten voor senioren",
+        description: "Iedere zomer wordt een dagtocht georganiseerd voor senioren van 50 jaar of ouder. Met uw Ooievaarspas kunt u voor € 10 deelnemen aan een fantastische dagtocht. De dagjes uit zijn tussen 10 juli en 16 augustus 2017 en kunt u kiezen uit een aantal leuke bestemmingen.",
+        categoryID: 1
+    },
+    {
+        title: "Zomerdagtochten voor personen met begeleidingsbehoefte",
+        description: "Ook als u aangepast vervoer nodig heeft kunt u mee op zomerdagtocht! Deze zomerdagtochten zijn bedoeld voor senioren met een begeleidingsbehoefte",
+        categoryID: 2
+    }
+];
+let informatiepas = [
+    {
+        title: 'Over de Ooievaarspas',
+        description: 'De Ooievaarspas biedt korting op allerlei activiteiten op het gebied van sport, cultuur, contributie, lidmaatschap en entree. De Ooievaarspas is voor inwoners van Den Haag, Leidschendam-Voorburg en Rijswijk met een laag inkomen. Dit en meer informatie over de Ooievaarspas kunt u onderstaand vinden.',
+        id: 1
+    },
+    {
+        title: 'Informatie voor aanbieders',
+        description: 'Bent u een nieuwe aanbieder van de Ooievaarspas en nog niet helemaal thuis in het verzilveren van kortingen met de Ooievaarspas?',
+        id: 2
+    },
+    {
+        title: 'Informatie over Ooievaarsregelingen',
+        description: 'Bent u al bekend met de Ooievaarsregelingen? Of weet u niet precies hoe u er gebruik van kan maken? Dit en meer leest u hier.',
+        id: 3
+    },
+    {
+        title: 'Actuele Informatie',
+        description: 'Op zoek naar contactinformatie of de laatste informatie? Zoals nieuwsberichten, onze interessante Ooievaarsnieuwsbrief of andere leuke nieuwtjes? Lees het hier.',
+        id: 4
+    },
+];
+let speciale_aanbieding = [
+    {
+        title: 'Join the Florence club! Speciaal',
+        description: 'In teamverband lekker actief zijn, dat kan in de Florence Clubs. Altijd al gedroomd om te kunnen hardlopen of handboogschieten? Dit is nu mogelijk, gezellig in teamverband!',
+        id: 1
+    },
+    {
+        title: 'Ontdek je sport met de sportstrippenkaart Speciaal',
+        description: 'Woon je in Leidschendam-Voorburg en ben je op zoek naar een nieuwe sport? De sportstrippenkaart helpt je op weg! Hardlopen, volleybal of zwemmen: weet jij niet welke sport bij je past? Dit is je kans! Met de sportstrippenkaart mag je vier sporten uitproberen bij meer dan 30 sportverenigingen in Leidschendam-Voorburg. Gewoon gratis!',
+        id: 2
+    },
+    {
+        title: 'Gratis online coaching voor Haagse pashouders Speciaal',
+        description: 'Wil je gratis hulp bij het afvallen? Neem je je voor om te gaan bewegen, maar komt het er steeds niet van? Heb je plannen om je leefstijl te verbeteren? Wil je graag stoppen met roken of wordt het hoog tijd om je stress te verminderen? Ben je toe aan gezinshulp? Zet dan nu de stap en meld je aan voor een jaar lang gratis online coaching!',
+        id: 3
+    },
+    {
+        title: 'Ontdek Drievliet met de Ooievaarspas vanaf 1 april Speciaal',
+        description: 'Familiepark Drievliet, plezier voor jong en oud. Drievliet is in 2017 aanbieder van de Ooievaarspas en verwelkomt families! Ook heeft Drievliet er twee mooie attracties bij! Durf jij in de sportieve Tijdmachine en de snelle Chute?',
+        id: 4
+    }
+];
+let aanbieding = [
+    {
+        title: 'Join the Florence club!',
+        description: 'In teamverband lekker actief zijn, dat kan in de Florence Clubs. Altijd al gedroomd om te kunnen hardlopen of handboogschieten? Dit is nu mogelijk, gezellig in teamverband!',
+        id: 1,
+        category: 'alle aanbiedingen',
+        activity: { kind: 'sport', sub: 'badminton' },
+        location: 'centrum',
+        target: 'ouder dan 17 jaar'
+    },
+    {
+        title: 'Ontdek je sport met de sportstrippenkaart',
+        description: 'Woon je in Leidschendam-Voorburg en ben je op zoek naar een nieuwe sport? De sportstrippenkaart helpt je op weg! Hardlopen, volleybal of zwemmen: weet jij niet welke sport bij je past? Dit is je kans! Met de sportstrippenkaart mag je vier sporten uitproberen bij meer dan 30 sportverenigingen in Leidschendam-Voorburg. Gewoon gratis!',
+        id: 2,
+        category: 'alle aanbiedingen',
+        activity: { kind: 'sport', sub: 'badminton' },
+        location: 'centrum',
+        target: 'alle leeftijden'
+    },
+    {
+        title: 'Gratis online coaching voor Haagse pashouders',
+        description: 'Wil je gratis hulp bij het afvallen? Neem je je voor om te gaan bewegen, maar komt het er steeds niet van? Heb je plannen om je leefstijl te verbeteren? Wil je graag stoppen met roken of wordt het hoog tijd om je stress te verminderen? Ben je toe aan gezinshulp? Zet dan nu de stap en meld je aan voor een jaar lang gratis online coaching!',
+        id: 3,
+        category: 'alle aanbiedingen',
+        activity: { kind: 'cultuur', sub: 'toneel' },
+        location: 'centrum',
+        target: 'ouder dan 50 jaar'
+    },
+    {
+        title: 'Ontdek Drievliet met de Ooievaarspas vanaf 1 april',
+        description: 'Familiepark Drievliet, plezier voor jong en oud. Drievliet is in 2017 aanbieder van de Ooievaarspas en verwelkomt families! Ook heeft Drievliet er twee mooie attracties bij! Durf jij in de sportieve Tijdmachine en de snelle Chute?',
+        id: 4,
+        category: 'speciale aanbiedingen',
+        activity: { kind: 'cultuur', sub: 'badminton' },
+        location: 'centrum',
+        target: 'alle leeftijden'
+    }
+];
+let vragen = [{
+        pagina: "Veelgestelde vragen",
+        title: " ",
+        vraag: " ",
+        antwoord: " ",
+        id: 0
+    },
+    {
+        pagina: " ",
+        title: "Aanvragen en/of wijzigingen Ooievaarspas",
+        vraag: "Ik heb een Ooievaarspas. Hoef ik dan geen verlenging aan te vragen?",
+        antwoord: " In principe moet u altijd een aanvraag doen voor verlenging van de Ooievaarspas. Er is een beperkt aantal groepen voor wie de Ooievaarspas automatisch wordt verlengd. Wilt u weten of u hiertoe behoort? Lees dan meer over de voorwaarden voor het aanvragen van een Ooievaarspas.",
+        id: 1
+    },
+    {
+        pagina: " ",
+        title: "",
+        vraag: "Wat gebeurt er nadat u een aanvraag voor een Ooievaarspas heeft gedaan?",
+        antwoord: "Nadat u een aanvraag heeft gedaan ontvangt u schriftelijk een ontvangstbevestiging. De gemeente bekijkt binnen 8 weken of u voldoet aan de voorwaarden en stelt vast of u recht heeft op de Ooievaarspas. Mocht u na 8 weken geen bericht hebben ontvangen, dan kunt u contact opnemen met de klantenservice. ",
+        id: 1
+    },
+    {
+        pagina: "",
+        title: "Gebruik Ooievaarspas",
+        vraag: "Ik heb een Ooievaarspas, mag ik gratis reizen?",
+        antwoord: "Gratis reizen kan alleen als u inwoner bent van Den Haag en de AOW-gerechtigde leeftijd heeft bereikt, over een persoonlijke OV-chipkaart beschikt en recht heeft op een Ooievaarspas in het huidige kalenderjaar (1 januari tot en met 31 december).",
+        id: 2
+    },
+    {
+        pagina: "",
+        title: "",
+        vraag: "Ik heb een brief gekregen over het ophalen van het gratis reisproduct, maar het lukt niet?",
+        antwoord: "Neem contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur of stuur een e-mail aan: ooievaarsregelingen@gemeentedenhaag.helptu.nl  ",
+        id: 2
+    },
+    {
+        pagina: " ",
+        title: "Geblokkeerde Ooievaarspas",
+        vraag: "Mijn Ooievaarspas is geblokkeerd. Wat is daarvan de reden?",
+        antwoord: "Daar kunnen verschillende redenen voor zijn. Neem daarom contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur. Ooievaarspashouders uit Leidschendam-Voorburg en Rijswijk moeten hiervoor contact opnemen met hun eigen gemeente.",
+        id: 3
+    },
+    {
+        pagina: " ",
+        title: "",
+        vraag: "Hoe lang duurt het voordat mijn Ooievaarspas (weer) is geactiveerd?",
+        antwoord: "Als u een aanvraag heeft gedaan en het recht op de Ooievaarspas is vastgesteld, dan wordt uw pas binnen maximaal 15 werkdagen weer geactiveerd.Heeft u geen brief ontvangen? Neem dan contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur.Ooievaarspashouders uit Leidschendam-Voorburg en Rijswijk moeten hiervoor contact opnemen met hun eigen gemeente.",
+        id: 3
+    }
+];
+let categorienVragen = [
+    {
+        categorie: "Aanvragen en/of wijzigingen Ooievaarspas",
+        id: 1
+    },
+    {
+        categorie: "Gebruik Ooievaarspas",
+        id: 2
+    },
+    {
+        categorie: "Geblokkeerde Ooievaarspas",
+        id: 3
+    }
+];
+let OverDeOoievaarspas = [
+    {
+        title: 'Over Ooievaarspas',
+        description: 'De Ooievaarspas geeft korting op sport, cultuur, contributie, lidmaatschap en entree. De Ooievaarspas is voor inwoners van Den Haag, Leidschendam-Voorburg en Rijswijk, met een inkomen tot maximaal 130% van de bijstandsnorm. ',
+        id: 1,
+    },
+    {
+        title: 'Aanvragen Ooievaarspas',
+        description: 'Woont u in Den Haag, Leidschendam-Voorburg of Rijswijk en heeft u een laag inkomen? Dan biedt de Ooievaarspas heel veel voordelen. Vraag daarom de Ooievaarspas aan.',
+        id: 1,
+    },
+    {
+        title: 'Verloop na aanvraag Ooievaarspas',
+        description: 'Nadat u een aanvraag heeft gedaan ontvangt u schriftelijk een ontvangstbevestiging. De gemeente bekijkt binnen 8 weken of u voldoet aan de voorwaarden en stelt vast of u recht heeft op de Ooievaarspas.',
+        id: 1,
+    },
+    {
+        title: 'Computerset',
+        description: 'Om goed te kunnen leren is het belangrijk dat kinderen een computer hebben. Daarmee kunnen zij meedoen op school, spreekbeurten voorbereiden, werkstukken maken en spelletjes spelen',
+        id: 2,
+    },
+    {
+        title: 'Fiets',
+        description: '',
+        id: 2,
+    },
+    {
+        title: 'Aanbieder worden?',
+        description: 'Wilt u aanbieder van de Ooievaarspas worden maar niet zeker of u voldoet aan ons aanbiedersprofiel? De voorwaarden kunt u hier vinden.',
+        id: 3,
+    },
+    {
+        title: 'Doel en Voorwaarden',
+        description: 'Bent u gevestigd in Den Haag, Leidschendam-Voorburg of Rijswijk en wilt u een aanbod doen tegen gereduceerd tarief? Lees onze doel en de belangrijkste voorwaarden om aanbieder te kunnen worden.',
+        id: 3,
+    },
+    {
+        title: 'Nieuwsberichten Ooievaarspas',
+        description: 'Wilt u op de meer weten over de laatste nieuwsberichten van onder andere lopende projecten, acties en informatie over aanbieders? Dat kan onze nieuws pagina.',
+        id: 4,
+    },
+    {
+        title: 'Aanmelden Ooievaarsnieuwsbrief',
+        description: 'Wilt u op de meer weten over de laatste nieuwsberichten van onder andere lopende projecten, acties en informatie over aanbieders? Dat kan onze nieuws pagina.',
+        id: 4
+    },
+    {
+        title: 'Pinguïn geboren in Sea Life Scheveningen',
+        description: 'Onze nieuwsbrieven staan altijd boordevol nieuws zoals nieuwe aanbieders, leuke aanbiedingen, (gratis) evenementen en dagtochten. Ook lees je meer over verschillende regelingen zoals pedicurebonnen, maaltijdvoorzieningen en de digitale wereld voor senioren. Onze eerdere nieuwsbrieven vind je hier. Meld je hieronder aan en blijf altijd als eerste op de hoogte van het laatste Ooievaarsnieuws. Veel leesplezier!',
+        id: 5,
+    }
+];
+let detailuitleg = [
+    {
+        text: 'Als u een minimuminkomen heeft en uw kind is 10 jaar of ouder, maar nog geen 18 jaar, dan kunt u via Stichting Leergeld Den Haag een aanvraag voor een nieuwe fiets indienen. Voor een nieuwe fiets betaalt u een eigen bijdrage van € 25,-. Gaat deze fiets kapot? Dan komt de fiets mogelijk éénmalig in aanmerking voor reparatie. Meer informatie? Kijk op www.denhaag.nl/ooievaarsregelingen',
+        image: '',
+        title: 'Fiets'
+    },
+    {
+        text: 'Na ruim 30 dagen is het dan zover – een Humboldt pinguïnkuiken is uit het ei gekropen. De gelukkige ouders zijn de 8 jarige pinguïn Janneke en vader Jip. Het is het allereerste kuiken dat we in Sea  Life Scheveningen mogen verwelkomen.',
+        image: '',
+        title: 'Pinguïn geboren in Sea Life Scheveningen'
+    },
+    {
+        title: 'Aanbieder worden?',
+        text: 'Iedereen moet mee kunnen doen in de samenleving. Ook mensen voor wie dat moeilijk is, zoals mensen met een minimum inkomen. De gemeente biedt die mensen met een laag inkomen graag de mogelijkheid om met korting lid te worden van een sport of culturele vereniging of instelling. Ook kunnen tentoonstellingen en evenementen worden bezocht. Dat kan allemaal met de Ooievaarspas.',
+        image: ''
+    },
+    {
+        title: 'Doel en Voorwaarden',
+        image: '',
+        text: 'Het doel van de Ooievaarspas is er voor te zorgen dat iedereen mee moet kunnen doen in de samenleving. Ook mensen met een minimum inkomen voor wie dat moeilijk is. De gemeente biedt die mensen met een laag inkomen graag de mogelijkheid om met korting lid te worden van een sport, culture en/of recreatieve vereniging of organisatie. Dit gebeurt langs twee lijnen: 1. Door financiële drempels, die mensen met een minimuminkomen ervan weerhouden aan maatschappelijke activiteiten deel te nemen, weg te nemen dan wel te verlagen; 2. Door Ooievaarspas houders actief te stimuleren gebruik te maken van het aanbod van de Ooievaarspas.',
+    },
+    {
+        title: 'Aanmelden Ooievaarsnieuwsbrief',
+        image: '',
+        text: 'Onze nieuwsbrieven staan altijd boordevol nieuws zoals nieuwe aanbieders, leuke aanbiedingen, (gratis) evenementen en dagtochten. Ook lees je meer over verschillende regelingen zoals pedicurebonnen, maaltijdvoorzieningen en de digitale wereld voor senioren. Onze eerdere nieuwsbrieven vind je hier. Meld je hieronder aan en blijf altijd als eerste op de hoogte van het laatste Ooievaarsnieuws. Veel leesplezier!',
+    },
+    {
+        title: 'Nieuwsberichten Ooievaarspas',
+        image: '',
+        text: 'Wilt u op de meer weten over de laatste nieuwsberichten van onder andere lopende projecten, acties en informatie over aanbieders? Dat kan onze nieuws pagina.'
+    },
+    {
+        title: 'Verloop na aanvraag Ooievaarspas',
+        image: '',
+        text: 'Wat gebeurt er nadat u een aanvraag voor een Ooievaarspas heeft gedaan? Nadat u een aanvraag heeft gedaan ontvangt u schriftelijk een ontvangstbevestiging. De gemeente bekijkt binnen 8 weken of u voldoet aan de voorwaarden en stelt vast of u recht heeft op de Ooievaarspas. Mocht u na 8 weken geen bericht hebben ontvangen, dan kunt u contact opnemen met de klantenservice. Als de gemeente onvoldoende gegevens van u heeft ontvangen om het recht op de Ooievaarspas te kunnen beoordelen, dan wordt u gebeld of krijgt u een brief waarin gevraagd wordt om informatie aan te leveren. Bij de brief zit een retour-enveloppe (u hoeft dus geen postzegel te plakken).'
+    }
+];
+
+
+/***/ }),
+/* 44 */
+>>>>>>> 67d20aa5451e560cafc399fed5b71f35c78c6931
 /***/ (function(module, exports, __webpack_require__) {
 
 var META     = __webpack_require__(55)('meta')
@@ -28172,6 +28575,7 @@ return ptBr;
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 256 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28184,6 +28588,32 @@ return ptBr;
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
+=======
+/* 320 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+>>>>>>> 67d20aa5451e560cafc399fed5b71f35c78c6931
 
 
 var pt = moment.defineLocale('pt', {
@@ -28236,9 +28666,19 @@ var pt = moment.defineLocale('pt', {
     }
 });
 
+<<<<<<< HEAD
 return pt;
 
 })));
+=======
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(334));
+>>>>>>> 67d20aa5451e560cafc399fed5b71f35c78c6931
 
 
 /***/ }),
@@ -28325,6 +28765,7 @@ return ro;
 /* 258 */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 //! moment.js locale configuration
 //! locale : Russian [ru]
 //! author : Viktorminator : https://github.com/Viktorminator
@@ -28358,6 +28799,60 @@ function relativeTimeWithPlural(number, withoutSuffix, key) {
     }
 }
 var monthsParse = [/^янв/i, /^фев/i, /^мар/i, /^апр/i, /^ма[йя]/i, /^июн/i, /^июл/i, /^авг/i, /^сен/i, /^окт/i, /^ноя/i, /^дек/i];
+=======
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const React = __webpack_require__(25);
+const Api = __webpack_require__(43);
+let hyperlink = "lees meer ";
+//main component voor aanbiedingen pagina
+class AanbiedingenComponent extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = { kind: "loading" };
+    }
+    componentWillMount() {
+        console.log('component will mount');
+        this.loadAanbieding();
+    }
+    loadAanbieding() {
+        Api
+            .get_aanbiedingen()
+            .then(c => this.setState(Object.assign({}, this.state, { kind: "aanbiedingPagina", aanbieding: c })));
+        //.catch(_ => this.loadCategories())
+    }
+    render() {
+        let onclickAanbieding = (id) => this.props.onMovePage({ kind: "DetailAanbieding", id: id, checkPage: 1 });
+        console.log(this.state.kind);
+        if (this.state.kind == "aanbiedingPagina") {
+            let AanbiedingView = function (aanbieding) {
+                return React.createElement("div", { key: aanbieding.id },
+                    React.createElement("a", { onClick: (id) => onclickAanbieding(aanbieding.id) },
+                        " ",
+                        React.createElement("h2", null, aanbieding.title),
+                        " "),
+                    React.createElement("br", null),
+                    React.createElement("p", null,
+                        " ",
+                        aanbieding.description),
+                    React.createElement("br", null),
+                    React.createElement("button", { onClick: () => onclickAanbieding(aanbieding.id) }, hyperlink));
+            };
+            return React.createElement("div", null, this.state.aanbieding.map(aanbieding => AanbiedingView(aanbieding)));
+        }
+        else {
+            return React.createElement("div", null, " Else");
+            // return <div> Dachtochten {this.state.dagtochten.map((element,key) => <div> {key} </div>)}</div>
+        }
+    }
+}
+exports.AanbiedingenComponent = AanbiedingenComponent;
+//    return <div><a onClick={() => this.toggle_button()}><h1>{this.state.name}</h1></a>
+//                         <button onClick={() => this.toggle_button()}>{button_text}</button><br/><br/>
+//                         {description}<br/><br/>
+//                         {fav_button}</div> 
+>>>>>>> 67d20aa5451e560cafc399fed5b71f35c78c6931
 
 // http://new.gramota.ru/spravka/rules/139-prop : § 103
 // Сокращения месяцев: http://new.gramota.ru/spravka/buro/search-answer?s=242637
@@ -28386,6 +28881,7 @@ var ru = moment.defineLocale('ru', {
     // полные названия с падежами, по три буквы, для некоторых, по 4 буквы, сокращения с точкой и без точки
     monthsRegex: /^(январ[ья]|янв\.?|феврал[ья]|февр?\.?|марта?|мар\.?|апрел[ья]|апр\.?|ма[йя]|июн[ья]|июн\.?|июл[ья]|июл\.?|августа?|авг\.?|сентябр[ья]|сент?\.?|октябр[ья]|окт\.?|ноябр[ья]|нояб?\.?|декабр[ья]|дек\.?)/i,
 
+<<<<<<< HEAD
     // копия предыдущего
     monthsShortRegex: /^(январ[ья]|янв\.?|феврал[ья]|февр?\.?|марта?|мар\.?|апрел[ья]|апр\.?|ма[йя]|июн[ья]|июн\.?|июл[ья]|июл\.?|августа?|авг\.?|сентябр[ья]|сент?\.?|октябр[ья]|окт\.?|ноябр[ья]|нояб?\.?|декабр[ья]|дек\.?)/i,
 
@@ -28507,15 +29003,133 @@ var ru = moment.defineLocale('ru', {
 return ru;
 
 })));
+=======
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const React = __webpack_require__(25);
+const Api = __webpack_require__(43);
+let checkdagtocht = true;
+let hyperlink = "lees meer";
+let next_page = { kind: "DetailDagtocht" };
+class DagtochtenComponent extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = { kind: "loading" };
+    }
+    componentWillMount() {
+        this.loadCategories();
+        this.loadDagtochten();
+    }
+    loadCategories() {
+        Api
+            .get_categories()
+            .then(c => this.setState(Object.assign({}, this.state, { kind: "dagtochtPagina", categories: c, dagtochten: [] })), e => console.log("Error: ", e));
+    }
+    loadDagtochten() {
+        Api
+            .get_dagtocht(this.props.id)
+            .then(d => this.setState(Object.assign({}, this.state, { kind: "dagtochtPagina", dagtochten: d })));
+        // .catch(_ => console.log('get dachtocht rejected ') 
+        //         || setTimeout( this.loadDagtochten ,5000))
+    }
+    render() {
+        let onclickdagtocht = (id) => this.props.onMovePage({ kind: "DetailDagtocht", id: id, checkPage: 2 });
+        console.log(this.state.kind);
+        if (this.state.kind == "dagtochtPagina") {
+            let categoryView = function (category) {
+                return React.createElement("div", { key: category.title },
+                    React.createElement("h2", null, category.title),
+                    React.createElement("p", null, category.description));
+            };
+            let dagtochtView = function (dagtocht) {
+                return React.createElement("div", { key: dagtocht.name },
+                    React.createElement("a", { onClick: (id) => onclickdagtocht(dagtocht.id) },
+                        "  ",
+                        React.createElement("h2", null,
+                            " ",
+                            dagtocht.description)),
+                    React.createElement("button", { onClick: () => onclickdagtocht(dagtocht.id) }, hyperlink));
+            };
+            let dag = this.state.detailDagtocht;
+            let id = this.state.detailcat;
+            return React.createElement("div", null,
+                this.state.categories.map(category => categoryView(category)),
+                React.createElement("div", null,
+                    " ",
+                    this.state.dagtochten.map(dagtocht => dagtochtView(dagtocht))),
+                this.state.dagtochten.filter(dagtocht => { dagtocht.categoryID == dagtocht.categoryID; }));
+        }
+        else if (this.state.kind == "DetailDagtocht") {
+            let dagtochtView = function (dagtocht) {
+                return React.createElement("div", { key: dagtocht.name },
+                    React.createElement("a", { onClick: (id) => onclickdagtocht(dagtocht.id) },
+                        " ",
+                        dagtocht.name),
+                    "+",
+                    React.createElement("p", null,
+                        " ",
+                        dagtocht.description),
+                    React.createElement("button", { onClick: (id) => onclickdagtocht(dagtocht.id) }, hyperlink));
+            };
+            // let x = localStorage.getItem('favoriteDagtocht') == this.state.detailDagtocht.name
+            // // return <div>
+            //     <p>{this.state.detailDagtocht.name}</p><br></br>
+            //     <p>{this.state.detailDagtocht.prijs}</p><br></br>
+            //     <p>{this.state.detailDagtocht.description}</p><br></br>
+            //     <p>{this.state.detailDagtocht.text}</p><br></br>
+            //     <p>Deze dagtocht is {x ? "wel" : "niet"} als favoriet gekozen</p>
+            //     <button onClick={event =>
+            //         this.state.kind == "DetailDagtocht" ?
+            //             localStorage.setItem('favoriteDagtocht', this.state.detailDagtocht.name)
+            //             : console.log("There is an error in DagtochtDetailPage")}>Maak favoriet</button>
+            // </div>
+        }
+        else {
+            return React.createElement("div", null, " Else");
+        }
+    }
+}
+exports.DagtochtenComponent = DagtochtenComponent;
+>>>>>>> 67d20aa5451e560cafc399fed5b71f35c78c6931
 
 
 /***/ }),
 /* 259 */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 //! moment.js locale configuration
 //! locale : Sindhi [sd]
 //! author : Narain Sagar : https://github.com/narainsagar
+=======
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const React = __webpack_require__(25);
+let hyperlink = "Lees meer";
+let homepageLink = "Home";
+let aanbiedingLink = "Aanbiedingen";
+let dagtochtLink = "Dagtochten";
+let ooievaarLink = "Ooievaarspas info";
+let vragenLink = "Veelgestelde vragen";
+class Menu extends React.Component {
+    render() {
+        let onClickDagtocht = (event) => this.props.onMovePage({ kind: "dagtochtPagina", id: 1 });
+        let onClickAanbieding = (event) => this.props.onMovePage({ kind: "aanbiedingPagina" });
+        let onClickOoievaarsinfo = (event) => this.props.onMovePage({ kind: "ooievaarspasPagina" });
+        return (React.createElement("header", null,
+            React.createElement("nav", null,
+                React.createElement("div", null,
+                    React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "homepage" }) }, homepageLink),
+                    React.createElement("button", { onClick: onClickAanbieding }, aanbiedingLink),
+                    React.createElement("button", { onClick: onClickDagtocht }, dagtochtLink),
+                    React.createElement("button", { onClick: onClickOoievaarsinfo }, ooievaarLink),
+                    React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "veelgesteldeVragenPagina" }) }, vragenLink)))));
+    }
+}
+exports.default = Menu;
+>>>>>>> 67d20aa5451e560cafc399fed5b71f35c78c6931
 
 ;(function (global, factory) {
     true ? factory(__webpack_require__(1)) :
@@ -28524,6 +29138,7 @@ return ru;
 }(this, (function (moment) { 'use strict';
 
 
+<<<<<<< HEAD
 var months = [
     'جنوري',
     'فيبروري',
@@ -28610,12 +29225,122 @@ var sd = moment.defineLocale('sd', {
 return sd;
 
 })));
+=======
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const React = __webpack_require__(25);
+const Api = __webpack_require__(43);
+class InforComponent extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = { kind: "loading" };
+    }
+    loadAanbieding() {
+        console.log("id checker", this.props.id);
+        Api
+            .get_aanbieding(this.props.id)
+            .then(d => this.setState(Object.assign({}, this.state, { kind: "DetailAanbieding", aanbieding: d })));
+        // .catch(_ => console.log('get dachtocht rejected ') || setTimeout( this.loadDagtochten ,5000))
+    }
+    loadSpeciaal() {
+        console.log("id checker", this.props.id);
+        Api
+            .get_special(this.props.id)
+            .then(d => this.setState(Object.assign({}, this.state, { kind: "DetailSpecial", special: d })));
+        // .catch(_ => console.log('get dachtocht rejected ') || setTimeout( this.loadDagtochten ,5000))
+    }
+    loadDagtocht() {
+        // console.log("id checker",this.props.id)
+        Api
+            .get_dagtocht(this.props.id)
+            .then(d => this.setState(Object.assign({}, this.state, { kind: "DetailDagtocht", dagtochten: d })));
+        // .catch(_ => console.log('get dachtocht rejected ') || setTimeout( this.loadDagtochten ,5000))
+    }
+    componentWillMount() {
+        console.log('component will mount', this.props.checkPage);
+        if (this.props.checkPage == 1) {
+            return this.loadAanbieding();
+        }
+        else if (this.props.checkPage == 2) {
+            return this.loadDagtocht();
+        }
+        else if (this.props.checkPage == 3) {
+            return this.loadSpeciaal();
+        }
+    }
+    render() {
+        console.log(this.state.kind);
+        if (this.state.kind == "DetailAanbieding") {
+            let AanbiedingView = function (aanbieding) {
+                let onclickFavoriete = (event) => (this.state.kind == "DetailAanbieding" ?
+                    localStorage.setItem('favoriteDagtocht', this.state.favoriete.name)
+                    : console.log("There is an error in DagtochtDetailPage"));
+                return React.createElement("div", { key: aanbieding.title },
+                    React.createElement("h2", null,
+                        " ",
+                        aanbieding.title),
+                    React.createElement("br", null),
+                    React.createElement("p", null,
+                        " ",
+                        aanbieding.description),
+                    React.createElement("br", null),
+                    React.createElement("button", { onClick: onclickFavoriete }, "Maak favoriet"));
+            };
+            return React.createElement("div", null, this.state.aanbieding.map(aanbiedingen => AanbiedingView(aanbiedingen)));
+        }
+        else if (this.state.kind == "DetailSpecial") {
+            let SpecialView = function (special) {
+                let onclickFavoriete = (event) => (this.state.kind == "DetailSpecial" ?
+                    localStorage.setItem('favoriteDagtocht', this.state.favoriete.name)
+                    : console.log("There is an error in DagtochtDetailPage"));
+                return React.createElement("div", { key: special.title },
+                    React.createElement("h2", null,
+                        " ",
+                        special.title),
+                    React.createElement("br", null),
+                    React.createElement("p", null,
+                        " ",
+                        special.description),
+                    React.createElement("br", null),
+                    React.createElement("button", { onClick: onclickFavoriete }, "Maak favoriet"));
+            };
+            return React.createElement("div", null, this.state.special.map(special => SpecialView(special)));
+        }
+        else if (this.state.kind == "DetailDagtocht") {
+            let onclickFavoriete = (event) => (this.state.kind == "DetailDagtocht" ?
+                localStorage.setItem('favoriteDagtocht', this.state.favoriete.name)
+                : console.log("There is an error in DagtochtDetailPage"));
+            let dagtochtView = function (dagtocht) {
+                return React.createElement("div", { key: dagtocht.name },
+                    React.createElement("h2", null,
+                        " ",
+                        dagtocht.name),
+                    React.createElement("br", null),
+                    React.createElement("p", null,
+                        " ",
+                        dagtocht.text),
+                    React.createElement("br", null),
+                    React.createElement("p", null, dagtocht.prijs),
+                    React.createElement("br", null),
+                    React.createElement("p", null, dagtocht.categoryID),
+                    React.createElement("button", { onClick: onclickFavoriete }, "Maak favoriet"));
+            };
+            return React.createElement("div", null, this.state.dagtochten.map(dagtocht => dagtochtView(dagtocht)));
+        }
+        else
+            return React.createElement("div", null, "else");
+    }
+}
+exports.InforComponent = InforComponent;
+>>>>>>> 67d20aa5451e560cafc399fed5b71f35c78c6931
 
 
 /***/ }),
 /* 260 */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 //! moment.js locale configuration
 //! locale : Northern Sami [se]
 //! authors : Bård Rolstad Henriksen : https://github.com/karamell
@@ -28676,12 +29401,60 @@ var se = moment.defineLocale('se', {
 return se;
 
 })));
+=======
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const React = __webpack_require__(25);
+const Api = __webpack_require__(43);
+let next_page = { kind: "InformatieDetail" };
+let hyperlink = 'lees meer';
+class InfoPasComponent extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = { kind: 'loading' };
+    }
+    loadUitleg() {
+        Api.get_OverDeOoievaarspas(this.props.id)
+            .then(u => this.setState(Object.assign({}, this.state, { kind: 'loaded', Uitleginformatie: u })))
+            .catch(u => console.log("error")); //this.loadUitleg())
+        console.log('test');
+    }
+    componentWillMount() {
+        this.loadUitleg();
+        console.log('Uitleg wordt geload');
+    }
+    render() {
+        let onClickInformatieDetail = (title) => this.props.onMovePage({ kind: "InformatieDetail", title: title });
+        if (this.state.kind == 'loaded') {
+            let uitleg_view = function (information) {
+                return React.createElement("div", { key: information.title },
+                    React.createElement("a", { onClick: (id) => onClickInformatieDetail(information.title) },
+                        "  ",
+                        React.createElement("h2", null,
+                            " ",
+                            information.title)),
+                    React.createElement("div", null,
+                        " ",
+                        information.description),
+                    React.createElement("button", { onClick: () => onClickInformatieDetail(information.title) }, hyperlink));
+            };
+            return React.createElement("div", null, this.state.Uitleginformatie.map(information => uitleg_view(information)));
+        }
+        else {
+            return React.createElement("div", null, "else");
+        }
+    }
+}
+exports.InfoPasComponent = InfoPasComponent;
+>>>>>>> 67d20aa5451e560cafc399fed5b71f35c78c6931
 
 
 /***/ }),
 /* 261 */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 //! moment.js locale configuration
 //! locale : Sinhalese [si]
 //! author : Sampath Sitinamaluwa : https://github.com/sampathsris
@@ -28752,12 +29525,51 @@ var si = moment.defineLocale('si', {
 return si;
 
 })));
+=======
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const React = __webpack_require__(25);
+const Api = __webpack_require__(43);
+class InformatieDetailComponent extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = { kind: 'loading' };
+    }
+    loadDetailinfo() {
+        Api.get_InformatieDetail(this.props.title)
+            .then(u => this.setState(Object.assign({}, this.state, { kind: 'loaded', Uitleginformatie: u })))
+            .catch(u => console.log("error")); //this.loadUitleg())
+        console.log('test');
+    }
+    componentWillMount() {
+        this.loadDetailinfo();
+        console.log('Details worden geload');
+    }
+    render() {
+        if (this.state.kind == 'loaded') {
+            let detail_view = function (details) {
+                return React.createElement("div", { key: details.title },
+                    React.createElement("h1", null, details.title),
+                    React.createElement("div", null, details.text),
+                    React.createElement("div", null, details.image));
+            };
+            return React.createElement("div", null, this.state.Uitleginformatie.map(details => detail_view(details)));
+        }
+        else {
+            return React.createElement("div", null, "Else");
+        }
+    }
+}
+exports.InformatieDetailComponent = InformatieDetailComponent;
+>>>>>>> 67d20aa5451e560cafc399fed5b71f35c78c6931
 
 
 /***/ }),
 /* 262 */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 //! moment.js locale configuration
 //! locale : Slovak [sk]
 //! author : Martin Minka : https://github.com/k2s
@@ -28907,12 +29719,59 @@ var sk = moment.defineLocale('sk', {
 return sk;
 
 })));
+=======
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const React = __webpack_require__(25);
+const Api = __webpack_require__(43);
+let next_page = { kind: "infopas" };
+let hyperlink = 'lees meer';
+class OoievaarsPasComponent extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = { kind: "loading" };
+    }
+    loadInformatiePas() {
+        Api.get_ooievaarsPas()
+            .then(i => this.setState(Object.assign({}, this.state, { kind: "loaded", value: i })), e => console.log('Error: ', e));
+        console.log('loadinformatiepas');
+    }
+    componentWillMount() {
+        this.loadInformatiePas();
+        console.log('Ooievaarsinfo wordt geload');
+    }
+    render() {
+        let onClickInfoPas = (id) => this.props.onMovePage({ kind: "infopas", id: id });
+        if (this.state.kind == "loaded") {
+            let ooievaarspas_View = function (info) {
+                return React.createElement("div", { key: info.title },
+                    React.createElement("a", { onClick: (id) => onClickInfoPas(info.id) },
+                        "  ",
+                        React.createElement("h2", null,
+                            " ",
+                            info.title)),
+                    React.createElement("div", null, info.description),
+                    React.createElement("button", { onClick: () => onClickInfoPas(info.id) }, hyperlink));
+            };
+            return React.createElement("div", null,
+                React.createElement("h1", null, "  Informatie over de Ooievaarspas"),
+                this.state.value.map(info => ooievaarspas_View(info)));
+        }
+        else {
+            return React.createElement("div", null, " else ");
+        }
+    }
+}
+exports.OoievaarsPasComponent = OoievaarsPasComponent;
+>>>>>>> 67d20aa5451e560cafc399fed5b71f35c78c6931
 
 
 /***/ }),
 /* 263 */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 //! moment.js locale configuration
 //! locale : Slovenian [sl]
 //! author : Robert Sedovšek : https://github.com/sedovsek
@@ -28994,6 +29853,16 @@ function processRelativeTime(number, withoutSuffix, key, isFuture) {
             return result;
     }
 }
+=======
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__webpack_require__(322);
+__export(__webpack_require__(321));
+>>>>>>> 67d20aa5451e560cafc399fed5b71f35c78c6931
 
 var sl = moment.defineLocale('sl', {
     months : 'januar_februar_marec_april_maj_junij_julij_avgust_september_oktober_november_december'.split('_'),
@@ -29071,15 +29940,36 @@ var sl = moment.defineLocale('sl', {
     }
 });
 
+<<<<<<< HEAD
 return sl;
 
 })));
+=======
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const React = __webpack_require__(25);
+const Manager = __webpack_require__(338);
+exports.HomePage = function (slug) {
+    return (React.createElement("div", null,
+        React.createElement(Manager.PageManagerComponent, null),
+        " "));
+};
+/*(<div>
+        {<Manager.PageManagerComponent/>}
+        <filtercat.FilterCategorieComponent/>
+        <filterwat.FilterWatComponent/>
+        <filterwaar.FilterWaarComponent/>
+        <filtervoorwie.FilterVoorWieComponent/>
+    </div>) }*/ 
+>>>>>>> 67d20aa5451e560cafc399fed5b71f35c78c6931
 
 
 /***/ }),
 /* 264 */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 //! moment.js locale configuration
 //! locale : Albanian [sq]
 //! author : Flakërim Ismani : https://github.com/flakerimi
@@ -29091,6 +29981,106 @@ return sl;
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
+=======
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const Moment = __webpack_require__(1);
+__webpack_require__(140);
+exports.parse_date = (e) => { return Object.assign({}, e, { CreatedDate: Moment.utc(e.CreatedDate) }); };
+exports.make_page = (res, parse_other_args) => {
+    return {
+        Items: res.Items.map((i) => { return Object.assign({}, i, { Item: exports.parse_date(i.Item) }); }).map((i) => { return Object.assign({}, i, { Item: parse_other_args(i.Item) }); }),
+        PageIndex: res.PageIndex,
+        SearchQuery: res.SearchQuery,
+        NumPages: res.NumPages,
+        PageSize: res.PageSize,
+        TotalCount: res.TotalCount,
+        CanCreate: res.CanCreate,
+        CanDelete: res.CanDelete
+    };
+};
+function create_HomePage() {
+    return __awaiter(this, void 0, void 0, function* () {
+        let res = yield fetch(`/api/v1/HomePage/`, { method: 'post', credentials: 'include', headers: { 'content-type': 'application/json',
+                'X-XSRF-TOKEN': document.getElementsByName("__RequestVerificationToken")[0].value } });
+        if (!res.ok)
+            throw Error(res.statusText);
+        let json = yield res.json();
+        return Object.assign({}, json, { CreatedDate: Moment.utc(json.CreatedDate) });
+    });
+}
+exports.create_HomePage = create_HomePage;
+function update_HomePage(item) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let res = yield fetch(`/api/v1/HomePage/`, { method: 'put',
+            body: JSON.stringify(Object.assign({}, item, { CreatedDate: undefined })), credentials: 'include', headers: { 'content-type': 'application/json', 'X-XSRF-TOKEN': document.getElementsByName("__RequestVerificationToken")[0].value } });
+        if (!res.ok)
+            throw Error(res.statusText);
+        return;
+    });
+}
+exports.update_HomePage = update_HomePage;
+function update_HomePage_with_pictures(item) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let res = yield fetch(`/api/v1/HomePage/WithPictures`, { method: 'put',
+            body: JSON.stringify(Object.assign({}, item, { CreatedDate: undefined })), credentials: 'include', headers: { 'content-type': 'application/json', 'X-XSRF-TOKEN': document.getElementsByName("__RequestVerificationToken")[0].value } });
+        if (!res.ok)
+            throw Error(res.statusText);
+        return;
+    });
+}
+exports.update_HomePage_with_pictures = update_HomePage_with_pictures;
+function delete_HomePage(source) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let res = yield fetch(`/api/v1/HomePage/${source.Id}`, { method: 'delete', credentials: 'include', headers: { 'content-type': 'application/json', 'X-XSRF-TOKEN': document.getElementsByName("__RequestVerificationToken")[0].value } });
+        if (!res.ok)
+            throw Error(res.statusText);
+        return;
+    });
+}
+exports.delete_HomePage = delete_HomePage;
+function get_HomePage(id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let res = yield fetch(`/api/v1/HomePage/${id}`, { method: 'get', credentials: 'include', headers: { 'content-type': 'application/json' } });
+        if (!res.ok)
+            throw Error(res.statusText);
+        let json = yield res.json();
+        return { Item: Object.assign({}, json.Item, { CreatedDate: Moment.utc(json.Item.CreatedDate) }),
+            Editable: !!json.Editable, JustCreated: false };
+    });
+}
+exports.get_HomePage = get_HomePage;
+function get_HomePage_with_pictures(id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let res = yield fetch(`/api/v1/HomePage/${id}/WithPictures`, { method: 'get', credentials: 'include', headers: { 'content-type': 'application/json' } });
+        if (!res.ok)
+            throw Error(res.statusText);
+        let json = yield res.json();
+        return { Item: Object.assign({}, json.Item, { CreatedDate: Moment.utc(json.Item.CreatedDate) }),
+            Editable: !!json.Editable, JustCreated: false };
+    });
+}
+exports.get_HomePage_with_pictures = get_HomePage_with_pictures;
+function get_HomePages(page_index, page_size, search_query = null) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let res = yield fetch(`/api/v1/HomePage?page_index=${page_index}&page_size=${page_size}${(search_query != null ? "&page_size=" + search_query : "")}`, { method: 'get', credentials: 'include', headers: { 'content-type': 'application/json' } });
+        if (!res.ok)
+            throw Error(res.statusText);
+        let json = yield res.json();
+        return exports.make_page(json, e => { return Object.assign({}, e); });
+    });
+}
+exports.get_HomePages = get_HomePages;
+>>>>>>> 67d20aa5451e560cafc399fed5b71f35c78c6931
 
 
 var sq = moment.defineLocale('sq', {
@@ -29146,15 +30136,40 @@ var sq = moment.defineLocale('sq', {
     }
 });
 
+<<<<<<< HEAD
 return sq;
 
 })));
+=======
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+__webpack_require__(140);
+function ping() {
+    return __awaiter(this, void 0, void 0, function* () {
+        let res = yield fetch(`/api/v1/keep_alive/ping`, { method: 'get', credentials: 'include', headers: { 'content-type': 'application/json' } });
+        if (!res.ok)
+            throw Error(res.statusText);
+        return;
+    });
+}
+exports.ping = ping;
+>>>>>>> 67d20aa5451e560cafc399fed5b71f35c78c6931
 
 
 /***/ }),
 /* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 //! moment.js locale configuration
 //! locale : Serbian Cyrillic [sr-cyrl]
 //! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
@@ -29188,6 +30203,217 @@ var translator = {
         }
     }
 };
+=======
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const React = __webpack_require__(25);
+const ReactDOM = __webpack_require__(292);
+const Api = __webpack_require__(332);
+const Permissions = __webpack_require__(335);
+const Utils = __webpack_require__(336);
+const i18next = __webpack_require__(173);
+const CustomViews = __webpack_require__(331);
+function load_relations_HomePage(self, callback) {
+    callback && callback();
+}
+exports.load_relations_HomePage = load_relations_HomePage;
+function set_size_HomePage(self, new_size) {
+    self.props.set_size(new_size, () => {
+        if (new_size == "fullscreen")
+            self.props.push(exports.HomePage_to_page(self.props.entity.Id));
+    });
+}
+exports.set_size_HomePage = set_size_HomePage;
+function render_editable_attributes_minimised_HomePage(self) {
+    let attributes = (React.createElement("div", null));
+    return attributes;
+}
+exports.render_editable_attributes_minimised_HomePage = render_editable_attributes_minimised_HomePage;
+function render_editable_attributes_maximised_HomePage(self) {
+    let state = self.state();
+    let attributes = (React.createElement("div", null));
+    return attributes;
+}
+exports.render_editable_attributes_maximised_HomePage = render_editable_attributes_maximised_HomePage;
+function render_breadcrumb_HomePage(self) {
+    return React.createElement("div", { className: "breadcrumb-homepage" }, "HomePage");
+}
+exports.render_breadcrumb_HomePage = render_breadcrumb_HomePage;
+function render_menu_HomePage(self) {
+    let state = self.state();
+    return React.createElement("div", { className: "menu" },
+        React.createElement("img", { className: "logo", src: "/images/logo.png", alt: "Logo" }),
+        React.createElement("div", { className: "pages" },
+            !Permissions.can_view_HomePage() ? null :
+                React.createElement("div", { className: `menu_entry page_link active-page` },
+                    React.createElement("a", { onClick: () => self.props.set_shown_relation("none") }, i18next.t('HomePage'))),
+            React.createElement("div", { className: "menu_entries" },
+                React.createElement("div", { className: "menu_entry menu_entry--with-sub" }))));
+}
+exports.render_menu_HomePage = render_menu_HomePage;
+function render_local_menu_HomePage(self) {
+    let state = self.state();
+    return React.createElement("div", { className: "local-menu" },
+        React.createElement("div", { className: "local_menu_entries" },
+            React.createElement("div", { className: `local_menu_entry${self.props.shown_relation == "none" ? " local_menu_entry--active" : ""}` },
+                React.createElement("a", { onClick: () => self.props.set_shown_relation("none") }, i18next.t('About this HomePage')))));
+}
+exports.render_local_menu_HomePage = render_local_menu_HomePage;
+function render_controls_HomePage(self) {
+    return React.createElement("div", { className: "control" },
+        self.props.allow_maximisation && self.props.set_size ? React.createElement("a", { className: `"homepage button button--toggle ${self.props.size != 'preview' ? 'button--toggle--open' : ''}`, onClick: () => {
+                set_size_HomePage(self, self.props.size == "preview" ? "large" : "preview");
+            } }) : null,
+        Permissions.can_delete_HomePage() && self.props.size == "fullscreen" ? React.createElement("a", { className: "button button--delete", onClick: () => confirm(i18next.t('Are you sure?')) &&
+                Api.delete_HomePage(self.props.entity).then(() => self.props.force_reload(() => self.props.pop())) }) : null,
+        self.props.unlink && self.props.mode != "view" ?
+            React.createElement("a", { className: "button button--unlink", onClick: () => self.props.unlink() })
+            :
+                null,
+        self.props.delete && self.props.mode != "view" ?
+            React.createElement("a", { className: "button button--delete", onClick: () => self.props.delete() })
+            :
+                null);
+}
+exports.render_controls_HomePage = render_controls_HomePage;
+function render_content_HomePage(self) {
+    let actions = [
+        self.props.allow_maximisation && self.props.set_size && self.props.size == "preview" ?
+            () => set_size_HomePage(self, self.props.size == "preview" ? "large" : "preview")
+            :
+                null,
+    ].filter(a => a != null);
+    let content = Permissions.can_view_HomePage() ?
+        self.props.size == "preview" ?
+            render_preview_HomePage(self)
+            : self.props.size == "large" ?
+                render_large_HomePage(self)
+                : self.props.size == "fullscreen" ?
+                    render_large_HomePage(self)
+                    : "Error: unauthorised access to entity."
+        : "Error: unauthorised access to entity.";
+    if (self.props.mode == "view" && actions.length == 1 && !false)
+        return React.createElement("a", { onClick: () => actions[0]() },
+            React.createElement("div", { className: `${self.props.inline != undefined && self.props.inline ? "" : "model-content"} ${self.props.size == 'preview' ? 'model-content--preview' : ''}` }, content));
+    else
+        return React.createElement("div", { className: `${self.props.inline != undefined && self.props.inline ? "" : "model-content"} ${self.props.size == 'preview' ? 'model-content--preview' : ''}` }, content);
+}
+exports.render_content_HomePage = render_content_HomePage;
+function render_preview_HomePage(self) {
+    let attributes = null;
+    if (self.props.mode == "view" || !Permissions.can_edit_HomePage())
+        attributes = (React.createElement("div", { className: "model__attributes" }));
+    else
+        attributes = render_editable_attributes_minimised_HomePage(self);
+    return (React.createElement("div", { className: "block" }, attributes));
+}
+exports.render_preview_HomePage = render_preview_HomePage;
+function render_large_HomePage(self) {
+    let state = self.state();
+    let attributes = null;
+    if (self.props.mode == "view" || !Permissions.can_edit_HomePage())
+        attributes = (React.createElement("div", { className: "model__attributes" }));
+    else
+        attributes = render_editable_attributes_maximised_HomePage(self);
+    return (React.createElement("div", { className: "block" },
+        self.props.nesting_depth == 0 && self.props.shown_relation != "all" && self.props.shown_relation != "none" ? null : attributes,
+        render_relations_HomePage(self)));
+}
+exports.render_large_HomePage = render_large_HomePage;
+function render_relations_HomePage(self) {
+    return React.createElement("div", { className: "relations" });
+}
+exports.render_relations_HomePage = render_relations_HomePage;
+function render_saving_animations_HomePage(self) {
+    return;
+}
+exports.render_saving_animations_HomePage = render_saving_animations_HomePage;
+class HomePageComponent extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.thread = null;
+        this.state = { update_count: 0, };
+    }
+    get_self() {
+        return { state: () => this.state, props: this.props, setState: (ns, c) => this.setState(ns, c) };
+    }
+    componentWillReceiveProps(new_props) {
+        if (new_props.size == "breadcrumb")
+            return;
+        let current_logged_in_entity = null;
+        let new_logged_in_entity = null;
+        if (new_props.mode != this.props.mode || (new_props.size != this.props.size && (new_props.size == "large" || new_props.size == "fullscreen")) ||
+            new_props.logic_frame != this.props.logic_frame ||
+            (current_logged_in_entity && !new_logged_in_entity) ||
+            (!current_logged_in_entity && new_logged_in_entity) ||
+            (current_logged_in_entity && new_logged_in_entity && current_logged_in_entity.Id != new_logged_in_entity.Id)) {
+            load_relations_HomePage(this.get_self());
+        }
+    }
+    componentWillMount() {
+        if (this.props.size == "breadcrumb")
+            return;
+        if (this.props.size != "preview") {
+            load_relations_HomePage(this.get_self());
+        }
+        this.thread = setInterval(() => {
+        }, 500);
+    }
+    componentWillUnmount() {
+        clearInterval(this.thread);
+    }
+    render() {
+        if (this.props.size == "breadcrumb") {
+            return Permissions.can_view_HomePage() ?
+                render_breadcrumb_HomePage(this.get_self())
+                : null;
+        }
+        return React.createElement("div", { id: `HomePage_${this.props.entity.Id.toString()}_${this.state.update_count}`, className: `model homepage` },
+            render_saving_animations_HomePage(this.get_self()),
+            this.props.nesting_depth == 0 ? render_menu_HomePage(this.get_self()) : null,
+            React.createElement("div", { className: this.props.nesting_depth == 0 ? 'main__content' : '' },
+                this.props.nesting_depth == 0 && !!this.props.toggle_button ?
+                    React.createElement("div", { className: "topbar" },
+                        this.props.breadcrumbs(),
+                        React.createElement("div", { className: "topbar__buttons" },
+                            this.props.toggle_button ? this.props.toggle_button() : null,
+                            this.props.authentication_menu()))
+                    :
+                        null,
+                render_controls_HomePage(this.get_self()),
+                render_content_HomePage(this.get_self())));
+    }
+}
+exports.HomePageComponent = HomePageComponent;
+exports.HomePage = (props) => React.createElement(HomePageComponent, Object.assign({}, props));
+exports.HomePage_to_page = (id) => {
+    let can_edit = Utils.any_of([Permissions.can_edit_HomePage]);
+    return Utils.scene_to_page(can_edit, exports.HomePage, Api.get_HomePage(id), Api.update_HomePage, "HomePage", "HomePage", `/HomePages/${id}`);
+};
+exports.HomePage_to = (id, slug, target_element_id) => {
+    (() => __awaiter(this, void 0, void 0, function* () {
+        let res = yield fetch(`/translations.json`, { method: 'get', credentials: 'include', headers: { 'content-type': 'application/json' } });
+        let resources = yield res.json();
+        i18next.init({
+            lng: "nl",
+            fallbackLng: "en",
+            ns: ["common", "HomePage", "Course", "Lecture"],
+            resources: resources
+        }, (err, t) => {
+            ReactDOM.render(CustomViews.HomePage(slug), document.getElementById(target_element_id));
+        });
+    }))();
+};
+>>>>>>> 67d20aa5451e560cafc399fed5b71f35c78c6931
 
 var srCyrl = moment.defineLocale('sr-cyrl', {
     months: 'јануар_фебруар_март_април_мај_јун_јул_август_септембар_октобар_новембар_децембар'.split('_'),
@@ -29261,15 +30487,30 @@ var srCyrl = moment.defineLocale('sr-cyrl', {
     }
 });
 
+<<<<<<< HEAD
 return srCyrl;
 
 })));
+=======
+/***/ }),
+/* 335 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.can_view_HomePage = () => true;
+exports.can_create_HomePage = () => false;
+exports.can_edit_HomePage = () => true;
+exports.can_delete_HomePage = () => false;
+>>>>>>> 67d20aa5451e560cafc399fed5b71f35c78c6931
 
 
 /***/ }),
 /* 266 */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 //! moment.js locale configuration
 //! locale : Serbian [sr]
 //! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
@@ -29379,12 +30620,385 @@ var sr = moment.defineLocale('sr', {
 return sr;
 
 })));
+=======
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const React = __webpack_require__(25);
+const ReactDOM = __webpack_require__(292);
+const Immutable = __webpack_require__(546);
+const KeepAliveApi = __webpack_require__(333);
+const i18next = __webpack_require__(173);
+__webpack_require__(140);
+exports.any_of = (predicates) => () => predicates.map(p => p()).some(p => p);
+class AuthenticationMenu extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.username = null;
+        this.email = null;
+        this.email_confirmation = null;
+        this.password = null;
+        this.new_password = null;
+        this.new_password_confirmation = null;
+        this.state = { kind: "menu" };
+    }
+    render() {
+        let current_logged_in_entity = null;
+        let current_state = this.state;
+        let restore_state = () => this.setState(current_state);
+        let error = (message) => () => this.setState(Object.assign({}, this.state, { kind: "error", message: i18next.t(message), action: restore_state }));
+        if (this.state.kind == "menu") {
+            return React.createElement("div", { className: "topbar__action-wrapper" },
+                current_logged_in_entity ?
+                    React.createElement(LanguageSelector, null)
+                    :
+                        null,
+                React.createElement("div", { className: "authentication-menu" },
+                    React.createElement("a", { className: "authentication-menu__user-btn", onClick: () => {
+                            if (current_logged_in_entity)
+                                this.setState({ kind: "choose-logout-changepassword" });
+                            else
+                                this.setState({ kind: "choose-login-register" });
+                        } })));
+        }
+        else if (this.state.kind == "choose-login-register") {
+            return React.createElement("div", { className: "authentication-menu" },
+                React.createElement("a", { className: "authentication-menu__user-btn" }),
+                React.createElement("div", { className: "overlay", onClick: e => e.target == e.currentTarget && this.setState({ kind: "menu" }) },
+                    React.createElement("div", { className: "authentication-menu__popup" })));
+        }
+        else if (this.state.kind == "choose-logout-changepassword") {
+            return React.createElement("div", { className: "authentication-menu" },
+                React.createElement("a", { className: "authentication-menu__user-btn" }),
+                React.createElement("div", { className: "overlay", onClick: e => e.target == e.currentTarget && this.setState({ kind: "menu" }) },
+                    React.createElement("div", { className: "authentication-menu__popup" },
+                        React.createElement("a", { onClick: () => {
+                                let action = (password, new_password, new_password_confirmation) => new_password_confirmation != new_password ?
+                                    error("Password and password confirmation do not match.")()
+                                    :
+                                        null;
+                                this.setState(Object.assign({}, this.state, { kind: "changing-password", action: action }));
+                            } }, i18next.t('Change password')),
+                        React.createElement("a", { onClick: () => null }, i18next.t('Logout')),
+                        React.createElement("a", { onClick: () => this.setState({ kind: "menu" }) }, i18next.t('Back')))));
+        }
+        else if (this.state.kind == "logging-in") {
+            return React.createElement("form", { className: "authentication-menu", onSubmit: e => {
+                    e.preventDefault();
+                    this.state.kind == "logging-in" && this.state.action(this.username.value, this.password.value);
+                } },
+                React.createElement("a", { className: "authentication-menu__user-btn" }),
+                React.createElement("div", { className: "overlay", onClick: e => e.target == e.currentTarget && this.setState({ kind: "menu" }) },
+                    React.createElement("div", { className: "authentication-menu__popup" },
+                        React.createElement("label", null, i18next.t('Username or email')),
+                        React.createElement("input", { type: "text", ref: u => this.username = u }),
+                        React.createElement("label", null, i18next.t('Password')),
+                        React.createElement("input", { type: "password", ref: p => this.password = p }),
+                        React.createElement("button", { className: "button button-submit", type: "submit" }, i18next.t('Submit')),
+                        React.createElement("button", { className: "button", onClick: () => {
+                                this.setState(Object.assign({}, this.state, { kind: "menu" }));
+                            } }, i18next.t('Cancel')),
+                        React.createElement("a", { className: "authentication-menu__forgot-password", onClick: () => {
+                                if (this.state.kind != "logging-in")
+                                    return;
+                                let new_state = Object.assign({}, this.state, { kind: "resetting-password", action: this.state.reset_action });
+                                this.setState(new_state);
+                            } }, i18next.t('Forgotten password')))));
+        }
+        else if (this.state.kind == "registering") {
+            return React.createElement("form", { className: "authentication-menu", onSubmit: e => {
+                    e.preventDefault();
+                    this.state.kind == "registering" && this.state.action(this.username.value, this.email.value, this.email_confirmation.value);
+                } },
+                React.createElement("a", { className: "authentication-menu__user-btn" }),
+                React.createElement("div", { className: "overlay", onClick: e => e.target == e.currentTarget && this.setState({ kind: "menu" }) },
+                    React.createElement("div", { className: "authentication-menu__popup" },
+                        React.createElement("label", null, i18next.t('Username')),
+                        React.createElement("input", { type: "text", ref: u => this.username = u }),
+                        React.createElement("label", null, i18next.t('Email')),
+                        React.createElement("input", { type: "text", ref: u => this.email = u }),
+                        React.createElement("label", null, i18next.t('Email confirmation')),
+                        React.createElement("input", { type: "text", ref: u => this.email_confirmation = u }),
+                        React.createElement("button", { className: "button button-submit", type: "submit" }, i18next.t('Submit')),
+                        React.createElement("button", { className: "button", onClick: () => {
+                                this.setState(Object.assign({}, this.state, { kind: "menu" }));
+                            } }, i18next.t('Cancel')))));
+        }
+        else if (this.state.kind == "changing-password") {
+            return React.createElement("form", { className: "authentication-menu", onSubmit: e => {
+                    e.preventDefault();
+                    this.state.kind == "changing-password" && this.state.action(this.password.value, this.new_password.value, this.new_password_confirmation.value);
+                } },
+                React.createElement("a", { className: "authentication-menu__user-btn" }),
+                React.createElement("div", { className: "overlay", onClick: e => e.target == e.currentTarget && this.setState({ kind: "menu" }) },
+                    React.createElement("div", { className: "authentication-menu__popup" },
+                        React.createElement("label", null, i18next.t('Old password')),
+                        React.createElement("input", { type: "password", ref: p => this.password = p }),
+                        React.createElement("label", null, i18next.t('New password')),
+                        React.createElement("input", { type: "password", ref: p => this.new_password = p }),
+                        React.createElement("label", null, i18next.t('New password confirmation')),
+                        React.createElement("input", { type: "password", ref: p => this.new_password_confirmation = p }),
+                        React.createElement("div", null,
+                            React.createElement("button", { className: "button button-submit", type: "submit" }, i18next.t('Submit')),
+                            React.createElement("button", { className: "button", onClick: () => {
+                                    this.setState(Object.assign({}, this.state, { kind: "menu" }));
+                                } }, i18next.t('Cancel'))))));
+        }
+        else if (this.state.kind == "resetting-password") {
+            return React.createElement("form", { className: "authentication-menu", onSubmit: e => {
+                    e.preventDefault();
+                    this.state.kind == "resetting-password" && this.state.action(this.username.value);
+                } },
+                React.createElement("a", { className: "authentication-menu__user-btn" }),
+                React.createElement("div", { className: "overlay", onClick: e => e.target == e.currentTarget && this.setState({ kind: "menu" }) },
+                    React.createElement("div", { className: "authentication-menu__popup" },
+                        React.createElement("label", null, i18next.t('Username or email')),
+                        React.createElement("input", { type: "text", ref: u => this.username = u }),
+                        React.createElement("div", null,
+                            React.createElement("button", { className: "button button-submit", type: "submit" }, i18next.t('Reset password')),
+                            React.createElement("button", { className: "button", onClick: () => {
+                                    this.setState(Object.assign({}, this.state, { kind: "menu" }));
+                                } }, i18next.t('Cancel'))))));
+        }
+        else if (this.state.kind == "error") {
+            return React.createElement("div", { className: "authentication-menu" },
+                React.createElement("a", { className: "authentication-menu__user-btn" }),
+                React.createElement("div", { className: "overlay", onClick: e => e.target == e.currentTarget && this.setState({ kind: "menu" }) },
+                    React.createElement("div", { className: "overlay__item" },
+                        React.createElement("h2", { className: "overlay__title" }, this.state.message),
+                        React.createElement("button", { className: "button button-ok", onClick: () => this.state.kind == "error" && this.state.action() }, i18next.t('Ok')))));
+        }
+    }
+}
+exports.AuthenticationMenu = AuthenticationMenu;
+class LanguageSelector extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = { changing_language: false };
+    }
+    render() {
+        return null;
+    }
+}
+function raw_page_to_paginated_items(f, x) {
+    return {
+        IdsInServerOrder: Immutable.List(x.Items.map(e => e.Item.Id)),
+        Items: Immutable.Map(x.Items.map(e => [e.Item.Id, f(e.Item, e.JustCreated)])),
+        Editable: Immutable.Map(x.Items.map(e => [e.Item.Id, e.Editable])),
+        JustCreated: Immutable.Map(x.Items.map(e => [e.Item.Id, e.JustCreated])),
+        SearchQuery: x.SearchQuery,
+        PageIndex: x.PageIndex,
+        PageSize: x.PageSize,
+        NumPages: x.NumPages,
+        TotalCount: x.TotalCount,
+        CanCreate: x.CanCreate,
+        CanDelete: x.CanDelete
+    };
+}
+exports.raw_page_to_paginated_items = raw_page_to_paginated_items;
+class Paginator extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = {};
+    }
+    render() {
+        if (this.props.NumPages <= 1)
+            return null;
+        return React.createElement("div", { className: "paginator", style: { margin: "auto", width: "25%" } },
+            this.props.NumPages > 3 ? React.createElement("a", { className: "page", style: { margin: "5px" }, onClick: () => this.props.page_selected(0) }, i18next.t('First')) : null,
+            this.props.PageIndex > 2 ? "..." : null,
+            this.props.PageIndex > 0 ?
+                React.createElement("a", { className: "page", style: { margin: "5px" }, onClick: () => this.props.page_selected(this.props.PageIndex - 1) }, i18next.t('Prev')) : null,
+            this.props.PageIndex > 0 ?
+                React.createElement("a", { className: "page", style: { margin: "5px" }, onClick: () => this.props.page_selected(this.props.PageIndex - 1) }, this.props.PageIndex) : null,
+            React.createElement("span", { className: "page", style: { margin: "5px" } }, this.props.PageIndex + 1),
+            this.props.PageIndex < this.props.NumPages - 1 ?
+                React.createElement("a", { className: "page", style: { margin: "5px" }, onClick: () => this.props.page_selected(this.props.PageIndex + 1) }, this.props.PageIndex + 2) : null,
+            this.props.PageIndex < this.props.NumPages - 1 ?
+                React.createElement("a", { className: "page", style: { margin: "5px" }, onClick: () => this.props.page_selected(this.props.PageIndex + 1) }, i18next.t('Next')) : null,
+            this.props.PageIndex < this.props.NumPages - 2 ? "..." : null,
+            this.props.NumPages > 3 ?
+                React.createElement("a", { className: "page", style: { margin: "5px" }, onClick: () => this.props.page_selected(this.props.NumPages - 1) }, i18next.t('Last')) : null);
+    }
+}
+exports.Paginator = Paginator;
+// the scene will be responsible for most of the animations and transitions, but also
+// managing the stack of renderers for navigation and url rewrites
+class Scene extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.thread = null;
+        this.state = { current_renderer: props.initial_renderer, is_dirty: false, size: props.is_breadcrumb ? "breadcrumb" : "fullscreen", mode: "view" };
+    }
+    componentDidMount() {
+        this.props.get_element.then(e => this.setState(Object.assign({}, this.state, { element: e })));
+    }
+    componentWillMount() {
+        this.thread = setInterval(() => {
+            if (this.state.is_dirty && this.state.element) {
+                this.props.save_element(this.state.element.Item).then(() => this.setState(Object.assign({}, this.state, { is_dirty: false }))).catch(() => console.log(`Update failed.`));
+            }
+        }, 500);
+    }
+    componentWillUnmount() {
+        clearInterval(this.thread);
+    }
+    render() {
+        let toggle_button = () => this.props.can_edit ?
+            React.createElement("a", { className: `toggle-mode toggle-mode--${this.state.mode}`, onClick: () => this.setState(Object.assign({}, this.state, { mode: this.state.mode == "view" ? "edit" : "view" })) },
+                React.createElement("span", null))
+            :
+                null;
+        return this.state.element ?
+            React.createElement("div", { className: "scene" },
+                this.state.is_dirty ?
+                    React.createElement("div", { style: { position: "fixed", top: 0, left: 0, zIndex: 1000, width: "20px", height: "20px", backgroundColor: "red" }, className: "saving" })
+                    :
+                        React.createElement("div", { style: { position: "fixed", top: 0, left: 0, zIndex: 1000, width: "20px", height: "20px", backgroundColor: "cornflowerblue" }, className: "saved" }),
+                this.state.current_renderer({
+                    slug: this.props.slug,
+                    shown_relation: this.props.shown_relation,
+                    set_shown_relation: this.props.set_shown_relation,
+                    is_animating: this.props.is_animating,
+                    is_breadcrumb: this.props.is_breadcrumb,
+                    pages_count: this.props.pages_count,
+                    set_page: this.props.set_page,
+                    push: this.props.push,
+                    pop: this.props.pop,
+                    always_maximised: this.props.always_maximised,
+                    allow_fullscreen: this.props.allow_fullscreen,
+                    allow_maximisation: this.props.allow_maximisation,
+                    entity: this.state.element.Item,
+                    authentication_menu: this.props.authentication_menu,
+                    breadcrumbs: this.props.breadcrumbs,
+                    toggle_button: toggle_button,
+                    nesting_depth: 0,
+                    size: this.state.size,
+                    mode: this.state.mode,
+                    is_editable: this.state.element.Editable,
+                    set_entity: (new_entity, callback, force_update_count_increment) => {
+                        this.setState(Object.assign({}, this.state, { is_dirty: true, element: Object.assign({}, this.state.element, { Item: new_entity }) }), callback);
+                    },
+                    nested_entity_names: this.props.nested_entity_names.push(this.props.entity_name),
+                    set_size: undefined,
+                    set_mode: (new_mode, callback) => this.setState(Object.assign({}, this.state, { mode: this.state.mode == "view" ? "edit" : "view" })),
+                    logic_frame: this.props.logic_frame,
+                    force_reload: this.props.force_reload
+                }))
+            : React.createElement("div", { className: "loading" }, "Loading...");
+    }
+}
+function scene_to_page(can_edit, renderer, get_element, save_element, entity_name, title, url) {
+    let SceneT = Scene;
+    return {
+        render: (slug) => (is_breadcrumb) => (is_animating) => (pages_count, logic_frame, force_reload) => () => (shown_relation, set_shown_relation) => (authentication_menu, breadcrumbs) => (nested_entity_names) => (set_page, push, pop) => React.createElement(SceneT, { is_breadcrumb: is_breadcrumb, is_animating: is_animating, pages_count: pages_count, logic_frame: logic_frame, force_reload: force_reload, slug: slug, set_page: set_page, push: push, pop: pop, initial_renderer: renderer, get_element: get_element, shown_relation: shown_relation, set_shown_relation: set_shown_relation, authentication_menu: authentication_menu, breadcrumbs: breadcrumbs, allow_fullscreen: true, allow_maximisation: true, always_maximised: true, nested_entity_names: nested_entity_names, entity_name: entity_name, save_element: e => save_element(e), can_edit: can_edit() && !is_breadcrumb }),
+        url: url,
+        title: title
+    };
+}
+exports.scene_to_page = scene_to_page;
+class PageManager extends React.Component {
+    constructor(props, context) {
+        super();
+        this.keep_alive_thread = null;
+        this.state = {
+            connection: "connected",
+            pages: Immutable.Stack([Object.assign({}, props.initial_page, { shown_relation: "none" })]),
+            logic_frame: 0
+        };
+    }
+    componentWillMount() {
+        this.onpopstate = window.addEventListener("popstate", (e) => {
+            e.stopPropagation();
+            this.pop();
+        });
+        this.keep_alive_thread = setInterval(() => {
+            KeepAliveApi.ping().then(() => this.state.connection != "connected" && this.setState(Object.assign({}, this.state, { connection: "connected" }))).catch(() => {
+                if (this.state.connection == "maybe-disconnected1")
+                    this.setState(Object.assign({}, this.state, { connection: "maybe-disconnected2" }));
+                else if (this.state.connection == "maybe-disconnected2")
+                    this.setState(Object.assign({}, this.state, { connection: "disconnected" }));
+                else if (this.state.connection == "connected")
+                    this.setState(Object.assign({}, this.state, { connection: "maybe-disconnected1" }));
+                else
+                    this.setState(Object.assign({}, this.state, { connection: "disconnected" }));
+            });
+        }, 5000);
+    }
+    componentWillUnmount() {
+        window.removeEventListener("popstate", this.onpopstate);
+        clearInterval(this.keep_alive_thread);
+    }
+    set_page(new_page, callback) {
+        window.history.pushState(null, new_page.title, new_page.url);
+        this.setState(Object.assign({}, this.state, { pages: this.state.pages.push(Object.assign({}, new_page, { shown_relation: "none" })) }), () => this.setState(Object.assign({}, this.state, { pages: Immutable.Stack([Object.assign({}, new_page, { shown_relation: "none" })]) }), callback));
+    }
+    push(new_page, callback) {
+        window.history.pushState(null, new_page.title, new_page.url);
+        this.setState(Object.assign({}, this.state, { pages: this.state.pages.push(Object.assign({}, new_page, { shown_relation: "none" })) }), callback);
+    }
+    pop(callback) {
+        let new_pages = this.state.pages.pop();
+        let new_page = new_pages.peek();
+        window.history.pushState(null, new_page.title, new_page.url);
+        this.setState(Object.assign({}, this.state, { pages: new_pages }), callback);
+    }
+    render() {
+        let authentication_menu = () => null;
+        let breadcrumbs = () => React.createElement("div", { className: "breadcrumbs" }, this.state.pages.count() == 1 ?
+            null
+            :
+                this.state.pages.map((p, i) => React.createElement("a", { key: `${i}`, className: "breadcrumbs__item", style: Object.assign({}, (i == this.state.pages.count() - 1 ?
+                        { pointerEvents: "none", border: "none" } : {}), (i == 0 ? { marginLeft: "5px" } : {})), onClick: () => {
+                        let new_pages = Immutable.Stack(this.state.pages.reverse().take(i + 1).reverse());
+                        let new_page = new_pages.peek();
+                        window.history.replaceState(null, new_page.title, new_page.url);
+                        this.setState(Object.assign({}, this.state, { pages: new_pages }));
+                    } }, p.render(this.props.slug)(true)(false)(this.state.pages.count(), this.state.logic_frame, (c) => c && c())()(p.shown_relation, np => { })(authentication_menu, breadcrumbs)(Immutable.Stack())((np, c) => { }, (np, c) => { }, c => { }))).reverse());
+        let disconnected_warning = this.state.connection == "disconnected" ?
+            React.createElement("div", { className: "overlay overlay--disconnected" },
+                React.createElement("div", { className: "overlay__item" },
+                    React.createElement("h2", { className: "overlay__title" }, i18next.t('There seems to be a connection issue')),
+                    React.createElement("button", { onClick: () => location.reload() }, i18next.t('Click here to reload the page'))))
+            :
+                null;
+        return React.createElement("div", { id: "curr", key: `${this.state.pages.peek().url}_${this.state.pages.count()}` },
+            disconnected_warning,
+            this.state.pages.peek().render(this.props.slug)(false)(false)(this.state.pages.count(), this.state.logic_frame, (c) => this.setState(Object.assign({}, this.state, { logic_frame: this.state.logic_frame + 1 }), c))()(this.state.pages.peek().shown_relation, (np, c) => this.setState(Object.assign({}, this.state, { pages: this.state.pages.pop().push(Object.assign({}, this.state.pages.peek(), { shown_relation: np })) }), c))(authentication_menu, breadcrumbs)(Immutable.Stack())((np, c) => this.set_page(np, c), (np, c) => this.push(np, c), c => this.pop(c)));
+    }
+}
+exports.PageManager = PageManager;
+function render_page_manager(slug, target_element_id, initial_page) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let res = yield fetch(`/translations.json`, { method: 'get', credentials: 'include', headers: { 'content-type': 'application/json' } });
+        let resources = yield res.json();
+        i18next.init({
+            lng: "nl",
+            fallbackLng: "en",
+            ns: ["common", "HomePage"],
+            resources: resources
+        }, (err, t) => {
+            ReactDOM.render(React.createElement(PageManager, { initial_page: initial_page, slug: slug }), document.getElementById(target_element_id));
+        });
+    });
+}
+exports.render_page_manager = render_page_manager;
+>>>>>>> 67d20aa5451e560cafc399fed5b71f35c78c6931
 
 
 /***/ }),
 /* 267 */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 //! moment.js locale configuration
 //! locale : siSwati [ss]
 //! author : Nicolai Davies<mail@nicolai.io> : https://github.com/nicolaidavies
@@ -29473,15 +31087,152 @@ var ss = moment.defineLocale('ss', {
 return ss;
 
 })));
+=======
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const React = __webpack_require__(25);
+const Api = __webpack_require__(43);
+let hyperlink = "Lees meer";
+let homepageLink = "Home";
+let aanbiedingLink = "Aanbiedingen";
+let dagtochtLink = "Dagtochten";
+let ooievaarLink = "Ooievaarspas info";
+let vragenLink = "Veelgestelde vragen";
+class HomepageComponent extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = { kind: "loading" };
+    }
+    componentWillMount() {
+        this.loadSpecialeAanbiedingen();
+    }
+    loadSpecialeAanbiedingen() {
+        Api.get_specialaanbieding().then(a => this.setState(Object.assign({}, this.state, { kind: "loaded", specialeAanbieding: a })));
+    }
+    render() {
+        let onclickAanbieding = (id) => this.props.onMovePage({ kind: "DetailAanbieding", id: id, checkPage: 3 });
+        if (this.state.kind == "loaded") {
+            let specialAanbiedingView = function (special_aanbieding) {
+                return React.createElement("div", { key: special_aanbieding.id },
+                    React.createElement("a", { onClick: (id) => onclickAanbieding(special_aanbieding.id) },
+                        " ",
+                        React.createElement("h2", null, special_aanbieding.title),
+                        " "),
+                    React.createElement("br", null),
+                    React.createElement("p", null,
+                        " ",
+                        special_aanbieding.description),
+                    React.createElement("br", null),
+                    React.createElement("button", { onClick: () => onclickAanbieding(special_aanbieding.id) }, hyperlink));
+            };
+            return React.createElement("div", null,
+                React.createElement("h1", null, "Homepage"),
+                React.createElement("h2", null, "Speciale Aanbiedingen"),
+                this.state.specialeAanbieding.map(value => specialAanbiedingView(value)));
+        }
+        else {
+            return React.createElement("div", null, " else ");
+        }
+    }
+}
+exports.HomepageComponent = HomepageComponent;
+>>>>>>> 67d20aa5451e560cafc399fed5b71f35c78c6931
 
 
 /***/ }),
 /* 268 */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 //! moment.js locale configuration
 //! locale : Swedish [sv]
 //! author : Jens Alm : https://github.com/ulmus
+=======
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const React = __webpack_require__(25);
+const Dagtochten = __webpack_require__(324);
+const detailPagina = __webpack_require__(326);
+const Ooievaarspasinfo = __webpack_require__(329);
+const Homepage = __webpack_require__(337);
+const InfoPas = __webpack_require__(327);
+const Aanbieding = __webpack_require__(323);
+const veelgesteldeVragen = __webpack_require__(339);
+const Header_1 = __webpack_require__(325);
+const InformatieDetail = __webpack_require__(328);
+class PageManagerComponent extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = { current_page: { kind: "homepage", id: 0 } };
+    }
+    render() {
+        console.log('PAGEMANAGER', this.state.current_page.kind);
+        let menubar = React.createElement("div", null,
+            " ",
+            React.createElement(Header_1.default, { onMovePage: (next_page) => this.moveToPage(next_page) }));
+        switch (this.state.current_page.kind) {
+            case "homepage":
+                return React.createElement("div", null,
+                    menubar,
+                    React.createElement(Homepage.HomepageComponent, { onMovePage: (next_page) => this.moveToPage(next_page) }),
+                    "  ");
+            case "dagtochtPagina":
+                return React.createElement("div", null,
+                    menubar,
+                    React.createElement(Dagtochten.DagtochtenComponent, { onMovePage: (next_page) => this.moveToPage(next_page), id: this.state.current_page.id }),
+                    " ");
+            case "aanbiedingPagina":
+                return React.createElement("div", null,
+                    menubar,
+                    React.createElement(Aanbieding.AanbiedingenComponent, { onMovePage: (next_page) => this.moveToPage(next_page) }),
+                    " ");
+            case "veelgesteldeVragenPagina":
+                return React.createElement("div", null,
+                    menubar,
+                    React.createElement(veelgesteldeVragen.veelgesteldevragenComponent, { onMovePage: (next_page) => this.moveToPage(next_page) }));
+            case "infopas":
+                return React.createElement("div", null,
+                    menubar,
+                    React.createElement(InfoPas.InfoPasComponent, { onMovePage: (next_page) => this.moveToPage(next_page), id: this.state.current_page.id }));
+            case "DetailDagtocht":
+                return React.createElement("div", null,
+                    menubar,
+                    React.createElement(detailPagina.InforComponent, { id: this.state.current_page.id, checkPage: this.state.current_page.checkPage }));
+            case "DetailAanbieding":
+                return React.createElement("div", null,
+                    menubar,
+                    React.createElement(detailPagina.InforComponent, { id: this.state.current_page.id, checkPage: this.state.current_page.checkPage }));
+            case "ooievaarspasPagina":
+                return React.createElement("div", null,
+                    menubar,
+                    React.createElement(Ooievaarspasinfo.OoievaarsPasComponent, { onMovePage: (next_page) => this.moveToPage(next_page) }),
+                    " ");
+            case "InformatieDetail":
+                return React.createElement("div", null,
+                    menubar,
+                    React.createElement(InformatieDetail.InformatieDetailComponent, { onMovePage: (next_page) => this.moveToPage(next_page), title: this.state.current_page.title }));
+        }
+    }
+    //     function Footer(){
+    //         return  <footer>
+    //                     <button onClick={event => location.reload()}>Ga naar Homepagina</button>
+    //                 </footer>
+    //     }
+    //     return  <div>
+    //                 {PageContent(this)}
+    //                 {Footer()}
+    //             </div>
+    // }
+    moveToPage(next_page) {
+        console.log("move to page");
+        this.setState(Object.assign({}, this.state, { current_page: next_page }));
+    }
+}
+exports.PageManagerComponent = PageManagerComponent;
+
+>>>>>>> 67d20aa5451e560cafc399fed5b71f35c78c6931
 
 ;(function (global, factory) {
     true ? factory(__webpack_require__(1)) :
@@ -29489,6 +31240,7 @@ return ss;
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
 
+<<<<<<< HEAD
 
 var sv = moment.defineLocale('sv', {
     months : 'januari_februari_mars_april_maj_juni_juli_augusti_september_oktober_november_december'.split('_'),
@@ -29543,6 +31295,53 @@ var sv = moment.defineLocale('sv', {
         doy : 4  // The week that contains Jan 4th is the first week of the year.
     }
 });
+=======
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const React = __webpack_require__(25);
+const Api = __webpack_require__(43);
+let homepageLink = "Home";
+class veelgesteldevragenComponent extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = { kind: "loading" };
+    }
+    componentWillMount() {
+        this.loadonderwerp();
+    }
+    loadonderwerp() {
+        Api.get_veelgesteldevragenonderwerp().then(o => this.setState(Object.assign({}, this.state, { kind: "veelgesteldevragenpagina", vragen: o, antwoorden: [true, false, false, false, false, false] })));
+        //.catch(o => this.loadonderwerp())
+    }
+    render() {
+        console.log("ik ben aan het renderen");
+        if (this.state.kind == "veelgesteldevragenpagina") {
+            let onderwerp_view = function (info, thisRef) {
+                function antwoordToggler(thisRef, antwoordNummer) {
+                    thisRef.state.antwoorden[antwoordNummer] = !thisRef.state.antwoorden[antwoordNummer];
+                    thisRef.forceUpdate();
+                }
+                return React.createElement("div", null,
+                    React.createElement("h1", null, info.pagina),
+                    React.createElement("h2", null,
+                        " ",
+                        info.vraag),
+                    React.createElement("div", { onClick: (event) => antwoordToggler(thisRef, 0) }, info.vraag),
+                    !thisRef.state.antwoorden[0] ? info.antwoord : "ANTWOORD IS VERBORGEN");
+            };
+            return React.createElement("div", null,
+                " ",
+                React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "homepage" }) }, homepageLink),
+                this.state.vragen.map(value => onderwerp_view(value, this)));
+        }
+        else {
+            return React.createElement("div", null, "else");
+        }
+    }
+}
+exports.veelgesteldevragenComponent = veelgesteldevragenComponent;
+>>>>>>> 67d20aa5451e560cafc399fed5b71f35c78c6931
 
 return sv;
 
@@ -56121,6 +57920,7 @@ exports.PageManagerComponent = PageManagerComponent;
 /* 634 */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -56166,6 +57966,30 @@ class veelgesteldevragenComponent extends React.Component {
     }
 }
 exports.veelgesteldevragenComponent = veelgesteldevragenComponent;
+=======
+module.exports = function(module) {
+	if(!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if(!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+>>>>>>> 67d20aa5451e560cafc399fed5b71f35c78c6931
 
 
 /***/ })

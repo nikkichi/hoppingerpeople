@@ -73,10 +73,25 @@ export function get_ooievaarsPas(): Promise<Types.InformatiePas[]> {
     return new Promise((resolve, reject) => {
         let random = generateNumber(0, 10);
         if (informatiepas == undefined)
-            reject("Foutmelding of some sort")
+            reject("Something went wrong")
         else resolve(informatiepas)
     })
 
+}
+export function get_ExtraInformatie(title: number): Promise<Types.Extra_Informatie[]>{
+    return new Promise((resolve, reject)=>{
+resolve(ExtraInformatie)
+
+    })
+}
+export function get_SpecificExtraInformatie(title: string): Promise<Types.Extra_Informatie[]>{
+      return new Promise((resolve, reject) => {
+        if (ExtraInformatie == undefined)
+            reject("De titel komt niet voor")
+        else {
+            return resolve(ExtraInformatie.filter((element) => element.title == title))
+        }
+    })
 }
 export function get_OverDeOoievaarspas(id: number): Promise<Types.Uitleg_InformatiePas[]> {
     //let value = aanbieding.filter((element) => element.id == 1)
@@ -91,9 +106,6 @@ export function get_OverDeOoievaarspas(id: number): Promise<Types.Uitleg_Informa
     })
 }
 export function get_InformatieDetail(title: string): Promise<Types.Detail_Uitleg[]> {
-    //let value = aanbieding.filter((element) => element.id == 1)
-    // return value
-
     return new Promise((resolve, reject) => {
         if (detailuitleg == undefined)
             reject("De titel komt niet voor")
@@ -422,5 +434,26 @@ let detailuitleg : Types.Detail_Uitleg[]=[
         title:'Verloop na aanvraag Ooievaarspas',
         image: '',
         text: 'Wat gebeurt er nadat u een aanvraag voor een Ooievaarspas heeft gedaan? Nadat u een aanvraag heeft gedaan ontvangt u schriftelijk een ontvangstbevestiging. De gemeente bekijkt binnen 8 weken of u voldoet aan de voorwaarden en stelt vast of u recht heeft op de Ooievaarspas. Mocht u na 8 weken geen bericht hebben ontvangen, dan kunt u contact opnemen met de klantenservice. Als de gemeente onvoldoende gegevens van u heeft ontvangen om het recht op de Ooievaarspas te kunnen beoordelen, dan wordt u gebeld of krijgt u een brief waarin gevraagd wordt om informatie aan te leveren. Bij de brief zit een retour-enveloppe (u hoeft dus geen postzegel te plakken).'
+    }
+]
+
+let ExtraInformatie: Types.Extra_Informatie[]=[
+    {
+        title:'Onze vrienden van de Ooievaarspas',
+        description:'Heb jij al kennis gemaakt met onze vrienden? Ontmoet ze hier en lees gauw wat zij aanbieden!',
+        text:'Ooievaarspashouders krijgen belangeloos korting bij organisaties die aangesloten zijn als vrienden van de Ooievaarspas. De verleende korting wordt vastgesteld door de organisatie zelf en wijkt daardoor af van reguliere Ooievaarspaskortingen.',
+        id: 1
+    },
+    {
+        title: 'Vergroot uw digitale wereld',
+        description:'Bent u al digitaal of wilt u digitaal worden? Doe dan mee met onze cursus ‘Allemaal Digitaal’!',
+        text: 'Bent u 60+ en nieuwsgierig naar het gebruik van een tablet? Dan is een cursus misschien iets voor u. Met het gebruik van internet blijft u langer zelfstandig en betrokken bij de maatschappij. Zo kunt u gemakkelijk in contact komen met familie en vrienden, maar ook organisaties benaderen en het nieuws volgen. De cursus ‘Allemaal Digitaal’ biedt u de kans om een kijkje te nemen in de digitale wereld. U hoeft geen ervaring te hebben om aan deze tabletcursus mee te doen.',
+        id: 2
+    },
+    {
+        title: '50% korting voor meer leuke dingen',
+        description:'Maak je gebruik van de regeling Kinderen Doen Mee? Wist je dat je hiernaast ook 50% korting op je volgende sport en volgende culturele activiteit krijgt?',
+        text:'Je kunt met de Ooievaarspas gebruik maken van de regeling Kinderen Doen Mee. Dit betekent dat je met 100% korting aan 1 sport + 1 creatieve activiteit kan meedoen. Daarnaast krijg je 50% korting op je volgende sport en volgende creatieve activiteit. Ben je lid van een voetbalvereniging, maar wil je ook graag op judo? Dan kun je gratis voetballen en krijg je 50% korting op het judoën. Zit je op gitaarles, maar wil je ook naar dansles? Dan kun je gratis gitaarles volgen en krijg je 50% korting op het dansen',
+        id: 3
     }
 ]
