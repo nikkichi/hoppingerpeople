@@ -8,7 +8,7 @@ import * as Api from './api'
 import * as Zoek from './Zoekbalk'
 
 type MenubarComponentProps = { onMovePage: (id: Manager.Page) => void}
-type MenubarComponentState = {}
+type MenubarComponentState = {searchterm: string}
 
 let hyperlink = "Lees meer"
 let homepageLink = "Home"
@@ -16,7 +16,7 @@ let aanbiedingLink = "Aanbiedingen"
 let dagtochtLink = "Dagtochten"
 let ooievaarLink = "Ooievaarspas info"
 let vragenLink = "Veelgestelde vragen"
-
+let zoekLink = "Zoeken"
 
 export default class Menu extends React.Component<MenubarComponentProps, MenubarComponentState> {
     
@@ -33,11 +33,19 @@ export default class Menu extends React.Component<MenubarComponentProps, Menubar
                     <button onClick={onClickDagtocht}>{dagtochtLink}</button>
                     <button onClick={onClickOoievaarsinfo}>{ooievaarLink}</button>
                     <button onClick={(event) => this.props.onMovePage({ kind: "veelgesteldeVragenPagina"})}>{vragenLink}</button>
+                    <input id="zoekinput" onChange={input => this.setState(
+                        input.target.value != null ?
+                        {searchterm:input.target.value}:
+                        {searchterm:""})}></input>
+                    <button onClick={(event) => this.props.onMovePage({ kind: "zoekresultatenPagina", searchterm:this.state.searchterm})}>
+                        {zoekLink}
+                    </button> 
                 </div>
                 </nav>
             </header>)
         }
     }
 
-
+//this.props.onMovePage(
+//                        {kind: "zoekresultatenPagina", searchterm:document.getElementById("zoekinput").nodeValue})}
 

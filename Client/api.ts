@@ -40,11 +40,9 @@ function filterDagtocht(id: number) {
 
 }
 
-export function get_dagtochten(id: number): Promise<Types.Dagtocht[]> {
-    console.log('get_dagtocht', dagTochten.filter((element) => element.categoryID == id))
-
+export function get_dagtochten(): Promise<Types.Dagtocht[]> {
     return new Promise((resolve, reject) => {
-        resolve(filter(id))
+        resolve(dagTochten)
     })
 }
 export function get_dagtocht(id: number): Promise<Types.Dagtocht[]> {

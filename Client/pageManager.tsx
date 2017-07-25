@@ -31,14 +31,14 @@ export type Page = { kind:"homepage"} |
                    { kind: "DetailDagtocht", id: number, checkPage: number }|
                    { kind: "DetailAanbieding", id: number, checkPage: number} |
                    { kind: "InformatieDetail", title: string} |
-                   { kind: "zoekresultatenPagina", results: JSX.Element[]}
+                   { kind: "zoekresultatenPagina", searchterm: string}
 
 export class PageManagerComponent extends React.Component<PageManagerComponentProps, PageManagerComponentState>{
  
     constructor(props: PageManagerComponentProps, context) {
         super(props, context);
         this.state = { current_page: { kind:"homepage", id:0} }
-    }
+    }   
 
     moveToPage(next_page: Page) {
         console.log("move to page")
@@ -57,24 +57,21 @@ export class PageManagerComponent extends React.Component<PageManagerComponentPr
             case "aanbiedingPagina":
                 return <div>{menubar}<Aanbieding.AanbiedingenComponent onMovePage={(next_page) => this.moveToPage(next_page)}/> </div> 
             case "veelgesteldeVragenPagina": 
-                return<div>{menubar}<veelgesteldeVragen.veelgesteldevragenComponent onMovePage={(next_page) => this.moveToPage(next_page)}/></div>   
+                return <div>{menubar}<veelgesteldeVragen.veelgesteldevragenComponent onMovePage={(next_page) => this.moveToPage(next_page)}/></div>   
             case "infopas": 
-                return<div>{menubar}<InfoPas.InfoPasComponent onMovePage={(next_page) => this.moveToPage(next_page)} id= {this.state.current_page.id}/></div>
+                return <div>{menubar}<InfoPas.InfoPasComponent onMovePage={(next_page) => this.moveToPage(next_page)} id= {this.state.current_page.id}/></div>
             case "DetailDagtocht":
-                return<div>{menubar}<detailPagina.InforComponent id= {this.state.current_page.id} checkPage= {this.state.current_page.checkPage}/></div>
+                return <div>{menubar}<detailPagina.InforComponent id= {this.state.current_page.id} checkPage= {this.state.current_page.checkPage}/></div>
             case "DetailAanbieding":
-                return<div>{menubar}<detailPagina.InforComponent id={this.state.current_page.id} checkPage= {this.state.current_page.checkPage} /></div>
+                return <div>{menubar}<detailPagina.InforComponent id={this.state.current_page.id} checkPage= {this.state.current_page.checkPage} /></div>
             case "ooievaarspasPagina":
                 return <div>{menubar}<Ooievaarspasinfo.OoievaarsPasComponent onMovePage={(next_page) => this.moveToPage(next_page)}  /> </div>  
             case "InformatieDetail": 
-                return<div>{menubar}<InformatieDetail.InformatieDetailComponent onMovePage={(next_page) => this.moveToPage(next_page)} title= {this.state.current_page.title}/></div>
+                return <div>{menubar}<InformatieDetail.InformatieDetailComponent onMovePage={(next_page) => this.moveToPage(next_page)} title= {this.state.current_page.title}/></div>
             case "zoekresultatenPagina":
-                return  <div>
-                            {<div> <Header onMovePage={(next_page) => this.moveToPage(next_page)}/></div>}
-                            <Zoek.Zoekbalk onMovePage={(next_page) => this.moveToPage(next_page)}/>
+                return  <div>{menubar}
+                            <Zoek.Zoekbalk onMovePage={(next_page) => this.moveToPage(next_page)} searchterm={this.state.current_page.searchterm}/>
                         </div>
-            default:
-                return <h1>HERES THE MISTAKE</h1>
     }}
 
     
