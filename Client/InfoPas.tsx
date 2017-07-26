@@ -27,7 +27,6 @@ export class InfoPasComponent extends React.Component<InfoPasComponentProps, Inf
         Api.get_OverDeOoievaarspas(this.props.id)
         .then(u => this.setState({...this.state, kind: 'loaded', Uitleginformatie: u}))
       //  .catch(u=> console.log("error"))//this.loadUitleg())
-        console.log('test')
 
     }
 
@@ -35,12 +34,12 @@ export class InfoPasComponent extends React.Component<InfoPasComponentProps, Inf
         Api.get_ExtraInformatie()
         .then(ex => this.setState({...this.state, kind:'loaded', Extrainformatie: ex}))
         //.catch(ex => console.log('error'))
-        console.log('extra info wordt geload')
+
     }
 
     componentWillMount(){
          this.loadUitleg();
-        console.log('Uitleg wordt geload')
+
         this.loadExtraInfo();
         
     }

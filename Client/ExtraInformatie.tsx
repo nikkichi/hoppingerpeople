@@ -22,12 +22,12 @@ export class ExtrainformatieComponent extends React.Component<ExtrainformatieCom
         Api.get_SpecificExtraInformatie(this.props.title)
         .then(ex => this.setState({...this.state, kind:'loaded', Extrainformatie: ex}))
         .catch(ex => console.log('error'))
-        console.log('extra info wordt geload')
+
     }
 
     componentWillMount(){
         this.loadExtraInfo();
-        console.log('Extra Info wordt geload')
+
     }
 
     render(){

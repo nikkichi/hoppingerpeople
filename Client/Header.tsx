@@ -15,11 +15,18 @@ let aanbiedingLink = "Aanbiedingen"
 let dagtochtLink = "Dagtochten"
 let ooievaarLink = "Ooievaarspas info"
 let vragenLink = "Veelgestelde vragen"
-
+let zoekLink = "Zoeken"
 
 export default class Menu extends React.Component<MenubarComponentProps, MenubarComponentState> {
     
     render(){
+        function onClickZoeken(thisRef) { return (event) => {
+            if(thisRef.state.searchterm == ""){
+                alert("U moet wel een zoekterm invullen om te zoeken")
+            }else{
+                thisRef.props.onMovePage({kind:"zoekresultatenPagina", searchterm:thisRef.state.searchterm})
+            }
+        }}
         let onClickDagtocht = (event) => this.props.onMovePage({ kind: "dagtochtPagina", id: 1})
         let onClickAanbieding = (event) => this.props.onMovePage({ kind: "loaded"})
         let onClickOoievaarsinfo = (event) => this.props.onMovePage({kind: "ooievaarspasPagina"})

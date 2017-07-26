@@ -35,7 +35,6 @@ export class FilterCategorieComponent extends React.Component<FilterCategorieCom
             <div className="dropdown">
                 <select className= "dropbtn" name="categorie filter" id="1" onChange={s => {
                     this.setCategory(s.currentTarget.value)
-                    console.log(s.currentTarget.value)
                 }}>
                     <option selected hidden>Maak uw keuze: </option>
                     {categories.map(category => stringToOption(category))}
@@ -56,7 +55,7 @@ export class FilterWatComponent extends React.Component<FilterWatComponentProps>
     }
 
     setWat(value){
-        this.props.setFilterState({... this.props.filterState, Wie: { kind: "on", value: value } })
+        this.props.setFilterState({... this.props.filterState, Wat: { kind: "on", value: value } })
     }
 
     render(){ 
@@ -152,7 +151,7 @@ export class FilterVoorWieComponent extends React.Component<FilterVoorWieCompone
             <div className="dropdown">
             <select className= "dropbtn" name="wie filter" id="4" onChange={s => {
                 this.setWie(s.currentTarget.value)
-                console.log(s.currentTarget.value)
+
                 }}>
                 <option selected hidden>Voor iedereen </option>
                 {targets.map(target => stringToOption(target))}
