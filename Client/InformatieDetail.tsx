@@ -19,17 +19,16 @@ export class InformatieDetailComponent extends React.Component<InformatieDetailC
         Api.get_InformatieDetail(this.props.title)
         .then(u => this.setState({...this.state, kind: 'loaded', Uitleginformatie: u}))
         .catch(u=> console.log("error"))//this.loadUitleg())
-        console.log('test')
+     
     }
     loadExtraInfo(){
         Api.get_ExtraInformatie()
         .then(ex => this.setState({...this.state, kind:'loaded', Extrainformatie: ex}))
         //.catch(ex => console.log('error'))
-        console.log('extra info wordt geload')
+      
     }
     componentWillMount(){
         this.loadDetailinfo();
-        console.log('Details worden geload')
         this.loadExtraInfo() 
     }
     render(){

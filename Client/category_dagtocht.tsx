@@ -33,14 +33,12 @@ export class category_dagtochtComponenet extends React.Component<category_dagtoc
 
     componentWillMount(){
         this.loadDagtochten();
-        console.log('dagtocht wordt geload')
     }
 
     render(){
         
          let onclickdagtocht = (id: number) => this.props.onMovePage({ kind: "DetailDagtocht", id: id, checkPage: 2 })
         if(this.state.kind == 'loaded'){
-{console.log("dagtochten...", this.state.dagtochten)}
            let dagtochtView = function (dagtocht: Types.Dagtocht) {
                 return <div className="box--dagtocht" key={dagtocht.name}>
                     <a onClick={(id) => onclickdagtocht(dagtocht.id)}>  <h2> {dagtocht.name}</h2></a>

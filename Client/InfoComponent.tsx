@@ -20,7 +20,7 @@ export class InforComponent extends React.Component<InforComponentProps, InforCo
     }
 
     loadAanbieding() {
-        console.log("id checker", this.props.id)
+
         Api
             .get_aanbieding(this.props.id)
             .then(d => this.setState({ ...this.state, kind: "DetailAanbieding", aanbieding: d }))
@@ -29,7 +29,7 @@ export class InforComponent extends React.Component<InforComponentProps, InforCo
     }
 
     loadSpeciaal() {
-        console.log("id checker", this.props.id)
+ 
         Api
             .get_special(this.props.id)
             .then(d => this.setState({ ...this.state, kind: "DetailSpecial", special: d }))
@@ -48,7 +48,7 @@ export class InforComponent extends React.Component<InforComponentProps, InforCo
     }
 
     componentWillMount() {
-        console.log('component will mount', this.props.checkPage)
+
 
         if (this.props.checkPage == 1) {
             return this.loadAanbieding();
@@ -65,7 +65,6 @@ export class InforComponent extends React.Component<InforComponentProps, InforCo
 
 
     render() {
-        console.log(this.state.kind)
         if (this.state.kind == "DetailAanbieding") {
             let AanbiedingView = function (aanbieding: Types.aanbieding) {
 

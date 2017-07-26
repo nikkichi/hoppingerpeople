@@ -46,7 +46,6 @@ export class DagtochtenComponent extends React.Component<DagtochtenComponentProp
     render() {
 
         let onclickdagtocht = (id: number) => this.props.onMovePage({ kind: "category_dagtocht", id: id })
-        console.log(this.state.kind)
         if (this.state.kind == "dagtochtPagina") {
 
             let categoryView = function (category: Types.Category_Dagtocht) {
