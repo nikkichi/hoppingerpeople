@@ -4,7 +4,7 @@ import * as Immutable from "immutable"
 import * as Api from "./api"
 import * as Manager from "./pageManager"
 import * as Types from './custom_types'
-import {FilterCategorieComponent, FilterVoorWieComponent } from './FilterComponent'
+import {FilterCategorieComponent,FilterWatComponent, FilterVoorWieComponent, FilterWaarComponent } from './FilterComponent'
 
 
 let hyperlink = "lees meer "
@@ -66,6 +66,7 @@ export class AanbiedingenComponent extends React.Component<AanbiedingenComponent
                     filterState: EmptyFilterState
                 }
             )} )
+            .catch(f => console.log('error'))
         }
 
     render() {
@@ -76,7 +77,9 @@ export class AanbiedingenComponent extends React.Component<AanbiedingenComponent
 
             let AanbiedingView = function (aanbieding: Types.aanbieding) {
                 return <div className="box--fourth" key={aanbieding.id}>
-                       <a onClick={(id) => onclickAanbieding(aanbieding.id)}> <h2>{aanbieding.title}</h2> </a>
+                       <a onClick={(id) => onclickAanbieding(aanbieding.id)}>
+                           <h2>{aanbieding.title}</h2>
+                           </a>
                     <br></br>
                     <img src = {aanbieding.image} ></img>
             
@@ -94,43 +97,73 @@ export class AanbiedingenComponent extends React.Component<AanbiedingenComponent
                     if (this.state.kind == "loaded") {
                         if(this.state.filterState.Categorie.kind == "off") {
                             return true;
-                        } else {
+                        } 
+                        else {
                             if (a.category == this.state.filterState.Categorie.value) { return true }
                             else { return false }
                         }
                     }
                 })
-                .filter((b) => {
+                .filter((d) => {
                     if (this.state.kind == "loaded") {
                         if (this.state.filterState.Wie.kind == "off") {
                             return true;
                         }
                         else {
-                            if (b.target == this.state.filterState.Wie.value) { return true }
+                            if (d.target == this.state.filterState.Wie.value) { return true }
                             else {return false} 
                         }
                     }
                 })
+                .filter((c) => {
+                    if (this.state.kind == "loaded") {
+                        if (this.state.filterState.Waar.kind == "off") {
+                            return true;
+                        }
+                        else {
+                            if (c.location == this.state.filterState.Waar.value) { return true }
+                            else { return false } 
+                        }
+                    }
+                })
+                .filter((b) => { 
+                    if (this.state.kind == "loaded") {
+                        if (this.state.filterState.Waar.kind == "off") {
+                            return true;
+                        }
+                        else {
+                            if (b.location == this.state.filterState.Waar.value) { return true }
+                            else { return false } 
+                        }
+                    }
+                })
+                
 
             return <div>
                 <h1 className="homepage--title">Aanbiedingen</h1>
                 <h2 className="box--aanbieding">Alle aanbiedingen</h2>
-                 {/* {this.state.aanbiedingen.map(aanbieding => AanbiedingView(aanbieding))  */}
+                  {/* {this.state.aanbiedingen.map(aanbieding => AanbiedingView(aanbieding))  } */}
 
                  
                 <FilterCategorieComponent 
                 aanbiedingen={this.state.aanbiedingen}
                 filterState={this.state.filterState} 
-                setFilterState={this.setFilterState.bind(this)} />
+                setFilterState={this.setFilterState.bind(this)}/><br/>
 
-                {/* wat filter */}
+                <FilterWatComponent
+                aanbiedingen={this.state.aanbiedingen}
+                filterState={this.state.filterState}
+                setFilterState={this.setFilterState.bind(this)}/><br/>
 
-                {/* waar filter  */}
+                <FilterWaarComponent
+                aanbiedingen={this.state.aanbiedingen}
+                filterState={this.state.filterState}
+                setFilterState={this.setFilterState.bind(this)}/><br/>
 
                 <FilterVoorWieComponent
                 aanbiedingen={this.state.aanbiedingen}
                 filterState={this.state.filterState}
-                setFilterState={this.setFilterState.bind(this)}/>
+                setFilterState={this.setFilterState.bind(this)}/><br/>
 
                 {filteredAanbiedingen.map(aanbieding => AanbiedingView(aanbieding))}
             </div>

@@ -319,7 +319,7 @@ let aanbieding: Types.aanbieding[] = [
         text: 'Dat badminton geen suffe sport is, bewijst badmintonclub DKC. Deze grote vereniging in Den Haag biedt speel- en trainingsmogelijkheden voor jong en oud. Lekker badmintonnen op elk niveau; van beginnend recreant tot fanatieke wedstrijdspeler. Wil je een keer vrijspelen of trainen? Ook dat kan.',
         id: 1,
         category: 'alle aanbiedingen',
-        activity: { kind: 'sport', sub: 'badminton' },
+        activity: 'badminton',
         location: 'centrum',
         target: 'ouder dan 17 jaar',
         reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door."
@@ -331,7 +331,7 @@ let aanbieding: Types.aanbieding[] = [
         text: 'Badminton houdt iedereen fit, ook u. Want ook voor 55-plussers is badminton een ideale sport. Sla lekker een shuttletje mee en houd uw gewrichten en spieren soepel.Ook als u geen badmintonervaring heeft, bent u van harte welkom.',
         id: 2,
         category: 'alle aanbiedingen',
-        activity: { kind: 'sport', sub: 'badminton' },
+        activity: 'badminton',
         location: 'centrum',
         target: 'alle leeftijden',
         reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door."
@@ -343,7 +343,7 @@ let aanbieding: Types.aanbieding[] = [
         text: 'Oefening baart kunst. Oftewel: door goed te oefenen, zet je de beste resultaten neer. Dat geldt ook voor deze toneelvereniging, de niet voor niets ‘Alles Door Oefening’ (ADO) in haar naam heeft.ADO-DVS is de oudste toneelvereniging van Den Haag. En dat zie je terug op het podium. Stukken van onder andere Ibsen, Sophocles, Bernlef en Wim T. Schippers zette ADO-DVS al op het podium neer. Lijkt het jou iets om daarin mee te spelen?',
         id: 3,
         category: 'alle aanbiedingen',
-        activity: { kind: 'cultuur', sub: 'toneel' },
+        activity: 'toneel',
         location: 'centrum',
         target: 'ouder dan 50 jaar',
         reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door."
@@ -355,7 +355,7 @@ let aanbieding: Types.aanbieding[] = [
         text: 'Speelde je vroeger ook zo vaak filmscènes na? Of hang je thuis wel eens ‘de clown’ of de ‘dramaqueen’ uit? Dan schuilt er misschien wel een heel goede acteur of actrice in je. En die kunnen ze bij Theatergroep Wats nu net goed gebruiken. De theatergroep staat regelmatig op de planken met uiteenlopende voorstellingen.Kom eens een repetitie bijwonen en kijk of het wat voor je is. Ben je overtuigd? Meld je aan en wie weet speel jij al mee in het volgende stuk!',
         id: 4,
         category: 'speciale aanbiedingen',
-        activity: { kind: 'cultuur', sub: 'toneel' },
+        activity: 'toneel',
         location: 'centrum',
         target: 'alle leeftijden',
         reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door."
@@ -368,7 +368,7 @@ let aanbieding: Types.aanbieding[] = [
         id: 5,
         reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door.",
         category: 'speciale aanbiedingen',
-        activity: { kind: 'cultuur', sub: 'toneel' },
+        activity: 'toneel',
         location: 'centrum',
         target: 'alle leeftijden'
     },
@@ -380,7 +380,7 @@ let aanbieding: Types.aanbieding[] = [
         id: 3,
         reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door.",
         category: 'speciale aanbiedingen',
-        activity: { kind: 'cultuur', sub: 'toneel' },
+        activity: 'fitness',
         location: 'centrum',
         target: 'alle leeftijden'
     },
@@ -393,7 +393,7 @@ let aanbieding: Types.aanbieding[] = [
         id: 1,
         reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door.",
         category: 'speciale aanbiedingen',
-        activity: { kind: 'cultuur', sub: 'toneel' },
+        activity: 'fitness',
         location: 'centrum',
         target: 'alle leeftijden'
     }

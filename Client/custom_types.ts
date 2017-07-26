@@ -34,10 +34,6 @@ export type SpecialAanbieding = {
     reserveren: string
 }
 
-type ActivityKind = "cultuur" | "sport"
-
-export type Activy = { kind: ActivityKind, sub: string }
-
 export type aanbieding = {
     text: string,
     image: string,
@@ -45,7 +41,7 @@ export type aanbieding = {
     description: string, 
     id: number,
     category: string,
-    activity: Activy,
+    activity: string,
     location: string,
     target: string ,
     reserveren: string
