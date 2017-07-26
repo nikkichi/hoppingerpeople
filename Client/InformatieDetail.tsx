@@ -21,7 +21,7 @@ export class InformatieDetailComponent extends React.Component<InformatieDetailC
     loadDetailinfo(){
         Api.get_InformatieDetail(this.props.title)
         .then(u => this.setState({...this.state, kind: 'loaded', Uitleginformatie: u}))
-        .catch(u=> console.log("error"))//this.loadUitleg())
+        //.catch(u=> console.log("error"))//this.loadUitleg())
         console.log('test')
     }
 
@@ -35,6 +35,7 @@ export class InformatieDetailComponent extends React.Component<InformatieDetailC
             let detail_view = function(details: Types.Detail_Uitleg){
                 return <div key={details.title}>
                     <h1>{details.title}</h1>
+                    <img src= {details.image}></img>
                     <div>{details.text}</div>
                     <div>{details.image}</div>
                     </div>
