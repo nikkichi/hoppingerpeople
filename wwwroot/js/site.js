@@ -4854,7 +4854,7 @@ module.exports = invariant;
 
 
 
-var emptyFunction = __webpack_require__(33);
+var emptyFunction = __webpack_require__(32);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -5394,7 +5394,7 @@ module.exports = ExecutionEnvironment;
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.1.13 ToObject(argument)
-var defined = __webpack_require__(31);
+var defined = __webpack_require__(30);
 module.exports = function(it){
   return Object(defined(it));
 };
@@ -5483,7 +5483,7 @@ __webpack_require__(39).inspectSource = function(it){
 
 var $export = __webpack_require__(0)
   , fails   = __webpack_require__(7)
-  , defined = __webpack_require__(31)
+  , defined = __webpack_require__(30)
   , quot    = /"/g;
 // B.2.3.2.1 CreateHTML(string, tag, attribute, value)
 var createHTML = function(string, tag, attribute, value) {
@@ -5507,7 +5507,7 @@ module.exports = function(NAME, exec){
 
 // to indexed object, toObject with fallback for non-array-like ES3 strings
 var IObject = __webpack_require__(70)
-  , defined = __webpack_require__(31);
+  , defined = __webpack_require__(30);
 module.exports = function(it){
   return IObject(defined(it));
 };
@@ -5968,6 +5968,82 @@ module.exports = { debugTool: debugTool };
 
 /***/ }),
 /* 29 */
+/***/ (function(module, exports) {
+
+var toString = {}.toString;
+
+module.exports = function(it){
+  return toString.call(it).slice(8, -1);
+};
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports) {
+
+// 7.2.1 RequireObjectCoercible(argument)
+module.exports = function(it){
+  if(it == undefined)throw TypeError("Can't call method on  " + it);
+  return it;
+};
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var fails = __webpack_require__(7);
+
+module.exports = function(method, arg){
+  return !!method && fails(function(){
+    arg ? method.call(null, function(){}, 1) : method.call(null);
+  });
+};
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * 
+ */
+
+function makeEmptyFunction(arg) {
+  return function () {
+    return arg;
+  };
+}
+
+/**
+ * This function accepts and discards inputs; it has no side effects. This is
+ * primarily useful idiomatically for overridable function endpoints which
+ * always need to be callable, since JS lacks a null-call idiom ala Cocoa.
+ */
+var emptyFunction = function emptyFunction() {};
+
+emptyFunction.thatReturns = makeEmptyFunction;
+emptyFunction.thatReturnsFalse = makeEmptyFunction(false);
+emptyFunction.thatReturnsTrue = makeEmptyFunction(true);
+emptyFunction.thatReturnsNull = makeEmptyFunction(null);
+emptyFunction.thatReturnsThis = function () {
+  return this;
+};
+emptyFunction.thatReturnsArgument = function (arg) {
+  return arg;
+};
+
+module.exports = emptyFunction;
+
+/***/ }),
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6004,7 +6080,6 @@ function filterAanbieding(id) {
 }
 function filterDagtocht(id) {
     let value = dagTochten.filter((element) => element.categoryID == id);
-    console.log(value, "lijst dagtochten");
     return value;
 }
 function get_dagtochten(id) {
@@ -6014,7 +6089,6 @@ function get_dagtochten(id) {
 }
 exports.get_dagtochten = get_dagtochten;
 function get_dagtocht(id) {
-    console.log('get_dagtocht', dagTochten.filter((element) => element.categoryID == id));
     return new Promise((resolve, reject) => {
         resolve(filterDagtocht(id));
     });
@@ -6029,14 +6103,12 @@ function get_OneDagtocht(id) {
 exports.get_OneDagtocht = get_OneDagtocht;
 function get_aanbiedingen() {
     return new Promise((resolve, reject) => {
-        console.log("aanbiedingen", aanbieding);
         resolve(aanbieding);
     });
 }
 exports.get_aanbiedingen = get_aanbiedingen;
 function get_aanbieding(id) {
     return new Promise((resolve, reject) => {
-        console.log("aanbiedingen", aanbieding);
         resolve(filterAanbieding(id));
     });
 }
@@ -6089,15 +6161,6 @@ function get_InformatieDetail(title) {
     });
 }
 exports.get_InformatieDetail = get_InformatieDetail;
-function get_Title() {
-    return new Promise((resolve, reject) => {
-        if (Title == undefined)
-            reject("Foutmelding");
-        else
-            resolve(Title);
-    });
-}
-exports.get_Title = get_Title;
 function get_cat1vragen() {
     return new Promise((resolve, reject) => {
         if (cat1Vragen == undefined)
@@ -6237,7 +6300,7 @@ let speciale_aanbieding = [
     {
         description: "In teamverband lekker actief zijn, dat kan in de Florence Clubs. Altijd al gedroomd om te kunnen...",
         image: 'https://www.ooievaarspas.nl/uploads/event/image/233/thumb_Florence-.jpg',
-        title: 'Join the Florence club! Speciaal',
+        title: 'Join the Florence club!',
         text: 'In teamverband lekker actief zijn, dat kan in de Florence Clubs. Altijd al gedroomd om te kunnen hardlopen of handboogschieten? Dit is nu mogelijk, gezellig in teamverband!',
         id: 1,
         reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door."
@@ -6245,7 +6308,7 @@ let speciale_aanbieding = [
     {
         description: "Woon je in Leidschendam-Voorburg en ben je op zoek naar een nieuwe sport? De sportstrippenkaart...",
         image: "https://www.ooievaarspas.nl/uploads/event/image/205/thumb_sportstrippenkaart.jpg",
-        title: 'Ontdek je sport met de sportstrippenkaart Speciaal',
+        title: 'Ontdek je sport met de sportstrippenkaart',
         text: 'Woon je in Leidschendam-Voorburg en ben je op zoek naar een nieuwe sport? De sportstrippenkaart helpt je op weg! Hardlopen, volleybal of zwemmen: weet jij niet welke sport bij je past? Dit is je kans! Met de sportstrippenkaart mag je vier sporten uitproberen bij meer dan 30 sportverenigingen in Leidschendam-Voorburg. Gewoon gratis!',
         id: 2,
         reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door."
@@ -6253,7 +6316,7 @@ let speciale_aanbieding = [
     {
         description: "Wil je gratis hulp bij het afvallen? Neem je je voor om te gaan bewegen, maar komt het er steeds...",
         image: "https://www.ooievaarspas.nl/uploads/event/image/216/thumb_Gezinnen_project.jpg",
-        title: 'Gratis online coaching voor Haagse pashouders Speciaal',
+        title: 'Gratis online coaching voor Haagse pashouders',
         text: 'Wil je gratis hulp bij het afvallen? Neem je je voor om te gaan bewegen, maar komt het er steeds niet van? Heb je plannen om je leefstijl te verbeteren? Wil je graag stoppen met roken of wordt het hoog tijd om je stress te verminderen? Ben je toe aan gezinshulp? Zet dan nu de stap en meld je aan voor een jaar lang gratis online coaching!',
         id: 3,
         reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door."
@@ -6261,7 +6324,7 @@ let speciale_aanbieding = [
     {
         description: "Familiepark Drievliet, plezier voor jong en oud. Drievliet is in 2017 aanbieder van de...",
         image: "https://www.ooievaarspas.nl/uploads/event/image/228/thumb_Drievliet.jpg",
-        title: 'Ontdek Drievliet met de Ooievaarspas vanaf 1 april Speciaal',
+        title: 'Ontdek Drievliet met de Ooievaarspas vanaf 1 april',
         text: 'Familiepark Drievliet, plezier voor jong en oud. Drievliet is in 2017 aanbieder van de Ooievaarspas en verwelkomt families! Ook heeft Drievliet er twee mooie attracties bij! Durf jij in de sportieve Tijdmachine en de snelle Chute?',
         id: 4,
         reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door."
@@ -6275,7 +6338,7 @@ let aanbieding = [
         text: 'Dat badminton geen suffe sport is, bewijst badmintonclub DKC. Deze grote vereniging in Den Haag biedt speel- en trainingsmogelijkheden voor jong en oud. Lekker badmintonnen op elk niveau; van beginnend recreant tot fanatieke wedstrijdspeler. Wil je een keer vrijspelen of trainen? Ook dat kan.',
         id: 1,
         category: 'alle aanbiedingen',
-        activity: { kind: 'sport', sub: 'badminton' },
+        activity: 'badminton',
         location: 'centrum',
         target: 'ouder dan 17 jaar',
         reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door."
@@ -6287,7 +6350,7 @@ let aanbieding = [
         text: 'Badminton houdt iedereen fit, ook u. Want ook voor 55-plussers is badminton een ideale sport. Sla lekker een shuttletje mee en houd uw gewrichten en spieren soepel.Ook als u geen badmintonervaring heeft, bent u van harte welkom.',
         id: 2,
         category: 'alle aanbiedingen',
-        activity: { kind: 'sport', sub: 'badminton' },
+        activity: 'badminton',
         location: 'centrum',
         target: 'alle leeftijden',
         reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door."
@@ -6299,7 +6362,7 @@ let aanbieding = [
         text: 'Oefening baart kunst. Oftewel: door goed te oefenen, zet je de beste resultaten neer. Dat geldt ook voor deze toneelvereniging, de niet voor niets ‘Alles Door Oefening’ (ADO) in haar naam heeft.ADO-DVS is de oudste toneelvereniging van Den Haag. En dat zie je terug op het podium. Stukken van onder andere Ibsen, Sophocles, Bernlef en Wim T. Schippers zette ADO-DVS al op het podium neer. Lijkt het jou iets om daarin mee te spelen?',
         id: 3,
         category: 'alle aanbiedingen',
-        activity: { kind: 'cultuur', sub: 'toneel' },
+        activity: 'toneel',
         location: 'centrum',
         target: 'ouder dan 50 jaar',
         reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door."
@@ -6311,7 +6374,7 @@ let aanbieding = [
         text: 'Speelde je vroeger ook zo vaak filmscènes na? Of hang je thuis wel eens ‘de clown’ of de ‘dramaqueen’ uit? Dan schuilt er misschien wel een heel goede acteur of actrice in je. En die kunnen ze bij Theatergroep Wats nu net goed gebruiken. De theatergroep staat regelmatig op de planken met uiteenlopende voorstellingen.Kom eens een repetitie bijwonen en kijk of het wat voor je is. Ben je overtuigd? Meld je aan en wie weet speel jij al mee in het volgende stuk!',
         id: 4,
         category: 'speciale aanbiedingen',
-        activity: { kind: 'cultuur', sub: 'toneel' },
+        activity: 'toneel',
         location: 'centrum',
         target: 'alle leeftijden',
         reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door."
@@ -6324,7 +6387,7 @@ let aanbieding = [
         id: 5,
         reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door.",
         category: 'speciale aanbiedingen',
-        activity: { kind: 'cultuur', sub: 'toneel' },
+        activity: 'toneel',
         location: 'centrum',
         target: 'alle leeftijden'
     },
@@ -6333,10 +6396,10 @@ let aanbieding = [
         image: "https://www.ooievaarspas.nl/uploads/event/image/216/thumb_Gezinnen_project.jpg",
         title: 'Gratis online coaching voor Haagse pashouders Speciaal',
         text: 'Wil je gratis hulp bij het afvallen? Neem je je voor om te gaan bewegen, maar komt het er steeds niet van? Heb je plannen om je leefstijl te verbeteren? Wil je graag stoppen met roken of wordt het hoog tijd om je stress te verminderen? Ben je toe aan gezinshulp? Zet dan nu de stap en meld je aan voor een jaar lang gratis online coaching!',
-        id: 3,
+        id: 6,
         reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door.",
         category: 'speciale aanbiedingen',
-        activity: { kind: 'cultuur', sub: 'toneel' },
+        activity: 'fitness',
         location: 'centrum',
         target: 'alle leeftijden'
     },
@@ -6345,55 +6408,80 @@ let aanbieding = [
         image: 'https://www.ooievaarspas.nl/uploads/event/image/233/thumb_Florence-.jpg',
         title: 'Join the Florence club! Speciaal',
         text: 'In teamverband lekker actief zijn, dat kan in de Florence Clubs. Altijd al gedroomd om te kunnen hardlopen of handboogschieten? Dit is nu mogelijk, gezellig in teamverband!',
-        id: 1,
+        id: 7,
         reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door.",
         category: 'speciale aanbiedingen',
-        activity: { kind: 'cultuur', sub: 'toneel' },
+        activity: 'fitness',
         location: 'centrum',
         target: 'alle leeftijden'
     }
 ];
-let Title = [{
-        pagina: "Veelgestelde vragen"
-    }];
 let cat1Vragen = [
     {
+        button: "<p><button onClick={(event) => thisRef.setState({...thisRef.state, antwoorden: thisRef.state.antwoorden.map(x => false)})}>klik mij</button></p>",
+        pagina: "Veelgestelde vragen",
         categorie: "Aanvragen en/of wijzigingen Ooievaarspas",
         vraag: "Ik heb een Ooievaarspas. Hoef ik dan geen verlenging aan te vragen?",
         antwoord: " In principe moet u altijd een aanvraag doen voor verlenging van de Ooievaarspas. Er is een beperkt aantal groepen voor wie de Ooievaarspas automatisch wordt verlengd. Wilt u weten of u hiertoe behoort? Lees dan meer over de voorwaarden voor het aanvragen van een Ooievaarspas.",
-        id: 1
+        id: 1,
+        idcat: 1
     },
     {
+        button: "",
+        pagina: "",
         categorie: "",
         vraag: "Wat gebeurt er nadat u een aanvraag voor een Ooievaarspas heeft gedaan?",
         antwoord: "Nadat u een aanvraag heeft gedaan ontvangt u schriftelijk een ontvangstbevestiging. De gemeente bekijkt binnen 8 weken of u voldoet aan de voorwaarden en stelt vast of u recht heeft op de Ooievaarspas. Mocht u na 8 weken geen bericht hebben ontvangen, dan kunt u contact opnemen met de klantenservice. ",
-        id: 2
+        id: 2,
+        idcat: 1
+    },
+    {
+        button: "",
+        pagina: "",
+        categorie: '',
+        vraag: "Ik heb een toekenningsbrief gekregen, alle gevraagde stukken opgestuurd, maar de Ooievaarspas nog niet ontvangen?",
+        antwoord: "De verwerking hiervan kan vier weken duren. Neem na deze vier weken contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur.Ooievaarspashouders uit Leidschendam-Voorburg en Rijswijk moeten hiervoor contact opnemen met hun eigen gemeente.",
+        id: 3,
+        idcat: 1
     }
 ];
 let cat2Vragen = [{
         categorie: "Gebruik Ooievaarspas",
         vraag: "Ik heb een Ooievaarspas, mag ik gratis reizen?",
         antwoord: "Gratis reizen kan alleen als u inwoner bent van Den Haag en de AOW-gerechtigde leeftijd heeft bereikt, over een persoonlijke OV-chipkaart beschikt en recht heeft op een Ooievaarspas in het huidige kalenderjaar (1 januari tot en met 31 december).",
-        id: 3
+        id: 4
     },
     {
         categorie: " ",
         vraag: "Ik heb een brief gekregen over het ophalen van het gratis reisproduct, maar het lukt niet?",
         antwoord: "Neem contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur of stuur een e-mail aan: ooievaarsregelingen@gemeentedenhaag.helptu.nl  ",
-        id: 4
-    }];
+        id: 5
+    },
+    {
+        categorie: " ",
+        vraag: "Ik kan niet gratis reizen, hoe kan dat?",
+        antwoord: "Gratis reizen kan alleen als u inwoner bent van Den Haag en de AOW-gerechtigde leeftijd heeft bereikt, over een persoonlijke OV-chipkaart beschikt en recht heeft op een Ooievaarspas in het huidige kalenderjaar (1 januari tot en met 31 december).Indien u wel aan de bovenstaande voorwaarden voldoet maar het niet lukt om gratis te reizen, kan dit verschillende oorzaken hebben. Neem daarom contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur.  ",
+        id: 6
+    }
+];
 let cat3Vragen = [
     {
         categorie: "Geblokkeerde Ooievaarspas",
         vraag: "Mijn Ooievaarspas is geblokkeerd. Wat is daarvan de reden?",
         antwoord: "Daar kunnen verschillende redenen voor zijn. Neem daarom contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur. Ooievaarspashouders uit Leidschendam-Voorburg en Rijswijk moeten hiervoor contact opnemen met hun eigen gemeente.",
-        id: 5
+        id: 7
     },
     {
         categorie: "",
         vraag: "Hoe lang duurt het voordat mijn Ooievaarspas (weer) is geactiveerd?",
         antwoord: "Als u een aanvraag heeft gedaan en het recht op de Ooievaarspas is vastgesteld, dan wordt uw pas binnen maximaal 15 werkdagen weer geactiveerd.Heeft u geen brief ontvangen? Neem dan contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur.Ooievaarspashouders uit Leidschendam-Voorburg en Rijswijk moeten hiervoor contact opnemen met hun eigen gemeente.",
-        id: 6
+        id: 8
+    },
+    {
+        categorie: "",
+        vraag: "Mijn Ooievaarspas is geblokkeerd. Kan ik nog gebruik maken van de Ooievaarspas activiteiten?",
+        antwoord: "Nee, u kunt na het blokkeren geen gebruik meer maken van de activiteiten van de Ooievaarspas.Geen geldige Ooievaarspas betekent daarom geen korting.",
+        id: 9
     }
 ];
 let OverDeOoievaarspas = [
@@ -6526,82 +6614,6 @@ let ExtraInformatie = [
     }
 ];
 
-
-/***/ }),
-/* 30 */
-/***/ (function(module, exports) {
-
-var toString = {}.toString;
-
-module.exports = function(it){
-  return toString.call(it).slice(8, -1);
-};
-
-/***/ }),
-/* 31 */
-/***/ (function(module, exports) {
-
-// 7.2.1 RequireObjectCoercible(argument)
-module.exports = function(it){
-  if(it == undefined)throw TypeError("Can't call method on  " + it);
-  return it;
-};
-
-/***/ }),
-/* 32 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var fails = __webpack_require__(7);
-
-module.exports = function(method, arg){
-  return !!method && fails(function(){
-    arg ? method.call(null, function(){}, 1) : method.call(null);
-  });
-};
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * 
- */
-
-function makeEmptyFunction(arg) {
-  return function () {
-    return arg;
-  };
-}
-
-/**
- * This function accepts and discards inputs; it has no side effects. This is
- * primarily useful idiomatically for overridable function endpoints which
- * always need to be callable, since JS lacks a null-call idiom ala Cocoa.
- */
-var emptyFunction = function emptyFunction() {};
-
-emptyFunction.thatReturns = makeEmptyFunction;
-emptyFunction.thatReturnsFalse = makeEmptyFunction(false);
-emptyFunction.thatReturnsTrue = makeEmptyFunction(true);
-emptyFunction.thatReturnsNull = makeEmptyFunction(null);
-emptyFunction.thatReturnsThis = function () {
-  return this;
-};
-emptyFunction.thatReturnsArgument = function (arg) {
-  return arg;
-};
-
-module.exports = emptyFunction;
 
 /***/ }),
 /* 34 */
@@ -7569,7 +7581,7 @@ var _assign = __webpack_require__(11);
 
 var PooledClass = __webpack_require__(58);
 
-var emptyFunction = __webpack_require__(33);
+var emptyFunction = __webpack_require__(32);
 var warning = __webpack_require__(4);
 
 var didWarnForAddedNewProperty = false;
@@ -8872,7 +8884,7 @@ module.exports = function(it, tag, stat){
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export = __webpack_require__(0)
-  , defined = __webpack_require__(31)
+  , defined = __webpack_require__(30)
   , fails   = __webpack_require__(7)
   , spaces  = __webpack_require__(117)
   , space   = '[' + spaces + ']'
@@ -9384,7 +9396,7 @@ module.exports = reactProdInvariant;
 /***/ (function(module, exports, __webpack_require__) {
 
 // getting tag from 19.1.3.6 Object.prototype.toString()
-var cof = __webpack_require__(30)
+var cof = __webpack_require__(29)
   , TAG = __webpack_require__(10)('toStringTag')
   // ES3 wrong here
   , ARG = cof(function(){ return arguments; }()) == 'Arguments';
@@ -9412,7 +9424,7 @@ module.exports = function(it){
 /***/ (function(module, exports, __webpack_require__) {
 
 // fallback for non-array-like ES3 and non-enumerable old V8 strings
-var cof = __webpack_require__(30);
+var cof = __webpack_require__(29);
 module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
   return cof(it) == 'String' ? it.split('') : Object(it);
 };
@@ -10269,7 +10281,7 @@ module.exports = function(NAME, wrapper, methods, common, IS_MAP, IS_WEAK){
 var hide     = __webpack_require__(21)
   , redefine = __webpack_require__(22)
   , fails    = __webpack_require__(7)
-  , defined  = __webpack_require__(31)
+  , defined  = __webpack_require__(30)
   , wks      = __webpack_require__(10);
 
 module.exports = function(KEY, length, exec){
@@ -10340,7 +10352,7 @@ module.exports = function(fn, args, that){
 
 // 7.2.8 IsRegExp(argument)
 var isObject = __webpack_require__(9)
-  , cof      = __webpack_require__(30)
+  , cof      = __webpack_require__(29)
   , MATCH    = __webpack_require__(10)('match');
 module.exports = function(it){
   var isRegExp;
@@ -11730,7 +11742,7 @@ module.exports = function(it){
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.2.2 IsArray(argument)
-var cof = __webpack_require__(30);
+var cof = __webpack_require__(29);
 module.exports = Array.isArray || function isArray(arg){
   return cof(arg) == 'Array';
 };
@@ -11863,7 +11875,7 @@ var global    = __webpack_require__(6)
   , Observer  = global.MutationObserver || global.WebKitMutationObserver
   , process   = global.process
   , Promise   = global.Promise
-  , isNode    = __webpack_require__(30)(process) == 'process';
+  , isNode    = __webpack_require__(29)(process) == 'process';
 
 module.exports = function(){
   var head, last, notify;
@@ -11985,7 +11997,7 @@ module.exports = function(O, D){
 /***/ (function(module, exports, __webpack_require__) {
 
 var toInteger = __webpack_require__(46)
-  , defined   = __webpack_require__(31);
+  , defined   = __webpack_require__(30);
 // true  -> String#at
 // false -> String#codePointAt
 module.exports = function(TO_STRING){
@@ -12008,7 +12020,7 @@ module.exports = function(TO_STRING){
 
 // helper for String#{startsWith, endsWith, includes}
 var isRegExp = __webpack_require__(83)
-  , defined  = __webpack_require__(31);
+  , defined  = __webpack_require__(30);
 
 module.exports = function(that, searchString, NAME){
   if(isRegExp(searchString))throw TypeError('String#' + NAME + " doesn't accept regex!");
@@ -12022,7 +12034,7 @@ module.exports = function(that, searchString, NAME){
 "use strict";
 
 var toInteger = __webpack_require__(46)
-  , defined   = __webpack_require__(31);
+  , defined   = __webpack_require__(30);
 
 module.exports = function repeat(count){
   var str = String(defined(this))
@@ -12083,7 +12095,7 @@ if(!setTask || !clearTask){
     delete queue[id];
   };
   // Node.js 0.8-
-  if(__webpack_require__(30)(process) == 'process'){
+  if(__webpack_require__(29)(process) == 'process'){
     defer = function(id){
       process.nextTick(ctx(run, id, 1));
     };
@@ -13919,7 +13931,7 @@ module.exports = shouldUpdateReactComponent;
 
 var _assign = __webpack_require__(11);
 
-var emptyFunction = __webpack_require__(33);
+var emptyFunction = __webpack_require__(32);
 var warning = __webpack_require__(4);
 
 var validateDOMNesting = emptyFunction;
@@ -14819,7 +14831,7 @@ module.exports = lowPriorityWarning;
 /* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var cof = __webpack_require__(30);
+var cof = __webpack_require__(29);
 module.exports = function(it, msg){
   if(typeof it != 'number' && cof(it) != 'Number')throw TypeError(msg);
   return +it;
@@ -14944,7 +14956,7 @@ var dP          = __webpack_require__(13).f
   , redefineAll = __webpack_require__(54)
   , ctx         = __webpack_require__(40)
   , anInstance  = __webpack_require__(49)
-  , defined     = __webpack_require__(31)
+  , defined     = __webpack_require__(30)
   , forOf       = __webpack_require__(61)
   , $iterDefine = __webpack_require__(107)
   , step        = __webpack_require__(152)
@@ -15420,7 +15432,7 @@ module.exports = Object.is || function is(x, y){
 // https://github.com/tc39/proposal-string-pad-start-end
 var toLength = __webpack_require__(15)
   , repeat   = __webpack_require__(116)
-  , defined  = __webpack_require__(31);
+  , defined  = __webpack_require__(30);
 
 module.exports = function(that, maxLength, fillString, left){
   var S            = String(defined(that))
@@ -15579,7 +15591,7 @@ if(new $WeakMap().set((Object.freeze || Object)(tmp), 7).get(tmp) != 7){
  * @typechecks
  */
 
-var emptyFunction = __webpack_require__(33);
+var emptyFunction = __webpack_require__(32);
 
 /**
  * Upstream version of event listener. Does not take into account specific
@@ -35115,10 +35127,15 @@ define(String.prototype, "padRight", "".padEnd);
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(18);
-const Api = __webpack_require__(29);
+const Api = __webpack_require__(33);
 const FilterComponent_1 = __webpack_require__(327);
 let hyperlink = "lees meer ";
-let EmptyFilterState = { Categorie: { kind: "off" } };
+let EmptyFilterState = {
+    Categorie: { kind: "off" },
+    Wat: { kind: "off" },
+    Waar: { kind: "off" },
+    Wie: { kind: "off" }
+};
 //main component voor aanbiedingen pagina
 class AanbiedingenComponent extends React.Component {
     constructor(props, context) {
@@ -35138,13 +35155,17 @@ class AanbiedingenComponent extends React.Component {
         if (newFilterState.Categorie.kind == "on") {
             console.log(newFilterState.Categorie.value);
         }
+        if (newFilterState.Wie.kind == "on") {
+            console.log(newFilterState.Wie.value);
+        }
     }
     loadAanbieding() {
         Api
             .get_aanbiedingen()
             .then(c => {
             this.setState(Object.assign({}, this.state, { kind: "loaded", aanbiedingen: c, filterState: EmptyFilterState }));
-        });
+        })
+            .catch(_ => this.loadAanbieding());
     }
     render() {
         let onclickAanbieding = (id) => this.props.onMovePage({ kind: "DetailAanbieding", id: id, checkPage: 1 });
@@ -35153,9 +35174,7 @@ class AanbiedingenComponent extends React.Component {
             let AanbiedingView = function (aanbieding) {
                 return React.createElement("div", { className: "box--fourth", key: aanbieding.id },
                     React.createElement("a", { onClick: (id) => onclickAanbieding(aanbieding.id) },
-                        " ",
-                        React.createElement("h2", null, aanbieding.title),
-                        " "),
+                        React.createElement("h2", null, aanbieding.title)),
                     React.createElement("br", null),
                     React.createElement("img", { src: aanbieding.image }),
                     React.createElement("p", { className: "box--special" },
@@ -35179,12 +35198,63 @@ class AanbiedingenComponent extends React.Component {
                         }
                     }
                 }
+            })
+                .filter((b) => {
+                if (this.state.kind == "loaded") {
+                    if (this.state.filterState.Wat.kind == "off") {
+                        return true;
+                    }
+                    else {
+                        if (b.activity == this.state.filterState.Wat.value) {
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+                }
+            })
+                .filter((c) => {
+                if (this.state.kind == "loaded") {
+                    if (this.state.filterState.Waar.kind == "off") {
+                        return true;
+                    }
+                    else {
+                        if (c.location == this.state.filterState.Waar.value) {
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+                }
+            })
+                .filter((d) => {
+                if (this.state.kind == "loaded") {
+                    if (this.state.filterState.Wie.kind == "off") {
+                        return true;
+                    }
+                    else {
+                        if (d.target == this.state.filterState.Wie.value) {
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+                }
             });
             return React.createElement("div", null,
                 React.createElement("h1", { className: "homepage--title" }, "Aanbiedingen"),
                 React.createElement("h2", { className: "box--aanbieding" }, "Alle aanbiedingen"),
-                "}",
                 React.createElement(FilterComponent_1.FilterCategorieComponent, { aanbiedingen: this.state.aanbiedingen, filterState: this.state.filterState, setFilterState: this.setFilterState.bind(this) }),
+                React.createElement("br", null),
+                React.createElement(FilterComponent_1.FilterWatComponent, { aanbiedingen: this.state.aanbiedingen, filterState: this.state.filterState, setFilterState: this.setFilterState.bind(this) }),
+                React.createElement("br", null),
+                React.createElement(FilterComponent_1.FilterWaarComponent, { aanbiedingen: this.state.aanbiedingen, filterState: this.state.filterState, setFilterState: this.setFilterState.bind(this) }),
+                React.createElement("br", null),
+                React.createElement(FilterComponent_1.FilterVoorWieComponent, { aanbiedingen: this.state.aanbiedingen, filterState: this.state.filterState, setFilterState: this.setFilterState.bind(this) }),
+                React.createElement("br", null),
                 filteredAanbiedingen.map(aanbieding => AanbiedingView(aanbieding)));
         }
         else {
@@ -35203,7 +35273,7 @@ exports.AanbiedingenComponent = AanbiedingenComponent;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(18);
-const Api = __webpack_require__(29);
+const Api = __webpack_require__(33);
 let checkdagtocht = true;
 let hyperlink = "Klik hier voor de dagtochten";
 let next_page = { kind: "DetailDagtocht" };
@@ -35224,7 +35294,6 @@ class DagtochtenComponent extends React.Component {
     //         || setTimeout( this.loadDagtochten ,5000))
     render() {
         let onclickdagtocht = (id) => this.props.onMovePage({ kind: "category_dagtocht", id: id });
-        console.log(this.state.kind);
         if (this.state.kind == "dagtochtPagina") {
             let categoryView = function (category) {
                 return React.createElement("div", { key: category.title },
@@ -35255,7 +35324,7 @@ exports.DagtochtenComponent = DagtochtenComponent;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(18);
-const Api = __webpack_require__(29);
+const Api = __webpack_require__(33);
 class ExtrainformatieComponent extends React.Component {
     constructor(props, context) {
         super(props, context);
@@ -35265,11 +35334,9 @@ class ExtrainformatieComponent extends React.Component {
         Api.get_SpecificExtraInformatie(this.props.title)
             .then(ex => this.setState(Object.assign({}, this.state, { kind: 'loaded', Extrainformatie: ex })))
             .catch(ex => console.log('error'));
-        console.log('extra info wordt geload');
     }
     componentWillMount() {
         this.loadExtraInfo();
-        console.log('Extra Info wordt geload');
     }
     render() {
         if (this.state.kind == 'loaded') {
@@ -35297,7 +35364,7 @@ exports.ExtrainformatieComponent = ExtrainformatieComponent;
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(18);
 const Immutable = __webpack_require__(175);
-const Api = __webpack_require__(29);
+let stringToOption = (x) => React.createElement("option", { value: x }, x);
 class FilterCategorieComponent extends React.Component {
     constructor(props, context) {
         super(props, context);
@@ -35306,8 +35373,6 @@ class FilterCategorieComponent extends React.Component {
         this.props.setFilterState(Object.assign({}, this.props.filterState, { Categorie: { kind: "on", value: value } }));
     }
     render() {
-        // let onclickAanbieding = (id: number) => this.props.onMovePage({ kind: "DetailAanbieding", id: id, checkPage: 1})
-        let stringToOption = (x) => React.createElement("option", { value: x }, x);
         let categories = Immutable.List(this.props.aanbiedingen)
             .map((aanbieding) => aanbieding.category)
             .reduce((accumulator, value) => {
@@ -35322,9 +35387,8 @@ class FilterCategorieComponent extends React.Component {
             "Categorie",
             React.createElement("br", null),
             React.createElement("div", null,
-                React.createElement("select", { onChange: s => {
+                React.createElement("select", { name: "categorie filter", id: "1", onChange: s => {
                         this.setCategory(s.currentTarget.value);
-                        console.log(s.currentTarget.value);
                     } },
                     React.createElement("option", { selected: true, hidden: true }, "Maak uw keuze: "),
                     categories.map(category => stringToOption(category)))));
@@ -35334,188 +35398,88 @@ exports.FilterCategorieComponent = FilterCategorieComponent;
 class FilterWatComponent extends React.Component {
     constructor(props, context) {
         super(props, context);
-        this.state = { kind: 'loading' };
     }
-    componentWillMount() {
-    }
-    load_aanbiedingen() {
-        Api.get_aanbiedingen()
-            .then(a => this.setState(Object.assign({}, this.state, { kind: "loaded", aanbiedingen: a })))
-            .catch(_ => this.load_aanbiedingen());
+    setWat(value) {
+        this.props.setFilterState(Object.assign({}, this.props.filterState, { Wat: { kind: "on", value: value } }));
     }
     render() {
-        if (this.state.kind == "loaded") {
-            let activityKind = this.state.activityKind;
-            let activityStrings = Immutable.List(this.state.aanbiedingen)
-                .map((aanbieding) => aanbieding.activity)
-                .filter((activity) => activity.kind == activityKind)
-                .map((activity) => activity.sub)
-                .reduce((accumulator, value) => {
-                if (accumulator.includes(value))
-                    return accumulator;
-                else
-                    return accumulator.push(value);
-            }, Immutable.List());
-            return React.createElement("div", null,
-                "Wat?",
-                React.createElement("br", null),
-                React.createElement("select", null,
-                    React.createElement("option", { selected: true, hidden: true }, "Alle activiteiten "),
-                    React.createElement("option", { value: "cultuur" }, "Cultuur"),
-                    activityStrings.map((x) => React.createElement("option", { value: x }, x))));
-        }
+        let activities = Immutable.List(this.props.aanbiedingen)
+            .map((aanbieding) => aanbieding.activity)
+            .reduce((accumulator, value) => {
+            if (accumulator.includes(value)) {
+                return accumulator;
+            }
+            else {
+                return accumulator.push(value);
+            }
+        }, Immutable.List());
+        return React.createElement("div", null,
+            "Wat?",
+            React.createElement("br", null),
+            React.createElement("select", { name: "wat filter", id: "2", onChange: s => {
+                    this.setWat(s.currentTarget.value);
+                } },
+                React.createElement("option", { selected: true, hidden: true }, "Alle actviteiten"),
+                activities.map(activities => stringToOption(activities))));
     }
 }
 exports.FilterWatComponent = FilterWatComponent;
-class CheckboxCultuur extends React.Component {
-    constructor(props, context) {
-        super(props, context);
-        this.state = {};
-    }
-    render() {
-        return React.createElement("div", null, "//     ");
-    }
-}
-exports.CheckboxCultuur = CheckboxCultuur;
-class CheckboxSport extends React.Component {
-    constructor(props, context) {
-        super(props, context);
-        this.state = {};
-    }
-    render() {
-        return React.createElement("div", null,
-            React.createElement("input", { name: "badminton", type: "checkbox" }),
-            " Badminton",
-            React.createElement("br", null),
-            React.createElement("input", { name: "balsport allerlei", type: "checkbox" }),
-            " Balsort allerlei",
-            React.createElement("br", null),
-            React.createElement("input", { name: "brigide", type: "checkbox" }),
-            " Brigide",
-            React.createElement("br", null),
-            React.createElement("input", { name: "denksport", type: "checkbox" }),
-            " Denksport",
-            React.createElement("br", null),
-            React.createElement("input", { name: "duursport", type: "checkbox" }),
-            " Duursport",
-            React.createElement("br", null),
-            React.createElement("input", { name: "fitness", type: "checkbox" }),
-            " Fitness",
-            React.createElement("br", null),
-            React.createElement("input", { name: "gymnastiek", type: "checkbox" }),
-            " Gymnastiek",
-            React.createElement("br", null),
-            React.createElement("input", { name: "handbal", type: "checkbox" }),
-            " Handbal",
-            React.createElement("br", null),
-            React.createElement("input", { name: "korfbal", type: "checkbox" }),
-            " Korfbal",
-            React.createElement("br", null),
-            React.createElement("input", { name: "mindervalidesport", type: "checkbox" }),
-            " Mindervalidensport",
-            React.createElement("br", null),
-            React.createElement("input", { name: "schaatsen", type: "checkbox" }),
-            " Schaatsen",
-            React.createElement("br", null),
-            React.createElement("input", { name: "speciaal voor ouderen", type: "checkbox" }),
-            " Speciaal voor Ouderen",
-            React.createElement("br", null),
-            React.createElement("input", { name: "tafeltennis", type: "checkbox" }),
-            " Tafeltennis",
-            React.createElement("br", null),
-            React.createElement("input", { name: "tennis", type: "checkbox" }),
-            " Tennis",
-            React.createElement("br", null),
-            React.createElement("input", { name: "voetbal", type: "checkbox" }),
-            " Voetbal",
-            React.createElement("br", null),
-            React.createElement("input", { name: "volleybal", type: "checkbox" }),
-            " Volleybal",
-            React.createElement("br", null),
-            React.createElement("input", { name: "zelfverdediging", type: "checkbox" }),
-            " Zelfverdediging",
-            React.createElement("br", null),
-            React.createElement("input", { name: "zwemmen", type: "checkbox" }),
-            " Zwemmen");
-    }
-}
-exports.CheckboxSport = CheckboxSport;
 class FilterWaarComponent extends React.Component {
     constructor(props, context) {
         super(props, context);
-        this.state = { kind: 'loading' };
     }
-    load_locations() {
-        Api.get_aanbiedingen()
-            .then(a => this.setState(Object.assign({}, this.state, { kind: 'loaded', aanbieding: a })))
-            .catch(_ => this.load_locations());
+    setWaar(value) {
+        this.props.setFilterState(Object.assign({}, this.props.filterState, { Waar: { kind: "on", value: value } }));
     }
     render() {
-        if (this.state.kind == 'loaded') {
-            let locations = Immutable.List(this.state.aanbiedingen)
-                .map((aanbieding) => aanbieding.location)
-                .reduce((accumulator, value) => {
-                if (accumulator.includes(value)) {
-                    return accumulator;
-                }
-                else {
-                    return accumulator.push(value);
-                }
-            }, Immutable.List());
-            let stringToOption = (x) => React.createElement("option", null, x);
-            return React.createElement("div", null,
-                "Waar?",
-                React.createElement("br", null),
-                React.createElement("select", null,
-                    React.createElement("option", { selected: true, hidden: true }, "Alle locaties "),
-                    React.createElement("optgroup", { label: "Den Haag" },
-                        React.createElement("option", { value: "archipelbuurt en willemspark" }, "Archipelbuurt en Willemspark"),
-                        React.createElement("option", { value: "zeeheldenkwartier" }, "Zeeheldenkwartier")),
-                    React.createElement("optgroup", { label: "Overige randgemeenten" },
-                        React.createElement("option", { value: "buiten regio" }, "Buiten regio"))));
-        }
+        let locations = Immutable.List(this.props.aanbiedingen)
+            .map((aanbieding) => aanbieding.location)
+            .reduce((accumulator, value) => {
+            if (accumulator.includes(value)) {
+                return accumulator;
+            }
+            else {
+                return accumulator.push(value);
+            }
+        }, Immutable.List());
+        return React.createElement("div", null,
+            "Waar?",
+            React.createElement("br", null),
+            React.createElement("select", { name: "waar filter", id: "3", onChange: s => {
+                    this.setWaar(s.currentTarget.value);
+                } },
+                React.createElement("option", { selected: true, hidden: true }, "Alle locaties "),
+                locations.map(location => stringToOption(location))));
     }
 }
 exports.FilterWaarComponent = FilterWaarComponent;
 class FilterVoorWieComponent extends React.Component {
     constructor(props, context) {
         super(props, context);
-        this.state = { kind: 'loading' };
     }
-    componentWillMount() {
-        this.load_voorwie();
-    }
-    load_voorwie() {
-        Api.get_aanbiedingen()
-            .then(a => this.setState(Object.assign({}, this.state, { kind: 'loaded', aanbiedingen: a })))
-            .catch(_ => this.load_voorwie());
+    setWie(value) {
+        this.props.setFilterState(Object.assign({}, this.props.filterState, { Wie: { kind: "on", value: value } }));
     }
     render() {
-        if (this.state.kind == 'loaded') {
-            let targets = Immutable.List(this.state.aanbiedingen)
-                .map((aanbieding) => aanbieding.target)
-                .reduce((accumulator, value) => {
-                if (accumulator.includes(value)) {
-                    return accumulator;
-                }
-                else {
-                    return accumulator.push(value);
-                }
-            }, Immutable.List());
-            let stringToOption = (x) => React.createElement("option", null, x);
-            return React.createElement("div", null,
-                "Wie?",
-                React.createElement("br", null),
-                React.createElement("select", null,
+        let targets = Immutable.List(this.props.aanbiedingen)
+            .map((aanbieding) => aanbieding.target)
+            .reduce((accumulator, value) => {
+            if (accumulator.includes(value)) {
+                return accumulator;
+            }
+            else {
+                return accumulator.push(value);
+            }
+        }, Immutable.List());
+        return React.createElement("div", null,
+            "Wie?",
+            React.createElement("br", null),
+            React.createElement("div", null,
+                React.createElement("select", { name: "wie filter", id: "4", onChange: s => {
+                        this.setWie(s.currentTarget.value);
+                    } },
                     React.createElement("option", { selected: true, hidden: true }, "Voor iedereen "),
-                    targets.map(target => stringToOption(target))));
-        }
-        else {
-            return React.createElement("div", null,
-                " ",
-                this.state.kind,
-                " ");
-        }
+                    targets.map(target => stringToOption(target)))));
     }
 }
 exports.FilterVoorWieComponent = FilterVoorWieComponent;
@@ -35543,8 +35507,9 @@ class Menu extends React.Component {
         return (React.createElement("header", { className: "header__inner" },
             React.createElement("nav", null,
                 React.createElement("div", null,
+                    React.createElement("h1", { className: "homepage--title" }, "Ooievaarspas"),
                     React.createElement("img", { height: "150px", width: "230", src: "https://www.denhaag.nl/static/denhaagrestylepresentation/images/DH-NL-Rgb-CS6.svg", alt: "logo" }),
-                    React.createElement("button", { onClick: (event) => this.props.onMovePage({ kind: "homepage" }) }, homepageLink),
+                    React.createElement("button", { className: "enjoy-css", onClick: (event) => this.props.onMovePage({ kind: "homepage" }) }, homepageLink),
                     React.createElement("button", { onClick: onClickAanbieding }, aanbiedingLink),
                     React.createElement("button", { onClick: onClickDagtocht }, dagtochtLink),
                     React.createElement("button", { onClick: onClickOoievaarsinfo }, ooievaarLink),
@@ -35562,21 +35527,19 @@ exports.default = Menu;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(18);
-const Api = __webpack_require__(29);
+const Api = __webpack_require__(33);
 class InforComponent extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = { kind: "loading" };
     }
     loadAanbieding() {
-        console.log("id checker", this.props.id);
         Api
             .get_aanbieding(this.props.id)
             .then(d => this.setState(Object.assign({}, this.state, { kind: "DetailAanbieding", aanbieding: d })));
         // .catch(_ => console.log('get dachtocht rejected ') || setTimeout( this.loadDagtochten ,5000))
     }
     loadSpeciaal() {
-        console.log("id checker", this.props.id);
         Api
             .get_special(this.props.id)
             .then(d => this.setState(Object.assign({}, this.state, { kind: "DetailSpecial", special: d })));
@@ -35590,7 +35553,6 @@ class InforComponent extends React.Component {
         // .catch(_ => console.log('get dachtocht rejected ') || setTimeout( this.loadDagtochten ,5000))
     }
     componentWillMount() {
-        console.log('component will mount', this.props.checkPage);
         if (this.props.checkPage == 1) {
             return this.loadAanbieding();
         }
@@ -35602,7 +35564,6 @@ class InforComponent extends React.Component {
         }
     }
     render() {
-        console.log(this.state.kind);
         if (this.state.kind == "DetailAanbieding") {
             let AanbiedingView = function (aanbieding) {
                 return React.createElement("div", { key: aanbieding.title },
@@ -35680,7 +35641,7 @@ exports.InforComponent = InforComponent;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(18);
-const Api = __webpack_require__(29);
+const Api = __webpack_require__(33);
 let hyperlink = 'lees meer';
 class InfoPasComponent extends React.Component {
     constructor(props, context) {
@@ -35691,17 +35652,14 @@ class InfoPasComponent extends React.Component {
         Api.get_OverDeOoievaarspas(this.props.id)
             .then(u => this.setState(Object.assign({}, this.state, { kind: 'loaded', Uitleginformatie: u })));
         //  .catch(u=> console.log("error"))//this.loadUitleg())
-        console.log('test');
     }
     loadExtraInfo() {
         Api.get_ExtraInformatie()
             .then(ex => this.setState(Object.assign({}, this.state, { kind: 'loaded', Extrainformatie: ex })));
         //.catch(ex => console.log('error'))
-        console.log('extra info wordt geload');
     }
     componentWillMount() {
         this.loadUitleg();
-        console.log('Uitleg wordt geload');
         this.loadExtraInfo();
     }
     render() {
@@ -35747,7 +35705,7 @@ exports.InfoPasComponent = InfoPasComponent;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(18);
-const Api = __webpack_require__(29);
+const Api = __webpack_require__(33);
 class InformatieDetailComponent extends React.Component {
     constructor(props, context) {
         super(props, context);
@@ -35757,17 +35715,14 @@ class InformatieDetailComponent extends React.Component {
         Api.get_InformatieDetail(this.props.title)
             .then(u => this.setState(Object.assign({}, this.state, { kind: 'loaded', Uitleginformatie: u })))
             .catch(u => console.log("error")); //this.loadUitleg())
-        console.log('test');
     }
     loadExtraInfo() {
         Api.get_ExtraInformatie()
             .then(ex => this.setState(Object.assign({}, this.state, { kind: 'loaded', Extrainformatie: ex })));
         //.catch(ex => console.log('error'))
-        console.log('extra info wordt geload');
     }
     componentWillMount() {
         this.loadDetailinfo();
-        console.log('Details worden geload');
         this.loadExtraInfo();
     }
     render() {
@@ -35807,7 +35762,7 @@ exports.InformatieDetailComponent = InformatieDetailComponent;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(18);
-const Api = __webpack_require__(29);
+const Api = __webpack_require__(33);
 let next_page = { kind: "infopas" };
 let hyperlink = 'lees meer';
 class OoievaarsPasComponent extends React.Component {
@@ -35818,11 +35773,9 @@ class OoievaarsPasComponent extends React.Component {
     loadInformatiePas() {
         Api.get_ooievaarsPas()
             .then(i => this.setState(Object.assign({}, this.state, { kind: "loaded", value: i })), e => console.log('Error: ', e));
-        console.log('loadinformatiepas');
     }
     componentWillMount() {
         this.loadInformatiePas();
-        console.log('Ooievaarsinfo wordt geload');
     }
     render() {
         let onClickInfoPas = (id) => this.props.onMovePage({ kind: "infopas", id: id, title: "ja" });
@@ -35871,7 +35824,7 @@ __export(__webpack_require__(322));
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(18);
-const Api = __webpack_require__(29);
+const Api = __webpack_require__(33);
 let next_page = { kind: "InformatieDetail" };
 let hyperlink = 'lees meer';
 class category_dagtochtComponenet extends React.Component {
@@ -35886,14 +35839,10 @@ class category_dagtochtComponenet extends React.Component {
     }
     componentWillMount() {
         this.loadDagtochten();
-        console.log('dagtocht wordt geload');
     }
     render() {
         let onclickdagtocht = (id) => this.props.onMovePage({ kind: "DetailDagtocht", id: id, checkPage: 2 });
         if (this.state.kind == 'loaded') {
-            {
-                console.log("dagtochten...", this.state.dagtochten);
-            }
             let dagtochtView = function (dagtocht) {
                 return React.createElement("div", { key: dagtocht.name },
                     React.createElement("a", { onClick: (id) => onclickdagtocht(dagtocht.id) },
@@ -36679,7 +36628,7 @@ exports.render_page_manager = render_page_manager;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(18);
-const Api = __webpack_require__(29);
+const Api = __webpack_require__(33);
 let hyperlink = "Lees meer";
 let homepageLink = "Home";
 let aanbiedingLink = "Aanbiedingen";
@@ -36704,7 +36653,7 @@ class HomepageComponent extends React.Component {
                 return React.createElement("div", { className: "box--fourth", key: special_aanbieding.id },
                     React.createElement("a", { onClick: (id) => onclickAanbieding(special_aanbieding.id) },
                         " ",
-                        React.createElement("h2", null, special_aanbieding.title),
+                        React.createElement("h2", { className: "box" }, special_aanbieding.title),
                         " "),
                     React.createElement("img", { src: special_aanbieding.image }),
                     React.createElement("br", null),
@@ -36715,7 +36664,6 @@ class HomepageComponent extends React.Component {
                     React.createElement("button", { onClick: () => onclickAanbieding(special_aanbieding.id) }, hyperlink));
             };
             return React.createElement("div", null,
-                React.createElement("h1", { className: "homepage--title" }, "Ooievaarspas"),
                 React.createElement("h2", { className: "homepage--special" }, "Speciale Aanbiedingen"),
                 this.state.specialeAanbieding.map(value => specialAanbiedingView(value)));
         }
@@ -36752,7 +36700,6 @@ class PageManagerComponent extends React.Component {
         this.state = { current_page: { kind: "homepage", id: 0 } };
     }
     render() {
-        console.log('PAGEMANAGER', this.state.current_page.kind);
         let menubar = React.createElement("div", null,
             " ",
             React.createElement(Header_1.default, { onMovePage: (next_page) => this.moveToPage(next_page) }));
@@ -36818,7 +36765,6 @@ class PageManagerComponent extends React.Component {
     //             </div>
     // }
     moveToPage(next_page) {
-        console.log("move to page");
         this.setState(Object.assign({}, this.state, { current_page: next_page }));
     }
 }
@@ -36833,7 +36779,7 @@ exports.PageManagerComponent = PageManagerComponent;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(18);
-const Api = __webpack_require__(29);
+const Api = __webpack_require__(33);
 let homepageLink = "Home";
 class veelgesteldevragenComponent extends React.Component {
     constructor(props, context) {
@@ -36843,7 +36789,7 @@ class veelgesteldevragenComponent extends React.Component {
     componentWillMount() {
         this.loadonderwerp();
         //dit is om de vrgen te initialiseren
-        this.setState(Object.assign({}, this.state, { antwoorden: [true, false, false, false, false, false] }));
+        this.setState(Object.assign({}, this.state, { antwoorden: [true, false, true, true, false, true, true, false, true, true] }));
     }
     loadonderwerp() {
         Api.get_cat1vragen().then((cat1 => this.setState(Object.assign({}, this.state, { kind: "loaded", cat1: cat1 }))), (e => console.log("Error", e)));
@@ -36851,31 +36797,50 @@ class veelgesteldevragenComponent extends React.Component {
         Api.get_cat3vragen().then((cat3 => this.setState(Object.assign({}, this.state, { kind: "loaded", cat3: cat3 }))), (e => console.log("Error", e)));
     }
     render() {
-        console.log("state", this.state);
         if (this.state.kind == "loaded" && this.state.cat1 != undefined && this.state.cat2 != undefined && this.state.cat3 != undefined) {
             function antwoordToggler(thisRef, antwoordNummer) {
                 thisRef.state.antwoorden[antwoordNummer] = !thisRef.state.antwoorden[antwoordNummer];
                 thisRef.forceUpdate();
             }
+            function antwoordAlles(thisRef, antwoordNummer) {
+                thisRef.state.idcat[antwoordNummer] == thisRef.state.antwoorden[antwoordNummer];
+                thisRef.forceUpdate();
+            }
+            // let titelprinten = function(infow: Types.cat1vragen, thisRef){
+            // return <div>
+            //         <h1>{infow.pagina}</h1>
+            //         </div> }
             let onderwerp_view1 = function (info1, thisRef) {
                 return React.createElement("div", null,
                     React.createElement("h1", null, info1.categorie),
-                    React.createElement("h4", { onClick: (event) => antwoordToggler(this, info1.id) }, info1.vraag),
-                    !thisRef.state.antwoorden[info1.id] ? info1.antwoord : "");
-            }; // info1.id refereert naar de vraag zelf, dus die moet getoggled en gecheckt worden
+                    React.createElement("br", null),
+                    React.createElement("h4", { onClick: (event) => antwoordToggler(thisRef, info1.id) }, info1.vraag),
+                    React.createElement("h3", null, !thisRef.state.antwoorden[info1.id] ? info1.antwoord : ""),
+                    React.createElement("br", null),
+                    React.createElement("button", { onClick: (event) => antwoordToggler(thisRef, info1.id) }, "Geef antwoord weer"));
+            };
+            // info1.id refereert naar de vraag zelf, dus die moet getoggled en gecheckt worden
             let onderwerp_view2 = function (info2, thisRef) {
                 return React.createElement("div", null,
                     React.createElement("h1", null, info2.categorie),
+                    React.createElement("br", null),
                     React.createElement("h4", { onClick: (event) => antwoordToggler(thisRef, info2.id) }, info2.vraag),
-                    !thisRef.state.antwoorden[info2.id] ? info2.antwoord : "");
+                    React.createElement("br", null),
+                    React.createElement("h3", null,
+                        " ",
+                        !thisRef.state.antwoorden[info2.id] ? info2.antwoord : ""),
+                    React.createElement("button", { onClick: (event) => antwoordToggler(thisRef, info2.id) }, "Geef antwoord weer"));
             };
             let onderwerp_view3 = function (info3, thisRef) {
                 return React.createElement("div", null,
                     React.createElement("h1", null, info3.categorie),
                     React.createElement("h4", { onClick: (event) => antwoordToggler(thisRef, info3.id) }, info3.vraag),
-                    !thisRef.state.antwoorden[info3.id] ? info3.antwoord : "");
+                    React.createElement("h3", null, !thisRef.state.antwoorden[info3.id] ? info3.antwoord : ""),
+                    React.createElement("button", { onClick: (event) => antwoordToggler(thisRef, info3.id) }, "Geef antwoord weer"));
             };
+            let antwoorden = this.state.antwoorden;
             return React.createElement("div", null,
+                React.createElement("h1", null, "Veelgestelde Vragen"),
                 this.state.cat1.map(value => onderwerp_view1(value, this)),
                 this.state.cat2.map(value => onderwerp_view2(value, this)),
                 this.state.cat3.map(value => onderwerp_view3(value, this)));
@@ -36886,7 +36851,6 @@ class veelgesteldevragenComponent extends React.Component {
     }
 }
 exports.veelgesteldevragenComponent = veelgesteldevragenComponent;
-//                             <p><button onClick={(event) => thisRef.setState({...thisRef.state, antwoorden: thisRef.state.antwoorden.map(x => false)})}>klik mij</button></p>
 
 
 /***/ }),
@@ -37309,7 +37273,7 @@ __webpack_require__(60)('copyWithin');
 var $export = __webpack_require__(0)
   , $every  = __webpack_require__(34)(4);
 
-$export($export.P + $export.F * !__webpack_require__(32)([].every, true), 'Array', {
+$export($export.P + $export.F * !__webpack_require__(31)([].every, true), 'Array', {
   // 22.1.3.5 / 15.4.4.16 Array.prototype.every(callbackfn [, thisArg])
   every: function every(callbackfn /* , thisArg */){
     return $every(this, callbackfn, arguments[1]);
@@ -37336,7 +37300,7 @@ __webpack_require__(60)('fill');
 var $export = __webpack_require__(0)
   , $filter = __webpack_require__(34)(2);
 
-$export($export.P + $export.F * !__webpack_require__(32)([].filter, true), 'Array', {
+$export($export.P + $export.F * !__webpack_require__(31)([].filter, true), 'Array', {
   // 22.1.3.7 / 15.4.4.20 Array.prototype.filter(callbackfn [, thisArg])
   filter: function filter(callbackfn /* , thisArg */){
     return $filter(this, callbackfn, arguments[1]);
@@ -37391,7 +37355,7 @@ __webpack_require__(60)(KEY);
 
 var $export  = __webpack_require__(0)
   , $forEach = __webpack_require__(34)(0)
-  , STRICT   = __webpack_require__(32)([].forEach, true);
+  , STRICT   = __webpack_require__(31)([].forEach, true);
 
 $export($export.P + $export.F * !STRICT, 'Array', {
   // 22.1.3.10 / 15.4.4.18 Array.prototype.forEach(callbackfn [, thisArg])
@@ -37455,7 +37419,7 @@ var $export       = __webpack_require__(0)
   , $native       = [].indexOf
   , NEGATIVE_ZERO = !!$native && 1 / [1].indexOf(1, -0) < 0;
 
-$export($export.P + $export.F * (NEGATIVE_ZERO || !__webpack_require__(32)($native)), 'Array', {
+$export($export.P + $export.F * (NEGATIVE_ZERO || !__webpack_require__(31)($native)), 'Array', {
   // 22.1.3.11 / 15.4.4.14 Array.prototype.indexOf(searchElement [, fromIndex])
   indexOf: function indexOf(searchElement /*, fromIndex = 0 */){
     return NEGATIVE_ZERO
@@ -37486,7 +37450,7 @@ var $export   = __webpack_require__(0)
   , arrayJoin = [].join;
 
 // fallback for not array-like strings
-$export($export.P + $export.F * (__webpack_require__(70) != Object || !__webpack_require__(32)(arrayJoin)), 'Array', {
+$export($export.P + $export.F * (__webpack_require__(70) != Object || !__webpack_require__(31)(arrayJoin)), 'Array', {
   join: function join(separator){
     return arrayJoin.call(toIObject(this), separator === undefined ? ',' : separator);
   }
@@ -37505,7 +37469,7 @@ var $export       = __webpack_require__(0)
   , $native       = [].lastIndexOf
   , NEGATIVE_ZERO = !!$native && 1 / [1].lastIndexOf(1, -0) < 0;
 
-$export($export.P + $export.F * (NEGATIVE_ZERO || !__webpack_require__(32)($native)), 'Array', {
+$export($export.P + $export.F * (NEGATIVE_ZERO || !__webpack_require__(31)($native)), 'Array', {
   // 22.1.3.14 / 15.4.4.15 Array.prototype.lastIndexOf(searchElement [, fromIndex])
   lastIndexOf: function lastIndexOf(searchElement /*, fromIndex = @[*-1] */){
     // convert -0 to +0
@@ -37529,7 +37493,7 @@ $export($export.P + $export.F * (NEGATIVE_ZERO || !__webpack_require__(32)($nati
 var $export = __webpack_require__(0)
   , $map    = __webpack_require__(34)(1);
 
-$export($export.P + $export.F * !__webpack_require__(32)([].map, true), 'Array', {
+$export($export.P + $export.F * !__webpack_require__(31)([].map, true), 'Array', {
   // 22.1.3.15 / 15.4.4.19 Array.prototype.map(callbackfn [, thisArg])
   map: function map(callbackfn /* , thisArg */){
     return $map(this, callbackfn, arguments[1]);
@@ -37570,7 +37534,7 @@ $export($export.S + $export.F * __webpack_require__(7)(function(){
 var $export = __webpack_require__(0)
   , $reduce = __webpack_require__(144);
 
-$export($export.P + $export.F * !__webpack_require__(32)([].reduceRight, true), 'Array', {
+$export($export.P + $export.F * !__webpack_require__(31)([].reduceRight, true), 'Array', {
   // 22.1.3.19 / 15.4.4.22 Array.prototype.reduceRight(callbackfn [, initialValue])
   reduceRight: function reduceRight(callbackfn /* , initialValue */){
     return $reduce(this, callbackfn, arguments.length, arguments[1], true);
@@ -37586,7 +37550,7 @@ $export($export.P + $export.F * !__webpack_require__(32)([].reduceRight, true), 
 var $export = __webpack_require__(0)
   , $reduce = __webpack_require__(144);
 
-$export($export.P + $export.F * !__webpack_require__(32)([].reduce, true), 'Array', {
+$export($export.P + $export.F * !__webpack_require__(31)([].reduce, true), 'Array', {
   // 22.1.3.18 / 15.4.4.21 Array.prototype.reduce(callbackfn [, initialValue])
   reduce: function reduce(callbackfn /* , initialValue */){
     return $reduce(this, callbackfn, arguments.length, arguments[1], false);
@@ -37601,7 +37565,7 @@ $export($export.P + $export.F * !__webpack_require__(32)([].reduce, true), 'Arra
 
 var $export    = __webpack_require__(0)
   , html       = __webpack_require__(102)
-  , cof        = __webpack_require__(30)
+  , cof        = __webpack_require__(29)
   , toIndex    = __webpack_require__(56)
   , toLength   = __webpack_require__(15)
   , arraySlice = [].slice;
@@ -37636,7 +37600,7 @@ $export($export.P + $export.F * __webpack_require__(7)(function(){
 var $export = __webpack_require__(0)
   , $some   = __webpack_require__(34)(3);
 
-$export($export.P + $export.F * !__webpack_require__(32)([].some, true), 'Array', {
+$export($export.P + $export.F * !__webpack_require__(31)([].some, true), 'Array', {
   // 22.1.3.23 / 15.4.4.17 Array.prototype.some(callbackfn [, thisArg])
   some: function some(callbackfn /* , thisArg */){
     return $some(this, callbackfn, arguments[1]);
@@ -37663,7 +37627,7 @@ $export($export.P + $export.F * (fails(function(){
   // V8 bug
   test.sort(null);
   // Old WebKit
-}) || !__webpack_require__(32)($sort)), 'Array', {
+}) || !__webpack_require__(31)($sort)), 'Array', {
   // 22.1.3.25 Array.prototype.sort(comparefn)
   sort: function sort(comparefn){
     return comparefn === undefined
@@ -38113,7 +38077,7 @@ $export($export.S, 'Math', {
 
 var global            = __webpack_require__(6)
   , has               = __webpack_require__(19)
-  , cof               = __webpack_require__(30)
+  , cof               = __webpack_require__(29)
   , inheritIfRequired = __webpack_require__(103)
   , toPrimitive       = __webpack_require__(36)
   , fails             = __webpack_require__(7)
@@ -40245,7 +40209,7 @@ __webpack_require__(60)('includes');
 var $export   = __webpack_require__(0)
   , microtask = __webpack_require__(110)()
   , process   = __webpack_require__(6).process
-  , isNode    = __webpack_require__(30)(process) == 'process';
+  , isNode    = __webpack_require__(29)(process) == 'process';
 
 $export($export.G, {
   asap: function asap(fn){
@@ -40260,7 +40224,7 @@ $export($export.G, {
 
 // https://github.com/ljharb/proposal-is-error
 var $export = __webpack_require__(0)
-  , cof     = __webpack_require__(30);
+  , cof     = __webpack_require__(29);
 
 $export($export.S, 'Error', {
   isError: function isError(it){
@@ -40886,7 +40850,7 @@ $export($export.P, 'String', {
 
 // https://tc39.github.io/String.prototype.matchAll/
 var $export     = __webpack_require__(0)
-  , defined     = __webpack_require__(31)
+  , defined     = __webpack_require__(30)
   , toLength    = __webpack_require__(15)
   , isRegExp    = __webpack_require__(83)
   , getFlags    = __webpack_require__(81)
@@ -44775,7 +44739,7 @@ module.exports = checkPropTypes;
 
 
 
-var emptyFunction = __webpack_require__(33);
+var emptyFunction = __webpack_require__(32);
 var invariant = __webpack_require__(3);
 var warning = __webpack_require__(4);
 
@@ -46337,7 +46301,7 @@ var DOMLazyTree = __webpack_require__(65);
 var ExecutionEnvironment = __webpack_require__(16);
 
 var createNodesFromMarkup = __webpack_require__(531);
-var emptyFunction = __webpack_require__(33);
+var emptyFunction = __webpack_require__(32);
 var invariant = __webpack_require__(3);
 
 var Danger = {
@@ -48097,7 +48061,7 @@ var ReactInstrumentation = __webpack_require__(28);
 var ReactMultiChild = __webpack_require__(590);
 var ReactServerRenderingTransaction = __webpack_require__(595);
 
-var emptyFunction = __webpack_require__(33);
+var emptyFunction = __webpack_require__(32);
 var escapeTextContentForBrowser = __webpack_require__(94);
 var invariant = __webpack_require__(3);
 var isEventSupported = __webpack_require__(136);
@@ -51007,7 +50971,7 @@ var _assign = __webpack_require__(11);
 var ReactUpdates = __webpack_require__(37);
 var Transaction = __webpack_require__(93);
 
-var emptyFunction = __webpack_require__(33);
+var emptyFunction = __webpack_require__(32);
 
 var RESET_BATCHED_UPDATES = {
   initialize: emptyFunction,
@@ -51574,7 +51538,7 @@ var ReactCurrentOwner = __webpack_require__(38);
 var ReactReconciler = __webpack_require__(66);
 var ReactChildReconciler = __webpack_require__(562);
 
-var emptyFunction = __webpack_require__(33);
+var emptyFunction = __webpack_require__(32);
 var flattenChildren = __webpack_require__(615);
 var invariant = __webpack_require__(3);
 
@@ -53202,7 +53166,7 @@ var SyntheticTransitionEvent = __webpack_require__(609);
 var SyntheticUIEvent = __webpack_require__(77);
 var SyntheticWheelEvent = __webpack_require__(610);
 
-var emptyFunction = __webpack_require__(33);
+var emptyFunction = __webpack_require__(32);
 var getEventCharCode = __webpack_require__(133);
 var invariant = __webpack_require__(3);
 
@@ -54867,7 +54831,7 @@ module.exports = PooledClass;
 var PooledClass = __webpack_require__(623);
 var ReactElement = __webpack_require__(59);
 
-var emptyFunction = __webpack_require__(33);
+var emptyFunction = __webpack_require__(32);
 var traverseAllChildren = __webpack_require__(634);
 
 var twoArgumentPooler = PooledClass.twoArgumentPooler;
