@@ -24,7 +24,9 @@ export class veelgesteldevragenComponent extends React.Component<veelgesteldevra
    componentWillMount() {
         this.loadonderwerp()
         //dit is om de vrgen te initialiseren
-        this.setState({...this.state, antwoorden:[false, false, false, false, false, false]})
+        this.setState({...this.state, antwoorden:[true, false, true, true, false, true, true, false, true,true]
+                                    
+                                      })
    }
 
    loadonderwerp() {
@@ -40,34 +42,56 @@ export class veelgesteldevragenComponent extends React.Component<veelgesteldevra
                 thisRef.state.antwoorden[antwoordNummer] = !thisRef.state.antwoorden[antwoordNummer]
                 thisRef.forceUpdate()
             }
+             function antwoordAlles(thisRef, antwoordNummer){
+                thisRef.state.idcat[antwoordNummer] == thisRef.state.antwoorden[antwoordNummer]
+                thisRef.forceUpdate()
+            }
+            
+            // let titelprinten = function(infow: Types.cat1vragen, thisRef){
+            // return <div>
+            //         <h1>{infow.pagina}</h1>
+
+            //         </div> }
             let onderwerp_view1 = function (info1:Types.cat1vragen, thisRef){
                 return  <div>
-                            <h1>{info1.categorie}</h1>
-                            <h4 onClick={(event) => antwoordToggler(this, info1.id)}>{info1.vraag}</h4>
+                            <h1>{info1.categorie}</h1>    
+                            <h4 onClick={(event) => antwoordToggler(thisRef, info1.id)}>{info1.vraag}</h4>
+                            <button onClick={(event) => antwoordToggler(thisRef, info1.id)}>Geef antwoord weer</button>
                             {!thisRef.state.antwoorden[info1.id]?info1.antwoord:""}
-                        </div>
+                            
+                         </div>
                         
-           } // info1.id refereert naar de vraag zelf, dus die moet getoggled en gecheckt worden
+                        
+           } 
+           // info1.id refereert naar de vraag zelf, dus die moet getoggled en gecheckt worden
            let onderwerp_view2 = function (info2:Types.cat2vragen, thisRef){
                 return  <div>
                             <h1>{info2.categorie}</h1>
                             <h4 onClick={(event) => antwoordToggler(thisRef, info2.id)}>{info2.vraag}</h4>
+                            <button onClick={(event) => antwoordToggler(thisRef, info2.id)}>Geef antwoord weer</button>
                             {!thisRef.state.antwoorden[info2.id]?info2.antwoord:""}
+                            
                         </div>
             }
             let onderwerp_view3 = function (info3:Types.cat2vragen, thisRef){
                 return  <div>
                             <h1>{info3.categorie}</h1>
                             <h4 onClick={(event) => antwoordToggler(thisRef, info3.id)}>{info3.vraag}</h4>
+                            <button onClick={(event) => antwoordToggler(thisRef, info3.id)}>Geef antwoord weer</button>
                             {!thisRef.state.antwoorden[info3.id]?info3.antwoord:""}
                         </div>
             }
             
-
+            
+let antwoorden= this.state.antwoorden
          return <div> 
+             <h1>Veelgestelde Vragen</h1>
              {this.state.cat1.map( value =>onderwerp_view1(value, this))}
+
              {this.state.cat2.map( value =>onderwerp_view2(value, this))}
+             
              {this.state.cat3.map( value =>onderwerp_view3(value, this))}
+
         
          </div>
 
@@ -85,4 +109,3 @@ export class veelgesteldevragenComponent extends React.Component<veelgesteldevra
 }
 
 
-//                             <p><button onClick={(event) => thisRef.setState({...thisRef.state, antwoorden: thisRef.state.antwoorden.map(x => false)})}>klik mij</button></p>

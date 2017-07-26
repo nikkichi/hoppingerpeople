@@ -125,13 +125,6 @@ export function get_InformatieDetail(title: string): Promise<Types.Detail_Uitleg
 }
 
 
-export function get_Title(): Promise<Types.title[]> {
-    return new Promise((resolve, reject) => {
-        if (Title == undefined)
-            reject("Foutmelding")
-        else resolve(Title)
-    })
-}
 export function get_cat1vragen(): Promise<Types.cat1vragen[]> {
     return new Promise((resolve, reject) => {
         if (cat1Vragen == undefined)
@@ -352,25 +345,37 @@ let aanbieding: Types.aanbieding[] = [
 
 ]
 
-let Title: Types.title[] = [{
-    pagina: "Veelgestelde vragen"
-}]
+
 
 let cat1Vragen: Types.cat1vragen[] = [
-    {
-
+    {   
+        button: "<p><button onClick={(event) => thisRef.setState({...thisRef.state, antwoorden: thisRef.state.antwoorden.map(x => false)})}>klik mij</button></p>",
+        pagina: "Veelgestelde vragen",
         categorie: "Aanvragen en/of wijzigingen Ooievaarspas",
         vraag: "Ik heb een Ooievaarspas. Hoef ik dan geen verlenging aan te vragen?",
         antwoord: " In principe moet u altijd een aanvraag doen voor verlenging van de Ooievaarspas. Er is een beperkt aantal groepen voor wie de Ooievaarspas automatisch wordt verlengd. Wilt u weten of u hiertoe behoort? Lees dan meer over de voorwaarden voor het aanvragen van een Ooievaarspas.",
-        id: 1
+        id: 1,
+        idcat: 1
     },
     {
-
+        button: "",
+        pagina: "",
         categorie: "",
         vraag: "Wat gebeurt er nadat u een aanvraag voor een Ooievaarspas heeft gedaan?",
         antwoord: "Nadat u een aanvraag heeft gedaan ontvangt u schriftelijk een ontvangstbevestiging. De gemeente bekijkt binnen 8 weken of u voldoet aan de voorwaarden en stelt vast of u recht heeft op de Ooievaarspas. Mocht u na 8 weken geen bericht hebben ontvangen, dan kunt u contact opnemen met de klantenservice. ",
-        id: 2
+        id: 2,
+         idcat: 1
+    },
+    {
+        button: "",
+        pagina: "",
+        categorie: '',
+        vraag:"Ik heb een toekenningsbrief gekregen, alle gevraagde stukken opgestuurd, maar de Ooievaarspas nog niet ontvangen?",
+        antwoord:"De verwerking hiervan kan vier weken duren. Neem na deze vier weken contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur.Ooievaarspashouders uit Leidschendam-Voorburg en Rijswijk moeten hiervoor contact opnemen met hun eigen gemeente.",
+        id: 3,
+         idcat: 1
 
+    
     }]
 let cat2Vragen: Types.cat2vragen[]
     = [{
@@ -378,23 +383,31 @@ let cat2Vragen: Types.cat2vragen[]
         categorie: "Gebruik Ooievaarspas",
         vraag: "Ik heb een Ooievaarspas, mag ik gratis reizen?",
         antwoord: "Gratis reizen kan alleen als u inwoner bent van Den Haag en de AOW-gerechtigde leeftijd heeft bereikt, over een persoonlijke OV-chipkaart beschikt en recht heeft op een Ooievaarspas in het huidige kalenderjaar (1 januari tot en met 31 december).",
-        id: 3
+        id: 4
     },
     {
 
         categorie: " ",
         vraag: "Ik heb een brief gekregen over het ophalen van het gratis reisproduct, maar het lukt niet?",
         antwoord: "Neem contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur of stuur een e-mail aan: ooievaarsregelingen@gemeentedenhaag.helptu.nl  ",
-        id: 4
+        id: 5
+    },
+        {
+            categorie: " ",
+        vraag: "Ik kan niet gratis reizen, hoe kan dat?",
+        antwoord: "Gratis reizen kan alleen als u inwoner bent van Den Haag en de AOW-gerechtigde leeftijd heeft bereikt, over een persoonlijke OV-chipkaart beschikt en recht heeft op een Ooievaarspas in het huidige kalenderjaar (1 januari tot en met 31 december).Indien u wel aan de bovenstaande voorwaarden voldoet maar het niet lukt om gratis te reizen, kan dit verschillende oorzaken hebben. Neem daarom contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur.  ",
+        id: 6
 
-    }]
+        }
+
+    ]
 let cat3Vragen: Types.cat3vragen[] = [
     {
 
         categorie: "Geblokkeerde Ooievaarspas",
         vraag: "Mijn Ooievaarspas is geblokkeerd. Wat is daarvan de reden?",
         antwoord: "Daar kunnen verschillende redenen voor zijn. Neem daarom contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur. Ooievaarspashouders uit Leidschendam-Voorburg en Rijswijk moeten hiervoor contact opnemen met hun eigen gemeente.",
-        id: 5
+        id: 7
     },
 
     {
@@ -402,8 +415,13 @@ let cat3Vragen: Types.cat3vragen[] = [
         categorie: "",
         vraag: "Hoe lang duurt het voordat mijn Ooievaarspas (weer) is geactiveerd?",
         antwoord: "Als u een aanvraag heeft gedaan en het recht op de Ooievaarspas is vastgesteld, dan wordt uw pas binnen maximaal 15 werkdagen weer geactiveerd.Heeft u geen brief ontvangen? Neem dan contact op met Klantenservice SZW, telefoon (070) 353 75 00, bereikbaar op werkdagen van 08.30 tot 17.00 uur.Ooievaarspashouders uit Leidschendam-Voorburg en Rijswijk moeten hiervoor contact opnemen met hun eigen gemeente.",
-        id: 6
-
+        id: 8
+    },
+    {
+        categorie: "",
+        vraag: "Mijn Ooievaarspas is geblokkeerd. Kan ik nog gebruik maken van de Ooievaarspas activiteiten?",
+        antwoord: "Nee, u kunt na het blokkeren geen gebruik meer maken van de activiteiten van de Ooievaarspas.Geen geldige Ooievaarspas betekent daarom geen korting.",
+        id: 9
     }
 ]
 let OverDeOoievaarspas: Types.Uitleg_InformatiePas[] = [

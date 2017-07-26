@@ -48,23 +48,25 @@ export type aanbieding = {
     reserveren: string
 }
 
-
-
-export type title={
-   pagina: string
-   
+export type titelprinten = {
+    pagina: string
 }
+
 export type cat1vragen={
+    button: string
+    pagina: string
     categorie: string
     vraag : string
     antwoord: string
     id: number
+    idcat: number
 }
 export type cat2vragen={
     categorie: string
     vraag : string
     antwoord: string
     id: number
+    
 }
 export type cat3vragen={
     categorie: string
