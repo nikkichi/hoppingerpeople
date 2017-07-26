@@ -16,6 +16,7 @@ import Header from './Header'
 import * as Manager from './pageManager'
 import * as InformatieDetail from './InformatieDetail'
 import * as category_dagtocht from './category_dagtocht'
+import * as Zoekbalk from './Zoekbalk'
 
 import * as ExtraInformatie from './ExtraInformatie'
 
@@ -34,7 +35,8 @@ export type Page = { kind:"homepage"} |
                    {kind: "DetailAanbieding", id: number, checkPage: number} |
                    {kind: "InformatieDetail", title: string}|
                    {kind: "category_dagtocht", id: number}|
-                   {kind: "ExtraInformatie", title: string}
+                   {kind: "ExtraInformatie", title: string} |
+                   {kind: "zoekresultatenPagina", searchterm: string}
 
 export class PageManagerComponent extends React.Component<PageManagerComponentProps, PageManagerComponentState>{
  
@@ -70,9 +72,10 @@ let menubar = <div> <Header onMovePage={(next_page) => this.moveToPage(next_page
                     return<div>{menubar}<InformatieDetail.InformatieDetailComponent onMovePage={(next_page) => this.moveToPage(next_page)} title= {this.state.current_page.title}/></div>
         case "category_dagtocht": 
                     return<div>{menubar}<category_dagtocht.category_dagtochtComponenet onMovePage={(next_page) => this.moveToPage(next_page)} id={this.state.current_page.id}/></div>
-
         case "ExtraInformatie":
             return <div>{menubar}<ExtraInformatie.ExtrainformatieComponent onMovePage={(next_page) => this.moveToPage(next_page)} title = {this.state.current_page.title}  /></div>
+        case "zoekresultatenPagina":
+            return <div>{menubar}<Zoekbalk.Zoekbalk onMovePage={(next_page) => this.moveToPage(next_page)} searchterm = {this.state.current_page.searchterm}/></div>
 
 
     }}
