@@ -32,7 +32,7 @@ export class InfoPasComponent extends React.Component<InfoPasComponentProps, Inf
     }
 
     loadExtraInfo(){
-        Api.get_ExtraInformatie(this.props.id)
+        Api.get_ExtraInformatie()
         .then(ex => this.setState({...this.state, kind:'loaded', Extrainformatie: ex}))
         //.catch(ex => console.log('error'))
         console.log('extra info wordt geload')

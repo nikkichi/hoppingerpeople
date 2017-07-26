@@ -87,7 +87,7 @@ export function get_ooievaarsPas(): Promise<Types.InformatiePas[]> {
     })
 
 }
-export function get_ExtraInformatie(title: number): Promise<Types.Extra_Informatie[]> {
+export function get_ExtraInformatie(): Promise<Types.Extra_Informatie[]> {
     return new Promise((resolve, reject) => {
         resolve(ExtraInformatie)
 
@@ -249,49 +249,56 @@ let informatiepas: Types.InformatiePas[] = [
     {
         title: 'Informatie voor aanbieders',
         description: 'Bent u een nieuwe aanbieder van de Ooievaarspas en nog niet helemaal thuis in het verzilveren van kortingen met de Ooievaarspas?',
-        id: 2
+        id: 3
     },
     {
         title: 'Informatie over Ooievaarsregelingen',
         description: 'Bent u al bekend met de Ooievaarsregelingen? Of weet u niet precies hoe u er gebruik van kan maken? Dit en meer leest u hier.',
-        id: 3
+        id: 2
     },
     {
         title: 'Actuele Informatie',
         description: 'Op zoek naar contactinformatie of de laatste informatie? Zoals nieuwsberichten, onze interessante Ooievaarsnieuwsbrief of andere leuke nieuwtjes? Lees het hier.',
         id: 4
-    },
-
+    }, {
+        title: "Nieuws",
+        description: "Hier kunt u jet laaste nieuws terug vinden! Wijzingen van regelingen, informatie over onze aannbieders en meer.",
+        id: 5
+    }
 
 ]
 
 
 let speciale_aanbieding: Types.SpecialAanbieding[] = [
     {
+        description: "In teamverband lekker actief zijn, dat kan in de Florence Clubs. Altijd al gedroomd om te kunnen...",
         image: 'https://www.ooievaarspas.nl/uploads/event/image/233/thumb_Florence-.jpg',
-        title: 'Join the Florence club! Speciaal',
-        description: 'In teamverband lekker actief zijn, dat kan in de Florence Clubs. Altijd al gedroomd om te kunnen hardlopen of handboogschieten? Dit is nu mogelijk, gezellig in teamverband!',
+        title: 'Join the Florence club!',
+        text: 'In teamverband lekker actief zijn, dat kan in de Florence Clubs. Altijd al gedroomd om te kunnen hardlopen of handboogschieten? Dit is nu mogelijk, gezellig in teamverband!',
         id: 1,
         reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door."
     },
     {
+        description: "Woon je in Leidschendam-Voorburg en ben je op zoek naar een nieuwe sport? De sportstrippenkaart...",
         image: "https://www.ooievaarspas.nl/uploads/event/image/205/thumb_sportstrippenkaart.jpg",
-        title: 'Ontdek je sport met de sportstrippenkaart Speciaal',
-        description: 'Woon je in Leidschendam-Voorburg en ben je op zoek naar een nieuwe sport? De sportstrippenkaart helpt je op weg! Hardlopen, volleybal of zwemmen: weet jij niet welke sport bij je past? Dit is je kans! Met de sportstrippenkaart mag je vier sporten uitproberen bij meer dan 30 sportverenigingen in Leidschendam-Voorburg. Gewoon gratis!',
+        title: 'Ontdek je sport met de sportstrippenkaart',
+        text: 'Woon je in Leidschendam-Voorburg en ben je op zoek naar een nieuwe sport? De sportstrippenkaart helpt je op weg! Hardlopen, volleybal of zwemmen: weet jij niet welke sport bij je past? Dit is je kans! Met de sportstrippenkaart mag je vier sporten uitproberen bij meer dan 30 sportverenigingen in Leidschendam-Voorburg. Gewoon gratis!',
         id: 2,
         reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door."
     },
     {
+        description: "Wil je gratis hulp bij het afvallen? Neem je je voor om te gaan bewegen, maar komt het er steeds...",
         image: "https://www.ooievaarspas.nl/uploads/event/image/216/thumb_Gezinnen_project.jpg",
-        title: 'Gratis online coaching voor Haagse pashouders Speciaal',
-        description: 'Wil je gratis hulp bij het afvallen? Neem je je voor om te gaan bewegen, maar komt het er steeds niet van? Heb je plannen om je leefstijl te verbeteren? Wil je graag stoppen met roken of wordt het hoog tijd om je stress te verminderen? Ben je toe aan gezinshulp? Zet dan nu de stap en meld je aan voor een jaar lang gratis online coaching!',
+        title: 'Gratis online coaching voor Haagse pashouders',
+        text: 'Wil je gratis hulp bij het afvallen? Neem je je voor om te gaan bewegen, maar komt het er steeds niet van? Heb je plannen om je leefstijl te verbeteren? Wil je graag stoppen met roken of wordt het hoog tijd om je stress te verminderen? Ben je toe aan gezinshulp? Zet dan nu de stap en meld je aan voor een jaar lang gratis online coaching!',
         id: 3,
         reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door."
     },
     {
+        description: "Familiepark Drievliet, plezier voor jong en oud. Drievliet is in 2017 aanbieder van de...",
         image: "https://www.ooievaarspas.nl/uploads/event/image/228/thumb_Drievliet.jpg",
-        title: 'Ontdek Drievliet met de Ooievaarspas vanaf 1 april Speciaal',
-        description: 'Familiepark Drievliet, plezier voor jong en oud. Drievliet is in 2017 aanbieder van de Ooievaarspas en verwelkomt families! Ook heeft Drievliet er twee mooie attracties bij! Durf jij in de sportieve Tijdmachine en de snelle Chute?',
+        title: 'Ontdek Drievliet met de Ooievaarspas vanaf 1 april',
+        text: 'Familiepark Drievliet, plezier voor jong en oud. Drievliet is in 2017 aanbieder van de Ooievaarspas en verwelkomt families! Ook heeft Drievliet er twee mooie attracties bij! Durf jij in de sportieve Tijdmachine en de snelle Chute?',
         id: 4,
         reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door."
     }
@@ -299,49 +306,94 @@ let speciale_aanbieding: Types.SpecialAanbieding[] = [
 ]
 let aanbieding: Types.aanbieding[] = [
     {
-        image: 'https://www.ooievaarspas.nl/uploads/event/image/233/thumb_Florence-.jpg',
-        title: 'Join the Florence club!',
-        description: 'In teamverband lekker actief zijn, dat kan in de Florence Clubs. Altijd al gedroomd om te kunnen hardlopen of handboogschieten? Dit is nu mogelijk, gezellig in teamverband!',
+        description: "Dat badminton geen suffe sport is, bewijst badmintonclub DKC. Deze grote vereniging in Den Haag...",
+        image: 'https://www.ooievaarspas.nl/uploads/offer_version/image/136/thumb_Badminton.jpg',
+        title: 'Badmintonclub DKC',
+        text: 'Dat badminton geen suffe sport is, bewijst badmintonclub DKC. Deze grote vereniging in Den Haag biedt speel- en trainingsmogelijkheden voor jong en oud. Lekker badmintonnen op elk niveau; van beginnend recreant tot fanatieke wedstrijdspeler. Wil je een keer vrijspelen of trainen? Ook dat kan.',
         id: 1,
         category: 'alle aanbiedingen',
-        activity: { kind: 'sport', sub: 'badminton' },
+        activity: 'badminton',
         location: 'centrum',
         target: 'ouder dan 17 jaar',
         reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door."
     },
     {
+        description: "Badminton houdt iedereen fit, ook u. Want ook voor 55-plussers is badminton een ideale sport. Sla...",
         image: "https://www.ooievaarspas.nl/uploads/event/image/205/thumb_sportstrippenkaart.jpg",
-        title: 'Ontdek je sport met de sportstrippenkaart',
-        description: 'Woon je in Leidschendam-Voorburg en ben je op zoek naar een nieuwe sport? De sportstrippenkaart helpt je op weg! Hardlopen, volleybal of zwemmen: weet jij niet welke sport bij je past? Dit is je kans! Met de sportstrippenkaart mag je vier sporten uitproberen bij meer dan 30 sportverenigingen in Leidschendam-Voorburg. Gewoon gratis!',
+        title: 'Badminton Club het Zandje 55',
+        text: 'Badminton houdt iedereen fit, ook u. Want ook voor 55-plussers is badminton een ideale sport. Sla lekker een shuttletje mee en houd uw gewrichten en spieren soepel.Ook als u geen badmintonervaring heeft, bent u van harte welkom.',
         id: 2,
         category: 'alle aanbiedingen',
-        activity: { kind: 'sport', sub: 'badminton' },
+        activity: 'badminton',
         location: 'centrum',
         target: 'alle leeftijden',
         reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door."
     },
     {
-        image: "https://www.ooievaarspas.nl/uploads/event/image/216/thumb_Gezinnen_project.jpg",
-        title: 'Gratis online coaching voor Haagse pashouders',
-        description: 'Wil je gratis hulp bij het afvallen? Neem je je voor om te gaan bewegen, maar komt het er steeds niet van? Heb je plannen om je leefstijl te verbeteren? Wil je graag stoppen met roken of wordt het hoog tijd om je stress te verminderen? Ben je toe aan gezinshulp? Zet dan nu de stap en meld je aan voor een jaar lang gratis online coaching!',
+        description: "Oefening baart kunst. Oftewel: door goed te oefenen, zet je de beste resultaten neer. Dat geldt...",
+        image: "https://www.ooievaarspas.nl/uploads/offer_version/image/54/thumb_toneelstuk_heren_op_stoel.jpg",
+        title: 'Oefening baart toneelkunst',
+        text: 'Oefening baart kunst. Oftewel: door goed te oefenen, zet je de beste resultaten neer. Dat geldt ook voor deze toneelvereniging, de niet voor niets ‘Alles Door Oefening’ (ADO) in haar naam heeft.ADO-DVS is de oudste toneelvereniging van Den Haag. En dat zie je terug op het podium. Stukken van onder andere Ibsen, Sophocles, Bernlef en Wim T. Schippers zette ADO-DVS al op het podium neer. Lijkt het jou iets om daarin mee te spelen?',
         id: 3,
         category: 'alle aanbiedingen',
-        activity: { kind: 'cultuur', sub: 'toneel' },
+        activity: 'toneel',
         location: 'centrum',
         target: 'ouder dan 50 jaar',
         reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door."
     },
     {
-        image: "https://www.ooievaarspas.nl/uploads/event/image/228/thumb_Drievliet.jpg",
-        title: 'Ontdek Drievliet met de Ooievaarspas vanaf 1 april',
-        description: 'Familiepark Drievliet, plezier voor jong en oud. Drievliet is in 2017 aanbieder van de Ooievaarspas en verwelkomt families! Ook heeft Drievliet er twee mooie attracties bij! Durf jij in de sportieve Tijdmachine en de snelle Chute?',
+        description: "Speelde je vroeger ook zo vaak filmscènes na? Of hang je thuis wel eens ‘de clown’ of...",
+        image: "https://www.ooievaarspas.nl/uploads/offer_version/image/299/thumb_10356_1247960565.jpg",
+        title: 'Theatergroep Wats',
+        text: 'Speelde je vroeger ook zo vaak filmscènes na? Of hang je thuis wel eens ‘de clown’ of de ‘dramaqueen’ uit? Dan schuilt er misschien wel een heel goede acteur of actrice in je. En die kunnen ze bij Theatergroep Wats nu net goed gebruiken. De theatergroep staat regelmatig op de planken met uiteenlopende voorstellingen.Kom eens een repetitie bijwonen en kijk of het wat voor je is. Ben je overtuigd? Meld je aan en wie weet speel jij al mee in het volgende stuk!',
         id: 4,
         category: 'speciale aanbiedingen',
-        activity: { kind: 'cultuur', sub: 'badminton' },
+        activity: 'toneel',
         location: 'centrum',
         target: 'alle leeftijden',
         reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door."
+    },
+    {
+        description: "Familiepark Drievliet, plezier voor jong en oud. Drievliet is in 2017 aanbieder van de...",
+        image: "https://www.ooievaarspas.nl/uploads/event/image/228/thumb_Drievliet.jpg",
+        title: 'Ontdek Drievliet met de Ooievaarspas vanaf 1 april Speciaal',
+        text: 'Familiepark Drievliet, plezier voor jong en oud. Drievliet is in 2017 aanbieder van de Ooievaarspas en verwelkomt families! Ook heeft Drievliet er twee mooie attracties bij! Durf jij in de sportieve Tijdmachine en de snelle Chute?',
+        id: 5,
+        reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door.",
+        category: 'speciale aanbiedingen',
+        activity: 'toneel',
+        location: 'centrum',
+        target: 'alle leeftijden'
+    },
+    {
+        description: "Wil je gratis hulp bij het afvallen? Neem je je voor om te gaan bewegen, maar komt het er steeds...",
+        image: "https://www.ooievaarspas.nl/uploads/event/image/216/thumb_Gezinnen_project.jpg",
+        title: 'Gratis online coaching voor Haagse pashouders Speciaal',
+        text: 'Wil je gratis hulp bij het afvallen? Neem je je voor om te gaan bewegen, maar komt het er steeds niet van? Heb je plannen om je leefstijl te verbeteren? Wil je graag stoppen met roken of wordt het hoog tijd om je stress te verminderen? Ben je toe aan gezinshulp? Zet dan nu de stap en meld je aan voor een jaar lang gratis online coaching!',
+        id: 3,
+        reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door.",
+        category: 'speciale aanbiedingen',
+        activity: 'fitness',
+        location: 'centrum',
+        target: 'alle leeftijden'
+    },
+    {
+
+        description: "In teamverband lekker actief zijn, dat kan in de Florence Clubs. Altijd al gedroomd om te kunnen...",
+        image: 'https://www.ooievaarspas.nl/uploads/event/image/233/thumb_Florence-.jpg',
+        title: 'Join the Florence club! Speciaal',
+        text: 'In teamverband lekker actief zijn, dat kan in de Florence Clubs. Altijd al gedroomd om te kunnen hardlopen of handboogschieten? Dit is nu mogelijk, gezellig in teamverband!',
+        id: 1,
+        reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door.",
+        category: 'speciale aanbiedingen',
+        activity: 'fitness',
+        location: 'centrum',
+        target: 'alle leeftijden'
     }
+
+
+
+
 
 ]
 
@@ -426,58 +478,69 @@ let cat3Vragen: Types.cat3vragen[] = [
 ]
 let OverDeOoievaarspas: Types.Uitleg_InformatiePas[] = [
     {
+        image: "",
         title: 'Over Ooievaarspas',
         description: 'De Ooievaarspas geeft korting op sport, cultuur, contributie, lidmaatschap en entree. De Ooievaarspas is voor inwoners van Den Haag, Leidschendam-Voorburg en Rijswijk, met een inkomen tot maximaal 130% van de bijstandsnorm. ',
         id: 1,
     },
     {
+        image:"",
         title: 'Aanvragen Ooievaarspas',
         description: 'Woont u in Den Haag, Leidschendam-Voorburg of Rijswijk en heeft u een laag inkomen? Dan biedt de Ooievaarspas heel veel voordelen. Vraag daarom de Ooievaarspas aan.',
         id: 1,
 
     },
     {
+        image:"",
         title: 'Verloop na aanvraag Ooievaarspas',
         description: 'Nadat u een aanvraag heeft gedaan ontvangt u schriftelijk een ontvangstbevestiging. De gemeente bekijkt binnen 8 weken of u voldoet aan de voorwaarden en stelt vast of u recht heeft op de Ooievaarspas.',
         id: 1,
 
     },
     {
+
         title: 'Computerset',
+        image: "https://www.ooievaarspas.nl/uploads/ckeditor/pictures/63/content_Picture6.png",
         description: 'Om goed te kunnen leren is het belangrijk dat kinderen een computer hebben. Daarmee kunnen zij meedoen op school, spreekbeurten voorbereiden, werkstukken maken en spelletjes spelen',
         id: 2,
 
     },
     {
+        image: "https://www.ooievaarspas.nl/uploads/ckeditor/pictures/62/content_Picture7.png",
         title: 'Fiets',
         description: '',
         id: 2,
 
     },
     {
+        image:"",
         title: 'Aanbieder worden?',
         description: 'Wilt u aanbieder van de Ooievaarspas worden maar niet zeker of u voldoet aan ons aanbiedersprofiel? De voorwaarden kunt u hier vinden.',
         id: 3,
 
     },
     {
+        image: "",
         title: 'Doel en Voorwaarden',
         description: 'Bent u gevestigd in Den Haag, Leidschendam-Voorburg of Rijswijk en wilt u een aanbod doen tegen gereduceerd tarief? Lees onze doel en de belangrijkste voorwaarden om aanbieder te kunnen worden.',
         id: 3,
 
     },
     {
+        image: "",
         title: 'Nieuwsberichten Ooievaarspas',
         description: 'Wilt u op de meer weten over de laatste nieuwsberichten van onder andere lopende projecten, acties en informatie over aanbieders? Dat kan onze nieuws pagina.',
         id: 4,
 
     },
     {
+        image:"",
         title: 'Aanmelden Ooievaarsnieuwsbrief',
         description: 'Wilt u op de meer weten over de laatste nieuwsberichten van onder andere lopende projecten, acties en informatie over aanbieders? Dat kan onze nieuws pagina.',
         id: 4
     },
     {
+        image:"",
         title: 'Pinguïn geboren in Sea Life Scheveningen',
         description: 'Onze nieuwsbrieven staan altijd boordevol nieuws zoals nieuwe aanbieders, leuke aanbiedingen, (gratis) evenementen en dagtochten. Ook lees je meer over verschillende regelingen zoals pedicurebonnen, maaltijdvoorzieningen en de digitale wereld voor senioren. Onze eerdere nieuwsbrieven vind je hier. Meld je hieronder aan en blijf altijd als eerste op de hoogte van het laatste Ooievaarsnieuws. Veel leesplezier!',
         id: 5,
@@ -488,13 +551,18 @@ let OverDeOoievaarspas: Types.Uitleg_InformatiePas[] = [
 let detailuitleg: Types.Detail_Uitleg[] = [
     {
         text: 'Als u een minimuminkomen heeft en uw kind is 10 jaar of ouder, maar nog geen 18 jaar, dan kunt u via Stichting Leergeld Den Haag een aanvraag voor een nieuwe fiets indienen. Voor een nieuwe fiets betaalt u een eigen bijdrage van € 25,-. Gaat deze fiets kapot? Dan komt de fiets mogelijk éénmalig in aanmerking voor reparatie. Meer informatie? Kijk op www.denhaag.nl/ooievaarsregelingen',
-        image: '',
+        image: 'https://www.ooievaarspas.nl/uploads/ckeditor/pictures/62/content_Picture7.png',
         title: 'Fiets'
     },
     {
         text: 'Na ruim 30 dagen is het dan zover – een Humboldt pinguïnkuiken is uit het ei gekropen. De gelukkige ouders zijn de 8 jarige pinguïn Janneke en vader Jip. Het is het allereerste kuiken dat we in Sea  Life Scheveningen mogen verwelkomen.',
-        image: '',
+        image: 'https://www.ooievaarspas.nl/uploads/news/image/18/thumb_pinguin_kuiken_2.jpg',
         title: 'Pinguïn geboren in Sea Life Scheveningen'
+    },
+    {
+        title: 'Computerset',
+        image: "https://www.ooievaarspas.nl/uploads/ckeditor/pictures/63/content_Picture6.png",
+        text: 'Om goed te kunnen leren is het belangrijk dat kinderen een computer hebben. Daarmee kunnen zij meedoen op school, spreekbeurten voorbereiden, werkstukken maken en spelletjes spelen'
     },
     {
         title: 'Aanbieder worden?',
@@ -520,6 +588,11 @@ let detailuitleg: Types.Detail_Uitleg[] = [
         title: 'Verloop na aanvraag Ooievaarspas',
         image: '',
         text: 'Wat gebeurt er nadat u een aanvraag voor een Ooievaarspas heeft gedaan? Nadat u een aanvraag heeft gedaan ontvangt u schriftelijk een ontvangstbevestiging. De gemeente bekijkt binnen 8 weken of u voldoet aan de voorwaarden en stelt vast of u recht heeft op de Ooievaarspas. Mocht u na 8 weken geen bericht hebben ontvangen, dan kunt u contact opnemen met de klantenservice. Als de gemeente onvoldoende gegevens van u heeft ontvangen om het recht op de Ooievaarspas te kunnen beoordelen, dan wordt u gebeld of krijgt u een brief waarin gevraagd wordt om informatie aan te leveren. Bij de brief zit een retour-enveloppe (u hoeft dus geen postzegel te plakken).'
+    },
+        {
+        title: 'Over Ooievaarspas',
+        image: '',
+        text: 'De Ooievaarspas geeft korting op sport, cultuur, contributie, lidmaatschap en entree. De Ooievaarspas is voor inwoners van Den Haag, Leidschendam-Voorburg en Rijswijk, met een inkomen tot maximaal 130% van de bijstandsnorm. In 1989 begon de gemeente Den Haag met de Ooievaarspas. Inmiddels maken 53.000 gezinnen gebruik van de Ooievaarspas en zijn er 88.000 passen in omloop..'
     }
 ]
 

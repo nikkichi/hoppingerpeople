@@ -1094,13 +1094,22 @@ th {
 	height: 100%;
 }
 
+.box {
+	font-family: Cambria;
+	color: #1191db;
+	font-size: 22px;
+	width: 375px;
+	height: 100px;
+}
+
 .box--fourth {
 	font-family: Cambria;
 	float: left;
 	width: 375px;
+	height: 450px;
 	padding-right: 50px;
-	padding-left: 60px;
-	border-style: dashed;
+	padding-left: 40px;
+	border-style: hidden;
 	border-color: royalblue;
 	border-width: 2px;
 	background-color: white;
@@ -1112,7 +1121,7 @@ th {
 	float: left;
 	width: 350px;
 	padding-right: 60px;
-	padding-left: 5px;
+	padding-left: 50px;
 	word-wrap: break-word;
 	font-family: Cambria;
 }
@@ -1121,7 +1130,7 @@ th {
 	font-family: Cambria;
 	border-style: solid;
 	padding-left: 40px;
-	border-color: skyblue;
+	border-color: #1191db;
 	background-color: white;
 	border-right: lightblue;
 	border-left: lightblue;
@@ -1175,16 +1184,14 @@ th {
 
 [class^="header__inner"] {
 	padding: 20px;
+	padding-top: 20px;
 	margin: 10px;
-	color: #fff;
 	font-size: 21px;
 	font-weight: bold;
 	line-height: 1.3em;
-	border: 2px dashed white;
+	border-bottom-color: black;
 	border-radius: 10px;
-	-webkit-box-shadow: 0 0 0 4px lightcoral, 2px 1px 6px 4px rgba(10, 10, 0, 0.5);
-	box-shadow: 0 0 0 4px lightcoral, 2px 1px 6px 4px rgba(10, 10, 0, 0.5);
-	text-shadow: -1px -1px #aa3030;
+	background: aqua opacity(0.5);
 	font-weight: normal;
 }
 
@@ -1519,6 +1526,27 @@ th {
 .header {
 	display: table-row;
 	height: 1px;
+}
+
+.enjoy-css {
+	display: inline-block;
+	position: relative;
+	cursor: pointer;
+	top: 0;
+	padding: 0 22px;
+	border: 4px solid #eae8f2;
+	font: normal normal bold 20px/50px Arial, Helvetica, sans-serif;
+	color: white;
+	text-align: center;
+	text-transform: uppercase;
+	text-overflow: clip;
+	background: #689acc;
+}
+
+.enjoy-css:hover {
+	border: 4px solid white;
+	color: white;
+	background: #5383b2;
 }
 
 .button--inline {
@@ -2315,58 +2343,19 @@ th {
 }
 
 .homepage--title {
-	margin-left: 40px;
-	color: cornflowerblue;
+	margin-left: 20px;
+	color: #1191db;
 	font-family: Cambria;
+	padding: 10px;
+	position: absolute;
+	right: 50px;
 }
 
 .homepage--special {
 	font-family: Cambria;
 	color: cornflowerblue;
 	margin-left: 40px;
-}
-
-.homepage--special .box--fourth {
-	font-family: Cambria;
-	float: left;
-	width: 375px;
-	padding-right: 50px;
-	padding-left: 60px;
-	border-style: dashed;
-	border-color: royalblue;
-	border-width: 2px;
-	background-color: white;
-	border-radius: 10px;
-	margin-left: 4px;
-}
-
-.homepage--special .box--description {
-	float: left;
-	width: 350px;
-	padding-right: 60px;
-	padding-left: 5px;
-	word-wrap: break-word;
-	font-family: Cambria;
-}
-
-.homepage--special .box--special {
-	font-family: Cambria;
-	border-style: solid;
-	padding-left: 40px;
-	border-color: skyblue;
-	background-color: white;
-	border-right: lightblue;
-	border-left: lightblue;
-}
-
-.homepage--special .box--aanbieding {
-	font-family: Cambria;
-	color: skyblue;
-	margin-left: 40px;
-	border-style: solid;
-	background-color: whitesmoke;
-	border-right: lightblue;
-	border-left: lightblue;
+	margin-bottom: 40px;
 }
 
 @media (min-width: 768px) {

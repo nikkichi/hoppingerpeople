@@ -1,14 +1,19 @@
 .box {
-
+    font-family: Cambria;
+    color:#1191db ;
+    font-size: 22px;
+    width: 375px;   
+    height: 100px; 
 }
 
 .box--fourth {
     font-family: Cambria; 
     float: left;
-    width: 375px;    
+    width: 375px;   
+    height: 450px; 
     padding-right: 50px;
-     padding-left: 60px;
-     border-style: dashed;
+     padding-left: 40px;
+     border-style: hidden;
      border-color: royalblue; 
      border-width: 2px; 
      background-color: white;  
@@ -21,7 +26,7 @@
      float: left;
      width: 350px;    
      padding-right: 60px;
-     padding-left: 5px;
+     padding-left: 50px;
      word-wrap: break-word; 
      font-family: Cambria;
      
@@ -31,7 +36,7 @@
      font-family: Cambria; 
      border-style: solid; 
      padding-left: 40px;  
-     border-color: skyblue; 
+     border-color: #1191db; 
      background-color:white; 
      border-right: lightblue;
      border-left: lightblue;  

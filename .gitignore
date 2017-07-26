@@ -3,3 +3,4 @@ bin/
 node_modules/
 wwwroot/js/site.js
 wwwroot/js/site.js.map 
+package-lock.json

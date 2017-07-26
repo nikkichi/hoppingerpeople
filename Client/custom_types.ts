@@ -25,6 +25,8 @@ export type InformatiePas = {
 }
 
 export type SpecialAanbieding = {
+    
+    text: string,
     image: string,
     title: string,
     description: string, 
@@ -32,17 +34,14 @@ export type SpecialAanbieding = {
     reserveren: string
 }
 
-type ActivityKind = "cultuur" | "sport"
-
-export type Activy = { kind: ActivityKind, sub: string }
-
 export type aanbieding = {
+    text: string,
     image: string,
     title: string,
     description: string, 
     id: number,
     category: string,
-    activity: Activy,
+    activity: string,
     location: string,
     target: string ,
     reserveren: string
@@ -76,6 +75,7 @@ export type cat3vragen={
 }
 
 export type Uitleg_InformatiePas={
+    image: string,
     title: string,
     description: string,
     id: number
