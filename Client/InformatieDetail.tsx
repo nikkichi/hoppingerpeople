@@ -7,7 +7,7 @@ import * as Models from './generated_models'
 import * as Types from './custom_types'
 import * as Api from './api'
 import * as Manager from './pageManager'
-type InformatieDetailComponentProps = {onMovePage: (id: Manager.Page) => void, title: string, id:number}
+type InformatieDetailComponentProps = {onMovePage: (id: Manager.Page) => void, title: string}
 type InformatieDetailComponentState = { kind: "loading"} 
                                      | {kind:"loaded", Uitleginformatie: Types.Detail_Uitleg[], Extrainformatie: Types.Extra_Informatie[]}
 export class InformatieDetailComponent extends React.Component<InformatieDetailComponentProps, InformatieDetailComponentState>{
@@ -22,7 +22,7 @@ export class InformatieDetailComponent extends React.Component<InformatieDetailC
         console.log('test')
     }
     loadExtraInfo(){
-        Api.get_ExtraInformatie(this.props.id)
+        Api.get_ExtraInformatie()
         .then(ex => this.setState({...this.state, kind:'loaded', Extrainformatie: ex}))
         //.catch(ex => console.log('error'))
         console.log('extra info wordt geload')
@@ -30,7 +30,7 @@ export class InformatieDetailComponent extends React.Component<InformatieDetailC
     componentWillMount(){
         this.loadDetailinfo();
         console.log('Details worden geload')
-        this.loadExtraInfo()
+        this.loadExtraInfo() 
     }
     render(){
         let onClickInformatiebutton = (title: string) => this.props.onMovePage({kind: "ExtraInformatie", title: title})

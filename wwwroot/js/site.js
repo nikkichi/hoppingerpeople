@@ -6051,7 +6051,7 @@ function get_ooievaarsPas() {
     });
 }
 exports.get_ooievaarsPas = get_ooievaarsPas;
-function get_ExtraInformatie(title) {
+function get_ExtraInformatie() {
     return new Promise((resolve, reject) => {
         resolve(ExtraInformatie);
     });
@@ -35694,7 +35694,7 @@ class InfoPasComponent extends React.Component {
         console.log('test');
     }
     loadExtraInfo() {
-        Api.get_ExtraInformatie(this.props.id)
+        Api.get_ExtraInformatie()
             .then(ex => this.setState(Object.assign({}, this.state, { kind: 'loaded', Extrainformatie: ex })));
         //.catch(ex => console.log('error'))
         console.log('extra info wordt geload');
@@ -35755,24 +35755,41 @@ class InformatieDetailComponent extends React.Component {
     }
     loadDetailinfo() {
         Api.get_InformatieDetail(this.props.title)
-            .then(u => this.setState(Object.assign({}, this.state, { kind: 'loaded', Uitleginformatie: u })));
-        //.catch(u=> console.log("error"))//this.loadUitleg())
+            .then(u => this.setState(Object.assign({}, this.state, { kind: 'loaded', Uitleginformatie: u })))
+            .catch(u => console.log("error")); //this.loadUitleg())
         console.log('test');
+    }
+    loadExtraInfo() {
+        Api.get_ExtraInformatie()
+            .then(ex => this.setState(Object.assign({}, this.state, { kind: 'loaded', Extrainformatie: ex })));
+        //.catch(ex => console.log('error'))
+        console.log('extra info wordt geload');
     }
     componentWillMount() {
         this.loadDetailinfo();
         console.log('Details worden geload');
+        this.loadExtraInfo();
     }
     render() {
+        let onClickInformatiebutton = (title) => this.props.onMovePage({ kind: "ExtraInformatie", title: title });
         if (this.state.kind == 'loaded') {
             let detail_view = function (details) {
                 return React.createElement("div", { key: details.title },
                     React.createElement("h1", null, details.title),
-                    React.createElement("img", { src: details.image }),
                     React.createElement("div", null, details.text),
-                    React.createElement("div", null, details.image));
+                    React.createElement("br", null),
+                    React.createElement("img", { src: details.image }));
             };
-            return React.createElement("div", null, this.state.Uitleginformatie.map(details => detail_view(details)));
+            let extrainfo_view = function (extrainfo) {
+                return React.createElement("div", { key: extrainfo.title },
+                    React.createElement("a", { onClick: () => onClickInformatiebutton(extrainfo.title) },
+                        React.createElement("h2", null, extrainfo.title)),
+                    React.createElement("div", null, extrainfo.description),
+                    React.createElement("button", { onClick: () => onClickInformatiebutton(extrainfo.title) }, "lees meer"));
+            };
+            return React.createElement("div", null,
+                this.state.Uitleginformatie.map(details => detail_view(details)),
+                this.state.Extrainformatie.map(extrainfo => extrainfo_view(extrainfo)));
         }
         else {
             return React.createElement("div", null, "Else");

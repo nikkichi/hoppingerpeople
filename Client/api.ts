@@ -87,7 +87,7 @@ export function get_ooievaarsPas(): Promise<Types.InformatiePas[]> {
     })
 
 }
-export function get_ExtraInformatie(title: number): Promise<Types.Extra_Informatie[]> {
+export function get_ExtraInformatie(): Promise<Types.Extra_Informatie[]> {
     return new Promise((resolve, reject) => {
         resolve(ExtraInformatie)
 
