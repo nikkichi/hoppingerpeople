@@ -51,7 +51,7 @@ export class InformatieDetailComponent extends React.Component<InformatieDetailC
                         <div>{extrainfo.description}</div>
                         <button onClick={() => onClickInformatiebutton(extrainfo.title) }>lees meer</button>
                     
-                         </div>  
+                         </div>    
             }
                 return<div>
                     {this.state.Uitleginformatie.map(details => detail_view(details))}
