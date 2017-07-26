@@ -37,7 +37,7 @@ export class HomepageComponent extends React.Component<HomepageComponentProps, H
         if (this.state.kind == "loaded") {
             let specialAanbiedingView = function (special_aanbieding: Types.SpecialAanbieding) {
                 return <div className="box--fourth" key={special_aanbieding.id}>
-                       <a onClick={(id) => onclickAanbieding(special_aanbieding.id)}> <h2>{special_aanbieding.title}</h2> </a>
+                       <a onClick={(id) => onclickAanbieding(special_aanbieding.id)}> <h2 className="box">{special_aanbieding.title}</h2> </a>
                               <img src = {special_aanbieding.image} ></img> 
                     <br></br>
                     <p className="box--special"> {special_aanbieding.description}</p>
@@ -48,7 +48,6 @@ export class HomepageComponent extends React.Component<HomepageComponentProps, H
                 </div>
             }
             return  <div>
-                    <h1 className="homepage--title">Ooievaarspas</h1>
                     <h2 className="homepage--special">Speciale Aanbiedingen</h2>
                         {this.state.specialeAanbieding.map( value =>specialAanbiedingView(value))}
                     </div>
