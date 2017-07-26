@@ -42,14 +42,14 @@ export class category_dagtochtComponenet extends React.Component<category_dagtoc
         if(this.state.kind == 'loaded'){
 {console.log("dagtochten...", this.state.dagtochten)}
            let dagtochtView = function (dagtocht: Types.Dagtocht) {
-                return <div key={dagtocht.name}>
+                return <div className="box--dagtocht" key={dagtocht.name}>
                     <a onClick={(id) => onclickdagtocht(dagtocht.id)}>  <h2> {dagtocht.name}</h2></a>
                     <img src = {dagtocht.image} ></img>
                      <div> {dagtocht.description}</div>
                 
 
 
-                    <button
+                     <button className= "small-button" 
                         onClick={() => onclickdagtocht(dagtocht.id)}>
                         {hyperlink}
                     </button>

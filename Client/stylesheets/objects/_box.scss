@@ -11,6 +11,7 @@
     float: left;
     width: 375px;   
     height: 450px; 
+    margin-bottom: 5px;
     padding-right: 50px;
      padding-left: 40px;
      border-style: hidden;
@@ -19,6 +20,23 @@
      background-color: white;  
      border-radius: 10px;
      margin-left: 4px; 
+
+}
+
+.box--fifth {
+    font-family: Cambria; 
+    float: left;
+    width: 400px;   
+    height: 450px; 
+    margin-bottom: 5px;
+    padding-right: 10px;
+     padding-left: 10px;
+     border-style: hidden;
+     border-color: royalblue; 
+     border-width: 2px; 
+     background-color: white;  
+     border-radius: 10px;
+     margin-left: 250px; 
 
 }
 
@@ -35,20 +53,90 @@
  .box--special {
      font-family: Cambria; 
      border-style: solid; 
-     padding-left: 40px;  
+     padding-left: 10px;  
      border-color: #1191db; 
      background-color:white; 
      border-right: lightblue;
      border-left: lightblue;  
  }
  .box--aanbieding {
+     float: left; 
      font-family: Cambria; 
      color: skyblue; 
-     margin-left: 40px;
+     margin-left: 100px;
+     padding-left: 100px; 
      border-style: solid;  
      background-color: whitesmoke; 
      border-right: lightblue;
      border-left: lightblue;  
  }
 
+ .box--filter-category {
+    font-family: Cambria; 
+    float: left;
+    width: 250px;   
+    height: 150px;
+    background-color: green; 
+    position: absolute;
+    top: 295px;
+    left: 0;
+    margin-right: 15px; 
+    padding-right: 20px;
+    display: block; 
+ }
 
+  .box--filter-wat {
+    font-family: Cambria; 
+    float: left;
+    width: 250px;   
+    height: 150px;
+    background-color: green; 
+    position: absolute;
+    top: 440px;
+    left: 0;
+    margin-right: 15px; 
+    padding-right: 20px;
+    
+ }
+
+   .box--filter-wie {
+    font-family: Cambria; 
+    float: left;
+    width: 250px;   
+    height: 150px;
+    background-color: green; 
+    position: absolute;
+    top: 565px;
+    left: 0;
+    margin-right: 15px; 
+    padding-right: 20px;
+    
+ }
+
+   .box--filter-waar {
+    font-family: Cambria; 
+    float: left;
+    width: 250px;   
+    height: 1000px;
+    background-color: green; 
+    position: absolute;
+    top: 690px;
+    left: 0;
+    margin-right: 15px; 
+    padding-right: 20px;
+    
+ }
+
+ 
+ .box--dagtocht {
+     font-family: Cambria; 
+     border-style: solid; 
+     padding-left: 10px; 
+     width: 1500px; 
+     height: 350px;  
+     margin-bottom: 5px; 
+     border-color: #1191db; 
+     background-color:white; 
+     border-right: lightblue;
+     border-left: lightblue;  
+ }

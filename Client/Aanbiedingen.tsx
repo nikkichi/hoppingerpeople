@@ -76,7 +76,7 @@ export class AanbiedingenComponent extends React.Component<AanbiedingenComponent
         if (this.state.kind == "loaded") {
 
             let AanbiedingView = function (aanbieding: Types.aanbieding) {
-                return <div className="box--fourth" key={aanbieding.id}>
+                return <div className="box--fifth" key={aanbieding.id}>
                        <a onClick={(id) => onclickAanbieding(aanbieding.id)}>
                            <h2>{aanbieding.title}</h2>
                            </a>
@@ -140,8 +140,8 @@ export class AanbiedingenComponent extends React.Component<AanbiedingenComponent
                 
 
             return <div>
-                <h1 className="homepage--title">Aanbiedingen</h1>
-                <h2 className="box--aanbieding">Alle aanbiedingen</h2>
+            
+                <h2 className="title-aanbiedingen">Alle aanbiedingen</h2>
                   {/* {this.state.aanbiedingen.map(aanbieding => AanbiedingView(aanbieding))  } */}
 
                  

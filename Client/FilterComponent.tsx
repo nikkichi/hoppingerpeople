@@ -7,7 +7,7 @@ import * as Manager from "./pageManager";
 import * as Api from "./api";
 import { FilterState } from "./Aanbiedingen"
 
-let stringToOption = (x: string) => <option value={x}>{x}</option>
+let stringToOption = (x: string) => <option className="dropdown-content" value={x}>{x}</option>
 
 type FilterCategorieComponentProps = { aanbiedingen: Types.aanbieding[], setFilterState: (newState: FilterState) => void, filterState: FilterState }
 
@@ -30,10 +30,10 @@ export class FilterCategorieComponent extends React.Component<FilterCategorieCom
                             else { return accumulator.push(value) }
                         }, Immutable.List<string>())
 
-        return <div>
+        return <div className="box--filter-category">
             Categorie<br/>
-            <div>
-                <select name="categorie filter" id="1" onChange={s => {
+            <div className="dropdown">
+                <select className= "dropbtn" name="categorie filter" id="1" onChange={s => {
                     this.setCategory(s.currentTarget.value)
                     console.log(s.currentTarget.value)
                 }}>
@@ -69,14 +69,16 @@ export class FilterWatComponent extends React.Component<FilterWatComponentProps>
                             else {return accumulator.push(value)}
                         }, Immutable.List<string>())
 
-        return<div>
+        return<div className="box--filter-wat">
             Wat?<br/>
-            <select name="wat filter" id= "2" onChange={s => {
+            <div className="dropdown">
+            <select className= "dropbtn" name="wat filter" id= "2" onChange={s => {
                 this.setWat(s.currentTarget.value)
                 }}>
                 <option selected hidden>Alle actviteiten</option>
                 {activities.map(activities => stringToOption(activities))}
             </select>
+            </div>
         </div> }
 
 }
@@ -106,14 +108,16 @@ export class FilterWaarComponent extends React.Component<FilterWaarComponentProp
                         }, Immutable.List<string>())
 
 
-        return <div>
+        return <div className="box--filter-waar">
             Waar?<br/>
-            <select name= "waar filter" id="3" onChange={s => {
+            <div className="dropdown">
+            <select className= "dropbtn" name= "waar filter" id="3" onChange={s => {
                 this.setWaar(s.currentTarget.value)
                 }}>
                 <option selected hidden>Alle locaties </option>
                 {locations.map(location => stringToOption(location))}            
             </select>
+            </div>
         </div>
         
     }
@@ -143,10 +147,10 @@ export class FilterVoorWieComponent extends React.Component<FilterVoorWieCompone
                         else {return accumulator.push(value)}
                     }, Immutable.List<string>())
 
-        return <div>
+        return <div className="box--filter-wie">
             Wie?<br/>
-            <div>
-            <select name="wie filter" id="4" onChange={s => {
+            <div className="dropdown">
+            <select className= "dropbtn" name="wie filter" id="4" onChange={s => {
                 this.setWie(s.currentTarget.value)
                 console.log(s.currentTarget.value)
                 }}>
