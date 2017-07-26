@@ -38,12 +38,24 @@ export default class Menu extends React.Component<MenubarComponentProps, Menubar
                      <h1 className="homepage--title">Ooievaarspas</h1>
             <img height="150px" width="230" src="https://www.denhaag.nl/static/denhaagrestylepresentation/images/DH-NL-Rgb-CS6.svg" alt="logo" />
             <button className= "enjoy-css" onClick={(event) => this.props.onMovePage({ kind: "homepage"})}>{homepageLink}</button>
+
             <button className= "enjoy-css" onClick={onClickAanbieding}>{aanbiedingLink}</button>
             <button className= "enjoy-css" onClick={onClickDagtocht}>{dagtochtLink}</button>
             <button className= "enjoy-css" onClick={onClickOoievaarsinfo}>{ooievaarLink}</button>
             <button className= "enjoy-css" onClick={(event) => this.props.onMovePage({ kind: "veelgesteldeVragenPagina"})}>{vragenLink}</button>
             
                 
+            <button onClick={onClickAanbieding}>{aanbiedingLink}</button>
+            <button onClick={onClickDagtocht}>{dagtochtLink}</button>
+            <button onClick={onClickOoievaarsinfo}>{ooievaarLink}</button>
+            <button onClick={(event) => this.props.onMovePage({ kind: "veelgesteldeVragenPagina"})}>{vragenLink}</button>
+            <input id="zoekinput" onChange={input => this.setState(
+                input.target.value != null ?
+                {searchterm:input.target.value}:
+                {searchterm:""})}></input>
+            <button onLoad={event => this.setState({searchterm:""})} onClick={onClickZoeken(this)}>
+                {zoekLink}
+            </button>
                     </div>
                     </nav>
             </header>)

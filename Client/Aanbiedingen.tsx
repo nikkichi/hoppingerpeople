@@ -138,7 +138,10 @@ export class AanbiedingenComponent extends React.Component<AanbiedingenComponent
                 <h2 className="title-aanbiedingen">Alle aanbiedingen</h2>
                   {/* {this.state.aanbiedingen.map(aanbieding => AanbiedingView(aanbieding))  } */}
 
-                 
+            return <div> 
+                <h1 className="homepage--title">Aanbiedingen</h1>
+                <h2 className="box--aanbieding">Alle aanbiedingen</h2>
+
                 <FilterCategorieComponent 
                 aanbiedingen={this.state.aanbiedingen}
                 filterState={this.state.filterState} 
