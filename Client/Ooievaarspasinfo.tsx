@@ -27,12 +27,12 @@ let hyperlink = 'lees meer'
              Api.get_ooievaarsPas()
            .then(i => this.setState({ ...this.state, kind: "loaded", value: i }),
            e => console.log('Error: ', e)) 
-           console.log('loadinformatiepas')
+      
      }
  
      componentWillMount() {
        this.loadInformatiePas();  
-       console.log('Ooievaarsinfo wordt geload') 
+    
                  
      }    
              
