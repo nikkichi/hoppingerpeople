@@ -16,6 +16,7 @@ import Header from './Header'
 import * as Manager from './pageManager'
 import * as InformatieDetail from './InformatieDetail'
 import * as category_dagtocht from './category_dagtocht'
+import Footer from './footer'
 
 import * as ExtraInformatie from './ExtraInformatie'
 
@@ -47,47 +48,46 @@ export class PageManagerComponent extends React.Component<PageManagerComponentPr
 
 
 let menubar = <div> <Header onMovePage={(next_page) => this.moveToPage(next_page)}/></div>
+let footer = <div> <Footer onMovePage={(next_page) => this.moveToPage(next_page)}/></div>
     switch (this.state.current_page.kind) {
         
         case "homepage":
-            return <div>{menubar}<Homepage.HomepageComponent onMovePage={(next_page) => this.moveToPage(next_page)}  />  </div>
-       case "dagtochtPagina":
-            
-		return <div>{menubar}<Dagtochten.DagtochtenComponent onMovePage={(next_page) => this.moveToPage(next_page)} id= {this.state.current_page.id} /> </div>
+            return <div>
+                {menubar}<Homepage.HomepageComponent onMovePage={(next_page) => this.moveToPage(next_page)}/> <div>{footer}</div>  </div>
+        case "dagtochtPagina":            
+		    return <div>
+                {menubar}<Dagtochten.DagtochtenComponent onMovePage={(next_page) => this.moveToPage(next_page)} id= {this.state.current_page.id}/> {footer} </div>
         case "loaded":
-            return <div>{menubar}<Aanbieding.AanbiedingenComponent onMovePage={(next_page) => this.moveToPage(next_page)}/> </div> 
+            return <div>
+                {menubar}<Aanbieding.AanbiedingenComponent onMovePage={(next_page) => this.moveToPage(next_page)}/> {footer} </div> 
         case "veelgesteldeVragenPagina": 
-                return<div>{menubar}< veelgesteldeVragen.veelgesteldevragenComponent onMovePage={(next_page) => this.moveToPage(next_page)}/></div>   
+            return <div>
+                {menubar}< veelgesteldeVragen.veelgesteldevragenComponent onMovePage={(next_page) => this.moveToPage(next_page)}/>{footer} </div>   
         case "infopas": 
-                    return<div>{menubar}<InfoPas.InfoPasComponent onMovePage={(next_page) => this.moveToPage(next_page)} id= {this.state.current_page.id} title={this.state.current_page.title} /></div>
+            return <div>
+                {menubar}<InfoPas.InfoPasComponent onMovePage={(next_page) => this.moveToPage(next_page)} id= {this.state.current_page.id} title={this.state.current_page.title} />{footer} </div>
         case "DetailDagtocht":
-                return<div>{menubar}<detailPagina.InforComponent id= {this.state.current_page.id} checkPage= {this.state.current_page.checkPage}/></div>
+            return <div>
+                {menubar}<detailPagina.InforComponent id= {this.state.current_page.id} checkPage= {this.state.current_page.checkPage}/>{footer} </div>
         case "DetailAanbieding":
-           return<div>{menubar}<detailPagina.InforComponent id={this.state.current_page.id} checkPage= {this.state.current_page.checkPage} /></div>
+            return <div>
+                {menubar}<detailPagina.InforComponent id={this.state.current_page.id} checkPage= {this.state.current_page.checkPage} />{footer} </div>
         case "ooievaarspasPagina":
-            return <div>{menubar}<Ooievaarspasinfo.OoievaarsPasComponent onMovePage={(next_page) => this.moveToPage(next_page)}  /> </div>  
+            return <div>
+                {menubar}<Ooievaarspasinfo.OoievaarsPasComponent onMovePage={(next_page) => this.moveToPage(next_page)}  />{footer}  </div>  
         case "InformatieDetail": 
-                    return<div>{menubar}<InformatieDetail.InformatieDetailComponent onMovePage={(next_page) => this.moveToPage(next_page)} title= {this.state.current_page.title}/></div>
+            return <div>
+                {menubar}<InformatieDetail.InformatieDetailComponent onMovePage={(next_page) => this.moveToPage(next_page)} title= {this.state.current_page.title}/>{footer}</div>
         case "category_dagtocht": 
-                    return<div>{menubar}<category_dagtocht.category_dagtochtComponenet onMovePage={(next_page) => this.moveToPage(next_page)} id={this.state.current_page.id}/></div>
-
+            return <div>
+                {menubar}<category_dagtocht.category_dagtochtComponenet onMovePage={(next_page) => this.moveToPage(next_page)} id={this.state.current_page.id}/>{footer}</div>
         case "ExtraInformatie":
-            return <div>{menubar}<ExtraInformatie.ExtrainformatieComponent onMovePage={(next_page) => this.moveToPage(next_page)} title = {this.state.current_page.title}  /></div>
+            return <div>
+                {menubar}<ExtraInformatie.ExtrainformatieComponent onMovePage={(next_page) => this.moveToPage(next_page)} title = {this.state.current_page.title}  />{footer}</div>
 
 
     }}
 
-    
-    //     function Footer(){
-    //         return  <footer>
-    //                     <button onClick={event => location.reload()}>Ga naar Homepagina</button>
-    //                 </footer>
-    //     }
-    //     return  <div>
-    //                 {PageContent(this)}
-    //                 {Footer()}
-    //             </div>
-    // }
 
     moveToPage(next_page: Page) {
         this.setState({ ...this.state, current_page: next_page })
