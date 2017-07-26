@@ -47,7 +47,7 @@ export class PageManagerComponent extends React.Component<PageManagerComponentPr
 
     render() {
 
-console.log('PAGEMANAGER', this.state.current_page.kind);
+
 let menubar = <div> <Header onMovePage={(next_page) => this.moveToPage(next_page)}/></div>
     switch (this.state.current_page.kind) {
         
@@ -93,7 +93,6 @@ let menubar = <div> <Header onMovePage={(next_page) => this.moveToPage(next_page
     // }
 
     moveToPage(next_page: Page) {
-        console.log("move to page")
         this.setState({ ...this.state, current_page: next_page })
     }
 }

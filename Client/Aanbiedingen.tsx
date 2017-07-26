@@ -47,12 +47,6 @@ export class AanbiedingenComponent extends React.Component<AanbiedingenComponent
             let newState = {...this.state, filterState: newFilterState}
             this.setState(newState)
         }
-        if (newFilterState.Categorie.kind == "on"){
-            console.log(newFilterState.Categorie.value)
-        }
-        if (newFilterState.Wie.kind == "on"){
-            console.log(newFilterState.Wie.value)
-        }
     }
 
     loadAanbieding() {
@@ -139,11 +133,9 @@ export class AanbiedingenComponent extends React.Component<AanbiedingenComponent
                 })
                 
 
-            return <div>
+            return <div> 
                 <h1 className="homepage--title">Aanbiedingen</h1>
                 <h2 className="box--aanbieding">Alle aanbiedingen</h2>
-                  {/* {this.state.aanbiedingen.map(aanbieding => AanbiedingView(aanbieding))  } */}
-
                  
                 <FilterCategorieComponent 
                 aanbiedingen={this.state.aanbiedingen}
