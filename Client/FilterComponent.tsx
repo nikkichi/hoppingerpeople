@@ -19,7 +19,6 @@ export class FilterCategorieComponent extends React.Component<FilterCategorieCom
     }
 
     render() {
-        // let onclickAanbieding = (id: number) => this.props.onMovePage({ kind: "DetailAanbieding", id: id, checkPage: 1})
 
         let stringToOption = (x: string) => <option value={x}>{x}</option>
 
@@ -47,6 +46,24 @@ export class FilterCategorieComponent extends React.Component<FilterCategorieCom
 
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //activiteit filter
 type FilterWatComponentProps = { }
@@ -224,55 +241,66 @@ export class FilterWaarComponent extends React.Component<FilterWaarComponentProp
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // wie filter
 
-type FilterVoorWieComponentProps = { }
-type FilterVoorWieComponentState = { kind: 'loading' } | { kind: 'loaded', aanbiedingen: Types.aanbieding[] }
+type FilterVoorWieComponentProps = { aanbiedingen: Types.aanbieding[], setFilterState: (newState: FilterState) => void, filterState: FilterState }
 
-export class FilterVoorWieComponent extends React.Component<FilterVoorWieComponentProps, FilterVoorWieComponentState>{
+export class FilterVoorWieComponent extends React.Component<FilterVoorWieComponentProps>{
     constructor(props, context) {
         super(props, context)
-        this.state = { kind: 'loading' }
     }
-
-    componentWillMount(){
-        this.load_voorwie();
-    }
-
-
-    load_voorwie(){
-        Api.get_aanbiedingen()
-        .then( a => this.setState({... this.state, kind: 'loaded', aanbiedingen: a}))
-        .catch( _ => this.load_voorwie())
+    
+    setWie(value){
+        this.props.setFilterState({ ... this.props.filterState, Wie: { kind : "on", value: value } })
     }
 
     render() {
 
-        if (this.state.kind == 'loaded'){
-            let targets = 
-                        Immutable.List(this.state.aanbiedingen)
-                        .map((aanbieding) => aanbieding.target)
-                        .reduce((accumulator, value) => {
-                            if (accumulator.includes(value)){
-                                return accumulator
-                            }
-                            else {return accumulator.push(value)}
-                        }, Immutable.List<string>())
-
         let stringToOption = (x: string) => <option>{x}</option>
         
-            return <div>
-                Wie?<br/>
-                <select>
-                    <option selected hidden>Voor iedereen </option>
-                   {targets.map(target => stringToOption(target))}
-                </select>
+        let targets = 
+                    Immutable.List(this.props.aanbiedingen)
+                    .map((aanbieding) => aanbieding.target)
+                    .reduce((accumulator, value) => {
+                        if (accumulator.includes(value)){
+                            return accumulator
+                        }
+                        else {return accumulator.push(value)}
+                    }, Immutable.List<string>())
+
+        return <div>
+            Wie?<br/>
+            <div>
+            <select onChange={s => {
+                this.setWie(s.currentTarget.value)
+                console.log(s.currentTarget.value)
+                }}>
+                <option selected hidden>Voor iedereen </option>
+                {targets.map(target => stringToOption(target))}
+            </select>
             </div>
-            }
+        </div>
 
-        else {
-            return <div> {this.state.kind} </div>
-            }
-
-        }
     }
+}
