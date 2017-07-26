@@ -56,7 +56,7 @@ export class FilterWatComponent extends React.Component<FilterWatComponentProps>
     }
 
     setWat(value){
-        this.props.setFilterState({... this.props.filterState, Wie: { kind: "on", value: value } })
+        this.props.setFilterState({... this.props.filterState, Wat: { kind: "on", value: value } })
     }
 
     render(){ 

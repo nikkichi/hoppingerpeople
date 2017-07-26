@@ -66,7 +66,7 @@ export class AanbiedingenComponent extends React.Component<AanbiedingenComponent
                     filterState: EmptyFilterState
                 }
             )} )
-            .catch(f => console.log('error'))
+            .catch( _ => this.loadAanbieding())
         }
 
     render() {
@@ -104,14 +104,14 @@ export class AanbiedingenComponent extends React.Component<AanbiedingenComponent
                         }
                     }
                 })
-                .filter((d) => {
+                .filter((b) => { 
                     if (this.state.kind == "loaded") {
-                        if (this.state.filterState.Wie.kind == "off") {
+                        if (this.state.filterState.Wat.kind == "off") {
                             return true;
                         }
                         else {
-                            if (d.target == this.state.filterState.Wie.value) { return true }
-                            else {return false} 
+                            if (b.activity == this.state.filterState.Wat.value) { return true }
+                            else { return false } 
                         }
                     }
                 })
@@ -126,14 +126,14 @@ export class AanbiedingenComponent extends React.Component<AanbiedingenComponent
                         }
                     }
                 })
-                .filter((b) => { 
+                .filter((d) => {
                     if (this.state.kind == "loaded") {
-                        if (this.state.filterState.Waar.kind == "off") {
+                        if (this.state.filterState.Wie.kind == "off") {
                             return true;
                         }
                         else {
-                            if (b.location == this.state.filterState.Waar.value) { return true }
-                            else { return false } 
+                            if (d.target == this.state.filterState.Wie.value) { return true }
+                            else {return false} 
                         }
                     }
                 })
