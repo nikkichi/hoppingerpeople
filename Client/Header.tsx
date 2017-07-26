@@ -28,12 +28,14 @@ export default class Menu extends React.Component<MenubarComponentProps, Menubar
             <header className="header__inner">  
                 <nav>
                 <div>
+                     <h1 className="homepage--title">Ooievaarspas</h1>
             <img height="150px" width="230" src="https://www.denhaag.nl/static/denhaagrestylepresentation/images/DH-NL-Rgb-CS6.svg" alt="logo" />
-            <button onClick={(event) => this.props.onMovePage({ kind: "homepage"})}>{homepageLink}</button>
+            <button className= "enjoy-css" onClick={(event) => this.props.onMovePage({ kind: "homepage"})}>{homepageLink}</button>
             <button onClick={onClickAanbieding}>{aanbiedingLink}</button>
             <button onClick={onClickDagtocht}>{dagtochtLink}</button>
             <button onClick={onClickOoievaarsinfo}>{ooievaarLink}</button>
             <button onClick={(event) => this.props.onMovePage({ kind: "veelgesteldeVragenPagina"})}>{vragenLink}</button>
+            
                 
                     </div>
                     </nav>

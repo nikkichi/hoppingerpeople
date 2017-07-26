@@ -10,15 +10,17 @@
 
 [class^="header__inner"] {
    padding: 20px;
+   padding-top: 20px;
    margin: 10px;
-   color: #fff;
    font-size: 21px;
    font-weight: bold;
    line-height: 1.3em;
-   border: 2px dashed white;
+   border-bottom-color: black;
    border-radius: 10px;
-   box-shadow: 0 0 0 4px lightcoral, 2px 1px 6px 4px rgba(10, 10, 0, 0.5);
-   text-shadow: -1px -1px #aa3030;
+   background: aqua
+   opacity(0.5);
+  // box-shadow: 0 0 0 4p , 2px 1px 6px 4px rgba(10, 10, 0, 0.5);
+  //  text-shadow: -1px -1px #aa3030;
    font-weight: normal;
 }
 

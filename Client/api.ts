@@ -280,7 +280,7 @@ let speciale_aanbieding: Types.SpecialAanbieding[] = [
     {
         description: "In teamverband lekker actief zijn, dat kan in de Florence Clubs. Altijd al gedroomd om te kunnen...",
         image: 'https://www.ooievaarspas.nl/uploads/event/image/233/thumb_Florence-.jpg',
-        title: 'Join the Florence club! Speciaal',
+        title: 'Join the Florence club!',
         text: 'In teamverband lekker actief zijn, dat kan in de Florence Clubs. Altijd al gedroomd om te kunnen hardlopen of handboogschieten? Dit is nu mogelijk, gezellig in teamverband!',
         id: 1,
         reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door."
@@ -288,7 +288,7 @@ let speciale_aanbieding: Types.SpecialAanbieding[] = [
     {
         description: "Woon je in Leidschendam-Voorburg en ben je op zoek naar een nieuwe sport? De sportstrippenkaart...",
         image: "https://www.ooievaarspas.nl/uploads/event/image/205/thumb_sportstrippenkaart.jpg",
-        title: 'Ontdek je sport met de sportstrippenkaart Speciaal',
+        title: 'Ontdek je sport met de sportstrippenkaart',
         text: 'Woon je in Leidschendam-Voorburg en ben je op zoek naar een nieuwe sport? De sportstrippenkaart helpt je op weg! Hardlopen, volleybal of zwemmen: weet jij niet welke sport bij je past? Dit is je kans! Met de sportstrippenkaart mag je vier sporten uitproberen bij meer dan 30 sportverenigingen in Leidschendam-Voorburg. Gewoon gratis!',
         id: 2,
         reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door."
@@ -296,7 +296,7 @@ let speciale_aanbieding: Types.SpecialAanbieding[] = [
     {
         description: "Wil je gratis hulp bij het afvallen? Neem je je voor om te gaan bewegen, maar komt het er steeds...",
         image: "https://www.ooievaarspas.nl/uploads/event/image/216/thumb_Gezinnen_project.jpg",
-        title: 'Gratis online coaching voor Haagse pashouders Speciaal',
+        title: 'Gratis online coaching voor Haagse pashouders',
         text: 'Wil je gratis hulp bij het afvallen? Neem je je voor om te gaan bewegen, maar komt het er steeds niet van? Heb je plannen om je leefstijl te verbeteren? Wil je graag stoppen met roken of wordt het hoog tijd om je stress te verminderen? Ben je toe aan gezinshulp? Zet dan nu de stap en meld je aan voor een jaar lang gratis online coaching!',
         id: 3,
         reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door."
@@ -304,7 +304,7 @@ let speciale_aanbieding: Types.SpecialAanbieding[] = [
     {
         description: "Familiepark Drievliet, plezier voor jong en oud. Drievliet is in 2017 aanbieder van de...",
         image: "https://www.ooievaarspas.nl/uploads/event/image/228/thumb_Drievliet.jpg",
-        title: 'Ontdek Drievliet met de Ooievaarspas vanaf 1 april Speciaal',
+        title: 'Ontdek Drievliet met de Ooievaarspas vanaf 1 april',
         text: 'Familiepark Drievliet, plezier voor jong en oud. Drievliet is in 2017 aanbieder van de Ooievaarspas en verwelkomt families! Ook heeft Drievliet er twee mooie attracties bij! Durf jij in de sportieve Tijdmachine en de snelle Chute?',
         id: 4,
         reserveren: "Reserveren dagtocht.Meld u aan in de week van maandag 26 juni tot en met vrijdag 30 juni 2017 tussen 09.00 uur tot 14.00 uur via telefoonnummer (070) 364 66 61. Geef bij het aanmelden uw geldige Ooievaarspasnummer door."

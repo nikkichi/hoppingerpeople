@@ -1,6 +1,27 @@
 // ==========================================================================
 // OBJECTS | Buttons
 // ==========================================================================
+.enjoy-css {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  top: 0;
+  padding: 0 22px;
+  border: 4px solid rgba(234,232,242,1);
+  font: normal normal bold 20px/50px Arial, Helvetica, sans-serif;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  text-transform: uppercase;
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  background: #689acc;
+}
+
+.enjoy-css:hover {
+  border: 4px solid rgb(255,255,255);
+  color: white;
+  background: #5383b2;
+}
 
 .button {
   @extend button;
