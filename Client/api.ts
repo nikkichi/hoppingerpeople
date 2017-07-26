@@ -145,7 +145,7 @@ let dagTochten: Types.Dagtocht[] = [
     }  
 ]
 
-let category: Types.Category_Dagtocht[] = [
+    let category: Types.Category_Dagtocht[] = [
 
     {
         title: "Zomerdagtochten voor gezinnen",

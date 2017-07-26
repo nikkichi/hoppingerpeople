@@ -51,7 +51,7 @@ export class PageManagerComponent extends React.Component<PageManagerComponentPr
     let menubar = <div> <Header onMovePage={(next_page) => this.moveToPage(next_page)}/></div>
         switch (this.state.current_page.kind) {
             case "homepage":
-                return <div>{menubar}<Homepage.HomepageComponent onMovePage={(next_page) => this.moveToPage(next_page)}  />  </div>
+                return <div>{menubar}<Homepage.HomepageComponent onMovePage={(next_page) => this.moveToPage(next_page)}/></div>
             case "dagtochtPagina":
                 return <div>{menubar}<Dagtochten.DagtochtenComponent onMovePage={(next_page) => this.moveToPage(next_page)} id= {this.state.current_page.id} /> </div>
             case "aanbiedingPagina":
