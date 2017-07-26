@@ -7,8 +7,8 @@
   cursor: pointer;
   top: 0;
   padding: 0 22px;
-  border: 4px solid rgba(234,232,242,1);
-  font: normal normal bold 20px/50px Arial, Helvetica, sans-serif;
+  border: 4px solid #e0e0e2;
+  font: normal normal bold 18px/38px Arial, Helvetica, sans-serif;
   color: rgb(255, 255, 255);
   text-align: center;
   text-transform: uppercase;
@@ -20,8 +20,31 @@
 .enjoy-css:hover {
   border: 4px solid rgb(255,255,255);
   color: white;
-  background: #5383b2;
+  background: #193566;
 }
+
+.small--button {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  top: 0;
+  padding: 0 22px;
+  border: 2px solid #e0e0e2;
+  font: normal normal bold 6px/19px Arial, Helvetica, sans-serif;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  text-transform: uppercase;
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  background: #689acc;
+}
+
+.small-button:hover {
+  border: 2px solid rgb(255,255,255);
+  color: white;
+  background: #193566;
+}
+
 
 .button {
   @extend button;

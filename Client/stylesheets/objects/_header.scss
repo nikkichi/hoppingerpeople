@@ -11,16 +11,14 @@
 [class^="header__inner"] {
    padding: 20px;
    padding-top: 20px;
-   margin: 10px;
+   margin: 0px;
    font-size: 21px;
    font-weight: bold;
    line-height: 1.3em;
-   border-bottom-color: black;
    border-radius: 10px;
-   background: aqua
-   opacity(0.5);
-  // box-shadow: 0 0 0 4p , 2px 1px 6px 4px rgba(10, 10, 0, 0.5);
-  //  text-shadow: -1px -1px #aa3030;
+   background: url(http://hakaglobalsolutions.com/wp-content/uploads/2016/04/cropped-header.png);
+   background-position: 50% 30%; 
+   background-repeat: no-repeat; 
    font-weight: normal;
 }
 

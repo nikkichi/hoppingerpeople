@@ -17,6 +17,7 @@ import * as Manager from './pageManager'
 import * as InformatieDetail from './InformatieDetail'
 import * as category_dagtocht from './category_dagtocht'
 import Footer from './footer'
+import * as Zoekbalk from './Zoekbalk'
 
 import * as ExtraInformatie from './ExtraInformatie'
 
@@ -35,7 +36,8 @@ export type Page = { kind:"homepage"} |
                    {kind: "DetailAanbieding", id: number, checkPage: number} |
                    {kind: "InformatieDetail", title: string}|
                    {kind: "category_dagtocht", id: number}|
-                   {kind: "ExtraInformatie", title: string}
+                   {kind: "ExtraInformatie", title: string} |
+                   {kind: "zoekresultatenPagina", searchterm: string}
 
 export class PageManagerComponent extends React.Component<PageManagerComponentProps, PageManagerComponentState>{
  
@@ -84,6 +86,8 @@ let footer = <div> <Footer onMovePage={(next_page) => this.moveToPage(next_page)
         case "ExtraInformatie":
             return <div>
                 {menubar}<ExtraInformatie.ExtrainformatieComponent onMovePage={(next_page) => this.moveToPage(next_page)} title = {this.state.current_page.title}  />{footer}</div>
+        case "zoekresultatenPagina":
+            return <div>{menubar}<Zoekbalk.Zoekbalk onMovePage={(next_page) => this.moveToPage(next_page)} searchterm = {this.state.current_page.searchterm}/></div>
 
 
     }}
