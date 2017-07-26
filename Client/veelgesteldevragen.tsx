@@ -24,13 +24,9 @@ export class veelgesteldevragenComponent extends React.Component<veelgesteldevra
    componentWillMount() {
         this.loadonderwerp()
         //dit is om de vrgen te initialiseren
-<<<<<<< HEAD
         this.setState({...this.state, antwoorden:[true, false, true, true, false, true, true, false, true,true]
                                     
                                       })
-=======
-        this.setState({...this.state, antwoorden:[true, false, false, false, false, false]})
->>>>>>> 86e8893cb2aa9b60770d513addcf44ca880bd6fd
    }
 
    loadonderwerp() {
