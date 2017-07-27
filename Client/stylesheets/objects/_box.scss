@@ -26,9 +26,10 @@
 .box--fifth {
     font-family: Cambria; 
     float: left;
-    width: 400px;   
+    width: 1000px;   
     height: 450px; 
     margin-bottom: 5px;
+    top: 50px;
     padding-right: 10px;
      padding-left: 10px;
      border-style: hidden;
@@ -57,7 +58,8 @@
      border-color: #1191db; 
      background-color:white; 
      border-right: lightblue;
-     border-left: lightblue;  
+     border-left: lightblue; 
+     top: 240px; 
  }
  .box--aanbieding {
      float: left; 
@@ -76,9 +78,9 @@
     float: left;
     width: 250px;   
     height: 150px;
-    background-color: green; 
+    background-color: #9fbff2; 
     position: absolute;
-    top: 295px;
+    top: 240px;
     left: 0;
     margin-right: 15px; 
     padding-right: 20px;
@@ -90,25 +92,25 @@
     float: left;
     width: 250px;   
     height: 150px;
-    background-color: green; 
+    background-color: #9fbff2; 
     position: absolute;
-    top: 440px;
+    top: 340px;
     left: 0;
     margin-right: 15px; 
     padding-right: 20px;
-    
+
  }
 
    .box--filter-wie {
     font-family: Cambria; 
     float: left;
     width: 250px;   
-    height: 150px;
-    background-color: green; 
+    height: 100px;
+    background-color: #9fbff2; 
     position: absolute;
-    top: 565px;
+    top: 440px;
     left: 0;
-    margin-right: 15px; 
+    margin-right: 15px;    
     padding-right: 20px;
     
  }
@@ -117,10 +119,10 @@
     font-family: Cambria; 
     float: left;
     width: 250px;   
-    height: 1000px;
-    background-color: green; 
+    height: 1475px;
+    background-color: #9fbff2;
     position: absolute;
-    top: 690px;
+    top: 540px;
     left: 0;
     margin-right: 15px; 
     padding-right: 20px;
@@ -139,4 +141,45 @@
      background-color:white; 
      border-right: lightblue;
      border-left: lightblue;  
+ }
+
+ 
+ .box--vragen {
+     font-family: Cambria; 
+     border-style: solid; 
+     padding-left: 10px; 
+     width: 1000px; 
+     height: 100px;  
+     margin-bottom: 5px; 
+     border-color: #1191db; 
+     background-color:white; 
+     border-right: lightblue;
+     margin-left: 150px;
+     border-left: lightblue;  
+ }
+
+  .box--antwoord {
+     font-family: Cambria; 
+     border-style: solid; 
+     padding-left: 10px; 
+     margin-left: 150px;
+     width: 1000px; 
+     height:150px;  
+     margin-bottom: 5px; 
+     border-color: white; 
+     background-color: lightblue; 
+     border-right: lightblue;
+     border-left: lightblue;  
+ }
+
+  .box-VraagBorder {
+     font-family: Cambria; 
+     border-style: solid; 
+     padding-left: 10px; 
+     width: 1300px; 
+     height: 1500px;  
+     margin-left: 140px; 
+     margin-bottom: 5px; 
+     border-color: #1191db; 
+     background-color:white; 
  }

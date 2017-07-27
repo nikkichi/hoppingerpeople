@@ -167,4 +167,27 @@
   height: 42px;
   line-height: 42px;
   margin-left: 20px;
+
+}
+
+
+.vraag-button {
+  position: relative;
+  cursor: pointer;
+  margin-left: 150px;
+  top: 0;
+  padding: 0 22px;
+  border: 2px solid #e0e0e2 ;
+  font: normal normal bold 16px/19px Arial, Helvetica, sans-serif;
+  color: white;
+  text-align: center;
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  background: #689acc ;
+}
+
+.vraag-button:hover {
+  border: 2px solid rgb(255,255,255);
+  color: #689acc ;
+  background: #fff;
 }
