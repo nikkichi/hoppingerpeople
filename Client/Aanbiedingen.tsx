@@ -135,7 +135,7 @@ export class AanbiedingenComponent extends React.Component<AanbiedingenComponent
 
             return <div>
             
-                <h2 className="title-aanbiedingen">Alle aanbiedingen</h2>
+                <h2 className="homepage--special">Alle aanbiedingen</h2>
                   {/* {this.state.aanbiedingen.map(aanbieding => AanbiedingView(aanbieding))  } */}
 
                  
