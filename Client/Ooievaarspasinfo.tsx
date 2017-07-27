@@ -45,16 +45,16 @@ let hyperlink = 'lees meer'
        if(this.state.kind == "loaded" )
         {
            let ooievaarspas_View = function(info: Types.InformatiePas){ 
-           return   <div key={info.title}>
+           return   <div className="box-ooi" key={info.title}>
                        <a onClick={(id) => onClickInfoPas(info.id)}>  <h2> {info.title}</h2></a>
                        <div>{info.description }</div>
-                       <button onClick={() => onClickInfoPas(info.id)}>{hyperlink}</button>
+                       <button className="regular-button" onClick={() => onClickInfoPas(info.id)}>{hyperlink}</button>
                     </div>
                  
           }
            
             return <div>
-                      <h1>  Informatie over de Ooievaarspas</h1>
+                      <h1 className="title-ooi">  Informatie over de Ooievaarspas</h1>
                       {this.state.value.map(info => ooievaarspas_View(info))}
                   </div>
            

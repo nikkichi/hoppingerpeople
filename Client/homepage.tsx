@@ -42,7 +42,7 @@ export class HomepageComponent extends React.Component<HomepageComponentProps, H
                     <br></br>
                     <p className="box--special"> {special_aanbieding.description}</p>
                     <br></br>
-                    <button onClick={() => onclickAanbieding(special_aanbieding.id)}>
+                    <button className="regular-button" onClick={() => onclickAanbieding(special_aanbieding.id)}>
                         {hyperlink}
                     </button>
                 </div>

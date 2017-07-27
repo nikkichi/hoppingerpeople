@@ -62,7 +62,7 @@
  .box--aanbieding {
      float: left; 
      font-family: Cambria; 
-     color: skyblue; 
+     color: #1191db; 
      margin-left: 100px;
      padding-left: 100px; 
      border-style: solid;  
@@ -76,7 +76,7 @@
     float: left;
     width: 250px;   
     height: 150px;
-    background-color: green; 
+    background-color: black;
     position: absolute;
     top: 295px;
     left: 0;
@@ -132,11 +132,62 @@
      font-family: Cambria; 
      border-style: solid; 
      padding-left: 10px; 
-     width: 1500px; 
-     height: 350px;  
+     width: 1200px; 
+     height: 375px;  
      margin-bottom: 5px; 
+     margin-left: 150px;
      border-color: #1191db; 
      background-color:white; 
      border-right: lightblue;
      border-left: lightblue;  
+ }
+
+ .box--dagDetail {
+     font-family: Cambria; 
+     border-style: solid; 
+     padding-left: 10px; 
+     margin-left: 275px; 
+     width: 1000px; 
+     height: 700px;  
+     margin-bottom: 5px; 
+     border-color: #1191db; 
+     background-color:white; 
+     border-right: lightblue;
+     border-left: lightblue; 
+     text-align: center;
+ }
+
+  .box-ooi {
+     font-family: Cambria; 
+     border-style: solid; 
+     padding-left: 10px; 
+     width: 1200px; 
+     height: 200px;  
+     margin-bottom: 5px; 
+     margin-left: 150px;
+     border-color: #1191db; 
+     background-color:white; 
+     border-right: lightblue;
+     border-left: lightblue;  
+ }
+
+   .box-ooiDetail {
+     font-family: Cambria; 
+     padding-left: 10px; 
+     width: 1200px; 
+     height: 125px;  
+     margin-bottom: 5px; 
+     margin-left: 150px;
+     background-color:white; 
+ }
+
+    .box-ooiDetailInfo {
+     font-family: Cambria; 
+     font-size: 16px; 
+     padding-left: 10px; 
+     width: 1200px; 
+     height: 250px;  
+     margin-bottom: 5px; 
+     margin-left: 50px;
+     background-color:white; 
  }

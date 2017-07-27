@@ -1156,7 +1156,7 @@ th {
 .box--aanbieding {
 	float: left;
 	font-family: Cambria;
-	color: skyblue;
+	color: #1191db;
 	margin-left: 100px;
 	padding-left: 100px;
 	border-style: solid;
@@ -1170,7 +1170,7 @@ th {
 	float: left;
 	width: 250px;
 	height: 150px;
-	background-color: green;
+	background-color: black;
 	position: absolute;
 	top: 295px;
 	left: 0;
@@ -1222,13 +1222,64 @@ th {
 	font-family: Cambria;
 	border-style: solid;
 	padding-left: 10px;
-	width: 1500px;
-	height: 350px;
+	width: 1200px;
+	height: 375px;
+	margin-bottom: 5px;
+	margin-left: 150px;
+	border-color: #1191db;
+	background-color: white;
+	border-right: lightblue;
+	border-left: lightblue;
+}
+
+.box--dagDetail {
+	font-family: Cambria;
+	border-style: solid;
+	padding-left: 10px;
+	margin-left: 275px;
+	width: 1000px;
+	height: 700px;
 	margin-bottom: 5px;
 	border-color: #1191db;
 	background-color: white;
 	border-right: lightblue;
 	border-left: lightblue;
+	text-align: center;
+}
+
+.box-ooi {
+	font-family: Cambria;
+	border-style: solid;
+	padding-left: 10px;
+	width: 1200px;
+	height: 200px;
+	margin-bottom: 5px;
+	margin-left: 150px;
+	border-color: #1191db;
+	background-color: white;
+	border-right: lightblue;
+	border-left: lightblue;
+}
+
+.box-ooiDetail {
+	font-family: Cambria;
+	padding-left: 10px;
+	width: 1200px;
+	height: 125px;
+	margin-bottom: 5px;
+	margin-left: 150px;
+	background-color: white;
+}
+
+.box-ooiDetailInfo {
+	font-family: Cambria;
+	font-size: 16px;
+	padding-left: 10px;
+	width: 1200px;
+	height: 250px;
+	margin-bottom: 5px;
+	margin-left: 50px;
+	background-color: white;
 }
 
 /* Dropdown Button */
@@ -1287,10 +1338,41 @@ th {
 .title-aanbiedingen {
 	font-family: Cambria;
 	color: #1191db;
-	font-size: 22px;
+	font-size: 30px;
 	border-style: solid;
 	border-left: hidden;
 	border-right: hidden;
+}
+
+.title-detail {
+	font-family: Cambria;
+	color: #1191db;
+	font-size: 30px;
+}
+
+.title-ooi {
+	font-family: Cambria;
+	color: #1191db;
+	font-size: 30px;
+	margin-left: 150px;
+}
+
+.title-ooi {
+	font-family: Cambria;
+	padding-left: 10px;
+	width: 1200px;
+	height: 100px;
+	margin-bottom: 5px;
+	margin-left: 150px;
+}
+
+.title-ooiDetInf {
+	font-family: Cambria;
+	padding-left: 10px;
+	width: 1200px;
+	height: 100px;
+	margin-bottom: 5px;
+	margin-left: 100px;
 }
 
 .main__title {
@@ -1709,13 +1791,26 @@ th {
 	text-align: center;
 	text-transform: uppercase;
 	text-overflow: clip;
+	background: #1191db;
+}
+
+.regular-button {
+	position: relative;
+	cursor: pointer;
+	top: 0;
+	padding: 0 22px;
+	border: 2px solid #e0e0e2;
+	font: normal normal bold 16px/19px Arial, Helvetica, sans-serif;
+	color: white;
+	text-align: center;
+	text-overflow: clip;
 	background: #689acc;
 }
 
-.small-button:hover {
+.regular-button:hover {
 	border: 2px solid white;
-	color: white;
-	background: #193566;
+	color: #689acc;
+	background: #fff;
 }
 
 .button--inline {

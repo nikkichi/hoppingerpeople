@@ -50,27 +50,27 @@ export class InfoPasComponent extends React.Component<InfoPasComponentProps, Inf
         if(this.state.kind == 'loaded'){
 
             let uitleg_view = function(information: Types.Uitleg_InformatiePas){ 
-                return <div key={information.title}>
+                return <div className="box-ooi" key={information.title}>
                             
-                           <a onClick={(id) => onClickInformatieDetail(information.title)}>  <h2> {information.title}</h2></a>
+                           <a onClick={(id) => onClickInformatieDetail(information.title)}>  <h2 > {information.title}</h2></a>
                             <div> {information.description}</div>
-                            <button onClick={() => onClickInformatieDetail(information.title)}>{hyperlink}</button>
+                            <button className="regular-button" onClick={() => onClickInformatieDetail(information.title)}>{hyperlink}</button>
                             
                  </div>
                     
                 }
             let extrainfo_view = function(extrainfo: Types.Extra_Informatie){
-                return <div key={extrainfo.title}>
+                return <div className="box-ooi" key={extrainfo.title}>
                         <a onClick={() => onClickInformatiebutton(extrainfo.title)}>
-                            <h2>{extrainfo.title}</h2>
+                            <h2 >{extrainfo.title}</h2>
                         </a>
                         <div>{extrainfo.description}</div>
-                        <button onClick={() => onClickInformatiebutton(extrainfo.title) }>{hyperlink}</button>
+                        <button className="regular-button" onClick={() => onClickInformatiebutton(extrainfo.title) }>{hyperlink}</button>
                     
                </div>            
                 }
         
-                return <div>
+                return <div >
                      {this.state.Uitleginformatie.map(information => uitleg_view(information))} 
                     {this.state.Extrainformatie.map(extrainfo => extrainfo_view(extrainfo))}
               

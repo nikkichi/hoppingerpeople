@@ -33,9 +33,9 @@ export class ExtrainformatieComponent extends React.Component<ExtrainformatieCom
     render(){
         if (this.state.kind == 'loaded'){
             let detail_view = function(details: Types.Extra_Informatie){
-                return <div key={details.title}>
-                    <h1>{details.title}</h1>
-                    <div>{details.text}</div>
+                return <div className="title-ooi" key={details.title}>
+                    <h1 className= "title-ooi">{details.title}</h1>
+                    <div className="box-ooiDetailInfo">{details.text}</div>
                     </div>
             }
                 return<div>
