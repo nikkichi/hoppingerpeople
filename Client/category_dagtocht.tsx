@@ -47,7 +47,7 @@ export class category_dagtochtComponenet extends React.Component<category_dagtoc
                 
 
 
-                     <button className= "small-button" 
+                     <button className= "regular-button" 
                         onClick={() => onclickdagtocht(dagtocht.id)}>
                         {hyperlink}
                     </button>
