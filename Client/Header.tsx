@@ -46,7 +46,7 @@ export default class Menu extends React.Component<MenubarComponentProps, Menubar
             <button className= "enjoy-css" onClick={onClickDagtocht}>{dagtochtLink}</button>
             <button className= "enjoy-css" onClick={onClickOoievaarsinfo}>{ooievaarLink}</button>
             <button className= "enjoy-css" onClick={(event) => this.props.onMovePage({ kind: "veelgesteldeVragenPagina"})}>{vragenLink}</button>
-            <input className="enjoy-css" id="zoekinput" onChange={input => this.setState(
+            <input className="box--search " id="zoekinput" onChange={input => this.setState(
                 input.target.value != null ?
                 {searchterm:input.target.value}:
                 {searchterm:""})}></input>
