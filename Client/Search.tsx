@@ -4,8 +4,8 @@ import { Container, Content, Header, Button, InputGroup, Input, Icon } from 'nat
 export default class SearchBar extends React.Component {
   render() {
     return (
-      <Container>
-        <Header searchBar rounded>
+      <Container className="box--search " >
+        <Header  searchBar rounded>
           <InputGroup>
             <Icon name='search' />
             <Input  />
