@@ -19,6 +19,10 @@ let zoekLink = "Zoeken"
 
 export default class Menu extends React.Component<MenubarComponentProps, MenubarComponentState> {
     
+    componentDidMount(){
+        this.setState({searchterm:""})
+    }
+
     render(){
         function onClickZoeken(thisRef) { return (event) => {
             if(thisRef.state.searchterm == ""){
@@ -32,7 +36,7 @@ export default class Menu extends React.Component<MenubarComponentProps, Menubar
         let onClickOoievaarsinfo = (event) => this.props.onMovePage({kind: "ooievaarspasPagina"})
             return (
             
-            <header className="header__inner">  
+            <header className="header__inner">
                 <nav>
                 <div>
                      <h1 className="homepage--title">Ooievaarspas</h1>
@@ -42,8 +46,13 @@ export default class Menu extends React.Component<MenubarComponentProps, Menubar
             <button className= "enjoy-css" onClick={onClickDagtocht}>{dagtochtLink}</button>
             <button className= "enjoy-css" onClick={onClickOoievaarsinfo}>{ooievaarLink}</button>
             <button className= "enjoy-css" onClick={(event) => this.props.onMovePage({ kind: "veelgesteldeVragenPagina"})}>{vragenLink}</button>
-            
-                
+            <input className="enjoy-css" id="zoekinput" onChange={input => this.setState(
+                input.target.value != null ?
+                {searchterm:input.target.value}:
+                {searchterm:""})}></input>
+            <button className="enjoy-css" onClick={onClickZoeken(this)}>
+                {zoekLink}
+            </button>
                     </div>
                     </nav>
             </header>)

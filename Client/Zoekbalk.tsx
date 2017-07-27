@@ -21,7 +21,7 @@ import * as Types from './custom_types'
 
 type Result = {aanbiedingHits: Types.aanbieding[], dagtochtHits: Types.Dagtocht[], pending: number} //hier moet ook een hyperlink bij
 
-export type ZoekbalkProps = { onMovePage: (id) => void, searchterm:string}
+export type ZoekbalkProps = { onMovePage: (id) => void, searchTerm:string}
 export type ZoekbalkState =
   | {kind:"searching"}
   | {kind:"searched", results:Result, completed:Boolean}
@@ -31,12 +31,12 @@ export class Zoekbalk extends React.Component<ZoekbalkProps, ZoekbalkState> {
   constructor(props : ZoekbalkProps, context){
     super(props, context)
     this.state = {kind:"searching"}
-    if(this.props.searchterm == ""){
+    if(this.props.searchTerm == ""){
       console.log("ERRORY")
     }
   }
   componentWillMount() {
-    if(this.props.searchterm == ""){
+    if(this.props.searchTerm == ""){
       this.setState({kind:"idle"})
     }else{
       this.LoadFunction()
@@ -45,7 +45,7 @@ export class Zoekbalk extends React.Component<ZoekbalkProps, ZoekbalkState> {
   private LoadFunction(){
     this.setState({kind:"searching"})
     this.setState({...this.state, kind:"searched", results:{aanbiedingHits:[], dagtochtHits:[], pending:-1}, completed:false})
-    this.SearchFunction(this.props.searchterm, this)
+    this.SearchFunction(this.props.searchTerm, this)
   }
   private HeuristicCompareFunc(a:string, b:string) {
     let result = 0
@@ -131,7 +131,7 @@ export class Zoekbalk extends React.Component<ZoekbalkProps, ZoekbalkState> {
                 <p>{dagtocht.text}</p>
               </div>
     }
-    if(this.props.searchterm == ""){
+    if(this.props.searchTerm == ""){
       return  <div>
                 <h1>Kan niet zoeken met lege zoekopdracht...</h1>
               </div>
