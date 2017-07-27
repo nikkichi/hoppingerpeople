@@ -87,7 +87,7 @@ let footer = <div> <Footer onMovePage={(next_page) => this.moveToPage(next_page)
             return <div>
                 {menubar}<ExtraInformatie.ExtrainformatieComponent onMovePage={(next_page) => this.moveToPage(next_page)} title = {this.state.current_page.title}  />{footer}</div>
         case "zoekresultatenPagina":
-            return <div>{menubar}<Zoekbalk.Zoekbalk onMovePage={(next_page) => this.moveToPage(next_page)} searchTerm = {this.state.current_page.searchterm}/></div>
+            return <div>{menubar}<Zoekbalk.Zoekbalk onMovePage={(next_page) => this.moveToPage(next_page)} searchterm = {this.state.current_page.searchterm}/></div>
 
 
     }}

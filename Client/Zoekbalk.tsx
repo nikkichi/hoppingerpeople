@@ -21,7 +21,7 @@ import * as Types from './custom_types'
 
 type Result = {aanbiedingHits: Types.aanbieding[], dagtochtHits: Types.Dagtocht[], pending: number} //hier moet ook een hyperlink bij
 
-export type ZoekbalkProps = { onMovePage: (id) => void, searchTerm:string}
+export type ZoekbalkProps = { onMovePage: (id) => void, searchterm:string}
 export type ZoekbalkState =
   | {kind:"searching"}
   | {kind:"searched", results:Result, completed:Boolean}
@@ -31,12 +31,12 @@ export class Zoekbalk extends React.Component<ZoekbalkProps, ZoekbalkState> {
   constructor(props : ZoekbalkProps, context){
     super(props, context)
     this.state = {kind:"searching"}
-    if(this.props.searchTerm == ""){
+    if(this.props.searchterm == ""){
       console.log("ERRORY")
     }
   }
   componentWillMount() {
-    if(this.props.searchTerm == ""){
+    if(this.props.searchterm == ""){
       this.setState({kind:"idle"})
     }else{
       this.LoadFunction()
@@ -45,7 +45,7 @@ export class Zoekbalk extends React.Component<ZoekbalkProps, ZoekbalkState> {
   private LoadFunction(){
     this.setState({kind:"searching"})
     this.setState({...this.state, kind:"searched", results:{aanbiedingHits:[], dagtochtHits:[], pending:-1}, completed:false})
-    this.SearchFunction(this.props.searchTerm, this)
+    this.SearchFunction(this.props.searchterm, this)
   }
   private HeuristicCompareFunc(a:string, b:string) {
     let result = 0
@@ -124,14 +124,19 @@ export class Zoekbalk extends React.Component<ZoekbalkProps, ZoekbalkState> {
     Aux.AsyncExternalFoldWithCompletion({aanbiedingHits:[], dagtochtHits:[], pending:-1}, searchterms, this.CollectAndFilterData(this), completionFunc)
   }
   render() {
-    let Prettify = (dagtocht:Types.Dagtocht) => {//DIT HIERONDER MOET NOG GOED GEFORMAT WORDEN
-      return  <div>
-                <p>{dagtocht.name}</p>
-                <p>{dagtocht.prijs}</p>
-                <p>{dagtocht.text}</p>
-              </div>
-    }
-    if(this.props.searchTerm == ""){
+    let onclickdagtocht = (id: number) => this.props.onMovePage({ kind: "DetailDagtocht", id: id, checkPage: 2 })
+    let dagtochtView = function (dagtocht: Types.Dagtocht) {
+                return <div className="box--dagtocht" key={dagtocht.name}>
+                    <a onClick={(id) => onclickdagtocht(dagtocht.id)}>  <h2> {dagtocht.name}</h2></a>
+                    <img src = {dagtocht.image} ></img>
+                     <div> {dagtocht.description}</div>
+                     <button className= "small-button" 
+                        onClick={() => onclickdagtocht(dagtocht.id)}>
+                        {"lees meer"}
+                    </button>
+                </div>
+            }
+    if(this.props.searchterm == ""){
       return  <div>
                 <h1>Kan niet zoeken met lege zoekopdracht...</h1>
               </div>
@@ -143,7 +148,7 @@ export class Zoekbalk extends React.Component<ZoekbalkProps, ZoekbalkState> {
         return  <div>
                   <h1>Zoekopdracht voltooid</h1>
                   {this.state.results.dagtochtHits.length != 0 ?
-                    this.state.results.dagtochtHits.map(dagtocht => Prettify(dagtocht)) :
+                    this.state.results.dagtochtHits.map(dagtocht => dagtochtView(dagtocht)) :
                     <h2>Er zijn geen zoekresultaten gevonden</h2>}
                 </div>
       }else{
