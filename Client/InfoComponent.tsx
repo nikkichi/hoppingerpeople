@@ -69,7 +69,7 @@ export class InforComponent extends React.Component<InforComponentProps, InforCo
             let AanbiedingView = function (aanbieding: Types.aanbieding) {
 
 
-                return <div key={aanbieding.title}>
+                return <div className="box--dagDetail" key={aanbieding.title}>
                     <h2> {aanbieding.title}</h2>
                     <img src={aanbieding.image} ></img>
                     <br></br>
@@ -91,7 +91,7 @@ export class InforComponent extends React.Component<InforComponentProps, InforCo
         }
         else if (this.state.kind == "DetailSpecial") {
             let SpecialView = function (special: Types.SpecialAanbieding) {
-                return <div key={special.title}>
+                return <div className="box--dagDetail" key={special.title}>
                     <h2> {special.title}</h2>
                     <img src = {special.image} ></img> 
                     <br></br>
@@ -112,9 +112,9 @@ export class InforComponent extends React.Component<InforComponentProps, InforCo
         }
         else if (this.state.kind == "DetailDagtocht") {
             let dagtochtView = function (dagtocht: Types.Dagtocht) {
-                return <div key={dagtocht.name}>
+                return <div className="box--dagDetail" key={dagtocht.name}>
                     <h2> {dagtocht.name}</h2>
-                    <img src={dagtocht.image} ></img>
+                    <img height="200px" width="300px" src={dagtocht.image}></img>
                     <br></br>
                     <h2>Omschrijving</h2>
                     <p> {dagtocht.text}</p>

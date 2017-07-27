@@ -36,13 +36,27 @@
   text-transform: uppercase;
   -o-text-overflow: clip;
   text-overflow: clip;
+  background: #1191db;
+}
+
+.regular-button {
+  position: relative;
+  cursor: pointer;
+  top: 0;
+  padding: 0 22px;
+  border: 2px solid #e0e0e2;
+  font: normal normal bold 16px/19px Arial, Helvetica, sans-serif;
+  color: white;
+  text-align: center;
+  -o-text-overflow: clip;
+  text-overflow: clip;
   background: #689acc;
 }
 
-.small-button:hover {
+.regular-button:hover {
   border: 2px solid rgb(255,255,255);
-  color: white;
-  background: #193566;
+  color: #689acc;
+  background: #fff;
 }
 
 

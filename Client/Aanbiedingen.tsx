@@ -80,7 +80,7 @@ export class AanbiedingenComponent extends React.Component<AanbiedingenComponent
             
                     <p className="box--special"> {aanbieding.description}</p>
                     <br></br>
-                    <button onClick={() => onclickAanbieding(aanbieding.id)}>
+                    <button className="regular-button" onClick={() => onclickAanbieding(aanbieding.id)}>
                         {hyperlink}
                     </button>   
                 </div>
@@ -127,7 +127,7 @@ export class AanbiedingenComponent extends React.Component<AanbiedingenComponent
                         }
                         else {
                             if (d.target == this.state.filterState.Wie.value) { return true }
-                            else {return false} 
+                            else {return false}
                         }
                     }
                 })

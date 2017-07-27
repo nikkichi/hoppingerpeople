@@ -36,19 +36,19 @@ export class InformatieDetailComponent extends React.Component<InformatieDetailC
         if (this.state.kind == 'loaded'){
             let detail_view = function(details: Types.Detail_Uitleg){
                 return <div key={details.title}>
-                    <h1>{details.title}</h1>
-                    <div>{details.text}</div>
+                    <h1 className="title-ooi">{details.title}</h1>
+                    <div className="box-ooiDetail" >{details.text}</div>
                     <br></br>
                     <img src = {details.image} ></img>
                     </div>
             }
             let extrainfo_view = function(extrainfo: Types.Extra_Informatie){
-                return <div key={extrainfo.title}>
+                return <div className="box-ooi" key={extrainfo.title}>
                         <a onClick={() => onClickInformatiebutton(extrainfo.title)}>
                             <h2>{extrainfo.title}</h2>
                         </a>
                         <div>{extrainfo.description}</div>
-                        <button onClick={() => onClickInformatiebutton(extrainfo.title) }>lees meer</button>
+                        <button className="regular-button" onClick={() => onClickInformatiebutton(extrainfo.title) }>lees meer</button>
                     
                          </div>    
             }

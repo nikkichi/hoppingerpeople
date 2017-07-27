@@ -50,10 +50,10 @@ export class DagtochtenComponent extends React.Component<DagtochtenComponentProp
 
             let categoryView = function (category: Types.Category_Dagtocht) {
                 return <div className="box--dagtocht" key={category.title}>
-                    <a onClick={(id) => onclickdagtocht(category.categoryID)}>  <h2> {category.title}</h2></a>
+                    <a onClick={(id) => onclickdagtocht(category.categoryID)}>  <h2 className="title-detail"> {category.title}</h2></a>
                     <img src={category.image} ></img>
                     <p>{category.description}</p>
-                    <button className="button--light" onClick={(id) => onclickdagtocht(category.categoryID)}>
+                    <button className="regular-button" onClick={(id) => onclickdagtocht(category.categoryID)}>
                         {hyperlink}
                     </button>
 
